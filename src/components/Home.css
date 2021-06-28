@@ -1,20 +1,23 @@
-.btn-danger {
+/* Navbar */
+/* .btn-danger {
     width: 15%;
 }
 
 .nav-link {
     font-size: 20px;
-}
+} */
+
+/* Main Content */
 
 .main-container{
-    background-color: bisque;
+    /* background-color: bisque; */
     position: relative;
     margin-top: 6%;
     font-size: 50px;
 }
 
-.main-row-title {
-    background-color: aqua;
+.main-row {
+    /* background-color: aqua; */
     text-align: left;
 }
 

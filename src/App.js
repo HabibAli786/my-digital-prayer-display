@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router';
 import Home from './components/Home'
-import PrayerTimes from './components/prayerTimes/prayerTimes';
+import PrayerTimes from './components/PrayerTimes/PrayerTimes';
 
 import logo from './logo.svg';
 import './App.css';
