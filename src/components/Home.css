@@ -5,3 +5,23 @@
 .nav-link {
     font-size: 20px;
 }
+
+.main-container{
+    background-color: bisque;
+    position: relative;
+    margin-top: 6%;
+    font-size: 50px;
+}
+
+.main-row-title {
+    background-color: aqua;
+    text-align: left;
+}
+
+.header {
+    font-size: 1.5em;
+}
+
+.subheading {
+    font-size: 0.5em;
+}
