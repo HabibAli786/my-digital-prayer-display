@@ -5,7 +5,7 @@ function PrayerTimes() {
     return(
         <>
         <Header />
-        <h1>Prayer Times</h1>
+        <h1>جُمُعَة‎</h1>
         </>
     )
 }
