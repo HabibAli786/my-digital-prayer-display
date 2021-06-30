@@ -49,6 +49,7 @@ function PrayerTimes() {
                 <Col className="col-3 active-color">11:00</Col>
             </Row>
         </Container>
+        <img className="logo" src='/images/iqra.png' alt="logo" />
         </>
     )
 }
