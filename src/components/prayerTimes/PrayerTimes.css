@@ -4,19 +4,24 @@
 }
 
 .container {
-    margin-top: 20px;
-    margin-left: 5px !important;
+    /* margin: 20px 0px 0px 5px !important; */
+    /* margin-left: 5px !important; */
 }
 
 .table-container {
+    margin: 20px 0px 0px 5px !important;
     text-align: left;
     font-family: Almarai;
-    font-size: 2em;
+    font-size: 4em;
     padding-left: 5px;
 }
 
 .row {
     /* outline-style: dashed; */
+}
+
+.active-color{
+    color: #0175f2;
 }
 /* 
 .col-header {
