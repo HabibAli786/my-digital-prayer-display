@@ -1,0 +1,24 @@
+.table-col {
+    /* outline-style: dashed; */
+    text-align: left;
+}
+
+.container {
+    margin-top: 20px;
+    margin-left: 5px !important;
+}
+
+.table-container {
+    text-align: left;
+    font-family: Almarai;
+    font-size: 2em;
+    padding-left: 5px;
+}
+
+.row {
+    /* outline-style: dashed; */
+}
+/* 
+.col-header {
+    text-align: center;
+} */

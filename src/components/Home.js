@@ -8,8 +8,8 @@ function Home() {
 
     return(
         <>
+        {/* Header */}
         <Header />
-
         <Container className="main-container">
             <Row className="main-row">
                 <Col className="main-col">
@@ -22,7 +22,7 @@ function Home() {
                 </Col>
             </Row>
         </Container>
-
+        {/* Footer */}
         <Footer />
         </>
     )
