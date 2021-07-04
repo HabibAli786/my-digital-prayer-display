@@ -1,0 +1,43 @@
+.container {
+    /* margin: 20px 0px 0px 5px !important; */
+    /* margin-left: 5px !important; */
+}
+
+.table-container {
+    margin: 20px 0px 0px 5px !important;
+    text-align: left;
+    font-family: Almarai;
+    font-size: 5.1em;
+    padding-left: 5px;
+}
+
+.active-color{
+    color: #0175f2;
+}
+
+.start-time {
+    font-size: 60px;
+}
+
+.jamaat {
+    font-size: 60px;
+}
+
+.logo {
+    position: absolute;
+    right: 1%;
+    top: 100px;
+    width: 30%;
+}
+
+.clock {
+    position: absolute;
+    right: 3%;
+    top: 46%;
+    font-size: 6em;
+    width: 25%;
+}
+
+/* .col {
+    border-style: dotted;
+} */

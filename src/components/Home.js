@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
+import Footer from './Footer/Footer'
 // import { BsClockHistory } from 'react-icons/bs'
 import Header from './Header/Header'
 import './Home.css'
@@ -7,8 +8,8 @@ function Home() {
 
     return(
         <>
+        {/* Header */}
         <Header />
-
         <Container className="main-container">
             <Row className="main-row">
                 <Col className="main-col">
@@ -21,6 +22,8 @@ function Home() {
                 </Col>
             </Row>
         </Container>
+        {/* Footer */}
+        <Footer />
         </>
     )
 }
