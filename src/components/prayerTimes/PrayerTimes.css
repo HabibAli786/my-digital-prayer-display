@@ -7,7 +7,7 @@
     margin: 20px 0px 0px 5px !important;
     text-align: left;
     font-family: Almarai;
-    font-size: 4.5em;
+    font-size: 4.6em;
     padding-left: 5px;
 }
 
@@ -16,11 +16,11 @@
 }
 
 .start-time {
-    font-size: 70px;
+    font-size: 60px;
 }
 
 .jamaat {
-    font-size: 70px;
+    font-size: 60px;
 }
 
 .logo {
@@ -32,11 +32,12 @@
 
 .clock {
     position: absolute;
-    right: 6%;
-    top: 50%;
+    right: 3%;
+    top: 46%;
     font-size: 6em;
+    width: 25%;
 }
 
-.col {
+/* .col {
     border-style: dotted;
-}
+} */
