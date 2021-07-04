@@ -30,7 +30,7 @@ const Clock = () => {
 
 function PrayerTimes() {
 
-    const [clock, setClock] = useState(0)
+    const [clock, setClock] = useState("0:00:00")
 
     useEffect(() => {
         setTimeout(() => {
@@ -84,7 +84,10 @@ function PrayerTimes() {
                 <Col className="col-2 active-color">11:00</Col>
             </Row>
         </Container>
-        <img className="logo" src='/images/iqra.png' alt="logo" />
+        {/* <img className="logo" src='/images/iqra.png' alt="logo" /> */}
+        <a href="/">
+            <img className="logo" src='/images/iqra.png' alt="logo" />
+        </a>
         <h1 className="clock">{clock}</h1>
         </>
     )
