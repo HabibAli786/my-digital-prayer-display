@@ -9,8 +9,8 @@ function PrayerTimes() {
             <Row>
                 <Col className="col-3"></Col>
                 <Col className="col-3"></Col>
-                <Col className="col-3">Start Time</Col>
-                <Col className="col-3 active-color">Jamaat</Col>
+                <Col className="col-3 start-time">Start Time</Col>
+                <Col className="col-3 jamaat active-color">Jamaat</Col>
             </Row>
             <Row>
                 <Col className="col-3">فَجْر‎</Col>
@@ -19,9 +19,9 @@ function PrayerTimes() {
                 <Col className="col-3 active-color">4:00</Col>
             </Row>
             <Row>
-                <Col className="col-3">Don't know</Col>
-                <Col className="col-3">4:41</Col>
                 <Col className="col-3">-- --</Col>
+                <Col className="col-3">Sunrise</Col>
+                <Col className="col-3">4:41</Col>
                 <Col className="col-3 active-color">-- --</Col>
             </Row>
             <Row>
@@ -50,6 +50,7 @@ function PrayerTimes() {
             </Row>
         </Container>
         <img className="logo" src='/images/iqra.png' alt="logo" />
+        <h1 className="clock">00:00:00</h1>
         </>
     )
 }
