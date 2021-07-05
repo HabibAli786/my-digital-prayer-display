@@ -28,15 +28,30 @@ const Clock = () => {
     return (`${hours}:${minutes}:${seconds}`)
 }
 
+const CurrentDate = () => {
+    const date = new Date()
+    const weekday = date.toLocaleString("default", { weekday: "long" })
+    const dayOfMonth = date.getUTCDate()
+    const month = date.toLocaleString('default', { month: 'long' })
+    return weekday + " " + dayOfMonth + " " + month
+}
+
 function PrayerTimes() {
 
     const [clock, setClock] = useState("0:00:00")
+    const [date, setDate] = useState(CurrentDate())
 
     useEffect(() => {
         setTimeout(() => {
             setClock(Clock())
         }, 1000)
     }, [clock])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setDate(CurrentDate())
+        }, 8000)
+    }, [date])
 
     return(
         <>
@@ -88,6 +103,7 @@ function PrayerTimes() {
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
         </a>
+        <h1 className="date">{date}</h1>
         <h1 className="clock">{clock}</h1>
         </>
     )
