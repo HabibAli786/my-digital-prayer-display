@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
+import Papa from 'papaparse'
 import './PrayerTimes.css'
 
 const Clock = () => {
