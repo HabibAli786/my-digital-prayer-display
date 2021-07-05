@@ -38,7 +38,7 @@ const CurrentDate = () => {
 
 function PrayerTimes() {
 
-    const [clock, setClock] = useState("0:00:00")
+    const [clock, setClock] = useState(Clock())
     const [date, setDate] = useState(CurrentDate())
 
     useEffect(() => {
@@ -99,7 +99,6 @@ function PrayerTimes() {
                 <Col className="col-2 active-color">11:00</Col>
             </Row>
         </Container>
-        {/* <img className="logo" src='/images/iqra.png' alt="logo" /> */}
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
         </a>
