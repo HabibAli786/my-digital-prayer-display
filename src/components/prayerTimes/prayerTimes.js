@@ -3,6 +3,25 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Papa from 'papaparse'
 import './PrayerTimes.css'
 
+async function GetData(artist) {
+    const data = Papa.parse(await fetchCsv());
+    console.log("-----PAPA DATA-------")
+    console.log(data);
+    console.log(data.data[1])
+    return data;
+}
+
+async function fetchCsv() {
+    const response = await fetch('csv/prayertimes-2021.csv');
+    const reader = response.body.getReader();
+    const result = await reader.read();
+    const decoder = new TextDecoder('utf-8');
+    const csv = await decoder.decode(result.value);
+    console.log("-------CSV-------")
+    console.log('csv', csv);
+    return csv;
+}
+
 const Clock = () => {
     const date = new Date()
     let hours = date.getHours()
@@ -36,6 +55,8 @@ const CurrentDate = () => {
     const month = date.toLocaleString('default', { month: 'long' })
     return weekday + " " + dayOfMonth + " " + month
 }
+
+GetData()
 
 function PrayerTimes() {
 
