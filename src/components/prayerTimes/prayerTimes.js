@@ -51,17 +51,22 @@ const Clock = () => {
 const CurrentDate = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
-    const dayOfMonth = date.getUTCDate()
+    const dayOfMonth = date.getUTCDate()+1
     const month = date.toLocaleString('default', { month: 'long' })
     return weekday + " " + dayOfMonth + " " + month
 }
 
-GetData()
+const GetCurrentPrayerTimes = () => {
+    return GetData().then(data => { return data })
+}
 
 function PrayerTimes() {
 
     const [clock, setClock] = useState(Clock())
     const [date, setDate] = useState(CurrentDate())
+    const [times, setTimes] = useState([
+        "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
+    ])
 
     useEffect(() => {
         setTimeout(() => {
@@ -75,6 +80,14 @@ function PrayerTimes() {
         }, 8000)
     }, [date])
 
+    // const prayer = () => {
+    //     GetData().then(prayer => {
+    //         console.log(prayer.data)
+    //     })
+    // }
+
+    // prayer()
+
     return(
         <>
         <Container className="table-container">
@@ -87,38 +100,38 @@ function PrayerTimes() {
             <Row>
                 <Col className="col-4">فَجْر‎</Col>
                 <Col className="col-4">Fajr</Col>
-                <Col className="col-2">3:06</Col>
-                <Col className="col-2 active-color">4:00</Col>
+                <Col className="col-2">{times[0]}</Col>
+                <Col className="col-2 active-color">{times[1]}</Col>
             </Row>
             <Row>
                 <Col className="col-4">-- --</Col>
                 <Col className="col-4">Sunrise</Col>
-                <Col className="col-2">4:41</Col>
+                <Col className="col-2">{times[2]}</Col>
                 <Col className="col-2 active-color">-- --</Col>
             </Row>
             <Row>
                 <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
                 <Col className="col-4">Zuhr</Col>
-                <Col className="col-2">1:11</Col>
-                <Col className="col-2 active-color">1:30</Col>
+                <Col className="col-2">{times[3]}</Col>
+                <Col className="col-2 active-color">{times[4]}</Col>
             </Row>
             <Row>
                 <Col className="col-4">صَلَاةُ العَصْر</Col>
                 <Col className="col-4">Asr</Col>
-                <Col className="col-2">6:44</Col>
-                <Col className="col-2 active-color">8:00</Col>
+                <Col className="col-2">{times[5]}</Col>
+                <Col className="col-2 active-color">{times[6]}</Col>
             </Row>
             <Row>
                 <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
                 <Col className="col-4">Maghrib</Col>
-                <Col className="col-2">9:32</Col>
-                <Col className="col-2 active-color">9:32</Col>
+                <Col className="col-2">{times[7]}</Col>
+                <Col className="col-2 active-color">{times[8]}</Col>
             </Row>
             <Row>
                 <Col className="col-4">صَلَاةُ العِشَاء‎</Col>
                 <Col className="col-4">Isha</Col>
-                <Col className="col-2">10:50</Col>
-                <Col className="col-2 active-color">11:00</Col>
+                <Col className="col-2">{times[9]}</Col>
+                <Col className="col-2 active-color">{times[10]}</Col>
             </Row>
         </Container>
         <a href="/">
