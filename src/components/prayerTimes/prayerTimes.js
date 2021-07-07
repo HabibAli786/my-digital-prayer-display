@@ -5,9 +5,9 @@ import './PrayerTimes.css'
 
 async function GetData(artist) {
     const data = Papa.parse(await fetchCsv());
-    console.log("-----PAPA DATA-------")
-    console.log(data);
-    console.log(data.data[1])
+    // console.log("-----PAPA DATA-------")
+    // console.log(data);
+    // console.log(data.data[1])
     return data;
 }
 
@@ -17,8 +17,8 @@ async function fetchCsv() {
     const result = await reader.read();
     const decoder = new TextDecoder('utf-8');
     const csv = await decoder.decode(result.value);
-    console.log("-------CSV-------")
-    console.log('csv', csv);
+    // console.log("-------CSV-------")
+    // console.log('csv', csv);
     return csv;
 }
 
@@ -51,14 +51,31 @@ const Clock = () => {
 const CurrentDate = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
-    const dayOfMonth = date.getUTCDate()+1
+    const dayOfMonth = date.getDate()
     const month = date.toLocaleString('default', { month: 'long' })
     return weekday + " " + dayOfMonth + " " + month
 }
 
-const GetCurrentPrayerTimes = () => {
-    return GetData().then(data => { return data })
+const FullDate = () => {
+    const date = new Date()
+    const day = date.getDate()
+    const month = date.getMonth()+1
+    const year = date.getFullYear()
+    return `0${day}/0${month}/${year}`
 }
+
+const GetCurrentPrayerTimes = () => {
+    GetData().then(prayer => {
+        for(let i=0; i < prayer.data.length; i++) {
+            if(prayer.data[i][0] === FullDate()) {
+                console.log(prayer.data[i])
+
+            }
+        }
+    })
+}
+
+GetCurrentPrayerTimes()
 
 function PrayerTimes() {
 
@@ -77,16 +94,18 @@ function PrayerTimes() {
     useEffect(() => {
         setTimeout(() => {
             setDate(CurrentDate())
+            // console.log("Welcome")
         }, 8000)
     }, [date])
 
-    // const prayer = () => {
-    //     GetData().then(prayer => {
-    //         console.log(prayer.data)
-    //     })
-    // }
-
-    // prayer()
+    GetData().then(prayer => {
+        for(let i=0; i < prayer.data.length; i++) {
+            if(prayer.data[i][0] === FullDate()) {
+                let slice = prayer.data[i].slice(1,14)
+                setTimes(slice)
+            }
+        }
+    })
 
     return(
         <>
