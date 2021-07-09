@@ -43,8 +43,6 @@ const Clock = () => {
         seconds = `0${seconds}`
     }
 
-    // console.log(`${hours}:${minutes}:${seconds}`)
-
     return (`${hours}:${minutes}:${seconds}`)
 }
 
@@ -64,19 +62,6 @@ const FullDate = () => {
     return `0${day}/0${month}/${year}`
 }
 
-const GetCurrentPrayerTimes = () => {
-    GetData().then(prayer => {
-        for(let i=0; i < prayer.data.length; i++) {
-            if(prayer.data[i][0] === FullDate()) {
-                console.log(prayer.data[i])
-
-            }
-        }
-    })
-}
-
-GetCurrentPrayerTimes()
-
 function PrayerTimes() {
 
     const [clock, setClock] = useState(Clock())
@@ -94,8 +79,7 @@ function PrayerTimes() {
     useEffect(() => {
         setTimeout(() => {
             setDate(CurrentDate())
-            // console.log("Welcome")
-        }, 8000)
+        }, 86400000)
     }, [date])
 
     GetData().then(prayer => {
