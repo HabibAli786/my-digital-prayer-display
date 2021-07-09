@@ -25,17 +25,25 @@
 
 .logo {
     position: absolute;
-    right: 1%;
-    top: 100px;
+    right: 3%;
+    top: 80px;
     width: 30%;
+}
+
+.date {
+    position: absolute;
+    right: 3%;
+    top: 40%;
+    width: 30%;
+    font-size: 4em;
 }
 
 .clock {
     position: absolute;
     right: 3%;
-    top: 46%;
+    top: 50%;
     font-size: 6em;
-    width: 25%;
+    width: 30%;
 }
 
 /* .col {
