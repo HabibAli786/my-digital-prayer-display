@@ -56,10 +56,21 @@ const CurrentDate = () => {
 
 const FullDate = () => {
     const date = new Date()
-    const day = date.getDate()
-    const month = date.getMonth()+1
+
+    let day = date.getDate()
+    day = day.toString()
+    if(day.length === 1) {
+        day = `0${day}`
+    }
+
+    let month = date.getMonth()+1
+    month = month.toString()
+    if(month.length === 1) {
+        month = `0${month}`
+    }
+    
     const year = date.getFullYear()
-    return `0${day}/0${month}/${year}`
+    return `${day}/${month}/${year}`
 }
 
 function PrayerTimes() {
@@ -71,20 +82,26 @@ function PrayerTimes() {
     ])
 
     useEffect(() => {
-        setTimeout(() => {
+        setInterval(() => {
             setClock(Clock())
         }, 1000)
     }, [clock])
 
-    useEffect(() => {
-        setTimeout(() => {
-            setDate(CurrentDate())
-        }, 86400000)
-    }, [date])
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         setDate()
+    //     }, 1000)
+    // }, [clock])
+
+    setInterval(() => {
+        setDate(CurrentDate())
+    }, 2000)
+
 
     GetData().then(prayer => {
         for(let i=0; i < prayer.data.length; i++) {
             if(prayer.data[i][0] === FullDate()) {
+                // console.log(prayer.data[i])
                 let slice = prayer.data[i].slice(1,14)
                 setTimes(slice)
             }
