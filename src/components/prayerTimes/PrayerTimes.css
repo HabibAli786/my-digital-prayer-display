@@ -3,6 +3,11 @@
     /* margin-left: 5px !important; */
 }
 
+.card-annc {
+    margin-top: 2%;
+    font-size: 4.5em;
+}
+
 .table-container {
     margin: 20px 0px 0px 5px !important;
     text-align: left;
@@ -45,6 +50,11 @@
     font-size: 6em;
     width: 30%;
 }
+
+@keyframes mymove {
+    from {top: 0px;}
+    to {top: 200px;}
+  }
 
 /* .col {
     border-style: dotted;

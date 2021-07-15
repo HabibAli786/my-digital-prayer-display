@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import Papa from 'papaparse'
 import './PrayerTimes.css'
 
@@ -75,41 +75,89 @@ const FullDate = () => {
 
 function PrayerTimes() {
 
-    const [clock, setClock] = useState(Clock())
+    const [clock, setClock] = useState()
     const [date, setDate] = useState(CurrentDate())
     const [times, setTimes] = useState([
         "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
     ])
 
+    // Update live clock every second
     useEffect(() => {
         setInterval(() => {
             setClock(Clock())
-        }, 1000)
+        }, 900)
+        return () => {
+
+        }
     }, [clock])
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         setDate()
-    //     }, 1000)
-    // }, [clock])
-
-    setInterval(() => {
+    // Run inital setDate onMount
+    useEffect(() => {
         setDate(CurrentDate())
-    }, 2000)
+        return () => {
+            
+        }
+    }, [])
 
+    useEffect(() => {
+        GetData()
+            .then(prayer => {
+                for(let i=0; i < prayer.data.length; i++) {
+                    if(prayer.data[i][0] === FullDate()) {
+                        let slice = prayer.data[i].slice(1,14)
+                        setTimes(slice)
+                    }
+                }
+            })
+            .catch(error => {
+                console.log("Error:" + error)
+            })
+        return () => {
+            
+        }
+    }, [])
 
-    GetData().then(prayer => {
-        for(let i=0; i < prayer.data.length; i++) {
-            if(prayer.data[i][0] === FullDate()) {
-                // console.log(prayer.data[i])
-                let slice = prayer.data[i].slice(1,14)
-                setTimes(slice)
-            }
+    useEffect(() => {
+        if(date === "00:00:00") {
+            setDate(CurrentDate())
+            GetData()
+            .then(prayer => {
+                for(let i=0; i < prayer.data.length; i++) {
+                    if(prayer.data[i][0] === FullDate()) {
+                        let slice = prayer.data[i].slice(1,14)
+                        setTimes(slice)
+                    }
+                }
+            })
+            .catch(error => {
+                console.log("Error:" + error)
+            })
+        }
+        return () => {
+            
         }
     })
 
+            // GetData()
+            // .then(prayer => {
+            //     for(let i=0; i < prayer.data.length; i++) {
+            //         if(prayer.data[i][0] === FullDate()) {
+            //             let slice = prayer.data[i].slice(1,14)
+            //             setTimes(slice)
+            //         }
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log("Error:" + error)
+            // })
+         
     return(
         <>
+        <a href="/">
+            <img className="logo" src='/images/iqra.png' alt="logo" />
+        </a>
+        <h1 className="date">{date}</h1>
+        <h1 className="clock">{clock}</h1>
         <Container className="table-container">
             <Row>
                 <Col className="col-4"></Col>
@@ -154,11 +202,9 @@ function PrayerTimes() {
                 <Col className="col-2 active-color">{times[10]}</Col>
             </Row>
         </Container>
-        <a href="/">
-            <img className="logo" src='/images/iqra.png' alt="logo" />
-        </a>
-        <h1 className="date">{date}</h1>
-        <h1 className="clock">{clock}</h1>
+        <Card className="card-annc mx-5">
+            <Card.Body>Surah Mulk after Maghrib</Card.Body>
+        </Card>
         </>
     )
 }
