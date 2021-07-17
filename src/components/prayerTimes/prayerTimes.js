@@ -80,6 +80,7 @@ function PrayerTimes() {
     const [times, setTimes] = useState([
         "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
     ])
+    const [animation, setAnimation] = useState(false)
 
     // Update live clock every second
     useEffect(() => {
@@ -150,7 +151,7 @@ function PrayerTimes() {
             // .catch(error => {
             //     console.log("Error:" + error)
             // })
-         
+
     return(
         <>
         <a href="/">
@@ -204,7 +205,7 @@ function PrayerTimes() {
         </Container>
         <Card className="card-annc mx-5">
             <Card.Body>
-                <Card.Text className="annc-text">
+                <Card.Text className={animation === true ? "annc-current" : "annc-next"}>
                 Surah Mulk after Maghrib
                 </Card.Text>
             </Card.Body>

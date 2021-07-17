@@ -75,8 +75,13 @@
     }
 }
 
-.annc-text {
+.annc-current {
     animation-name: slideout;
+    animation-duration: 2s;
+}
+
+.annc-next {
+    animation-name: slidein;
     animation-duration: 2s;
 }
 /* .col {
