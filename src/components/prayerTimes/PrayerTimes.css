@@ -51,11 +51,34 @@
     width: 30%;
 }
 
-@keyframes mymove {
-    from {top: 0px;}
-    to {top: 200px;}
-  }
+@keyframes slidein {
+    from {
+      transform: translateX(3%);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+}
 
+@keyframes slideout {
+    from {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+  
+    to {
+      transform: translateX(-28%);
+      opacity: 0;
+    }
+}
+
+.annc-text {
+    animation-name: slideout;
+    animation-duration: 2s;
+}
 /* .col {
     border-style: dotted;
 } */

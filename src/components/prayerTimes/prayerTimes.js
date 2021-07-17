@@ -203,7 +203,11 @@ function PrayerTimes() {
             </Row>
         </Container>
         <Card className="card-annc mx-5">
-            <Card.Body>Surah Mulk after Maghrib</Card.Body>
+            <Card.Body>
+                <Card.Text className="annc-text">
+                Surah Mulk after Maghrib
+                </Card.Text>
+            </Card.Body>
         </Card>
         </>
     )
