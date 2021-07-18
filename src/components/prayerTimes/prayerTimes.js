@@ -92,6 +92,23 @@ function PrayerTimes() {
         }
     }, [clock])
 
+    // Animation useEffect
+    useEffect(() => {
+        if(animation === false) {
+            setTimeout(() => {
+                setAnimation(true)
+                console.log("false")
+            }, 5000)
+            // setAnimation(false)
+        }
+        if(animation === true){
+            setTimeout(() => {
+                setAnimation(false)
+                console.log("true")
+            }, 8000)
+        }
+    }, [animation])
+
     // Run inital setDate onMount
     useEffect(() => {
         setDate(CurrentDate())

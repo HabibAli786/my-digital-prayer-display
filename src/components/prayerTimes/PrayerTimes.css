@@ -78,11 +78,13 @@
 .annc-current {
     animation-name: slideout;
     animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 
 .annc-next {
     animation-name: slidein;
     animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 /* .col {
     border-style: dotted;
