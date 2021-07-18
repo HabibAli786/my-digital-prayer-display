@@ -119,7 +119,7 @@ function PrayerTimes() {
     }, [])
 
     useEffect(() => {
-        if(date === "00:00:00") {
+        if(clock === "00:00:00") {
             setDate(CurrentDate())
             GetData()
             .then(prayer => {
