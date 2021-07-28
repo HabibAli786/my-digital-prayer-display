@@ -102,7 +102,7 @@ function PrayerTimes() {
             setTimeout(() => {
                 setAnimation(true)
                 console.log("false")
-            }, 5000)
+            }, 8000)
             // setAnimation(false)
         }
         if(animation === true){
@@ -110,7 +110,12 @@ function PrayerTimes() {
                 setCount(count + 1)
                 setAnimation(false)
                 console.log("true")
-            }, 8000)
+                console.log(count)
+                if(count === notifications.length-1) {
+                    console.log("reset count")
+                    setCount(0)
+                }
+            }, 2000)
         }
     }, [animation])
 
