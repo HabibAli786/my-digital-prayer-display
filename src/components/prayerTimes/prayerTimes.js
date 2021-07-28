@@ -80,11 +80,15 @@ function PrayerTimes() {
     const [times, setTimes] = useState([
         "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
     ])
+
     const [animation, setAnimation] = useState(false)
     const [notifications, setNotifications] = useState([
         "Surah Mulk after Maghrib", "Dars after Zuhr", "Collections for Eid after Jummah", "Eid on the 23rd of July"
     ])
     const [count, setCount] = useState(0)
+
+    const [slideshowCount, setSlideshowCount] = useState(0)
+    const [displaySlideshow, setDisplaySlideshow] = useState(true)
 
     // Update live clock every second
     useEffect(() => {
@@ -183,6 +187,9 @@ function PrayerTimes() {
 
     return(
         <>
+        {
+            !displaySlideshow ?
+        <>
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
         </a>
@@ -239,6 +246,10 @@ function PrayerTimes() {
                 </Card.Text>
             </Card.Body>
         </Card>
+        </>
+        :
+        <img src="/slideshow/slide1.jpg" alt="slidshow" /> 
+        }
         </>
     )
 }
