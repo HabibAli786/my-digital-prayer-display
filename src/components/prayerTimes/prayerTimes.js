@@ -75,6 +75,7 @@ const FullDate = () => {
 
 function PrayerTimes() {
 
+    const numofSlidshowImages = 3
     const [clock, setClock] = useState()
     const [date, setDate] = useState(CurrentDate())
     const [times, setTimes] = useState([
@@ -87,7 +88,7 @@ function PrayerTimes() {
     ])
     const [count, setCount] = useState(0)
 
-    const [slideshowCount, setSlideshowCount] = useState(0)
+    const [slideshowCount, setSlideshowCount] = useState(1)
     const [displaySlideshow, setDisplaySlideshow] = useState(true)
 
     // Update live clock every second
@@ -100,7 +101,7 @@ function PrayerTimes() {
         }
     }, [clock])
 
-    // Animation useEffect
+    // Notification Animation useEffect
     useEffect(() => {
         if(animation === false) {
             setTimeout(() => {
@@ -122,6 +123,28 @@ function PrayerTimes() {
             }, 2000)
         }
     }, [animation])
+
+    // Slideshow Animation useEffect
+    useEffect(() => {
+        if(displaySlideshow === false) {
+            setTimeout(() => {
+                setDisplaySlideshow(true)
+                console.log("false")
+            }, 8000)
+            // setAnimation(false)
+        }
+        if(displaySlideshow === true){
+            setTimeout(() => {
+                setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numofSlidshowImages) {
+                    console.log("reset count")
+                    setSlideshowCount(1)
+                }
+                console.log("slideshow count" + slideshowCount )
+            }, 2000)
+        }
+    }, [displaySlideshow])
 
     // Run inital setDate onMount
     useEffect(() => {
@@ -248,7 +271,7 @@ function PrayerTimes() {
         </Card>
         </>
         :
-        <img src="/slideshow/slide1.jpg" alt="slidshow" /> 
+        <img src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
         }
         </>
     )
