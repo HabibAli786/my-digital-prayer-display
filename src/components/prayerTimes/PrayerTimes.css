@@ -51,6 +51,8 @@
     width: 30%;
 }
 
+/* Notification animations */
+
 @keyframes slidein {
     from {
       transform: translateX(3%);
@@ -86,6 +88,52 @@
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
+
+/* Slideshow animation */
+@keyframes display {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 100;
+    }
+}
+
+@keyframes hideDisplay {
+    from {
+      opacity: 100;
+    }
+  
+    to {
+      opacity: 0;
+    }
+}
+
+.slideshow-display {
+    animation-name: display;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.slideshow-hide {
+    animation-name: hideDisplay;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+}
+
+.slideshow-image {
+    /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
 /* .col {
     border-style: dotted;
 } */

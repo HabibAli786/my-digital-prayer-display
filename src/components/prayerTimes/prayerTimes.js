@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import Papa from 'papaparse'
+import axios from 'axios';
 import './PrayerTimes.css'
 
 async function GetData(artist) {
@@ -75,8 +76,10 @@ const FullDate = () => {
 
 function PrayerTimes() {
 
+    // Global Variables
     const numofSlidshowImages = 3
-    const [clock, setClock] = useState()
+
+    const [clock, setClock] = useState("00:00:00")
     const [date, setDate] = useState(CurrentDate())
     const [times, setTimes] = useState([
         "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
@@ -89,7 +92,7 @@ function PrayerTimes() {
     const [count, setCount] = useState(0)
 
     const [slideshowCount, setSlideshowCount] = useState(1)
-    const [displaySlideshow, setDisplaySlideshow] = useState(true)
+    const [displaySlideshow, setDisplaySlideshow] = useState(false)
 
     // Update live clock every second
     useEffect(() => {
@@ -106,18 +109,13 @@ function PrayerTimes() {
         if(animation === false) {
             setTimeout(() => {
                 setAnimation(true)
-                console.log("false")
             }, 8000)
-            // setAnimation(false)
         }
         if(animation === true){
             setTimeout(() => {
                 setCount(count + 1)
                 setAnimation(false)
-                console.log("true")
-                console.log(count)
                 if(count === notifications.length-1) {
-                    console.log("reset count")
                     setCount(0)
                 }
             }, 2000)
@@ -129,7 +127,6 @@ function PrayerTimes() {
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
-                console.log("false")
             }, 8000)
             // setAnimation(false)
         }
@@ -138,17 +135,23 @@ function PrayerTimes() {
                 setSlideshowCount(slideshowCount + 1)
                 setDisplaySlideshow(false)
                 if(slideshowCount === numofSlidshowImages) {
-                    console.log("reset count")
                     setSlideshowCount(1)
                 }
-                console.log("slideshow count" + slideshowCount )
-            }, 2000)
+            }, 3000)
         }
     }, [displaySlideshow])
 
     // Run inital setDate onMount
     useEffect(() => {
-        setDate(CurrentDate())
+        // setDate(CurrentDate())
+        axios.get('http://localhost:3001/prayertimes')
+        .then((response) => {
+            setDate(response.data[0].fullDay)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
         return () => {
             
         }
@@ -176,7 +179,6 @@ function PrayerTimes() {
     // update prayer times and date when clock reaches next day
     useEffect(() => {
         if(clock === "00:00:00") {
-            setDate(CurrentDate())
             GetData()
             .then(prayer => {
                 for(let i=0; i < prayer.data.length; i++) {
@@ -271,7 +273,7 @@ function PrayerTimes() {
         </Card>
         </>
         :
-        <img src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
+        <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
         }
         </>
     )
