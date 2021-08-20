@@ -143,7 +143,6 @@ function PrayerTimes() {
 
     // Run inital setDate onMount
     useEffect(() => {
-        // setDate(CurrentDate())
         axios.get('http://localhost:3001/prayertimes')
         .then((response) => {
             setDate(response.data[0].fullDay)
@@ -159,43 +158,56 @@ function PrayerTimes() {
 
     // run initial get prayers time
     useEffect(() => {
-        GetData()
-            .then(prayer => {
-                for(let i=0; i < prayer.data.length; i++) {
-                    if(prayer.data[i][0] === FullDate()) {
-                        let slice = prayer.data[i].slice(1,14)
-                        setTimes(slice)
-                    }
-                }
-            })
-            .catch(error => {
-                console.log("Error:" + error)
-            })
+        // GetData()
+        //     .then(prayer => {
+        //         for(let i=0; i < prayer.data.length; i++) {
+        //             if(prayer.data[i][0] === FullDate()) {
+        //                 let slice = prayer.data[i].slice(1,14)
+        //                 setTimes(slice)
+        //             }
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log("Error:" + error)
+        //     })
+        axios.get('http://localhost:3001/prayertimes')
+        .then((response) => {
+            const prayertimes = response.data.slice(1)
+            const arr = []
+            for(let i=0; i < prayertimes.length; i++) {
+                arr.push(prayertimes[i].startTime)
+                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+            }
+            setTimes(arr)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
         return () => {
             
         }
     }, [])
     
     // update prayer times and date when clock reaches next day
-    useEffect(() => {
-        if(clock === "00:00:00") {
-            GetData()
-            .then(prayer => {
-                for(let i=0; i < prayer.data.length; i++) {
-                    if(prayer.data[i][0] === FullDate()) {
-                        let slice = prayer.data[i].slice(1,14)
-                        setTimes(slice)
-                    }
-                }
-            })
-            .catch(error => {
-                console.log("Error:" + error)
-            })
-        }
-        return () => {
+    // useEffect(() => {
+    //     if(clock === "00:00:00") {
+    //         GetData()
+    //         .then(prayer => {
+    //             for(let i=0; i < prayer.data.length; i++) {
+    //                 if(prayer.data[i][0] === FullDate()) {
+    //                     let slice = prayer.data[i].slice(1,14)
+    //                     setTimes(slice)
+    //                 }
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log("Error:" + error)
+    //         })
+    //     }
+    //     return () => {
             
-        }
-    })
+    //     }
+    // })
 
             // GetData()
             // .then(prayer => {
