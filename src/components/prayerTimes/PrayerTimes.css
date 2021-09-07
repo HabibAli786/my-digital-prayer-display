@@ -6,6 +6,7 @@
 .card-annc {
     margin-top: 2%;
     font-size: 4.5em;
+    overflow: hidden;
 }
 
 .table-container {
@@ -35,12 +36,29 @@
     width: 30%;
 }
 
-.date {
+.weekday {
+    position: absolute;
+    right: 3%;
+    top: 33.5%;
+    width: 30%;
+    font-size: 4em;
+}
+
+.dayMonth {
     position: absolute;
     right: 3%;
     top: 40%;
     width: 30%;
     font-size: 4em;
+}
+
+
+.finshed {
+    color: grey;
+}
+
+.active {
+
 }
 
 .clock {

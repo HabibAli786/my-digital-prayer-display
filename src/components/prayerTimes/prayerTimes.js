@@ -1,27 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import Papa from 'papaparse'
 import axios from 'axios';
 import './PrayerTimes.css'
-
-async function GetData(artist) {
-    const data = Papa.parse(await fetchCsv());
-    // console.log("-----PAPA DATA-------")
-    // console.log(data);
-    // console.log(data.data[1])
-    return data;
-}
-
-async function fetchCsv() {
-    const response = await fetch('csv/prayertimes-2021.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    // console.log("-------CSV-------")
-    // console.log('csv', csv);
-    return csv;
-}
 
 const Clock = () => {
     const date = new Date()
@@ -47,43 +27,61 @@ const Clock = () => {
     return (`${hours}:${minutes}:${seconds}`)
 }
 
-const CurrentDate = () => {
+const weekDay = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
+    // const dayOfMonth = date.getDate()
+    // const month = date.toLocaleString('default', { month: 'long' })
+    // return weekday + " " + dayOfMonth + " " + month
+    return weekday
+}
+
+const dayMonth = () => {
+    const date = new Date()
     const dayOfMonth = date.getDate()
     const month = date.toLocaleString('default', { month: 'long' })
-    return weekday + " " + dayOfMonth + " " + month
+    return dayOfMonth + " " + month
 }
 
-const FullDate = () => {
-    const date = new Date()
+const strToDate = (str) => {
+    console.log(str)
+    if(str.length === 8) {
+        if(str === "00:00:00") {
+            
+        } else {
+            const date = new Date()
+            const strHours = str.slice(0, 2)
+            const strMinutes = str.slice(3, 5)
+            const strSeconds = str.slice(6, 8)
 
-    let day = date.getDate()
-    day = day.toString()
-    if(day.length === 1) {
-        day = `0${day}`
-    }
+            const result = date.setHours(strHours, strMinutes, strSeconds)
 
-    let month = date.getMonth()+1
-    month = month.toString()
-    if(month.length === 1) {
-        month = `0${month}`
+            console.log(result)
+
+            return result
+        }
+        // console.log(str)
+    } else {
+        console.log(str + "str not long enough")
     }
-    
-    const year = date.getFullYear()
-    return `${day}/${month}/${year}`
+    // console.log(str)
 }
+
+//  0 1 2 3 4 5 6 7 8 9 10
+//  0 0 : 0 0 : 0 0
 
 function PrayerTimes() {
 
     // Global Variables
     const numofSlidshowImages = 3
+    const newDate = new Date()
 
     const [clock, setClock] = useState("00:00:00")
-    const [date, setDate] = useState(CurrentDate())
+    const [date, setDate] = useState([weekDay(), dayMonth()])
     const [times, setTimes] = useState([
-        "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00", "0:00"
+        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"
     ])
+    const [prayerFinished, setprayerFinished] = useState(false)
 
     const [animation, setAnimation] = useState(false)
     const [notifications, setNotifications] = useState([
@@ -99,9 +97,6 @@ function PrayerTimes() {
         setInterval(() => {
             setClock(Clock())
         }, 900)
-        return () => {
-
-        }
     }, [clock])
 
     // Notification Animation useEffect
@@ -142,34 +137,23 @@ function PrayerTimes() {
     }, [displaySlideshow])
 
     // Run inital setDate onMount
-    useEffect(() => {
-        axios.get('http://localhost:3001/prayertimes')
-        .then((response) => {
-            setDate(response.data[0].fullDay)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/prayertimes')
+    //     .then((response) => {
+    //         setDate(response.data[0].fullDay)
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 
-        return () => {
+    //     return () => {
             
-        }
-    }, [])
+    //     }
+    // }, [])
 
-    // run initial get prayers time
+    // setTimes
     useEffect(() => {
-        // GetData()
-        //     .then(prayer => {
-        //         for(let i=0; i < prayer.data.length; i++) {
-        //             if(prayer.data[i][0] === FullDate()) {
-        //                 let slice = prayer.data[i].slice(1,14)
-        //                 setTimes(slice)
-        //             }
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log("Error:" + error)
-        //     })
+        console.log("hello")
         axios.get('http://localhost:3001/prayertimes')
         .then((response) => {
             const prayertimes = response.data.slice(1)
@@ -224,13 +208,14 @@ function PrayerTimes() {
 
     return(
         <>
-        {
-            !displaySlideshow ?
+        {/* {
+            !displaySlideshow ? */}
         <>
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
         </a>
-        <h1 className="date">{date}</h1>
+        <h1 className="weekday">{date[0]}</h1>
+        <h1 className="dayMonth">{date[1]}</h1>
         <h1 className="clock">{clock}</h1>
         <Container className="table-container">
             <Row>
@@ -239,7 +224,7 @@ function PrayerTimes() {
                 <Col className="col-2 start-time">Start</Col>
                 <Col className="col-2 jamaat active-color">Jamaat</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished === true ? "finshed" : "finished"}>
                 <Col className="col-4">فَجْر‎</Col>
                 <Col className="col-4">Fajr</Col>
                 <Col className="col-2">{times[0]}</Col>
@@ -284,9 +269,9 @@ function PrayerTimes() {
             </Card.Body>
         </Card>
         </>
-        :
-        <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
-        }
+        {/* : */}
+        {/* <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" />  */}
+        {/* } */}
         </>
     )
 }
