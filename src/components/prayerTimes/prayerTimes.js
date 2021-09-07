@@ -99,10 +99,11 @@ function PrayerTimes() {
         }, 900)
     }, [clock])
 
+    // Grey out prayers that have finshed
     useEffect(() => {
         let clockToDate = new Date()
         let timesToDate = new Date()
-        let newPrayerFinshed = [...prayerFinished]
+        const newPrayerFinshed = [...prayerFinished]
 
         const clockHours = clock.slice(0, 2)
         const clockMinutes = clock.slice(3, 5)
@@ -110,22 +111,11 @@ function PrayerTimes() {
 
         clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
 
-        // let newTimesArr = times
-        // newTimesArr.splice(0, 1)
-        // newTimesArr.splice(3, 1)
-        // newTimesArr.splice(5, 1)
-        // newTimesArr.splice(7, 1)
-        // newTimesArr.splice(9, 1)
-
-        // console.log("I am the new array " + newTimesArr)
-
+        let j = 0
         for(let i=0; i < 11; i += 1) {
-            let j = 0
             if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
                 continue
             }
-            console.log(i)
-            console.log(times)
             const timesHours = times[i].slice(0, 2)
             const timesMinutes = times[i].slice(3, 5)
             const timesSeconds = times[i].slice(6, 8)
@@ -135,29 +125,23 @@ function PrayerTimes() {
             if(clockToDate > timesToDate) {
                 newPrayerFinshed[j] = true
                 setprayerFinished(newPrayerFinshed)
-                console.log(prayerFinished)
-                console.log("I am true")
             } else {
-                newPrayerFinshed[j] = true
+                newPrayerFinshed[j] = false
                 setprayerFinished(newPrayerFinshed)
-                console.log("I am false")
             }
-            j += 1
-        }
-
-        // const timesHours = times[5].slice(0, 2)
-        // const timesMinutes = times[5].slice(3, 5)
-        // const timesSeconds = times[5].slice(6, 8)
-                        
+            j = j+1
+        }                        
     }, [clock])
 
     // Notification Animation useEffect
     useEffect(() => {
+        // How long the text will appear
         if(animation === false) {
             setTimeout(() => {
                 setAnimation(true)
-            }, 8000)
+            }, 10000)
         }
+        // How long next text will appear
         if(animation === true){
             setTimeout(() => {
                 setCount(count + 1)
@@ -165,18 +149,20 @@ function PrayerTimes() {
                 if(count === notifications.length-1) {
                     setCount(0)
                 }
-            }, 2000)
+            }, 3000)
         }
     }, [animation])
 
     // Slideshow Animation useEffect
     useEffect(() => {
+        // How long will the image be off the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
-            }, 8000)
+            }, 90000)
             // setAnimation(false)
         }
+        // How long the image will be on the screen
         if(displaySlideshow === true){
             setTimeout(() => {
                 setSlideshowCount(slideshowCount + 1)
@@ -184,7 +170,7 @@ function PrayerTimes() {
                 if(slideshowCount === numofSlidshowImages) {
                     setSlideshowCount(1)
                 }
-            }, 3000)
+            }, 10000)
         }
     }, [displaySlideshow])
 
@@ -205,7 +191,6 @@ function PrayerTimes() {
 
     // setTimes
     useEffect(() => {
-        console.log("hello")
         axios.get('http://localhost:3001/prayertimes')
         .then((response) => {
             const prayertimes = response.data.slice(1)
@@ -260,8 +245,8 @@ function PrayerTimes() {
 
     return(
         <>
-        {/* {
-            !displaySlideshow ? */}
+        {
+            !displaySlideshow ?
         <>
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
@@ -321,9 +306,9 @@ function PrayerTimes() {
             </Card.Body>
         </Card>
         </>
-        {/* : */}
-        {/* <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" />  */}
-        {/* } */}
+        :
+            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
+        }
         </>
     )
 }
