@@ -74,14 +74,14 @@ function PrayerTimes() {
 
     // Global Variables
     const numofSlidshowImages = 3
-    const newDate = new Date()
 
     const [clock, setClock] = useState("00:00:00")
     const [date, setDate] = useState([weekDay(), dayMonth()])
     const [times, setTimes] = useState([
-        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"
+        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "0:00"
     ])
-    const [prayerFinished, setprayerFinished] = useState(false)
+
+    const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
 
     const [animation, setAnimation] = useState(false)
     const [notifications, setNotifications] = useState([
@@ -97,6 +97,58 @@ function PrayerTimes() {
         setInterval(() => {
             setClock(Clock())
         }, 900)
+    }, [clock])
+
+    useEffect(() => {
+        let clockToDate = new Date()
+        let timesToDate = new Date()
+        let newPrayerFinshed = [...prayerFinished]
+
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
+
+        clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+        // let newTimesArr = times
+        // newTimesArr.splice(0, 1)
+        // newTimesArr.splice(3, 1)
+        // newTimesArr.splice(5, 1)
+        // newTimesArr.splice(7, 1)
+        // newTimesArr.splice(9, 1)
+
+        // console.log("I am the new array " + newTimesArr)
+
+        for(let i=0; i < 11; i += 1) {
+            let j = 0
+            if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
+                continue
+            }
+            console.log(i)
+            console.log(times)
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
+
+            if(clockToDate > timesToDate) {
+                newPrayerFinshed[j] = true
+                setprayerFinished(newPrayerFinshed)
+                console.log(prayerFinished)
+                console.log("I am true")
+            } else {
+                newPrayerFinshed[j] = true
+                setprayerFinished(newPrayerFinshed)
+                console.log("I am false")
+            }
+            j += 1
+        }
+
+        // const timesHours = times[5].slice(0, 2)
+        // const timesMinutes = times[5].slice(3, 5)
+        // const timesSeconds = times[5].slice(6, 8)
+                        
     }, [clock])
 
     // Notification Animation useEffect
@@ -224,37 +276,37 @@ function PrayerTimes() {
                 <Col className="col-2 start-time">Start</Col>
                 <Col className="col-2 jamaat active-color">Jamaat</Col>
             </Row>
-            <Row className={prayerFinished === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[0] === true ? "finshed" : "finished"}>
                 <Col className="col-4">فَجْر‎</Col>
                 <Col className="col-4">Fajr</Col>
                 <Col className="col-2">{times[0]}</Col>
                 <Col className="col-2 active-color">{times[1]}</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished[1] === true ? "finshed" : "finished"}>
                 <Col className="col-4">-- --</Col>
                 <Col className="col-4">Sunrise</Col>
                 <Col className="col-2">{times[2]}</Col>
                 <Col className="col-2 active-color">-- --</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished[2] === true ? "finshed" : "finished"}>
                 <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
                 <Col className="col-4">Zuhr</Col>
                 <Col className="col-2">{times[3]}</Col>
                 <Col className="col-2 active-color">{times[4]}</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished[3] === true ? "finshed" : "finished"}>
                 <Col className="col-4">صَلَاةُ العَصْر</Col>
                 <Col className="col-4">Asr</Col>
                 <Col className="col-2">{times[5]}</Col>
                 <Col className="col-2 active-color">{times[6]}</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished[4] === true ? "finshed" : "finished"}>
                 <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
                 <Col className="col-4">Maghrib</Col>
                 <Col className="col-2">{times[7]}</Col>
                 <Col className="col-2 active-color">{times[8]}</Col>
             </Row>
-            <Row>
+            <Row className={prayerFinished[5] === true ? "finshed" : "finished"}>
                 <Col className="col-4">صَلَاةُ العِشَاء‎</Col>
                 <Col className="col-4">Isha</Col>
                 <Col className="col-2">{times[9]}</Col>
