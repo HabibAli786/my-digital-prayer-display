@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, isValidElement } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import axios from 'axios';
 import './PrayerTimes.css'
@@ -31,10 +31,21 @@ const nextDay = () => {
     const today = new Date()
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
-    const day = "0" + tomorrow.getDate()
-    let month = "0" + (tomorrow.getMonth()+1)
-    const year = tomorrow.getFullYear()
     
+    let day = tomorrow.getDate()
+    day = day.toString()
+    if(day.length === 1) {
+        day = `0${day}`
+    }
+
+    let month = tomorrow.getMonth()+1
+    month = month.toString()
+    if(month.length === 1) {
+        month = `0${month}`
+    }
+    
+    const year = tomorrow.getFullYear()
+
     return day + "-" + month + "-" + year
 }
 
@@ -55,10 +66,10 @@ const dayMonth = () => {
 }
 
 const strToDate = (str) => {
-    console.log(str)
+    if(!str) return "error"
     if(str.length === 8) {
         if(str === "00:00:00") {
-            
+            return "No Date to Convert"
         } else {
             const date = new Date()
             const strHours = str.slice(0, 2)
@@ -73,7 +84,7 @@ const strToDate = (str) => {
         }
         // console.log(str)
     } else {
-        console.log(str + "str not long enough")
+        console.log(str + " str not long enough")
     }
     // console.log(str)
 }
@@ -144,6 +155,30 @@ function PrayerTimes() {
         }                        
     }, [clock])
 
+    useEffect(() => {
+        let timeAtChange = strToDate(times[11] + ":00")
+        console.log(clock)
+        if(strToDate(clock) > timeAtChange) {
+            console.log(true)
+            const nextDate = nextDay()
+            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+            .then((response) => {
+                const prayertimes = response.data.slice(1)
+                const arr = []
+                for(let i=0; i < prayertimes.length; i++) {
+                    arr.push(prayertimes[i].startTime)
+                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+                }
+                setTimes(arr)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        } else {
+            console.log(false)
+        }
+    }, [clock])
+
     // Notification Animation useEffect
     useEffect(() => {
         // How long the text will appear
@@ -202,8 +237,8 @@ function PrayerTimes() {
 
     // setTimes
     useEffect(() => {
-        // const date = nextDay()
-        // console.log(date)
+        // const nextDate = nextDay()
+        // console.log(nextDate)
         axios.get(`http://localhost:3001/prayertimes/`)
         .then((response) => {
             const prayertimes = response.data.slice(1)
