@@ -27,6 +27,17 @@ const Clock = () => {
     return (`${hours}:${minutes}:${seconds}`)
 }
 
+const nextDay = () => {
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const day = "0" + tomorrow.getDate()
+    let month = "0" + (tomorrow.getMonth()+1)
+    const year = tomorrow.getFullYear()
+    
+    return day + "-" + month + "-" + year
+}
+
 const weekDay = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
@@ -191,7 +202,9 @@ function PrayerTimes() {
 
     // setTimes
     useEffect(() => {
-        axios.get('http://localhost:3001/prayertimes')
+        // const date = nextDay()
+        // console.log(date)
+        axios.get(`http://localhost:3001/prayertimes/`)
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
