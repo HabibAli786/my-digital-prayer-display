@@ -3,12 +3,6 @@
     /* margin-left: 5px !important; */
 }
 
-.card-annc {
-    margin-top: 2%;
-    font-size: 4.5em;
-    overflow: hidden;
-}
-
 .table-container {
     margin: 20px 0px 0px 5px !important;
     text-align: left;
@@ -67,44 +61,6 @@
     top: 50%;
     font-size: 6em;
     width: 30%;
-}
-
-/* Notification animations */
-
-@keyframes slidein {
-    from {
-      transform: translateX(3%);
-      opacity: 0;
-    }
-  
-    to {
-      transform: translateX(0%);
-      opacity: 100;
-    }
-}
-
-@keyframes slideout {
-    from {
-      transform: translateX(0%);
-      opacity: 100;
-    }
-  
-    to {
-      transform: translateX(-28%);
-      opacity: 0;
-    }
-}
-
-.annc-current {
-    animation-name: slideout;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-}
-
-.annc-next {
-    animation-name: slidein;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
 }
 
 /* Slideshow animation */

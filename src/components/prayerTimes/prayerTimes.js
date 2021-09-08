@@ -98,7 +98,6 @@ function PrayerTimes() {
     // Global Variables
     const numofSlidshowImages = 3
 
-    
     const [clock, setClock] = useState("00:00:00")
     // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
@@ -153,6 +152,7 @@ function PrayerTimes() {
         }                        
     }, [clock])
 
+    // Update prayertimes after isha
     useEffect(() => {
         let timeAtChange = strToDate(times[10] + ":00")
         if(strToDate(clock) > timeAtChange) {
@@ -196,22 +196,7 @@ function PrayerTimes() {
         }
     }, [displaySlideshow])
 
-    // Run inital setDate onMount
-    // useEffect(() => {
-    //     axios.get('http://localhost:3001/prayertimes')
-    //     .then((response) => {
-    //         setDate(response.data[0].fullDay)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     })
-
-    //     return () => {
-            
-    //     }
-    // }, [])
-
-    // setTimes
+    // set intial prayertimes
     useEffect(() => {
         // const nextDate = nextDay()
         // console.log(nextDate)
@@ -232,40 +217,6 @@ function PrayerTimes() {
             
         }
     }, [])
-    
-    // update prayer times and date when clock reaches next day
-    // useEffect(() => {
-    //     if(clock === "00:00:00") {
-    //         GetData()
-    //         .then(prayer => {
-    //             for(let i=0; i < prayer.data.length; i++) {
-    //                 if(prayer.data[i][0] === FullDate()) {
-    //                     let slice = prayer.data[i].slice(1,14)
-    //                     setTimes(slice)
-    //                 }
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.log("Error:" + error)
-    //         })
-    //     }
-    //     return () => {
-            
-    //     }
-    // })
-
-            // GetData()
-            // .then(prayer => {
-            //     for(let i=0; i < prayer.data.length; i++) {
-            //         if(prayer.data[i][0] === FullDate()) {
-            //             let slice = prayer.data[i].slice(1,14)
-            //             setTimes(slice)
-            //         }
-            //     }
-            // })
-            // .catch(error => {
-            //     console.log("Error:" + error)
-            // })
 
     return(
         <>
