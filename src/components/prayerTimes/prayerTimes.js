@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef, isValidElement } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import axios from 'axios';
+import Notifications from '../Notifications/Notifications'
 import './PrayerTimes.css'
 
 const Clock = () => {
@@ -78,7 +79,7 @@ const strToDate = (str) => {
 
             const result = date.setHours(strHours, strMinutes, strSeconds)
 
-            console.log(result)
+            // console.log(result)
 
             return result
         }
@@ -89,7 +90,7 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
-//  0 1 2 3 4 5 6 7 8 9 10
+//  0 1 2 3 4 5 6 7 8
 //  0 0 : 0 0 : 0 0
 
 function PrayerTimes() {
@@ -97,19 +98,16 @@ function PrayerTimes() {
     // Global Variables
     const numofSlidshowImages = 3
 
+    
     const [clock, setClock] = useState("00:00:00")
+    // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
+
+    // Prayertimes
     const [times, setTimes] = useState([
         "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "0:00"
     ])
-
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
-
-    const [animation, setAnimation] = useState(false)
-    const [notifications, setNotifications] = useState([
-        "Surah Mulk after Maghrib", "Dars after Zuhr", "Collections for Eid after Jummah", "Eid on the 23rd of July"
-    ])
-    const [count, setCount] = useState(0)
 
     const [slideshowCount, setSlideshowCount] = useState(1)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
@@ -156,10 +154,8 @@ function PrayerTimes() {
     }, [clock])
 
     useEffect(() => {
-        let timeAtChange = strToDate(times[11] + ":00")
-        console.log(clock)
+        let timeAtChange = strToDate(times[10] + ":00")
         if(strToDate(clock) > timeAtChange) {
-            console.log(true)
             const nextDate = nextDay()
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
@@ -175,29 +171,9 @@ function PrayerTimes() {
                 console.log(error)
             })
         } else {
-            console.log(false)
+
         }
     }, [clock])
-
-    // Notification Animation useEffect
-    useEffect(() => {
-        // How long the text will appear
-        if(animation === false) {
-            setTimeout(() => {
-                setAnimation(true)
-            }, 10000)
-        }
-        // How long next text will appear
-        if(animation === true){
-            setTimeout(() => {
-                setCount(count + 1)
-                setAnimation(false)
-                if(count === notifications.length-1) {
-                    setCount(0)
-                }
-            }, 3000)
-        }
-    }, [animation])
 
     // Slideshow Animation useEffect
     useEffect(() => {
@@ -323,7 +299,7 @@ function PrayerTimes() {
             </Row>
             <Row className={prayerFinished[2] === true ? "finshed" : "finished"}>
                 <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
-                <Col className="col-4">Zuhr</Col>
+                <Col className="col-4">Dhuhr</Col>
                 <Col className="col-2">{times[3]}</Col>
                 <Col className="col-2 active-color">{times[4]}</Col>
             </Row>
@@ -346,13 +322,7 @@ function PrayerTimes() {
                 <Col className="col-2 active-color">{times[10]}</Col>
             </Row>
         </Container>
-        <Card className="card-annc mx-5">
-            <Card.Body>
-                <Card.Text className={animation === true ? "annc-current" : "annc-next"}>
-                {notifications[count]}
-                </Card.Text>
-            </Card.Body>
-        </Card>
+        <Notifications />
         </>
         :
             <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
