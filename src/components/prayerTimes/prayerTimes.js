@@ -119,11 +119,11 @@ function PrayerTimes() {
         }, 900)
     }, [clock])
 
-    // Update day and month
+    // Update day, month and Jummah if it is Friday
     useEffect(() => {
         // console.log(weekDay())
         // console.log("I am Compare " + compareDate.toLocaleString("default", { weekday: "long" }))
-        if(clock === "00:00:01") {
+        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate(times[4]+":00")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
@@ -132,7 +132,6 @@ function PrayerTimes() {
             if(date[0] === "Friday") {
                 setIsJummah(true)
             }
-            console.log("hello")
         }
 
     }, [clock])
@@ -243,7 +242,7 @@ function PrayerTimes() {
             !displaySlideshow ?
         <div>
         <a href="/">
-            <img className="logo" src='/images/iqra.png' alt="logo" />
+            <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
         </a>
         <h1 className="weekday">{date[0]}</h1>
         <h1 className="dayMonth">{date[1]}</h1>
