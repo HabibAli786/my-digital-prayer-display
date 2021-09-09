@@ -7,9 +7,19 @@ import './Notifications.css'
 function Notifications() {
     const [animation, setAnimation] = useState(false)
     const [notifications, setNotifications] = useState([
-        "Surah Mulk after Maghrib", "Dars after Zuhr", "Collections for Eid after Jummah", "Eid on the 23rd of July"
+        "No Notifications"
     ])
     const [count, setCount] = useState(0)
+
+    useEffect(() => {
+        axios.get(`http://localhost:3001/notifications`)
+            .then((response) => {
+                setNotifications(response.data.notifications)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [animation])
 
     // Notification Animation useEffect
     useEffect(() => {

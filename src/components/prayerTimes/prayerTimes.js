@@ -107,6 +107,7 @@ function PrayerTimes() {
         "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "0:00"
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
+    const [isJummah, setIsJummah] = useState(false)
 
     const [slideshowCount, setSlideshowCount] = useState(1)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
@@ -116,6 +117,24 @@ function PrayerTimes() {
         setInterval(() => {
             setClock(Clock())
         }, 900)
+    }, [clock])
+
+    // Update day and month
+    useEffect(() => {
+        // console.log(weekDay())
+        // console.log("I am Compare " + compareDate.toLocaleString("default", { weekday: "long" }))
+        if(clock === "00:00:01") {
+            const compareDate = new Date()
+            const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
+            if(date[0] !== compareDay) {
+                setDate([weekDay(), dayMonth()])
+            }
+            if(date[0] === "Friday") {
+                setIsJummah(true)
+            }
+            console.log("hello")
+        }
+
     }, [clock])
 
     // Grey out prayers that have finshed
@@ -151,6 +170,28 @@ function PrayerTimes() {
             j = j+1
         }                        
     }, [clock])
+
+    // set intial prayertimes
+    useEffect(() => {
+        // const nextDate = nextDay()
+        // console.log(nextDate)
+        axios.get(`http://localhost:3001/prayertimes/`)
+        .then((response) => {
+            const prayertimes = response.data.slice(1)
+            const arr = []
+            for(let i=0; i < prayertimes.length; i++) {
+                arr.push(prayertimes[i].startTime)
+                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+            }
+            setTimes(arr)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        return () => {
+            
+        }
+    }, [])
 
     // Update prayertimes after isha
     useEffect(() => {
@@ -196,33 +237,11 @@ function PrayerTimes() {
         }
     }, [displaySlideshow])
 
-    // set intial prayertimes
-    useEffect(() => {
-        // const nextDate = nextDay()
-        // console.log(nextDate)
-        axios.get(`http://localhost:3001/prayertimes/`)
-        .then((response) => {
-            const prayertimes = response.data.slice(1)
-            const arr = []
-            for(let i=0; i < prayertimes.length; i++) {
-                arr.push(prayertimes[i].startTime)
-                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
-            }
-            setTimes(arr)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-        return () => {
-            
-        }
-    }, [])
-
     return(
         <>
         {
             !displaySlideshow ?
-        <>
+        <div>
         <a href="/">
             <img className="logo" src='/images/iqra.png' alt="logo" />
         </a>
@@ -249,8 +268,17 @@ function PrayerTimes() {
                 <Col className="col-2 active-color">-- --</Col>
             </Row>
             <Row className={prayerFinished[2] === true ? "finshed" : "finished"}>
-                <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
-                <Col className="col-4">Dhuhr</Col>
+                { isJummah ?
+                    <>
+                        <Col className="col-4">صلاة الجماعة</Col>
+                        <Col className="col-4">Jama'ah</Col>
+                    </>
+                    :
+                    <>
+                        <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
+                        <Col className="col-4">Dhuhr</Col>
+                    </>
+                }
                 <Col className="col-2">{times[3]}</Col>
                 <Col className="col-2 active-color">{times[4]}</Col>
             </Row>
@@ -274,7 +302,7 @@ function PrayerTimes() {
             </Row>
         </Container>
         <Notifications />
-        </>
+        </div>
         :
             <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
         }
