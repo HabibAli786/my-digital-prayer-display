@@ -270,7 +270,7 @@ function PrayerTimes() {
                 { isJummah ?
                     <>
                         <Col className="col-4">صلاة الجماعة</Col>
-                        <Col className="col-4">Jama'ah</Col>
+                        <Col className="col-4">Jumu'ah</Col>
                     </>
                     :
                     <>
