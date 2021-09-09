@@ -19,6 +19,9 @@ function Notifications() {
             .catch((error) => {
                 console.log(error)
             })
+        return () => { 
+            
+        }
     }, [animation])
 
     // Notification Animation useEffect
