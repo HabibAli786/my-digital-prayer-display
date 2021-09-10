@@ -131,6 +131,8 @@ function PrayerTimes() {
             }
             if(date[0] === "Friday") {
                 setIsJummah(true)
+            } else {
+                setIsJummah(false)
             }
         }
 
