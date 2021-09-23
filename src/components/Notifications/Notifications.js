@@ -12,7 +12,10 @@ function Notifications() {
     const [count, setCount] = useState(0)
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/notifications`)
+        let source = axios.CancelToken.source();
+        axios.get(`http://localhost:3001/notifications`, {
+            cancelToken: source.token
+        })
             .then((response) => {
                 setNotifications(response.data.notifications)
             })
@@ -20,7 +23,7 @@ function Notifications() {
                 console.log(error)
             })
         return () => { 
-            
+            source.cancel("Cancelling in cleanup");
         }
     }, [animation])
 

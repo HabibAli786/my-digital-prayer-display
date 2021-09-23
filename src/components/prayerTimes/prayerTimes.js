@@ -109,6 +109,7 @@ function PrayerTimes() {
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
 
+    const [numOfSlides, setNumOfSlides] = useState(null)
     const [slideshowCount, setSlideshowCount] = useState(1)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
 
@@ -135,7 +136,6 @@ function PrayerTimes() {
                 setIsJummah(false)
             }
         }
-
     }, [clock])
 
     // Grey out prayers that have finshed
@@ -217,6 +217,17 @@ function PrayerTimes() {
         }
     }, [clock])
 
+    // Updating number of slides
+    useEffect(() => {
+        axios.get(`http://localhost:3001/media/slides`)
+            .then((response) => {
+                setNumOfSlides(response.data.numOfFiles)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [clock])
+
     // Slideshow Animation useEffect
     useEffect(() => {
         // How long will the image be off the screen
@@ -229,10 +240,14 @@ function PrayerTimes() {
         // How long the image will be on the screen
         if(displaySlideshow === true){
             setTimeout(() => {
-                setSlideshowCount(slideshowCount + 1)
-                setDisplaySlideshow(false)
-                if(slideshowCount === numofSlidshowImages) {
-                    setSlideshowCount(1)
+                if(numOfSlides) {
+                    setSlideshowCount(slideshowCount + 1)
+                    setDisplaySlideshow(false)
+                    if(slideshowCount === numofSlidshowImages) {
+                        setSlideshowCount(1)
+                    }
+                } else {
+                    setDisplaySlideshow(false)
                 }
             }, 10000)
         }
@@ -305,7 +320,7 @@ function PrayerTimes() {
         <Notifications />
         </div>
         :
-            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`/slideshow/slide${slideshowCount}.jpg`} alt="slidshow" /> 
+            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slideshowCount}`} alt="slidshow" /> 
         }
         </>
     )
