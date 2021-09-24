@@ -1,7 +1,23 @@
-.main-container {
-    border-style: dotted;
+.main-container-admin {
+    margin-top: 2%;
+    /* border-style: dotted; */
+}
+
+.login-container {
+    margin-top: 1%;
+    /* border-style: dotted; */
+}
+
+.login-row {
+    font-size: 20%;
 }
 
 .input-field {
-    width: 20%;
+    width: 40%;
+    margin: auto;
+}
+
+.login-header {
+    font-size: 7rem;
+    margin-bottom: 20px;
 }
