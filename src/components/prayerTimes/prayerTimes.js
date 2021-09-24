@@ -96,7 +96,7 @@ const strToDate = (str) => {
 function PrayerTimes() {
 
     // Global Variables
-    const numofSlidshowImages = 3
+    // const numofSlidshowImages = 3
 
     const [clock, setClock] = useState("00:00:00")
     // Day and month
@@ -230,7 +230,7 @@ function PrayerTimes() {
 
     // Slideshow Animation useEffect
     useEffect(() => {
-        // How long will the image be off the screen
+        // How long will the image take to come off the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
@@ -240,15 +240,15 @@ function PrayerTimes() {
         // How long the image will be on the screen
         if(displaySlideshow === true){
             setTimeout(() => {
-                if(numOfSlides) {
-                    setSlideshowCount(slideshowCount + 1)
-                    setDisplaySlideshow(false)
-                    if(slideshowCount === numofSlidshowImages) {
-                        setSlideshowCount(1)
-                    }
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides) {
+                    setSlideshowCount(1)
                 } else {
-                    setDisplaySlideshow(false)
+                    setSlideshowCount(slideshowCount + 1)
                 }
+                console.log("slideshowcount " + slideshowCount)
+                console.log("numofslideshowimages " + numOfSlides)
             }, 10000)
         }
     }, [displaySlideshow])

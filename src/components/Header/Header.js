@@ -15,7 +15,7 @@ function Header() {
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/prayerTimes">PrayerTimes</Nav.Link>
-                    <Nav.Link href="#admin">Admin</Nav.Link>
+                    <Nav.Link href="/admin">Admin</Nav.Link>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
                     <Button variant="danger">Exit</Button>
