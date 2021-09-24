@@ -30,12 +30,29 @@
     width: 30%;
 }
 
-.date {
+.weekday {
+    position: absolute;
+    right: 3%;
+    top: 33.5%;
+    width: 30%;
+    font-size: 4em;
+}
+
+.dayMonth {
     position: absolute;
     right: 3%;
     top: 40%;
     width: 30%;
     font-size: 4em;
+}
+
+
+.finshed {
+    color: grey;
+}
+
+.active {
+
 }
 
 .clock {
@@ -45,6 +62,51 @@
     font-size: 6em;
     width: 30%;
 }
+
+/* Slideshow animation */
+@keyframes display {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 100;
+    }
+}
+
+@keyframes hideDisplay {
+    from {
+      opacity: 100;
+    }
+  
+    to {
+      opacity: 0;
+    }
+}
+
+.slideshow-display {
+    animation-name: display;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.slideshow-hide {
+    animation-name: hideDisplay;
+    animation-duration: 20s;
+    animation-fill-mode: forwards;
+}
+
+.slideshow-image {
+    /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 
 /* .col {
     border-style: dotted;
