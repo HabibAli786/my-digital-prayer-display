@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Redirect } from 'react-router';
 import Header from '../Header/Header'
 
 import './Admin.css'
@@ -9,12 +10,8 @@ function Admin() {
 
     const [loginUsername, setLoginUsername] = useState(false)
     const [loginPassword, setLoginPassword] = useState(false)
-    const [auth, setAuth] = useState(null)
-    const [userData, setuserData] = useState(null)
-    
-    const login = () => {
-
-    }
+    const [auth, setAuth] = useState(false)
+    const [userData, setuserData] = useState(false)
 
     const getUser = () => {
         axios({
@@ -22,7 +19,16 @@ function Admin() {
             withCredentials: true,
             url: 'http://localhost:3001/admin/user'
         }).then((res) => {
-            console.log(res)
+            console.log(res.data)
+            const data = res.data
+            if(data.username) {
+                console.log("hello111")
+                setuserData(data)
+                setAuth("Successfully Authenticated")
+            } else {
+                setuserData(false)
+                setAuth("")
+            }
         })
     }
 
@@ -44,14 +50,19 @@ function Admin() {
         .then((res) => {
             console.log(res.data)
             if(res.data === 'Successfully Authenticated') {
-                setAuth(true)
+                setAuth(res.data)
             } else {
-                setAuth(false)
+                setAuth(res.data)
             }
         })
 
         event.target.reset()
     }
+
+    useEffect(() => {
+        console.log("hello")
+        getUser()
+    }, [])
     
     return (
         <>
@@ -88,7 +99,10 @@ function Admin() {
             </Row>
         </Container>
         {
-            auth === true ? <h1>You have been unsuccesfull</h1> : <h1>Hello User</h1>
+            auth === "Successfully Authenticated" ? 
+                <Redirect to="/user" />
+            :
+                <p>{auth}</p>
         }
         <Button onClick={getUser}>Get user data</Button>
         </>

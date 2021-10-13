@@ -5,6 +5,7 @@ import Admin from './components/Admin/Admin'
 
 import logo from './logo.svg';
 import './App.css';
+import User from './components/User/User';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/user">
+          <User />
         </Route>
       </Switch>
     </div>
