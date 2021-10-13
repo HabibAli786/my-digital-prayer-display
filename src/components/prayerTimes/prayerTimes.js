@@ -124,7 +124,7 @@ function PrayerTimes() {
     useEffect(() => {
         // console.log(weekDay())
         // console.log("I am Compare " + compareDate.toLocaleString("default", { weekday: "long" }))
-        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate(times[4]+":00")) {
+        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate(times[10]+":00")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
