@@ -27,7 +27,7 @@ function Admin() {
                 setAuth("Successfully Authenticated")
             } else {
                 setuserData(false)
-                setAuth("")
+                setAuth("Unsuccessfully Authenticated")
             }
         })
     }
@@ -60,12 +60,20 @@ function Admin() {
     }
 
     useEffect(() => {
-        console.log("hello")
+        console.log("admin useEffect running...")
         getUser()
     }, [])
     
     return (
         <>
+        {
+            auth === "Successfully Authenticated" ? 
+                // <Redirect to="/user" />
+                <Redirect to={{ pathname: "/user", state: { auth: true } }} />
+                // <p></p>
+            :
+                <p>{auth}</p>
+        }
         <Header />
         <Container className="image-container mt-5">
             <Row>
@@ -98,12 +106,6 @@ function Admin() {
                 </Form>
             </Row>
         </Container>
-        {
-            auth === "Successfully Authenticated" ? 
-                <Redirect to="/user" />
-            :
-                <p>{auth}</p>
-        }
         <Button onClick={getUser}>Get user data</Button>
         </>
     )

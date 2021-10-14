@@ -2,10 +2,10 @@ import { Route, Switch } from 'react-router';
 import Home from './components/Home'
 import PrayerTimes from './components/PrayerTimes/PrayerTimes';
 import Admin from './components/Admin/Admin'
+import User from './components/User/User';
 
 import logo from './logo.svg';
 import './App.css';
-import User from './components/User/User';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Admin />
         </Route>
         <Route path="/user">
-          <User />
+          <Route path="/user" render={(props) => <User {...props}/>}/>
         </Route>
       </Switch>
     </div>
