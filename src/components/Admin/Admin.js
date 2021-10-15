@@ -31,13 +31,13 @@ function Admin() {
         })
     }
 
-    const login = () => {
+    const login = (username, password) => {
         if(loginUsername) {
             axios({
                 method: 'POST',
                 data: {
-                    username: loginUsername,
-                    password: loginPassword
+                    username: username,
+                    password: password
                 },
                 withCredentials: true,
                 url: 'http://localhost:3001/admin/login'
@@ -61,19 +61,16 @@ function Admin() {
 
         setLoginUsername(username)
         setLoginPassword(password)
-        console.log(loginUsername)
-        console.log(loginPassword)
 
-        login()
+        login(username, password)
 
         event.target.reset()
     }
 
     useEffect(() => {
         console.log("admin useEffect running...")
-        // if()
         getUser()
-        login()
+        // login()
     }, [])
     
     return (
