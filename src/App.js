@@ -8,6 +8,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const auth = false
+
   return (
     <div className="App">
       <Switch>
@@ -21,7 +24,7 @@ function App() {
           <Admin />
         </Route>
         <Route path="/user">
-          <Route path="/user" render={(props) => <User {...props}/>}/>
+          <Route path="/user" render={(props) => <User {...props} />}/>
         </Route>
       </Switch>
     </div>

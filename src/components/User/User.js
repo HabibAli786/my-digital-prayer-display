@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap'
@@ -24,29 +25,27 @@ function User(props) {
     }
 
     useEffect(() => {
-        console.log("I am prop " + props.location.state.auth)
-        if(props.location.state.auth === true) {
-            setAuth("Authenticated")
+        if(props.location.state) {
+            if(props.location.state.auth === true) {
+                setAuth("Authenticated")
+            } else {
+                setAuth("Not Authenticated")
+            }
         } else {
             setAuth("Not Authenticated")
         }
-        // console.log("I am coming from props" + props.location.state.auth)
     }, [])
 
-    console.log("I am state " + auth)
-
-    return (
-        <>
-            {
-                auth === "Not Authenticated" ? <Redirect to="/admin" />
-                :
-                <>
-                <h1>Welcome to the Admin Page</h1>
-                <Button onClick={Logout}>Logout</Button>
-                </>
-            }
-        </>
-    )
+    if(auth === "Not Authenticated") {
+        return ( <Redirect to="/admin" /> )
+    } else {
+        return (
+            <>
+            <h1>Welcome to the Admin Page</h1>
+            <Button onClick={Logout}>Logout</Button>
+            </>
+        )
+    }
 }
 
 export default User

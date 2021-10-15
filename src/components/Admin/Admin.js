@@ -22,7 +22,6 @@ function Admin() {
             console.log(res.data)
             const data = res.data
             if(data.username) {
-                console.log("hello111")
                 setuserData(data)
                 setAuth("Successfully Authenticated")
             } else {
@@ -32,36 +31,49 @@ function Admin() {
         })
     }
 
+    const login = () => {
+        if(loginUsername) {
+            axios({
+                method: 'POST',
+                data: {
+                    username: loginUsername,
+                    password: loginPassword
+                },
+                withCredentials: true,
+                url: 'http://localhost:3001/admin/login'
+            })
+            .then((res) => {
+                console.log("I am coming from the server " + res.data)
+                if(res.data === 'Successfully Authenticated') {
+                    setAuth(res.data)
+                } else {
+                    setAuth(res.data)
+                }
+            })
+        }
+    }
+
     const onSubmit = (event) => {
         event.preventDefault()
 
-        setLoginUsername(event.target.username.value)
-        setLoginPassword(event.target.password.value)
+        const username = event.target.username.value
+        const password = event.target.password.value
 
-        axios({
-            method: 'POST',
-            data: {
-                username: loginUsername,
-                password: loginPassword
-            },
-            withCredentials: true,
-            url: 'http://localhost:3001/admin/login'
-        })
-        .then((res) => {
-            console.log(res.data)
-            if(res.data === 'Successfully Authenticated') {
-                setAuth(res.data)
-            } else {
-                setAuth(res.data)
-            }
-        })
+        setLoginUsername(username)
+        setLoginPassword(password)
+        console.log(loginUsername)
+        console.log(loginPassword)
+
+        login()
 
         event.target.reset()
     }
 
     useEffect(() => {
         console.log("admin useEffect running...")
+        // if()
         getUser()
+        login()
     }, [])
     
     return (
