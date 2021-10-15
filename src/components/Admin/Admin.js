@@ -8,8 +8,6 @@ import './Admin.css'
 
 function Admin() {
 
-    const [loginUsername, setLoginUsername] = useState(false)
-    const [loginPassword, setLoginPassword] = useState(false)
     const [auth, setAuth] = useState(false)
     const [userData, setuserData] = useState(false)
 
@@ -24,15 +22,15 @@ function Admin() {
             if(data.username) {
                 setuserData(data)
                 setAuth("Successfully Authenticated")
-            } else {
-                setuserData(false)
-                setAuth("Unsuccessfully Authenticated")
+            // } else {
+            //     setuserData(false)
+            //     setAuth("Unsuccessfully Authenticated")
             }
         })
     }
 
     const login = (username, password) => {
-        if(loginUsername) {
+        if(username) {
             axios({
                 method: 'POST',
                 data: {
@@ -59,8 +57,8 @@ function Admin() {
         const username = event.target.username.value
         const password = event.target.password.value
 
-        setLoginUsername(username)
-        setLoginPassword(password)
+        // setLoginUsername(username)
+        // setLoginPassword(password)
 
         login(username, password)
 
@@ -75,14 +73,6 @@ function Admin() {
     
     return (
         <>
-        {
-            auth === "Successfully Authenticated" ? 
-                // <Redirect to="/user" />
-                <Redirect to={{ pathname: "/user", state: { auth: true } }} />
-                // <p></p>
-            :
-                <p>{auth}</p>
-        }
         <Header />
         <Container className="image-container mt-5">
             <Row>
@@ -115,7 +105,13 @@ function Admin() {
                 </Form>
             </Row>
         </Container>
-        <Button onClick={getUser}>Get user data</Button>
+        { auth === "Successfully Authenticated" &&
+                <Redirect to={{ pathname: "/user", state: { auth: true } }} />
+        }
+        {
+            auth === "Unsuccessfully Authenticated" &&
+                <p className="login-message">Unsuccesfully Authenticated</p>
+        }
         </>
     )
 }

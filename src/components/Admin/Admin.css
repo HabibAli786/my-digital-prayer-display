@@ -21,3 +21,9 @@
     font-size: 7rem;
     margin-bottom: 20px;
 }
+
+.login-message {
+    font-size: 3rem;
+    color: red;
+    fill: red;
+}
