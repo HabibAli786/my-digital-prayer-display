@@ -17,9 +17,9 @@ function Header() {
                     <Nav.Link href="/prayerTimes">PrayerTimes</Nav.Link>
                     <Nav.Link href="/admin">Admin</Nav.Link>
                 </Nav>
-                <Navbar.Collapse className="justify-content-end">
+                {/* <Navbar.Collapse className="justify-content-end">
                     <Button variant="danger">Exit</Button>
-                </Navbar.Collapse>
+                </Navbar.Collapse> */}
             </Navbar.Collapse>
         </Container>
         </Navbar>
