@@ -2,13 +2,18 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router';
+import { connect} from 'react-redux';
+
+import { set_auth } from '../Redux/actions/authAction';
 import Header from '../Header/Header'
 
 import './Admin.css'
 
-function Admin() {
+function Admin(props) {
 
-    const [auth, setAuth] = useState(false)
+    const { auth, set_auth } = props
+
+    // const [auth, setAuth] = useState(false)
     const [userData, setuserData] = useState(false)
 
     const getUser = () => {
@@ -21,7 +26,7 @@ function Admin() {
             const data = res.data
             if(data.username) {
                 setuserData(data)
-                setAuth("Successfully Authenticated")
+                set_auth("Successfully Authenticated")
             // } else {
             //     setuserData(false)
             //     setAuth("Unsuccessfully Authenticated")
@@ -43,9 +48,9 @@ function Admin() {
             .then((res) => {
                 console.log("I am coming from the server " + res.data)
                 if(res.data === 'Successfully Authenticated') {
-                    setAuth(res.data)
+                    set_auth(res.data)
                 } else {
-                    setAuth(res.data)
+                    set_auth(res.data)
                 }
             })
         }
@@ -116,4 +121,15 @@ function Admin() {
     )
 }
 
-export default Admin
+const matchStateToProps = state => ({
+    auth : state.admin.auth
+  })
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        set_auth : (auth) => dispatch(set_auth(auth))
+    }
+}
+
+// export default Admin
+export default connect(matchStateToProps, mapDispatchToProps)(Admin);
