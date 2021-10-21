@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import authReducer from './components/Redux/reducers/authReducer';
+import { createStore } from 'redux';
 
-const rootReducers = combineReducers({
-    admin : authReducer        
-})
+import rootReducer from './root-reducer';
 
-export default rootReducers;
+export const store = createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+
+export default { store }

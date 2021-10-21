@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap"
 import { BsClockHistory } from 'react-icons/bs'
+import { Link } from "react-router-dom"
 import '../Header/Header.css'
 
 function Header() {
@@ -13,9 +14,9 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/prayerTimes">PrayerTimes</Nav.Link>
-                    <Nav.Link href="/admin">Admin</Nav.Link>
+                    <Nav.Link eventKey="/" as={Link} to="/">Home</Nav.Link>
+                    <Nav.Link eventKey="/prayertimes" as={Link} to="/prayerTimes">PrayerTimes</Nav.Link>
+                    <Nav.Link eventKey="/admin" as={Link} to="/admin">Admin</Nav.Link>
                 </Nav>
                 {/* <Navbar.Collapse className="justify-content-end">
                     <Button variant="danger">Exit</Button>
