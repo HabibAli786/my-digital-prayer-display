@@ -8,15 +8,15 @@ function Header() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="light">
         <Container>
-            <Navbar.Brand href="/">
+            <Navbar.Brand eventkey="/" as={Link} to="/">
                 <BsClockHistory size="2em"/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link eventKey="/" as={Link} to="/">Home</Nav.Link>
-                    <Nav.Link eventKey="/prayertimes" as={Link} to="/prayerTimes">PrayerTimes</Nav.Link>
-                    <Nav.Link eventKey="/admin" as={Link} to="/admin">Admin</Nav.Link>
+                    <Nav.Link eventkey="/" as={Link} to="/">Home</Nav.Link>
+                    <Nav.Link eventkey="/prayertimes" as={Link} to="/prayerTimes">PrayerTimes</Nav.Link>
+                    <Nav.Link eventkey="/admin" as={Link} to="/admin">Admin</Nav.Link>
                 </Nav>
                 {/* <Navbar.Collapse className="justify-content-end">
                     <Button variant="danger">Exit</Button>

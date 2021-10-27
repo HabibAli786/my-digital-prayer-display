@@ -1,5 +1,6 @@
 const init = {
-    auth: false
+    auth: false,
+    username : null
 }
 
 const authReducer = (state = init, action) => {
@@ -8,6 +9,11 @@ const authReducer = (state = init, action) => {
             return {
                 ...state,
                 auth: action.payload
+            }
+        case 'SET_USERNAME':
+            return {
+                ...state,
+                username: action.payload
             }
         default:
             return state

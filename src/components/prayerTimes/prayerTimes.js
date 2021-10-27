@@ -3,6 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import axios from 'axios';
 import Notifications from '../Notifications/Notifications'
 import './PrayerTimes.css'
+import { Link } from 'react-router-dom';
 
 const Clock = () => {
     const date = new Date()
@@ -258,9 +259,9 @@ function PrayerTimes() {
         {
             !displaySlideshow ?
         <div>
-        <a href="/">
+        <Link to="/">
             <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
-        </a>
+        </Link>
         <h1 className="weekday">{date[0]}</h1>
         <h1 className="dayMonth">{date[1]}</h1>
         <h1 className="clock">{clock}</h1>

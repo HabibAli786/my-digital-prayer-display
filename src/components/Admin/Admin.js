@@ -4,17 +4,15 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect} from 'react-redux';
 
-import { set_auth } from '../Redux/actions/authAction';
+import { set_auth, set_username } from '../Redux/actions/authAction';
 import Header from '../Header/Header'
 
 import './Admin.css'
 
 function Admin(props) {
 
-    const { auth, set_auth } = props
-
-    // const [auth, setAuth] = useState(false)
-    const [userData, setuserData] = useState(false)
+    const { auth, set_auth, username, set_username } = props
+    // const [userData, setuserData] = useState(false)
 
     const getUser = () => {
         axios({
@@ -25,7 +23,7 @@ function Admin(props) {
             console.log(res.data)
             const data = res.data
             if(data.username) {
-                setuserData(data)
+                set_username(data.username)
                 set_auth("Successfully Authenticated")
             // } else {
             //     setuserData(false)
@@ -111,7 +109,7 @@ function Admin(props) {
             </Row>
         </Container>
         { auth === "Successfully Authenticated" &&
-                <Redirect to={{ pathname: "/user", state: { auth: true } }} />
+                <Redirect to={{ pathname: "/user" }} />
         }
         {
             auth === "Unsuccessfully Authenticated" &&
@@ -122,12 +120,14 @@ function Admin(props) {
 }
 
 const matchStateToProps = state => ({
-    auth : state.admin.auth
+    auth : state.admin.auth,
+    username : state.admin.username
   })
   
 const mapDispatchToProps = (dispatch) => {
     return {
-        set_auth : (auth) => dispatch(set_auth(auth))
+        set_auth : (auth) => dispatch(set_auth(auth)),
+        set_username : (username) => dispatch(set_username(username))
     }
 }
 
