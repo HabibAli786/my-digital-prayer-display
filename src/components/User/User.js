@@ -8,6 +8,7 @@ import './User.css'
 import Footer from '../Footer/Footer';
 import { connect } from 'react-redux';
 import { set_auth, set_username } from '../Redux/actions/authAction';
+import { Link } from 'react-router-dom';
 
 function User(props) {
 
@@ -44,7 +45,9 @@ function User(props) {
                 </Row>
                 <Row className="mt-2">
                     <Col>
-                        <Button className="button-options" variant="outline-primary" size="lg" href="/uploadTimetable">Upload Timetable</Button>
+                    <Link to="/uploadTimetable">
+                        <Button className="button-options" variant="outline-primary" size="lg">Upload Timetable</Button>
+                    </Link>
                     </Col>
                     <Col>
                         <Button className="button-options" variant="outline-primary" size="lg">Edit Timetable</Button>
