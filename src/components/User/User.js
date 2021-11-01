@@ -11,7 +11,7 @@ import { set_auth, set_username } from '../Redux/actions/authAction';
 
 function User(props) {
 
-    const { auth, set_auth, username } = props
+    const { auth, set_auth, username, set_username } = props
 
     const Logout = () => {
         axios({
@@ -22,14 +22,15 @@ function User(props) {
             console.log(res.data)
             if(res.data === "Logged out") {
                 set_auth(false)
+                set_username(null)
             } else {
-                set_auth("Authenticated")
+                // set_auth("Authenticated")
             }
         })
     }
 
     if(!auth) {
-        return ( <h1>Auth is {auth}</h1> )
+        return ( <Redirect to={{ pathname: "/admin" }} />)
     } else {
         return (
             <>
