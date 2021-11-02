@@ -15,7 +15,7 @@ function UploadTimetable(props) {
 
     console.log(auth)
     
-    if(!auth) {
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
         return ( <Redirect to="/admin" /> )
     } else {
         return (
