@@ -3,15 +3,17 @@ import Header from '../Header/Header';
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Redirect } from 'react-router';
+import { connect, useDispatch } from 'react-redux';
 
 import './User.css'
 import Footer from '../Footer/Footer';
-import { connect } from 'react-redux';
 import { set_auth, set_username } from '../Redux/actions/authAction';
 import { Link } from 'react-router-dom';
+import { authenticate } from '../Redux/reducers/authReducer';
 
 function User(props) {
 
+    const dispatch = useDispatch()
     const { auth, set_auth, username, set_username } = props
 
     const Logout = () => {
@@ -30,7 +32,11 @@ function User(props) {
         })
     }
 
-    if(!auth) {
+    useEffect(() => {
+        dispatch(authenticate())
+    }, [])
+
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
         return ( <Redirect to={{ pathname: "/admin" }} />)
     } else {
         return (
