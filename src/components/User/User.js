@@ -51,20 +51,26 @@ function User(props) {
                 </Row>
                 <Row className="mt-2">
                     <Col>
-                    <Link to="/uploadTimetable">
-                        <Button className="button-options" variant="outline-primary" size="lg">Upload Timetable</Button>
-                    </Link>
+                        <Link to="/uploadTimetable">
+                            <Button className="button-options" variant="outline-primary" size="lg">Upload Timetable</Button>
+                        </Link>
                     </Col>
                     <Col>
-                        <Button className="button-options" variant="outline-primary" size="lg">Edit Timetable</Button>
+                        <Link to="/editTimetable">
+                            <Button className="button-options" variant="outline-primary" size="lg">Edit Timetable</Button>
+                        </Link>
                     </Col>
                     <Col>
-                        <Button className="button-options" variant="outline-primary" size="lg">Upload Logo</Button>
+                        <Link to="/uploadLogo">
+                            <Button className="button-options" variant="outline-primary" size="lg">Upload Logo</Button>
+                        </Link>
                     </Col>
                 </Row>
                 <Row className="mt-5">
                     <Col>
-                        <Button className="button-options" variant="outline-primary" size="lg">Edit Notifications</Button>
+                        <Link to="/editNotifications">
+                            <Button className="button-options" variant="outline-primary" size="lg">Edit Notifications</Button>
+                        </Link>
                     </Col>
                     <Col>
                     
