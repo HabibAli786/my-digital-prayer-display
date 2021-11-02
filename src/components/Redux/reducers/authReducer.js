@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { set_username } from '../actions/authAction'
+import { set_auth, set_username } from '../actions/authAction'
 
 const init = {
     auth: false,
@@ -34,8 +34,14 @@ export const authenticate = () => async (dispatch, getState) => {
         const data = res.data
         if(data.username) {
             auth = "Successfully Authenticated"
+        } else {
+            auth = null
         }
+    }).catch((error) => {
+        console.log(error)
+        auth = "Server Offline"
     })
+    dispatch(set_auth(auth))
     dispatch(set_username(auth))
 }
 

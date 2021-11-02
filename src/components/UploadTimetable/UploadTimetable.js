@@ -3,13 +3,14 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux";
 import { Redirect } from 'react-router';
 import { set_auth, set_username } from "../Redux/actions/authAction";
+import { authenticate } from "../Redux/reducers/authReducer";
 
 function UploadTimetable(props) {
 
     const { auth, set_auth, username } = props
 
     useEffect(() => {
-
+        authenticate()
     }, [])
 
     console.log(auth)

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router';
-import { connect} from 'react-redux';
+import { connect, useDispatch} from 'react-redux';
 
 import { authenticate } from '../Redux/reducers/authReducer'
 import { set_auth, set_username } from '../Redux/actions/authAction';
@@ -12,6 +12,7 @@ import './Admin.css'
 
 function Admin(props) {
 
+    const dispatch = useDispatch()
     const { auth, set_auth, username, set_username } = props
     // const [userData, setuserData] = useState(false)
 
@@ -71,7 +72,7 @@ function Admin(props) {
 
     useEffect(() => {
         console.log("admin useEffect running...")
-        authenticate()
+        dispatch(authenticate())
         // login()
     }, [])
     
@@ -115,6 +116,10 @@ function Admin(props) {
         {
             auth === "Unsuccessfully Authenticated" &&
                 <p className="login-message">Unsuccesfully Authenticated</p>
+        }
+        {
+            auth === "Server Offline" &&
+                <p className="login-message">Server is offline, please reconnect to server before logging in</p>
         }
         </>
     )
