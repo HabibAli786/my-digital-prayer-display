@@ -25,6 +25,7 @@ const authReducer = (state = init, action) => {
 
 export const authenticate = () => async (dispatch, getState) => {
     let auth
+    let username
     await axios({
         method: 'GET',
         withCredentials: true,
@@ -33,6 +34,7 @@ export const authenticate = () => async (dispatch, getState) => {
         console.log(res.data)
         const data = res.data
         if(data.username) {
+            username = data.username
             auth = "Successfully Authenticated"
         } else {
             auth = null
@@ -42,7 +44,7 @@ export const authenticate = () => async (dispatch, getState) => {
         auth = "Server Offline"
     })
     dispatch(set_auth(auth))
-    dispatch(set_username(auth))
+    dispatch(set_username(username))
 }
 
 export default authReducer;
