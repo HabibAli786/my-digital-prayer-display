@@ -25,7 +25,7 @@ const authReducer = (state = init, action) => {
 
 export const authenticate = () => async (dispatch, getState) => {
     let auth
-    let username
+    let username = null
     await axios({
         method: 'GET',
         withCredentials: true,
@@ -37,7 +37,7 @@ export const authenticate = () => async (dispatch, getState) => {
             username = data.username
             auth = "Successfully Authenticated"
         } else {
-            auth = null
+            auth = "Unsuccessfully Authenticated"
         }
     }).catch((error) => {
         console.log(error)
