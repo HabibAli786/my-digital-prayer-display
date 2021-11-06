@@ -36,7 +36,7 @@ export const authenticate = () => async (dispatch, getState) => {
         if(data.username) {
             username = data.username
             auth = "Successfully Authenticated"
-        } else {
+        } else if(data === "Unsuccessfully Authenticated") {
             auth = "Unsuccessfully Authenticated"
         }
     }).catch((error) => {
