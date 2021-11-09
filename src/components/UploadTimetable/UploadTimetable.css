@@ -3,3 +3,15 @@
     height: 500px;
     border-style: solid;
 }
+
+.server_status_success {
+    margin-top: 2.3em;
+    font-size: 50px;
+    color: green;
+}
+
+.server_status_unsuccessful {
+    margin-top: 2.3em;
+    font-size: 50px;
+    color: red;
+}

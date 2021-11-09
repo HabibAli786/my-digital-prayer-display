@@ -15,14 +15,29 @@ function UploadTimetable(props) {
     const { auth, set_auth, username } = props
 
     const [file, setFile] = useState(null)
+    const [serverStatus, setServerStatus] = useState(null)
+
 
     const uploadFile = (e) => {
         e.preventDefault()
+        const data = new FormData()
+        data.append('prayertimes', file)
         // console.log(e.target.value)
         console.log(file)
+        if(file) {
+            axios.post('http://localhost:3001/media/uploadTimetable', data, {
+                'content-type': 'multipart/form-data'
+            }).then(res => { // then print response status
+                console.log(res);
+                setServerStatus(res.data)
+            })
+        } else {
+            setServerStatus("Error: No file has been selected")
+        }
     }
 
     useEffect(() => {
+        console.log("UploadTimetable useEffect running")
         authenticate()
     }, [])
 
@@ -44,6 +59,7 @@ function UploadTimetable(props) {
                         <Form onSubmit={uploadFile}>
                             <input 
                                 style={{ marginTop : "100px", fontSize: "30px", borderStyle: "solid" }} 
+                                name="prayertimes"
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />
                             <br />
@@ -52,6 +68,12 @@ function UploadTimetable(props) {
                     </Col>
                 </Row>
             </Container>
+            { serverStatus === "File has been uploaded successfully" &&
+                <p className="server_status_success">Server Status: {serverStatus}</p>
+            }
+            { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
+                <p className="server_status_unsuccessful">Server Status: {serverStatus}</p>
+            }
             </>
         )
     }

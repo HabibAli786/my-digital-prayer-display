@@ -26,6 +26,7 @@ const authReducer = (state = init, action) => {
 export const authenticate = () => async (dispatch, getState) => {
     let auth
     let username = null
+    console.log("I am running Thunk")
     await axios({
         method: 'GET',
         withCredentials: true,
