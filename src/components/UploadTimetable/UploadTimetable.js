@@ -34,12 +34,13 @@ function UploadTimetable(props) {
         } else {
             setServerStatus("Error: No file has been selected")
         }
+        e.target.prayertimes.value = ""
     }
 
     useEffect(() => {
         console.log("UploadTimetable useEffect running")
         authenticate()
-    }, [])
+    }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
         return ( <Redirect to="/admin" /> )
