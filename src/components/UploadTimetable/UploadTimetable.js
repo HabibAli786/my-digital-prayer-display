@@ -12,7 +12,7 @@ import { authenticate } from "../Redux/reducers/authReducer";
 
 function UploadTimetable(props) {
 
-    const { auth, set_auth, username } = props
+    const { auth } = props
 
     const [file, setFile] = useState(null)
     const [serverStatus, setServerStatus] = useState(null)
