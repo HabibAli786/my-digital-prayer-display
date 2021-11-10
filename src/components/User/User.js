@@ -34,7 +34,7 @@ function User(props) {
 
     useEffect(() => {
         dispatch(authenticate())
-    }, [])
+    }, [auth, username])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
         return ( <Redirect to={{ pathname: "/admin" }} />)

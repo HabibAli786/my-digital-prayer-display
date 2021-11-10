@@ -5,7 +5,6 @@ import PrayerTimes from './components/PrayerTimes/PrayerTimes';
 import Admin from './components/Admin/Admin';
 import User from './components/User/User';
 import UploadTimetable from './components/UploadTimetable/UploadTimetable';
-import logo from './logo.svg';
 import './App.css';
 import EditTimetable from './components/EditTimetable/EditTimetable';
 import UploadLogo from './components/UploadLogo/UploadLogo';
