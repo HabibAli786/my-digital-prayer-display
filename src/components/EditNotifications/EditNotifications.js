@@ -15,7 +15,7 @@ function EditNotifications(props) {
 
     console.log(auth)
     
-    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )
     } else {
         return (

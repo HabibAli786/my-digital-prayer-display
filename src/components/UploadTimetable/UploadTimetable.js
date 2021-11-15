@@ -42,13 +42,13 @@ function UploadTimetable(props) {
         authenticate()
     }, [file, serverStatus])
 
-    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )
     } else {
         return (
             <>
             <Header />
-            <h1 style={{marginTop : "15px", fontSize: "50px"}}>UploadTimetable</h1>
+            <h1 style={{marginTop : "15px", fontSize: "50px"}}>Upload Timetable</h1>
             <Container className="uploadTimetable-container">
                 <Row>
                     <Col>
