@@ -4,6 +4,8 @@ import { Button, Container, Row, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";
+
+import TableEdit from "./TableEdit";
 import Header from "../Header/Header";
 import { set_auth, set_username } from "../Redux/actions/authAction";
 import { authenticate } from "../Redux/reducers/authReducer";
@@ -14,23 +16,23 @@ function EditTimetable(props) {
 
     const { auth, set_auth, username } = props
     
-    const [rowData, setRowData] = useState([{
-        row: 0,
-        date: "00/00/0000",
-        fajr_begins: "00:00",
-        fajr_jamaat: "00:00",
-        sunrise: "00:00",
-        zuhr_begins: "00:00",
-        zuhr_jamaat: "00:00",
-        asr_begins: "0:00",
-        asr_jamaat: "00:00",
-        maghrib_begins: "00:00",
-        maghrib_jamaat: "00:00",
-        isha_begins: "00:00",
-        isha_jamaat: "00:00"
-    }])
+    // const [rowData, setRowData] = useState([{
+    //     row: 0,
+    //     date: "00/00/0000",
+    //     fajr_begins: "00:00",
+    //     fajr_jamaat: "00:00",
+    //     sunrise: "00:00",
+    //     zuhr_begins: "00:00",
+    //     zuhr_jamaat: "00:00",
+    //     asr_begins: "0:00",
+    //     asr_jamaat: "00:00",
+    //     maghrib_begins: "00:00",
+    //     maghrib_jamaat: "00:00",
+    //     isha_begins: "00:00",
+    //     isha_jamaat: "00:00"
+    // }])
 
-    const data = useMemo(() => rowData, [rowData])
+    // const data = useMemo(() => rowData, [rowData])
 
     const columns = useMemo(
         () => [
@@ -88,32 +90,118 @@ function EditTimetable(props) {
                       },
         ],
         []
-      )
+    )
+
+    const [data, setData] = useState([{
+            row: 0,
+            date: "00/00/0000",
+            fajr_begins: "00:00",
+            fajr_jamaat: "00:00",
+            sunrise: "00:00",
+            zuhr_begins: "00:00",
+            zuhr_jamaat: "00:00",
+            asr_begins: "0:00",
+            asr_jamaat: "00:00",
+            maghrib_begins: "00:00",
+            maghrib_jamaat: "00:00",
+            isha_begins: "00:00",
+            isha_jamaat: "00:00"
+        }])
+    const [originalData] = useState(data)
+    const [skipPageReset, setSkipPageReset] = useState(false)
 
     const getData = () => {
         axios.get('http://localhost:3001/prayertimes/request/all')
         .then((res) => {
-            setRowData(res.data)
+            setData(res.data)
         })
         .catch((err) => {
             console.log(err)
         })
     }
 
-    const tableInstance = useTable({ columns, data })
+    // We need to keep the table from resetting the pageIndex when we
+    // Update data. So we can keep track of that flag with a ref.
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = tableInstance
+    // When our cell renderer calls updateMyData, we'll use
+    // the rowIndex, columnId and new value to update the
+    // original data
+    const updateMyData = (rowIndex, columnId, value) => {
+        // We also turn on the flag to not reset the page
+        setSkipPageReset(true)
+        setData(old =>
+        old.map((row, index) => {
+            if (index === rowIndex) {
+            return {
+                ...old[rowIndex],
+                [columnId]: value,
+            }
+            }
+            return row
+        })
+        )
+    }
+
+    const submitData = () => {
+        console.log(data)
+    }
+
+    // After data chagnes, we turn the flag back off
+    // so that if data actually changes when we're not
+    // editing it, the page is reset
+    useEffect(() => {
+        setSkipPageReset(false)
+    }, [data])
 
     useEffect(() => {
         authenticate()
         getData()
     }, [])
+
+    const EditableCell = ({
+        value: initialValue,
+        row: { index },
+        column: { id },
+        updateMyData, // This is a custom function that we supplied to our table instance
+      }) => {
+        // We need to keep and update the state of the cell normally
+        const [value, setValue] = useState(initialValue)
+      
+        const onChange = e => {
+          setValue(e.target.value)
+        }
+      
+        // We'll only update the external data when the input is blurred
+        const onBlur = () => {
+          updateMyData(index, id, value)
+        }
+      
+        // If the initialValue is changed external, sync it up with our state
+        useEffect(() => {
+          setValue(initialValue)
+        }, [initialValue])
+      
+        return <input className="edit_input" value={value} onChange={onChange} onBlur={onBlur} />
+      }
+
+      const defaultColumn = {
+        Cell: EditableCell,
+      }
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        prepareRow,
+        rows,
+      } = useTable(
+        {
+          columns,
+          data,
+          defaultColumn,
+          updateMyData,
+        }
+    )
 
     
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
@@ -123,21 +211,24 @@ function EditTimetable(props) {
             <>
             <Header />
             <h1 style={{marginTop : "15px", fontSize: "50px"}}>Edit Timetable</h1>
-            <Container className="editTimetable_container" fluid>
+            <Container className="editTimetable_container">
                 <Row>
-                    <Button className="editTimetable_submitbtn">Submit</Button>
+                    <Button className="editTimetable_submitbtn" onClick={submitData}>Submit</Button>
                 </Row>
                 <Row>
-                <Table className="edit_table" striped bordered hover {...getTableProps()}>
+                <Table className="edit_table" {...getTableProps()}>
                     <thead>
-                    {
+                    {// Loop over the header rows
                     headerGroups.map(headerGroup => (
+                        // Apply the header row props
                         <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>
-                                    {// Render the header
-                                        column.render('Header')}
-                                </th>
+                        {// Loop over the headers in each row
+                        headerGroup.headers.map(column => (
+                            // Apply the header cell props
+                            <th {...column.getHeaderProps()}>
+                            {// Render the header
+                            column.render('Header')}
+                            </th>
                         ))}
                         </tr>
                     ))}
@@ -165,7 +256,6 @@ function EditTimetable(props) {
                         )
                     })}
                     </tbody>
-
                 </Table>
                 </Row>
             </Container>
