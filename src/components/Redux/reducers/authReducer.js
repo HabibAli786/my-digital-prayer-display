@@ -24,7 +24,7 @@ const authReducer = (state = init, action) => {
 }
 
 export const authenticate = () => async (dispatch, getState) => {
-    let auth
+    let auth = null
     let username = null
     console.log("I am running Thunk")
     await axios({
@@ -40,6 +40,7 @@ export const authenticate = () => async (dispatch, getState) => {
         } else if(data === "Unsuccessfully Authenticated") {
             auth = "Unsuccessfully Authenticated"
         }
+        console.log("I am running two")
     }).catch((error) => {
         console.log(error)
         auth = "Server Offline"

@@ -36,7 +36,7 @@ function User(props) {
         dispatch(authenticate())
     }, [auth, username])
 
-    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" ) {
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to={{ pathname: "/admin" }} />)
     } else {
         return (
