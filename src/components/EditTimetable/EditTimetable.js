@@ -32,7 +32,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Fajr Jamaat',
-                        accessor: 'fajr_jamah',
+                        accessor: 'fajr_jamaat',
                       },
                       {
                         Header: 'Sunrise',
@@ -44,15 +44,15 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Zuhr Jamaat',
-                        accessor: 'zuhr_jamah',
+                        accessor: 'zuhr_jamaat',
                       },
                       {
                         Header: 'Asr Begins',
-                        accessor: 'asr_mithl_1',
+                        accessor: 'asr_begins',
                       },
                       {
                         Header: 'Asr Jamaat',
-                        accessor: 'asr_jamah',
+                        accessor: 'asr_jamaat',
                       },
                       {
                         Header: 'Maghrib Begins',
@@ -60,7 +60,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Maghrib Jamaat',
-                        accessor: 'maghrib_jamah',
+                        accessor: 'maghrib_jamaat',
                       },
                       {
                         Header: 'Isha Begins',
@@ -68,7 +68,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Isha Jamaat',
-                        accessor: 'isha_jamah',
+                        accessor: 'isha_jamaat',
                       },
         ],
         []
@@ -78,16 +78,16 @@ function EditTimetable(props) {
             row: 0,
             d_date: "00/00/0000",
             fajr_begins: "00:00",
-            fajr_jamah: "00:00",
+            fajr_jamaat: "00:00",
             sunrise: "00:00",
             zuhr_begins: "00:00",
-            zuhr_jamah: "00:00",
-            asr_mithl_1: "00:00",
-            asr_jamah: "00:00",
+            zuhr_jamaat: "00:00",
+            asr_begins: "00:00",
+            asr_jamaat: "00:00",
             maghrib_begins: "00:00",
-            maghrib_jamah: "00:00",
+            maghrib_jamaat: "00:00",
             isha_begins: "00:00",
-            isha_jamah: "00:00"
+            isha_jamaat: "00:00"
         }])
     const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
