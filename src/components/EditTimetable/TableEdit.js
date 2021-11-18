@@ -56,23 +56,41 @@ function TableEdit({ columns, data, updateMyData, skipPageReset }) {
   // Render the UI for your table
   return (
     <>
-      <Table className="edit_table" {...getTableProps()} striped bordered hover>
+      <Table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
+          {// Loop over the header rows
+          headerGroups.map(headerGroup => (
+            // Apply the header row props
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              {// Loop over the headers in each row
+              headerGroup.headers.map(column => (
+                // Apply the header cell props
+                <th {...column.getHeaderProps()}>
+                  {// Render the header
+                  column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}
         </thead>
+        {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {// Loop over the table rows
+          rows.map(row => {
+            // Prepare the row for display
             prepareRow(row)
             return (
+              // Apply the row props
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                {// Loop over the rows cells
+                row.cells.map(cell => {
+                  // Apply the cell props
+                  return (
+                    <td {...cell.getCellProps()}>
+                      {// Render the cell contents
+                      cell.render('Cell')}
+                    </td>
+                  )
                 })}
               </tr>
             )
