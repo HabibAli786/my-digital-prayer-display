@@ -15,24 +15,6 @@ import './EditTimetable.css'
 function EditTimetable(props) {
 
     const { auth, set_auth, username } = props
-    
-    // const [rowData, setRowData] = useState([{
-    //     row: 0,
-    //     date: "00/00/0000",
-    //     fajr_begins: "00:00",
-    //     fajr_jamaat: "00:00",
-    //     sunrise: "00:00",
-    //     zuhr_begins: "00:00",
-    //     zuhr_jamaat: "00:00",
-    //     asr_begins: "0:00",
-    //     asr_jamaat: "00:00",
-    //     maghrib_begins: "00:00",
-    //     maghrib_jamaat: "00:00",
-    //     isha_begins: "00:00",
-    //     isha_jamaat: "00:00"
-    // }])
-
-    // const data = useMemo(() => rowData, [rowData])
 
     const columns = useMemo(
         () => [
@@ -42,7 +24,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Date',
-                        accessor: 'date',
+                        accessor: 'd_date',
                       },
                       {
                         Header: 'Fajr Begins',
@@ -50,7 +32,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Fajr Jamaat',
-                        accessor: 'fajr_jamaat',
+                        accessor: 'fajr_jamah',
                       },
                       {
                         Header: 'Sunrise',
@@ -62,15 +44,15 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Zuhr Jamaat',
-                        accessor: 'zuhr_jamaat',
+                        accessor: 'zuhr_jamah',
                       },
                       {
                         Header: 'Asr Begins',
-                        accessor: 'asr_begins',
+                        accessor: 'asr_mithl_1',
                       },
                       {
                         Header: 'Asr Jamaat',
-                        accessor: 'asr_jamaat',
+                        accessor: 'asr_jamah',
                       },
                       {
                         Header: 'Maghrib Begins',
@@ -78,7 +60,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Maghrib Jamaat',
-                        accessor: 'maghrib_jamaat',
+                        accessor: 'maghrib_jamah',
                       },
                       {
                         Header: 'Isha Begins',
@@ -86,7 +68,7 @@ function EditTimetable(props) {
                       },
                       {
                         Header: 'Isha Jamaat',
-                        accessor: 'isha_jamaat',
+                        accessor: 'isha_jamah',
                       },
         ],
         []
@@ -94,18 +76,18 @@ function EditTimetable(props) {
 
     const [data, setData] = useState([{
             row: 0,
-            date: "00/00/0000",
+            d_date: "00/00/0000",
             fajr_begins: "00:00",
-            fajr_jamaat: "00:00",
+            fajr_jamah: "00:00",
             sunrise: "00:00",
             zuhr_begins: "00:00",
-            zuhr_jamaat: "00:00",
-            asr_begins: "0:00",
-            asr_jamaat: "00:00",
+            zuhr_jamah: "00:00",
+            asr_mithl_1: "00:00",
+            asr_jamah: "00:00",
             maghrib_begins: "00:00",
-            maghrib_jamaat: "00:00",
+            maghrib_jamah: "00:00",
             isha_begins: "00:00",
-            isha_jamaat: "00:00"
+            isha_jamah: "00:00"
         }])
     const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
@@ -113,6 +95,7 @@ function EditTimetable(props) {
     const getData = () => {
         axios.get('http://localhost:3001/prayertimes/request/all')
         .then((res) => {
+            console.log(res.data)
             setData(res.data)
         })
         .catch((err) => {
@@ -144,6 +127,15 @@ function EditTimetable(props) {
 
     const submitData = () => {
         console.log(data)
+        axios({
+            method: 'POST',
+            data: data,
+            withCredentials: true,
+            url: 'http://localhost:3001/prayertimes'
+        })
+        .then((res) => {
+            console.log(res.data)
+        })
     }
 
     // After data chagnes, we turn the flag back off

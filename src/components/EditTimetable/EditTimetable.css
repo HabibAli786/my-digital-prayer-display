@@ -1,0 +1,18 @@
+.editTimetable_container {
+    margin-top: 30px;
+    max-width: 95% !important;
+    /* overflow: hidden; */
+}
+
+.editTimetable_submitbtn {
+    width: 20% !important;
+    font-size: 30px !important;
+}
+
+.edit_table {
+    font-size: 20px;
+}
+
+.edit_input {
+    width: 100%;
+}
