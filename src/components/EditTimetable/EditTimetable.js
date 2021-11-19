@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react"
-import { Button, Container, Row, Table } from "react-bootstrap";
+import { Button, Container, Row, Table, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";
+import { FcSynchronize } from "react-icons/fc";
 
 import TableEdit from "./TableEdit";
 import Header from "../Header/Header";
@@ -11,6 +12,7 @@ import { set_auth, set_username } from "../Redux/actions/authAction";
 import { authenticate } from "../Redux/reducers/authReducer";
 
 import './EditTimetable.css'
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 function EditTimetable(props) {
 
@@ -75,20 +77,21 @@ function EditTimetable(props) {
     )
 
     const [data, setData] = useState([{
-            row: 0,
-            d_date: "00/00/0000",
-            fajr_begins: "00:00",
-            fajr_jamaat: "00:00",
-            sunrise: "00:00",
-            zuhr_begins: "00:00",
-            zuhr_jamaat: "00:00",
-            asr_begins: "00:00",
-            asr_jamaat: "00:00",
-            maghrib_begins: "00:00",
-            maghrib_jamaat: "00:00",
-            isha_begins: "00:00",
-            isha_jamaat: "00:00"
-        }])
+      row: 0,
+      d_date: "00/00/0000",
+      fajr_begins: "00:00",
+      fajr_jamaat: "00:00",
+      sunrise: "00:00",
+      zuhr_begins: "00:00",
+      zuhr_jamaat: "00:00",
+      asr_begins: "00:00",
+      asr_jamaat: "00:00",
+      maghrib_begins: "00:00",
+      maghrib_jamaat: "00:00",
+      isha_begins: "00:00",
+      isha_jamaat: "00:00"
+    }])
+    const [loading, setLoading] = useState(true)
     const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
 
@@ -97,6 +100,7 @@ function EditTimetable(props) {
         .then((res) => {
             console.log(res.data)
             setData(res.data)
+            setLoading(false)
         })
         .catch((err) => {
             console.log(err)
@@ -198,6 +202,11 @@ function EditTimetable(props) {
     
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )
+    }
+    if(loading === true) {
+      return (
+        <LoadingIcon />
+      )
     } else {
         return (
             <>
