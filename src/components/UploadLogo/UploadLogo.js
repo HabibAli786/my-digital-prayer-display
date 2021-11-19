@@ -12,7 +12,7 @@ import './UploadLogo.css'
 
 function UploadLogo(props) {
 
-    const { auth, set_auth, username } = props
+    const { auth } = props
 
     const [file, setFile] = useState(null)
     const [serverStatus, setServerStatus] = useState(null)
@@ -21,19 +21,19 @@ function UploadLogo(props) {
     const uploadFile = (e) => {
         e.preventDefault()
         const data = new FormData()
-        data.append('prayertimes', file)
+        data.append('logo', file)
         // console.log(e.target.value)
         console.log(file)
-        // if(file) {
-        //     axios.post('http://localhost:3001/media/uploadLogo', data, {
-        //         'content-type': 'multipart/form-data'
-        //     }).then(res => { // then print response status
-        //         console.log(res);
-        //         setServerStatus(res.data)
-        //     })
-        // } else {
-        //     setServerStatus("Error: No file has been selected")
-        // }
+        if(file) {
+            axios.post('http://localhost:3001/media/logo', data, {
+                'content-type': 'multipart/form-data'
+            }).then(res => { // then print response status
+                console.log(res);
+                setServerStatus(res.data)
+            })
+        } else {
+            setServerStatus("Error: No file has been selected")
+        }
         e.target.logo.value = ""
     }
 
