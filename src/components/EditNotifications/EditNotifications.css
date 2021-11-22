@@ -1,0 +1,27 @@
+.edit-notifications-container {
+    margin-left: 1% !important;
+    margin-top: 2%;
+    font-size: 45px !important;
+}
+
+.notification-header-row {
+    width: 40%;
+}
+
+.notification-row {
+    margin-top: 2% !important;
+}
+
+.notifications {
+    text-align: left;
+    margin-top: 1%;
+}
+
+.notification-button {
+    width: 100%;
+    font-size: 45px !important;
+}
+
+.new-notification-header-row {
+    margin-top: 15% !important;
+}
