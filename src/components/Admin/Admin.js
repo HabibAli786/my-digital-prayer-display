@@ -16,24 +16,6 @@ function Admin(props) {
     const { auth, set_auth, username, set_username } = props
     // const [userData, setuserData] = useState(false)
 
-    const getUser = () => {
-        axios({
-            method: 'GET',
-            withCredentials: true,
-            url: 'http://localhost:3001/admin/user'
-        }).then((res) => {
-            console.log(res.data)
-            const data = res.data
-            if(data.username) {
-                set_username(data.username)
-                set_auth("Successfully Authenticated")
-            // } else {
-            //     setuserData(false)
-            //     setAuth("Unsuccessfully Authenticated")
-            }
-        })
-    }
-
     const login = (username, password) => {
         if(username) {
             axios({

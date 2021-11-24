@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react"
 import { Button, Container, Row, Table, Spinner } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";
 import { FcSynchronize } from "react-icons/fc";
@@ -16,6 +16,7 @@ import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 function EditTimetable(props) {
 
+    const dispatch = useDispatch()
     const { auth, set_auth, username } = props
 
     const columns = useMemo(
@@ -150,7 +151,7 @@ function EditTimetable(props) {
     }, [data])
 
     useEffect(() => {
-        authenticate()
+        dispatch(authenticate())
         getData()
     }, [])
 

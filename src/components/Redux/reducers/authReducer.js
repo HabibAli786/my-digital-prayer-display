@@ -40,7 +40,6 @@ export const authenticate = () => async (dispatch, getState) => {
         } else if(data === "Unsuccessfully Authenticated") {
             auth = "Unsuccessfully Authenticated"
         }
-        console.log("I am running two")
     }).catch((error) => {
         console.log(error)
         auth = "Server Offline"
