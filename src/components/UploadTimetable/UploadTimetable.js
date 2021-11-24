@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
@@ -11,7 +11,8 @@ import { set_auth, set_username } from "../Redux/actions/authAction";
 import { authenticate } from "../Redux/reducers/authReducer";
 
 function UploadTimetable(props) {
-
+    
+    const dispatch = useDispatch()
     const { auth } = props
 
     const [file, setFile] = useState(null)
@@ -39,7 +40,7 @@ function UploadTimetable(props) {
 
     useEffect(() => {
         console.log("UploadTimetable useEffect running")
-        authenticate()
+        dispatch(authenticate())
     }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
