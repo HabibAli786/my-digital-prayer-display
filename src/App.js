@@ -9,6 +9,7 @@ import './App.css';
 import EditTimetable from './components/EditTimetable/EditTimetable';
 import UploadLogo from './components/UploadLogo/UploadLogo';
 import EditNotifications from './components/EditNotifications/EditNotifications';
+import EditSlides from './components/EditSlides/EditSlides';
 
 function App() {
 
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route path="/editNotifications">
           <EditNotifications />
+        </Route>
+        <Route path="/editSlides">
+          <EditSlides />
         </Route>
       </Switch>
     </div>

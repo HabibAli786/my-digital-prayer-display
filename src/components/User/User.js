@@ -73,7 +73,9 @@ function User(props) {
                         </Link>
                     </Col>
                     <Col>
-                    
+                        <Link to="/editSlides">
+                            <Button className="button-options" variant="outline-primary" size="lg">Edit Slides</Button>
+                        </Link>
                     </Col>
                     <Col>
                     
