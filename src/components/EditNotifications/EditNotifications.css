@@ -5,11 +5,13 @@
 }
 
 .notification-header-row {
-    width: 40%;
+    width: 50%;
+    margin-left: 10px !important;
 }
 
 .notification-row {
     margin-top: 2% !important;
+    margin-left: 10px !important;
 }
 
 .notifications {
@@ -23,5 +25,6 @@
 }
 
 .new-notification-header-row {
-    margin-top: 15% !important;
+    margin-top: 5% !important;
+    margin-left: 10px !important;
 }
