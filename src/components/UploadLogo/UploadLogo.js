@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 
 import Header from '../Header/Header'
@@ -12,6 +12,7 @@ import './UploadLogo.css'
 
 function UploadLogo(props) {
 
+    const dispatch = useDispatch()
     const { auth } = props
 
     const [file, setFile] = useState(null)
@@ -39,7 +40,7 @@ function UploadLogo(props) {
 
     useEffect(() => {
         console.log("UploadLogo useEffect running")
-        authenticate()
+        dispatch(authenticate())
     }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
