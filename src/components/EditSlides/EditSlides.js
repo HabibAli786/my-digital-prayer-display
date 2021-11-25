@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react"
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
+import { v4 as uuidv4 } from 'uuid';
 
 import Header from '../Header/Header'
 import { set_auth, set_username } from "../Redux/actions/authAction";
@@ -14,10 +15,28 @@ function EditSlides(props) {
     const dispatch = useDispatch()
     const { auth } = props
 
+    const [slides, setSlides] = useState([])
+
+    const getSlides = () => {
+        axios({
+            method: 'GET',
+            withCredentials: true,
+            url: 'http://localhost:3001/media/slides'
+        }).then((res) => {
+            // console.log(res.data)
+            const data = res.data.files
+            console.log(data)
+            if(data.length >= 1) {
+                setSlides(data)
+            }
+        })
+    }
+
 
     useEffect(() => {
         dispatch(authenticate())
-    }, [])
+        getSlides()
+    }, [slides.length])
     
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )
@@ -31,17 +50,20 @@ function EditSlides(props) {
                         <h1 style={{textAlign: "left", fontSize: "45px"}}>List of Slides</h1>
                 </Row>
                 <div style={{overflowY: "scroll", overflowX: "hidden", height: "500px"}}>
-                    {/* {notifications ? notifications.map(
-                        notification => 
-                        <Row key={uuidv4()} className="notification-row">
-                            <Col className="notifications" lg={10}>
-                                <Card body>{notification}</Card>
+                    {slides ? slides.map(
+                        slide => 
+                        <Row key={uuidv4()} className="slides-row">
+                            <Col lg={2}>
+                                <img style={{width : "100%", height: "100%"}} src={`http://localhost:3001/media/slides/${slides.indexOf(slide)+1}`} alt="Slide"/>
+                            </Col>
+                            <Col className="slides" lg={7}>
+                                <Card body>{slide}</Card>
                             </Col>
                             <Col lg={2}>
-                                <Button variant="danger" className="notification-button" onClick={() => deleteNotification(notification)}>Delete</Button>
+                                <Button variant="danger" className="slides-button" onClick={() => console.log(slide)}>Delete</Button>
                             </Col>
                         </Row>
-                    ) :  */ } 
+                    ) :
                     <Row className="slides-row">
                         <Col lg={2}>
                             <img style={{width : "100%", height: "100%"}} src="" alt="Slide"/>
@@ -53,7 +75,7 @@ function EditSlides(props) {
                                 <Button variant="danger" className="slides-button" onClick={() => console.log("I got clicked")}>Delete</Button>
                         </Col>
                     </Row>
-                    {/* }  */}
+                    }
                     
                 </div>
                 
