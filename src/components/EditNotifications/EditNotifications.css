@@ -25,6 +25,11 @@
 }
 
 .new-notification-header-row {
-    margin-top: 5% !important;
+    margin-top: 3% !important;
+    margin-left: 10px !important;
+}
+
+.new-notification-row {
+    /* margin-top: 1% !important; */
     margin-left: 10px !important;
 }

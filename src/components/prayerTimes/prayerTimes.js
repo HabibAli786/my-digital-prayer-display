@@ -91,6 +91,7 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
+
 //  0 1 2 3 4 5 6 7 8
 //  0 0 : 0 0 : 0 0
 
@@ -110,8 +111,9 @@ function PrayerTimes() {
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
 
+    const [slides, setSlides] = useState([])
     const [numOfSlides, setNumOfSlides] = useState(null)
-    const [slideshowCount, setSlideshowCount] = useState(1)
+    const [slideshowCount, setSlideshowCount] = useState(0)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
 
     // Update live clock every second
@@ -231,6 +233,20 @@ function PrayerTimes() {
 
     // Slideshow Animation useEffect
     useEffect(() => {
+        axios({
+            method: 'GET',
+            withCredentials: true,
+            url: 'http://localhost:3001/media/slides'
+        }).then((res) => {
+            // console.log(res.data)
+            const data = res.data.files
+            console.log(data)
+            if(data.length >= 1) {
+                setSlides(data)
+            } else {
+                setSlides([])
+            }
+        })
         // How long will the image take to come off the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
@@ -321,7 +337,7 @@ function PrayerTimes() {
         <Notifications />
         </div>
         :
-            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slideshowCount}`} alt="slidshow" /> 
+            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
         }
         </>
     )

@@ -1,0 +1,44 @@
+.edit-slides-container {
+    margin-left: 1% !important;
+    margin-top: 2%;
+    font-size: 45px !important;
+}
+
+.slides-header-row {
+    width: 50%;
+    margin-left: 10px !important;
+}
+
+.slides-row {
+    margin-top: 2% !important;
+    margin-left: 10px !important;
+}
+
+.slides {
+    text-align: left;
+    margin-top: 1%;
+}
+
+.slides-button {
+    width: 100%;
+    font-size: 45px !important;
+}
+
+.slides-submit-button {
+    position: relative;
+    bottom: 6px;
+    font-size: 45px !important;
+}
+
+.new-slides-header-row {
+    margin-top: 5% !important;
+    margin-left: 10px !important;
+}
+
+.slides-img-row {
+    width: 5px;
+    height: 10px;
+    max-width: 5px;
+    max-height: 10px;
+    border-style: dotted;
+}
