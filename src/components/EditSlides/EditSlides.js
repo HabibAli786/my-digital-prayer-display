@@ -18,6 +18,7 @@ function EditSlides(props) {
     const [slides, setSlides] = useState([])
 
     const getSlides = () => {
+        console.log("getSlides is running")
         axios({
             method: 'GET',
             withCredentials: true,
@@ -29,6 +30,21 @@ function EditSlides(props) {
             if(data.length >= 1) {
                 setSlides(data)
             }
+        })
+    }
+
+    const deleteSlide = (slide) => {
+        axios({
+            method: 'POST',
+            data: {
+                slideToDelete : slide
+            },
+            withCredentials: true,
+            url: 'http://localhost:3001/media/slides/admin/delete'
+        })
+        .then((res) => {
+            console.log(res.data)
+            getSlides()
         })
     }
 
@@ -60,7 +76,7 @@ function EditSlides(props) {
                                 <Card body>{slide}</Card>
                             </Col>
                             <Col lg={2}>
-                                <Button variant="danger" className="slides-button" onClick={() => console.log(slide)}>Delete</Button>
+                                <Button variant="danger" className="slides-button" onClick={() => deleteSlide(slide)}>Delete</Button>
                             </Col>
                         </Row>
                     ) :
@@ -85,8 +101,9 @@ function EditSlides(props) {
                 <Row className="slides-row">
                     <Col className="slides" lg={10}>
                     <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Control style={{fontSize: "45px"}} type="text" placeholder="Upload New Slides Here" />
+                        <Form.Group className="mb-3">
+rm.ControlInput1">
+Slides Here" />
                         </Form.Group>
                     </Form>
                     </Col>
