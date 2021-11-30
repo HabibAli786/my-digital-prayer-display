@@ -29,6 +29,8 @@ function EditSlides(props) {
             console.log(data)
             if(data.length >= 1) {
                 setSlides(data)
+            } else {
+                setSlides([])
             }
         })
     }
@@ -53,7 +55,9 @@ function EditSlides(props) {
         dispatch(authenticate())
         getSlides()
     }, [slides.length])
-    
+
+    console.log(slides.length)
+
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )
     } else {
@@ -66,11 +70,11 @@ function EditSlides(props) {
                         <h1 style={{textAlign: "left", fontSize: "45px"}}>List of Slides</h1>
                 </Row>
                 <div style={{overflowY: "scroll", overflowX: "hidden", height: "500px"}}>
-                    {slides ? slides.map(
+                    {slides.length > 0 && slides.map(
                         slide => 
                         <Row key={uuidv4()} className="slides-row">
                             <Col lg={2}>
-                                <img style={{width : "100%", height: "100%"}} src={`http://localhost:3001/media/slides/${slides.indexOf(slide)+1}`} alt="Slide"/>
+                                <img style={{width : "100%", height: "100%"}} src={`http://localhost:3001/media/slides/${slide}`} alt="Slide"/>
                             </Col>
                             <Col className="slides" lg={7}>
                                 <Card body>{slide}</Card>
@@ -79,16 +83,11 @@ function EditSlides(props) {
                                 <Button variant="danger" className="slides-button" onClick={() => deleteSlide(slide)}>Delete</Button>
                             </Col>
                         </Row>
-                    ) :
+                    )}
+                    {slides.length <= 0 &&
                     <Row className="slides-row">
-                        <Col lg={2}>
-                            <img style={{width : "100%", height: "100%"}} src="" alt="Slide"/>
-                        </Col>
-                        <Col className="slides" lg={7}>
-                            <Card body>No Slide Currently</Card>
-                        </Col>
-                        <Col lg={2}>
-                                <Button variant="danger" className="slides-button" onClick={() => console.log("I got clicked")}>Delete</Button>
+                        <Col className="slides" lg={10}>
+                            <Card body>No Slide Currently Available</Card>
                         </Col>
                     </Row>
                     }
@@ -102,8 +101,7 @@ function EditSlides(props) {
                     <Col className="slides" lg={10}>
                     <Form>
                         <Form.Group className="mb-3">
-rm.ControlInput1">
-Slides Here" />
+                            <Form.Control name="slides" style={{fontSize: "45px"}} type="text" placeholder="Upload Your New Slide Here" />
                         </Form.Group>
                     </Form>
                     </Col>
