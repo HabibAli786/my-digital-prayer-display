@@ -16,6 +16,7 @@ function EditSlides(props) {
     const { auth } = props
 
     const [slides, setSlides] = useState([])
+    const [slideToUpload, setSlideToUpload] = useState(null)
 
     const getSlides = () => {
         console.log("getSlides is running")
@@ -49,6 +50,27 @@ function EditSlides(props) {
             getSlides()
         })
     }
+
+    const uploadSlide = (e) => {
+        e.preventDefault()
+        const data = new FormData()
+        data.append('slide', slideToUpload)
+        console.log(data)
+        // console.log(e.target.value)
+        console.log(slideToUpload)
+        if(slideToUpload) {
+            axios.post('http://localhost:3001/media/slides/admin/add', data, {
+                'content-type': 'multipart/form-data'
+            }).then(res => { // then print response status
+                console.log(res);
+                getSlides()
+                // setServerStatus(res.data)
+            })
+        } else {
+            // setServerStatus("Error: No file has been selected")
+        }
+        e.target.slide.value = ""
+    } 
 
 
     useEffect(() => {
@@ -98,15 +120,17 @@ function EditSlides(props) {
                     <h1 style={{textAlign: "left", fontSize: "45px"}}>New Slides</h1>
                 </Row>
                 <Row className="slides-row">
-                    <Col className="slides" lg={10}>
-                    <Form>
+                    <Col className="slides" lg={12}>
+                    <Form onSubmit={uploadSlide}>
                         <Form.Group className="mb-3">
-                            <Form.Control name="slides" style={{fontSize: "45px"}} type="text" placeholder="Upload Your New Slide Here" />
+                            <input 
+                                name="slide" 
+                                style={{fontSize: "45px"}} 
+                                type="file" 
+                                onChange={(e) => setSlideToUpload(e.target.files[0]) } />
+                            <Button type="submit" variant="primary" className="slides-submit-button">Upload</Button>
                         </Form.Group>
                     </Form>
-                    </Col>
-                    <Col lg={2}>
-                        <Button variant="primary" className="slides-button">Upload</Button>
                     </Col>
                 </Row>
             </Container>

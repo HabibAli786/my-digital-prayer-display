@@ -51,7 +51,7 @@ function EditNotifications(props) {
     const addNotification = (event) => {
         // console.log(event)
         event.preventDefault()
-        const data  = event.target.notification.value
+        const data = event.target.notification.value
         axios({
             method: 'POST',
             data: {

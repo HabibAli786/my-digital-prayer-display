@@ -25,6 +25,7 @@ function UploadLogo(props) {
         data.append('logo', file)
         // console.log(e.target.value)
         console.log(file)
+        console.log(data)
         if(file) {
             axios.post('http://localhost:3001/media/logo', data, {
                 'content-type': 'multipart/form-data'

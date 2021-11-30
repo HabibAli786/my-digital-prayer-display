@@ -24,6 +24,12 @@
     font-size: 45px !important;
 }
 
+.slides-submit-button {
+    position: relative;
+    bottom: 6px;
+    font-size: 45px !important;
+}
+
 .new-slides-header-row {
     margin-top: 5% !important;
     margin-left: 10px !important;
