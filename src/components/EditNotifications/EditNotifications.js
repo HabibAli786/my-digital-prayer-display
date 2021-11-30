@@ -27,6 +27,8 @@ function EditNotifications(props) {
             const data = res.data.notifications
             if(data.length >= 1) {
                 setNotifications(data)
+            } else {
+                setNotifications([])
             }
         })
     }
@@ -84,7 +86,7 @@ function EditNotifications(props) {
                         <h1 style={{textAlign: "left", fontSize: "45px"}}>List of Notifications</h1>
                 </Row>
                 <div style={{overflowY: "scroll", overflowX: "hidden", height: "480px"}}>
-                    {notifications ? notifications.map(
+                    {notifications.length > 0 && notifications.map(
                         notification => 
                         <Row key={uuidv4()} className="notification-row">
                             <Col className="notifications" lg={10}>
@@ -94,13 +96,13 @@ function EditNotifications(props) {
                                 <Button variant="danger" className="notification-button" onClick={() => deleteNotification(notification)}>Delete</Button>
                             </Col>
                         </Row>
-                    ) : 
+                    ) }
+                    {notifications.length <= 0 &&
                     <Row className="notification-row">
                         <Col className="notifications" lg={10}>
                             <Card body>No Notifications Currently</Card>
                         </Col>
-                    </Row>
-                    }
+                    </Row> }
                     
                 </div>
                 
