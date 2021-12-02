@@ -1,29 +1,160 @@
-.main-container-admin {
-    margin-top: 2%;
-    /* border-style: dotted; */
+@media (min-width: 576px) {
+    .main-container-admin {
+        margin-top: 2%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+    
+    .input-field {
+        width: 40%;
+        margin: auto;
+    }
+    
+    .login-header {
+        font-size: 7rem;
+        margin-bottom: 20px;
+    }
+    
+    .login-message {
+        font-size: 3rem;
+        color: red;
+        fill: red;
+    }
 }
 
-.login-container {
-    margin-top: 1%;
-    /* border-style: dotted; */
+@media (min-width: 768px) {
+    .main-container-admin {
+        margin-top: 2%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+    
+    .input-field {
+        width: 40%;
+        margin: auto;
+    }
+    
+    .login-header {
+        font-size: 7rem;
+        margin-bottom: 20px;
+    }
+    
+    .login-message {
+        font-size: 3rem;
+        color: red;
+        fill: red;
+    }
 }
 
-.login-row {
-    font-size: 20%;
+@media (min-width: 992px) {
+    .image-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+    
+    .input-field {
+        width: 40%;
+        margin: auto;
+    }
+    
+    .login-header {
+        font-size: 7rem;
+        margin-bottom: 20px;
+    }
+    
+    .login-message {
+        font-size: 3rem;
+        color: red;
+        fill: red;
+    }
 }
 
-.input-field {
-    width: 40%;
-    margin: auto;
+@media (min-width: 1200px) {
+    .main-container-admin {
+        margin-top: 2%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+    
+    .input-field {
+        width: 40%;
+        margin: auto;
+    }
+    
+    .login-header {
+        font-size: 7rem;
+        margin-bottom: 20px;
+    }
+    
+    .login-message {
+        font-size: 3rem;
+        color: red;
+        fill: red;
+    }
 }
 
-.login-header {
-    font-size: 7rem;
-    margin-bottom: 20px;
+@media (min-width: 1400px) {
+    .main-container-admin {
+        margin-top: 2%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+    
+    .input-field {
+        width: 40%;
+        margin: auto;
+    }
+    
+    .login-header {
+        font-size: 7rem;
+        margin-bottom: 20px;
+    }
+    
+    .login-message {
+        font-size: 3rem;
+        color: red;
+        fill: red;
+    }
 }
 
-.login-message {
-    font-size: 3rem;
-    color: red;
-    fill: red;
-}

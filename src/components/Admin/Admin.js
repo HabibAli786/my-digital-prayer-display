@@ -61,7 +61,7 @@ function Admin(props) {
     return (
         <>
         <Header />
-        <Container className="image-container mt-5">
+        <Container className="image-container">
             <Row>
                 <Col>
                     <img className="admin-icon" src="images/admin-icon.png" alt="admin icon" />
