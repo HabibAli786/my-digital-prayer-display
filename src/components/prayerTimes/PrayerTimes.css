@@ -1,116 +1,621 @@
-.container {
-    /* margin: 20px 0px 0px 5px !important; */
-    /* margin-left: 5px !important; */
-}
-
-.table-container {
-    margin: 20px 0px 0px 5px !important;
-    text-align: left;
-    font-family: Almarai;
-    font-size: 5.1em;
-    padding-left: 5px;
-}
-
-.active-color{
-    color: #0175f2;
-}
-
-.start-time {
-    font-size: 60px;
-}
-
-.jamaat {
-    font-size: 60px;
-}
-
-.logo {
-    position: absolute;
-    right: 3%;
-    top: 80px;
-    height: 24%;
-    width: 30%;    
-    max-width: 30%;
-    max-height: 24%;
-}
-
-.weekday {
-    position: absolute;
-    right: 3%;
-    top: 33.5%;
-    width: 30%;
-    font-size: 4em;
-}
-
-.dayMonth {
-    position: absolute;
-    right: 3%;
-    top: 40%;
-    width: 30%;
-    font-size: 4em;
-}
-
-
-.finshed {
-    color: grey;
-}
-
-.active {
-
-}
-
-.clock {
-    position: absolute;
-    right: 3%;
-    top: 50%;
-    font-size: 6em;
-    width: 30%;
-}
-
-/* Slideshow animation */
-@keyframes display {
-    from {
-      opacity: 0;
+@media (min-width: 576px) {
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
     }
-  
-    to {
-      opacity: 100;
+    
+    .table-container {
+        margin: 20px 0px 0px 5px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 5.1em;
+        padding-left: 5px;
     }
-}
-
-@keyframes hideDisplay {
-    from {
-      opacity: 100;
+    
+    .active-color{
+        color: #0175f2;
     }
-  
-    to {
-      opacity: 0;
+    
+    .start-time {
+        font-size: 60px;
     }
+    
+    .jamaat {
+        font-size: 60px;
+    }
+    
+    .logo {
+        position: absolute;
+        right: 3%;
+        top: 80px;
+        height: 24%;
+        width: 30%;    
+        max-width: 30%;
+        max-height: 24%;
+    }
+    
+    .weekday {
+        position: absolute;
+        right: 3%;
+        top: 33.5%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        right: 3%;
+        top: 40%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .active {
+    
+    }
+    
+    .clock {
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        font-size: 6em;
+        width: 30%;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    
+    
+    /* .col {
+        border-style: dotted;
+    } */
 }
 
-.slideshow-display {
-    animation-name: display;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
+@media (min-width: 768px) {
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
+    }
+    
+    .table-container {
+        margin: 20px 0px 0px 5px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 5.1em;
+        padding-left: 5px;
+    }
+    
+    .active-color{
+        color: #0175f2;
+    }
+    
+    .start-time {
+        font-size: 60px;
+    }
+    
+    .jamaat {
+        font-size: 60px;
+    }
+    
+    .logo {
+        position: absolute;
+        right: 3%;
+        top: 80px;
+        height: 24%;
+        width: 30%;    
+        max-width: 30%;
+        max-height: 24%;
+    }
+    
+    .weekday {
+        position: absolute;
+        right: 3%;
+        top: 33.5%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        right: 3%;
+        top: 40%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .active {
+    
+    }
+    
+    .clock {
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        font-size: 6em;
+        width: 30%;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    
+    
+    /* .col {
+        border-style: dotted;
+    } */
 }
 
-.slideshow-hide {
-    animation-name: hideDisplay;
-    animation-duration: 20s;
-    animation-fill-mode: forwards;
+@media (min-width: 992px) {
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
+    }
+    
+    .table-container {
+        margin: 20px 0px 0px 5px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 5.1em;
+        padding-left: 5px;
+    }
+    
+    .active-color{
+        color: #0175f2;
+    }
+    
+    .start-time {
+        font-size: 60px;
+    }
+    
+    .jamaat {
+        font-size: 60px;
+    }
+    
+    .logo {
+        position: absolute;
+        right: 3%;
+        top: 80px;
+        height: 24%;
+        width: 30%;    
+        max-width: 30%;
+        max-height: 24%;
+    }
+    
+    .weekday {
+        position: absolute;
+        right: 3%;
+        top: 33.5%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        right: 3%;
+        top: 40%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .active {
+    
+    }
+    
+    .clock {
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        font-size: 6em;
+        width: 30%;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    
+    
+    /* .col {
+        border-style: dotted;
+    } */
 }
 
-.slideshow-image {
-    /* Full height */
-  height: 100%; 
+@media (min-width: 1200px) {
+    .row0 {
+        width: 85%;
+    }
 
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    .row1 {
+        width: 85%;
+    }
+
+    .row2 {
+        width: 85%;
+    }
+
+    .row3 {
+        width: 85%;
+    }
+
+    .row4 {
+        width: 85%;
+    }
+
+    .row5 {
+        width: 85%;
+    }
+
+    .row6 {
+        width: 85%;
+    }
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
+    }
+    
+    .table-container {
+        margin: 10px 0px 0px 2px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 3.5em;
+        padding-left: 5px;
+    }
+    
+    .active-color{
+        color: #0175f2;
+    }
+    
+    .start-time {
+        font-size: 40px;
+    }
+    
+    .jamaat {
+        font-size: 40px;
+    }
+    
+    .logo {
+        position: absolute;
+        left: 72%;
+        top: 70px;
+        height: 24%;
+        width: 30%;    
+        max-width: 30%;
+        max-height: 24%;
+    }
+    
+    .weekday {
+        position: absolute;
+        left: 72%;
+        top: 33.5%;
+        width: 30%;
+        font-size: 3em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        left: 72%;
+        top: 42%;
+        width: 30%;
+        font-size: 3em;
+    }
+    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .active {
+    
+    }
+    
+    .clock {
+        position: absolute;
+        left: 72%;
+        top: 54%;
+        font-size: 4em;
+        width: 30%;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    
+    
+    /* .col {
+        border-style: dotted;
+    } */
 }
 
-
-
-/* .col {
-    border-style: dotted;
-} */
+@media (min-width: 1400px) {
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
+    }
+    
+    .table-container {
+        margin: 20px 0px 0px 5px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 5.1em;
+        padding-left: 5px;
+    }
+    
+    .active-color{
+        color: #0175f2;
+    }
+    
+    .start-time {
+        font-size: 60px;
+    }
+    
+    .jamaat {
+        font-size: 60px;
+    }
+    
+    .logo {
+        position: absolute;
+        right: 3%;
+        top: 80px;
+        height: 24%;
+        width: 30%;    
+        max-width: 30%;
+        max-height: 24%;
+    }
+    
+    .weekday {
+        position: absolute;
+        right: 3%;
+        top: 33.5%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        right: 3%;
+        top: 40%;
+        width: 30%;
+        font-size: 4em;
+    }
+    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .active {
+    
+    }
+    
+    .clock {
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        font-size: 6em;
+        width: 30%;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    
+    
+    /* .col {
+        border-style: dotted;
+    } */
+}
