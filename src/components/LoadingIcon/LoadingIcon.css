@@ -1,5 +1,39 @@
-.spinner {
-    margin-top: 15%;
-    width: 500px !important;
-    height: 500px !important;
+@media (min-width: 576px) { 
+    .spinner {
+        margin-top: 15%;
+        width: 500px !important;
+        height: 500px !important;
+    }
+}
+
+@media (min-width: 768px) { 
+    .spinner {
+        margin-top: 15%;
+        width: 500px !important;
+        height: 500px !important;
+    }
+}
+
+@media (min-width: 992px) { 
+    .spinner {
+        margin-top: 15%;
+        width: 500px !important;
+        height: 500px !important;
+    }
+}
+
+@media (min-width: 1200px) { 
+    .spinner {
+        margin-top: 8%;
+        width: 500px !important;
+        height: 500px !important;
+    }
+}
+
+@media (min-width: 1400px) { 
+    .spinner {
+        margin-top: 15%;
+        width: 500px !important;
+        height: 500px !important;
+    }
 }

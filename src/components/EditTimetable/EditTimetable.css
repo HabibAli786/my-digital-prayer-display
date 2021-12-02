@@ -1,18 +1,104 @@
-.editTimetable_container {
-    margin-top: 30px;
-    max-width: 95% !important;
-    /* overflow: hidden; */
+@media (min-width: 576px) { 
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 95% !important;
+        /* overflow: hidden; */
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 30px !important;
+    }
+    
+    .edit_table {
+        font-size: 20px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }   
 }
 
-.editTimetable_submitbtn {
-    width: 20% !important;
-    font-size: 30px !important;
+@media (min-width: 768px) { 
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 95% !important;
+        /* overflow: hidden; */
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 30px !important;
+    }
+    
+    .edit_table {
+        font-size: 20px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }   
 }
 
-.edit_table {
-    font-size: 20px;
+@media (min-width: 992px) { 
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 95% !important;
+        /* overflow: hidden; */
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 30px !important;
+    }
+    
+    .edit_table {
+        font-size: 20px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }   
 }
 
-.edit_input {
-    width: 100%;
+@media (min-width: 1200px) { 
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 98% !important;
+        /* overflow: hidden; */
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 30px !important;
+    }
+    
+    .edit_table {
+        font-size: 12px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }   
+}
+
+@media (min-width: 1400px) { 
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 95% !important;
+        /* overflow: hidden; */
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 30px !important;
+    }
+    
+    .edit_table {
+        font-size: 20px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }   
 }
