@@ -60,7 +60,7 @@ function UploadTimetable(props) {
                     <Col>
                         <Form onSubmit={uploadFile}>
                             <input 
-                                style={{ marginTop : "100px", fontSize: "30px", borderStyle: "solid" }} 
+                                className="uploadTimetable-fileInput"
                                 name="prayertimes"
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />
