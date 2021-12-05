@@ -80,12 +80,12 @@ function EditNotifications(props) {
         return (
             <>
             <Header />
-            <h1 style={{marginTop : "15px", fontSize: "60px"}}>Edit Notifications</h1>
+            <h1 className="edit-notification-title">Edit Notifications</h1>
             <Container className="edit-notifications-container">
                 <Row className="notification-header-row">
-                        <h1 style={{textAlign: "left", fontSize: "45px"}}>List of Notifications</h1>
+                        <h1 className="edit-notification-header">List of Notifications</h1>
                 </Row>
-                <div style={{overflowY: "scroll", overflowX: "hidden", height: "480px"}}>
+                <div className="notification-container">
                     {notifications.length > 0 && notifications.map(
                         notification => 
                         <Row key={uuidv4()} className="notification-row">
@@ -107,13 +107,13 @@ function EditNotifications(props) {
                 </div>
                 
                 <Row className="new-notification-header-row">
-                    <h1 style={{textAlign: "left", fontSize: "45px"}}>New Notifications</h1>
+                    <h1 className="new-notification-header">New Notifications</h1>
                 </Row>
                 <Row className="new-notification-row">
                 <Form onSubmit={addNotification}>
                     <Col className="notifications" lg={10}>
                         <Form.Group className="mb-3">
-                            <Form.Control name="notification" style={{fontSize: "45px"}} type="text" placeholder="Enter New Notification Here" />
+                            <Form.Control name="notification" className="new-notification-input" type="text" placeholder="Enter New Notification Here" />
                         </Form.Group>
                     </Col>
                     <Col lg={2}>
