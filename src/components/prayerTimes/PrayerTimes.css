@@ -502,6 +502,33 @@
 }
 
 @media (min-width: 1400px) {
+    .row0 {
+        width: 100%;
+    }
+
+    .row1 {
+        width: 100%;
+    }
+
+    .row2 {
+        width: 100%;
+    }
+
+    .row3 {
+        width: 100%;
+    }
+
+    .row4 {
+        width: 100%;
+    }
+
+    .row5 {
+        width: 100%;
+    }
+
+    .row6 {
+        width: 100%;
+    }
     .container {
         /* margin: 20px 0px 0px 5px !important; */
         /* margin-left: 5px !important; */
