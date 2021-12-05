@@ -35,7 +35,7 @@ function Notifications() {
                 setAnimation(true)
             }, 10000)
         }
-        // How long NEXT text will appear
+        // How long till NEXT text will appear
         if(animation === true){
             setTimeout(() => {
                 setCount(count + 1)
