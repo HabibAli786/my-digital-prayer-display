@@ -41,7 +41,7 @@ function UploadTimetable(props) {
     useEffect(() => {
         console.log("UploadTimetable useEffect running")
         dispatch(authenticate())
-    }, [file, serverStatus])
+    }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )

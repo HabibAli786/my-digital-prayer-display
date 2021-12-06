@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 import Notifications from '../Notifications/Notifications'
 import './PrayerTimes.css'
@@ -224,7 +224,13 @@ function PrayerTimes() {
     useEffect(() => {
         axios.get(`http://localhost:3001/media/slides`)
             .then((response) => {
-                setNumOfSlides(response.data.numOfFiles)
+                const data = response.data
+                setNumOfSlides(data.numOfFiles)
+                if(data.files.length >= 1) {
+                    setSlides(data.files)
+                } else {
+                    setSlides([])
+                }
             })
             .catch((error) => {
                 console.log(error)
@@ -233,20 +239,6 @@ function PrayerTimes() {
 
     // Slideshow Animation useEffect
     useEffect(() => {
-        axios({
-            method: 'GET',
-            withCredentials: true,
-            url: 'http://localhost:3001/media/slides'
-        }).then((res) => {
-            // console.log(res.data)
-            const data = res.data.files
-            console.log(data)
-            if(data.length >= 1) {
-                setSlides(data)
-            } else {
-                setSlides([])
-            }
-        })
         // How long will the image take to come on the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
@@ -280,7 +272,13 @@ function PrayerTimes() {
         </Link>
         <h1 className="weekday">{date[0]}</h1>
         <h1 className="dayMonth">{date[1]}</h1>
-        <h1 className="clock">{clock}</h1>
+        {/* 00:00:00 */}
+        {/* <h1 className="clock">{clock}</h1> */}
+        <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
+        <h1 className="clock-colon-1">:</h1>
+        <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
+        <h1 className="clock-colon-2">:</h1>
+        <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
         <Container className="table-container">
             <Row className="row0">
                 <Col className="col-4"></Col>

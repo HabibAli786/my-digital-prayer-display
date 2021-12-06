@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Header from '../Header/Header';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect, useDispatch } from 'react-redux';
@@ -34,7 +34,7 @@ function User(props) {
 
     useEffect(() => {
         dispatch(authenticate())
-    }, [auth, username])
+    }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to={{ pathname: "/admin" }} />)

@@ -66,6 +66,41 @@
         font-size: 6em;
         width: 30%;
     }
+
+    .clock-hours {
+        position: absolute;
+        left: 77%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 82.3%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 84%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 90%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 91.5%;
+        top: 54%;
+        font-size: 4em;
+    }
     
     /* Slideshow animation */
     @keyframes display {
@@ -185,6 +220,41 @@
         font-size: 6em;
         width: 30%;
     }
+
+    .clock-hours {
+        position: absolute;
+        left: 77%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 82.3%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 84%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 90%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 91.5%;
+        top: 54%;
+        font-size: 4em;
+    }
     
     /* Slideshow animation */
     @keyframes display {
@@ -303,6 +373,41 @@
         top: 50%;
         font-size: 6em;
         width: 30%;
+    }
+
+    .clock-hours {
+        position: absolute;
+        left: 77%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 82.3%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 84%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 90%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 91.5%;
+        top: 54%;
+        font-size: 4em;
     }
     
     /* Slideshow animation */
@@ -450,6 +555,41 @@
         font-size: 4em;
         width: 30%;
     }
+
+    .clock-hours {
+        position: absolute;
+        left: 77%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 82.3%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 84%;
+        top: 54%;
+        font-size: 4em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 90%;
+        top: 53.5%;
+        font-size: 4em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 91.5%;
+        top: 54%;
+        font-size: 4em;
+    }
     
     /* Slideshow animation */
     @keyframes display {
@@ -559,8 +699,8 @@
     
     .logo {
         position: absolute;
-        right: 3%;
-        top: 80px;
+        left: 70%;
+        top: 60px;
         height: 24%;
         width: 30%;    
         max-width: 30%;
@@ -569,7 +709,7 @@
     
     .weekday {
         position: absolute;
-        right: 3%;
+        left: 70%;
         top: 33.5%;
         width: 30%;
         font-size: 4em;
@@ -577,8 +717,8 @@
     
     .dayMonth {
         position: absolute;
-        right: 3%;
-        top: 40%;
+        left: 70%;
+        top: 41%;
         width: 30%;
         font-size: 4em;
     }
@@ -588,16 +728,47 @@
         color: grey;
     }
     
-    .active {
-    
-    }
-    
     .clock {
         position: absolute;
-        right: 3%;
+        left: 73%;
         top: 50%;
         font-size: 6em;
         width: 30%;
+    }
+
+    .clock-hours {
+        position: absolute;
+        left: 75%;
+        top: 54%;
+        font-size: 6em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 80.3%;
+        top: 53.5%;
+        font-size: 6em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 82%;
+        top: 54%;
+        font-size: 6em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 87%;
+        top: 53.5%;
+        font-size: 6em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 88.5%;
+        top: 54%;
+        font-size: 6em;
     }
     
     /* Slideshow animation */
