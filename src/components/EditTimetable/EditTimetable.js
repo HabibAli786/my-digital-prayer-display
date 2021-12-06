@@ -15,7 +15,7 @@ import LoadingIcon from "../LoadingIcon/LoadingIcon";
 function EditTimetable(props) {
 
     const dispatch = useDispatch()
-    const { auth, set_auth, username } = props
+    const { auth } = props
 
     const columns = useMemo(
         () => [
