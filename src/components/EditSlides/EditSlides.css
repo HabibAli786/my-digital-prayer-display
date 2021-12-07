@@ -296,6 +296,16 @@
     .new-slides-input {
         font-size: 35px;
     }
+
+    .slides-error-row {
+        margin-top: 1px !important;
+        margin-left: 10px !important;
+    }
+
+    .slides-error {
+        text-align: left;
+        color: red;
+    }
     
     /* .slides-img-row {
         width: 5px;

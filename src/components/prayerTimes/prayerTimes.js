@@ -54,9 +54,6 @@ const nextDay = () => {
 const weekDay = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
-    // const dayOfMonth = date.getDate()
-    // const month = date.toLocaleString('default', { month: 'long' })
-    // return weekday + " " + dayOfMonth + " " + month
     return weekday
 }
 
@@ -91,10 +88,6 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
-
-//  0 1 2 3 4 5 6 7 8
-//  0 0 : 0 0 : 0 0
-
 function PrayerTimes() {
 
     // Global Variables
@@ -110,7 +103,8 @@ function PrayerTimes() {
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
-
+    
+    // Slides
     const [slides, setSlides] = useState([])
     const [numOfSlides, setNumOfSlides] = useState(null)
     const [slideshowCount, setSlideshowCount] = useState(0)
@@ -272,8 +266,6 @@ function PrayerTimes() {
         </Link>
         <h1 className="weekday">{date[0]}</h1>
         <h1 className="dayMonth">{date[1]}</h1>
-        {/* 00:00:00 */}
-        {/* <h1 className="clock">{clock}</h1> */}
         <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
         <h1 className="clock-colon-1">:</h1>
         <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>

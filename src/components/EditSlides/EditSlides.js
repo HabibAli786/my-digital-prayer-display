@@ -17,6 +17,7 @@ function EditSlides(props) {
 
     const [slides, setSlides] = useState([])
     const [slideToUpload, setSlideToUpload] = useState(null)
+    const [error, setError] = useState(null)
 
     const getSlides = () => {
         console.log("getSlides is running")
@@ -61,8 +62,11 @@ function EditSlides(props) {
         if(slideToUpload) {
             axios.post('http://localhost:3001/media/slides/admin/add', data, {
                 'content-type': 'multipart/form-data'
-            }).then(res => { // then print response status
+            }).then(res => {
                 console.log(res);
+                if(res.data !== "File has been uploaded successfully") {
+                    setError(res.data)
+                }
                 getSlides()
                 // setServerStatus(res.data)
             })
@@ -133,6 +137,11 @@ function EditSlides(props) {
                     </Form>
                     </Col>
                 </Row>
+                {error &&
+                    <Row className="slides-error-row">
+                        <h1 className="slides-error">{error}</h1>
+                    </Row>
+                }
             </Container>
             </>
         )
