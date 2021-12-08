@@ -1,17 +1,129 @@
-.uploadTimetable-container {
-    margin-top: 100px;
-    height: 500px;
-    border-style: solid;
+@media (min-width: 576px) { 
+    .uploadTimetable-container {
+        margin-top: 100px;
+        height: 500px;
+        border-style: solid;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 3% !important; 
+        font-size: 30px;
+        border-style: solid; 
+    }
+    
+    .server_status_success {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .server_status_unsuccessful {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: red;
+    }
 }
 
-.server_status_success {
-    margin-top: 2.3em;
-    font-size: 50px;
-    color: green;
+@media (min-width: 768px) { 
+    .uploadTimetable-container {
+        margin-top: 100px;
+        height: 500px;
+        border-style: solid;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 3% !important; 
+        font-size: 30px;
+        border-style: solid; 
+    }
+    
+    .server_status_success {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .server_status_unsuccessful {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: red;
+    }
 }
 
-.server_status_unsuccessful {
-    margin-top: 2.3em;
-    font-size: 50px;
-    color: red;
+@media (min-width: 992px) { 
+    .uploadTimetable-container {
+        margin-top: 100px;
+        height: 500px;
+        border-style: solid;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 3% !important; 
+        font-size: 30px;
+        border-style: solid; 
+    }
+    
+    .server_status_success {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .server_status_unsuccessful {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: red;
+    }
+}
+
+@media (min-width: 1200px) {    
+    .uploadTimetable-container {
+        margin-top: 2%;
+        height: 400px;
+        border-style: solid;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 1% !important; 
+        font-size: 30px;
+        border-style: solid; 
+    }
+    
+    .server_status_success {
+        margin-top: 3% !important;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .server_status_unsuccessful {
+        margin-top: 3% !important;
+        font-size: 50px;
+        color: red;
+    }
+}
+
+@media (min-width: 1400px) { 
+    .uploadTimetable-container {
+        margin-top: 100px;
+        height: 500px;
+        border-style: solid;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 4% !important; 
+        font-size: 30px;
+        border-style: solid; 
+    }
+    
+    .server_status_success {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .server_status_unsuccessful {
+        margin-top: 2.3em;
+        font-size: 50px;
+        color: red;
+    }
 }

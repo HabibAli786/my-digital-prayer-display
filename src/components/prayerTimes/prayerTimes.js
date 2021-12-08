@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 import Notifications from '../Notifications/Notifications'
 import './PrayerTimes.css'
@@ -54,9 +54,6 @@ const nextDay = () => {
 const weekDay = () => {
     const date = new Date()
     const weekday = date.toLocaleString("default", { weekday: "long" })
-    // const dayOfMonth = date.getDate()
-    // const month = date.toLocaleString('default', { month: 'long' })
-    // return weekday + " " + dayOfMonth + " " + month
     return weekday
 }
 
@@ -91,10 +88,6 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
-
-//  0 1 2 3 4 5 6 7 8
-//  0 0 : 0 0 : 0 0
-
 function PrayerTimes() {
 
     // Global Variables
@@ -110,7 +103,8 @@ function PrayerTimes() {
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
-
+    
+    // Slides
     const [slides, setSlides] = useState([])
     const [numOfSlides, setNumOfSlides] = useState(null)
     const [slideshowCount, setSlideshowCount] = useState(0)
@@ -121,6 +115,10 @@ function PrayerTimes() {
         setInterval(() => {
             setClock(Clock())
         }, 900)
+
+        // return () => { 
+        //     setClock("00:00:00")
+        // }
     }, [clock])
 
     // Update day, month and Jummah if it is Friday
@@ -224,7 +222,13 @@ function PrayerTimes() {
     useEffect(() => {
         axios.get(`http://localhost:3001/media/slides`)
             .then((response) => {
-                setNumOfSlides(response.data.numOfFiles)
+                const data = response.data
+                setNumOfSlides(data.numOfFiles)
+                if(data.files.length >= 1) {
+                    setSlides(data.files)
+                } else {
+                    setSlides([])
+                }
             })
             .catch((error) => {
                 console.log(error)
@@ -233,25 +237,11 @@ function PrayerTimes() {
 
     // Slideshow Animation useEffect
     useEffect(() => {
-        axios({
-            method: 'GET',
-            withCredentials: true,
-            url: 'http://localhost:3001/media/slides'
-        }).then((res) => {
-            // console.log(res.data)
-            const data = res.data.files
-            console.log(data)
-            if(data.length >= 1) {
-                setSlides(data)
-            } else {
-                setSlides([])
-            }
-        })
-        // How long will the image take to come off the screen
+        // How long will the image take to come on the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
-            }, 90000)
+            }, 60000)
             // setAnimation(false)
         }
         // How long the image will be on the screen
@@ -259,14 +249,14 @@ function PrayerTimes() {
             setTimeout(() => {
                 // setSlideshowCount(slideshowCount + 1)
                 setDisplaySlideshow(false)
-                if(slideshowCount === numOfSlides) {
-                    setSlideshowCount(1)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
                 } else {
                     setSlideshowCount(slideshowCount + 1)
                 }
                 console.log("slideshowcount " + slideshowCount)
                 console.log("numofslideshowimages " + numOfSlides)
-            }, 10000)
+            }, 15000)
         }
     }, [displaySlideshow])
 
@@ -280,27 +270,31 @@ function PrayerTimes() {
         </Link>
         <h1 className="weekday">{date[0]}</h1>
         <h1 className="dayMonth">{date[1]}</h1>
-        <h1 className="clock">{clock}</h1>
+        <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
+        <h1 className="clock-colon-1">:</h1>
+        <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
+        <h1 className="clock-colon-2">:</h1>
+        <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
         <Container className="table-container">
-            <Row>
+            <Row className="row0">
                 <Col className="col-4"></Col>
                 <Col className="col-4"></Col>
                 <Col className="col-2 start-time">Start</Col>
                 <Col className="col-2 jamaat active-color">Jamaat</Col>
             </Row>
-            <Row className={prayerFinished[0] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
                 <Col className="col-4">فَجْر‎</Col>
                 <Col className="col-4">Fajr</Col>
                 <Col className="col-2">{times[0]}</Col>
                 <Col className="col-2 active-color">{times[1]}</Col>
             </Row>
-            <Row className={prayerFinished[1] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
                 <Col className="col-4">-- --</Col>
                 <Col className="col-4">Sunrise</Col>
                 <Col className="col-2">{times[2]}</Col>
                 <Col className="col-2 active-color">-- --</Col>
             </Row>
-            <Row className={prayerFinished[2] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
                 { isJummah ?
                     <>
                         <Col className="col-4">صلاة الجماعة</Col>
@@ -315,19 +309,19 @@ function PrayerTimes() {
                 <Col className="col-2">{times[3]}</Col>
                 <Col className="col-2 active-color">{times[4]}</Col>
             </Row>
-            <Row className={prayerFinished[3] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
                 <Col className="col-4">صَلَاةُ العَصْر</Col>
                 <Col className="col-4">Asr</Col>
                 <Col className="col-2">{times[5]}</Col>
                 <Col className="col-2 active-color">{times[6]}</Col>
             </Row>
-            <Row className={prayerFinished[4] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
                 <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
                 <Col className="col-4">Maghrib</Col>
                 <Col className="col-2">{times[7]}</Col>
                 <Col className="col-2 active-color">{times[8]}</Col>
             </Row>
-            <Row className={prayerFinished[5] === true ? "finshed" : "finished"}>
+            <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
                 <Col className="col-4">صَلَاةُ العِشَاء‎</Col>
                 <Col className="col-4">Isha</Col>
                 <Col className="col-2">{times[9]}</Col>

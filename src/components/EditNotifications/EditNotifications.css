@@ -1,35 +1,315 @@
-.edit-notifications-container {
-    margin-left: 1% !important;
-    margin-top: 2%;
-    font-size: 45px !important;
+@media (min-width: 576px) { 
+    .edit-notification-title {
+        margin-top: 15px;
+        font-size: 60px;
+    }
+
+    .edit-notifications-container {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        font-size: 45px !important;
+    }
+    
+    .notification-header-row {
+        width: 50%;
+        margin-left: 10px !important;
+    }
+
+    .edit-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+
+    .notification-container {
+        overflow-y: scroll;
+        overflow-x: hidden; 
+        height: 480px;
+    }
+    
+    .notification-row {
+        margin-top: 2% !important;
+        margin-left: 10px !important;
+    }
+    
+    .notifications {
+        text-align: left;
+        margin-top: 1%;
+    }
+    
+    .notification-button {
+        width: 100%;
+        font-size: 45px !important;
+    }
+    
+    .new-notification-header-row {
+        margin-top: 3% !important;
+        margin-left: 10px !important;
+    }
+
+    .new-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+    
+    .new-notification-row {
+        /* margin-top: 1% !important; */
+        margin-left: 10px !important;
+    }
+
+    .new-notification-input {
+        font-size: 45px !important;
+    }
 }
 
-.notification-header-row {
-    width: 50%;
-    margin-left: 10px !important;
+@media (min-width: 768px) { 
+    .edit-notification-title {
+        margin-top: 15px;
+        font-size: 60px;
+    }
+
+    .edit-notifications-container {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        font-size: 45px !important;
+    }
+    
+    .notification-header-row {
+        width: 50%;
+        margin-left: 10px !important;
+    }
+
+    .edit-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+
+    .notification-container {
+        overflow-y: scroll;
+        overflow-x: hidden; 
+        height: 480px;
+    }
+    
+    .notification-row {
+        margin-top: 2% !important;
+        margin-left: 10px !important;
+    }
+    
+    .notifications {
+        text-align: left;
+        margin-top: 1%;
+    }
+    
+    .notification-button {
+        width: 100%;
+        font-size: 45px !important;
+    }
+    
+    .new-notification-header-row {
+        margin-top: 3% !important;
+        margin-left: 10px !important;
+    }
+
+    .new-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+    
+    .new-notification-row {
+        /* margin-top: 1% !important; */
+        margin-left: 10px !important;
+    }
+
+    .new-notification-input {
+        font-size: 45px !important;
+    }
 }
 
-.notification-row {
-    margin-top: 2% !important;
-    margin-left: 10px !important;
+@media (min-width: 992px) {
+    .edit-notification-title {
+        margin-top: 15px;
+        font-size: 60px;
+    }
+
+    .edit-notifications-container {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        font-size: 45px !important;
+    }
+    
+    .notification-header-row {
+        width: 50%;
+        margin-left: 10px !important;
+    }
+
+    .edit-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+
+    .notification-container {
+        overflow-y: scroll;
+        overflow-x: hidden; 
+        height: 480px;
+    }
+    
+    .notification-row {
+        margin-top: 2% !important;
+        margin-left: 10px !important;
+    }
+    
+    .notifications {
+        text-align: left;
+        margin-top: 1%;
+    }
+    
+    .notification-button {
+        width: 100%;
+        font-size: 45px !important;
+    }
+    
+    .new-notification-header-row {
+        margin-top: 3% !important;
+        margin-left: 10px !important;
+    }
+
+    .new-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+    
+    .new-notification-row {
+        /* margin-top: 1% !important; */
+        margin-left: 10px !important;
+    }
+
+    .new-notification-input {
+        font-size: 45px !important;
+    }
 }
 
-.notifications {
-    text-align: left;
-    margin-top: 1%;
+@media (min-width: 1200px) {
+    .edit-notification-title {
+        margin-top: 15px;
+        font-size: 40px;
+    }
+
+    .edit-notifications-container {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        font-size: 30px !important;
+    }
+    
+    .notification-header-row {
+        width: 50%;
+        margin-left: 10px !important;
+    }
+
+    .edit-notification-header {
+        text-align: left; 
+        font-size: 35px;
+    }
+
+    .notification-container {
+        overflow-y: scroll;
+        overflow-x: hidden; 
+        height: 250px;
+    }
+    
+    .notification-row {
+        margin-top: 2% !important;
+        margin-left: 10px !important;
+    }
+    
+    .notifications {
+        text-align: left;
+        margin-top: 1%;
+    }
+    
+    .notification-button {
+        width: 100%;
+        font-size: 30px !important;
+    }
+    
+    .new-notification-header-row {
+        margin-top: 3% !important;
+        margin-left: 10px !important;
+    }
+
+    .new-notification-header {
+        text-align: left; 
+        font-size: 35px;
+    }
+    
+    .new-notification-row {
+        /* margin-top: 1% !important; */
+        margin-left: 10px !important;
+    }
+
+    .new-notification-input {
+        font-size: 30px !important;
+    }
 }
 
-.notification-button {
-    width: 100%;
-    font-size: 45px !important;
-}
 
-.new-notification-header-row {
-    margin-top: 3% !important;
-    margin-left: 10px !important;
-}
+@media (min-width: 1400px) {
+    .edit-notification-title {
+        margin-top: 15px;
+        font-size: 60px;
+    }
 
-.new-notification-row {
-    /* margin-top: 1% !important; */
-    margin-left: 10px !important;
+    .edit-notifications-container {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        font-size: 45px !important;
+    }
+    
+    .notification-header-row {
+        width: 50%;
+        margin-left: 10px !important;
+    }
+
+    .edit-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+
+    .notification-container {
+        overflow-y: scroll;
+        overflow-x: hidden; 
+        height: 480px;
+    }
+    
+    .notification-row {
+        margin-top: 2% !important;
+        margin-left: 10px !important;
+    }
+    
+    .notifications {
+        text-align: left;
+        margin-top: 1%;
+    }
+    
+    .notification-button {
+        width: 100%;
+        font-size: 45px !important;
+    }
+    
+    .new-notification-header-row {
+        margin-top: 3% !important;
+        margin-left: 10px !important;
+    }
+
+    .new-notification-header {
+        text-align: left; 
+        font-size: 45px;
+    }
+    
+    .new-notification-row {
+        /* margin-top: 1% !important; */
+        margin-left: 10px !important;
+    }
+
+    .new-notification-input {
+        font-size: 45px !important;
+    }
 }

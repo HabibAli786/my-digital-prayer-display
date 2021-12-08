@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect, useDispatch} from 'react-redux';
@@ -13,7 +13,7 @@ import './Admin.css'
 function Admin(props) {
 
     const dispatch = useDispatch()
-    const { auth, set_auth, username, set_username } = props
+    const { auth, set_auth } = props
     // const [userData, setuserData] = useState(false)
 
     const login = (username, password) => {
@@ -61,7 +61,7 @@ function Admin(props) {
     return (
         <>
         <Header />
-        <Container className="image-container mt-5">
+        <Container className="image-container">
             <Row>
                 <Col>
                     <img className="admin-icon" src="images/admin-icon.png" alt="admin icon" />

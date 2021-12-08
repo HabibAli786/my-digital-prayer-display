@@ -41,7 +41,7 @@ function UploadTimetable(props) {
     useEffect(() => {
         console.log("UploadTimetable useEffect running")
         dispatch(authenticate())
-    }, [file, serverStatus])
+    }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )
@@ -60,7 +60,7 @@ function UploadTimetable(props) {
                     <Col>
                         <Form onSubmit={uploadFile}>
                             <input 
-                                style={{ marginTop : "100px", fontSize: "30px", borderStyle: "solid" }} 
+                                className="uploadTimetable-fileInput"
                                 name="prayertimes"
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />

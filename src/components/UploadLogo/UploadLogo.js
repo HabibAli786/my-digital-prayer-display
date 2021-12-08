@@ -61,7 +61,7 @@ function UploadLogo(props) {
                     <Col>
                         <Form onSubmit={uploadFile}>
                             <input 
-                                style={{ marginTop : "100px", fontSize: "30px", borderStyle: "solid" }} 
+                                className="uploadLogo-inputImage" 
                                 name="logo"
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />

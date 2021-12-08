@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
@@ -17,6 +17,7 @@ function EditSlides(props) {
 
     const [slides, setSlides] = useState([])
     const [slideToUpload, setSlideToUpload] = useState(null)
+    const [error, setError] = useState(null)
 
     const getSlides = () => {
         console.log("getSlides is running")
@@ -61,8 +62,11 @@ function EditSlides(props) {
         if(slideToUpload) {
             axios.post('http://localhost:3001/media/slides/admin/add', data, {
                 'content-type': 'multipart/form-data'
-            }).then(res => { // then print response status
+            }).then(res => {
                 console.log(res);
+                if(res.data !== "File has been uploaded successfully") {
+                    setError(res.data)
+                }
                 getSlides()
                 // setServerStatus(res.data)
             })
@@ -86,17 +90,17 @@ function EditSlides(props) {
         return (
             <>
             <Header />
-            <h1 style={{marginTop : "15px", fontSize: "60px"}}>Edit Slides</h1>
+            <h1 className="edit-slides-title">Edit Slides</h1>
             <Container className="edit-slides-container">
-                <Row className="slides-header-row">
-                        <h1 style={{textAlign: "left", fontSize: "45px"}}>List of Slides</h1>
+                <Row className="edit-slides-header-row">
+                        <h1 className="edit-slides-header">List of Slides</h1>
                 </Row>
-                <div style={{overflowY: "scroll", overflowX: "hidden", height: "500px"}}>
+                <div className="slides-container">
                     {slides.length > 0 && slides.map(
                         slide => 
                         <Row key={uuidv4()} className="slides-row">
                             <Col lg={2}>
-                                <img style={{width : "100%", height: "100%"}} src={`http://localhost:3001/media/slides/${slide}`} alt="Slide"/>
+                                <img className="slides-image" src={`http://localhost:3001/media/slides/${slide}`} alt="Slide"/>
                             </Col>
                             <Col className="slides" lg={7}>
                                 <Card body>{slide}</Card>
@@ -117,7 +121,7 @@ function EditSlides(props) {
                 </div>
                 
                 <Row className="new-slides-header-row">
-                    <h1 style={{textAlign: "left", fontSize: "45px"}}>New Slides</h1>
+                    <h1 className="new-slides-header">New Slides</h1>
                 </Row>
                 <Row className="slides-row">
                     <Col className="slides" lg={12}>
@@ -125,7 +129,7 @@ function EditSlides(props) {
                         <Form.Group className="mb-3">
                             <input 
                                 name="slide" 
-                                style={{fontSize: "45px"}} 
+                                className="new-slides-input" 
                                 type="file" 
                                 onChange={(e) => setSlideToUpload(e.target.files[0]) } />
                             <Button type="submit" variant="primary" className="slides-submit-button">Upload</Button>
@@ -133,6 +137,11 @@ function EditSlides(props) {
                     </Form>
                     </Col>
                 </Row>
+                {error &&
+                    <Row className="slides-error-row">
+                        <h1 className="slides-error">{error}</h1>
+                    </Row>
+                }
             </Container>
             </>
         )

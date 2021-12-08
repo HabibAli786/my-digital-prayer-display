@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import axios from 'axios';
 import './Notifications.css'
 
@@ -24,6 +24,7 @@ function Notifications() {
             })
         return () => { 
             source.cancel("Cancelling in cleanup");
+            setNotifications("No Notifications")
         }
     }, [animation])
 
@@ -35,7 +36,7 @@ function Notifications() {
                 setAnimation(true)
             }, 10000)
         }
-        // How long NEXT text will appear
+        // How long till NEXT text will appear
         if(animation === true){
             setTimeout(() => {
                 setCount(count + 1)
@@ -45,6 +46,8 @@ function Notifications() {
                 }
             }, 3000)
         }
+
+       
     }, [animation])
 
 
