@@ -236,99 +236,99 @@ function PrayerTimes() {
     }, [clock])
 
     // Slideshow Animation useEffect
-    useEffect(() => {
-        // How long will the image take to come on the screen
-        if(displaySlideshow === false) {
-            setTimeout(() => {
-                setDisplaySlideshow(true)
-            }, 60000)
-            // setAnimation(false)
-        }
-        // How long the image will be on the screen
-        if(displaySlideshow === true){
-            setTimeout(() => {
-                // setSlideshowCount(slideshowCount + 1)
-                setDisplaySlideshow(false)
-                if(slideshowCount === numOfSlides-1) {
-                    setSlideshowCount(0)
-                } else {
-                    setSlideshowCount(slideshowCount + 1)
-                }
-                console.log("slideshowcount " + slideshowCount)
-                console.log("numofslideshowimages " + numOfSlides)
-            }, 15000)
-        }
-    }, [displaySlideshow])
+    // useEffect(() => {
+    //     // How long will the image take to come on the screen
+    //     if(displaySlideshow === false) {
+    //         setTimeout(() => {
+    //             setDisplaySlideshow(true)
+    //         }, 60000)
+    //         // setAnimation(false)
+    //     }
+    //     // How long the image will be on the screen
+    //     if(displaySlideshow === true){
+    //         setTimeout(() => {
+    //             // setSlideshowCount(slideshowCount + 1)
+    //             setDisplaySlideshow(false)
+    //             if(slideshowCount === numOfSlides-1) {
+    //                 setSlideshowCount(0)
+    //             } else {
+    //                 setSlideshowCount(slideshowCount + 1)
+    //             }
+    //             console.log("slideshowcount " + slideshowCount)
+    //             console.log("numofslideshowimages " + numOfSlides)
+    //         }, 15000)
+    //     }
+    // }, [displaySlideshow])
 
     return(
         <>
         {
             !displaySlideshow ?
-        <div>
-        <Link to="/">
-            <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
-        </Link>
-        <h1 className="weekday">{date[0]}</h1>
-        <h1 className="dayMonth">{date[1]}</h1>
-        <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
-        <h1 className="clock-colon-1">:</h1>
-        <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
-        <h1 className="clock-colon-2">:</h1>
-        <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
-        <Container className="table-container">
-            <Row className="row0">
-                <Col className="col-4"></Col>
-                <Col className="col-4"></Col>
-                <Col className="col-2 start-time">Start</Col>
-                <Col className="col-2 jamaat active-color">Jamaat</Col>
-            </Row>
-            <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
-                <Col className="col-4">فَجْر‎</Col>
-                <Col className="col-4">Fajr</Col>
-                <Col className="col-2">{times[0]}</Col>
-                <Col className="col-2 active-color">{times[1]}</Col>
-            </Row>
-            <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
-                <Col className="col-4">-- --</Col>
-                <Col className="col-4">Sunrise</Col>
-                <Col className="col-2">{times[2]}</Col>
-                <Col className="col-2 active-color">-- --</Col>
-            </Row>
-            <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
-                { isJummah ?
-                    <>
-                        <Col className="col-4">صلاة الجماعة</Col>
-                        <Col className="col-4">Jumu'ah</Col>
-                    </>
-                    :
-                    <>
-                        <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
-                        <Col className="col-4">Dhuhr</Col>
-                    </>
-                }
-                <Col className="col-2">{times[3]}</Col>
-                <Col className="col-2 active-color">{times[4]}</Col>
-            </Row>
-            <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
-                <Col className="col-4">صَلَاةُ العَصْر</Col>
-                <Col className="col-4">Asr</Col>
-                <Col className="col-2">{times[5]}</Col>
-                <Col className="col-2 active-color">{times[6]}</Col>
-            </Row>
-            <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
-                <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
-                <Col className="col-4">Maghrib</Col>
-                <Col className="col-2">{times[7]}</Col>
-                <Col className="col-2 active-color">{times[8]}</Col>
-            </Row>
-            <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
-                <Col className="col-4">صَلَاةُ العِشَاء‎</Col>
-                <Col className="col-4">Isha</Col>
-                <Col className="col-2">{times[9]}</Col>
-                <Col className="col-2 active-color">{times[10]}</Col>
-            </Row>
-        </Container>
-        <Notifications />
+        <div className="prayertimes-background">
+            {/* <Link to="/">
+                <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
+            </Link>
+            <h1 className="weekday">{date[0]}</h1>
+            <h1 className="dayMonth">{date[1]}</h1>
+            <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
+            <h1 className="clock-colon-1">:</h1>
+            <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
+            <h1 className="clock-colon-2">:</h1>
+            <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
+            <Container className="table-container">
+                <Row className="row0">
+                    <Col className="col-4"></Col>
+                    <Col className="col-4"></Col>
+                    <Col className="col-2 start-time">Start</Col>
+                    <Col className="col-2 jamaat active-color">Jamaat</Col>
+                </Row>
+                <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
+                    <Col className="col-4">فَجْر‎</Col>
+                    <Col className="col-4">Fajr</Col>
+                    <Col className="col-2">{times[0]}</Col>
+                    <Col className="col-2 active-color">{times[1]}</Col>
+                </Row>
+                <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
+                    <Col className="col-4">-- --</Col>
+                    <Col className="col-4">Sunrise</Col>
+                    <Col className="col-2">{times[2]}</Col>
+                    <Col className="col-2 active-color">-- --</Col>
+                </Row>
+                <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
+                    { isJummah ?
+                        <>
+                            <Col className="col-4">صلاة الجماعة</Col>
+                            <Col className="col-4">Jumu'ah</Col>
+                        </>
+                        :
+                        <>
+                            <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
+                            <Col className="col-4">Dhuhr</Col>
+                        </>
+                    }
+                    <Col className="col-2">{times[3]}</Col>
+                    <Col className="col-2 active-color">{times[4]}</Col>
+                </Row>
+                <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
+                    <Col className="col-4">صَلَاةُ العَصْر</Col>
+                    <Col className="col-4">Asr</Col>
+                    <Col className="col-2">{times[5]}</Col>
+                    <Col className="col-2 active-color">{times[6]}</Col>
+                </Row>
+                <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
+                    <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
+                    <Col className="col-4">Maghrib</Col>
+                    <Col className="col-2">{times[7]}</Col>
+                    <Col className="col-2 active-color">{times[8]}</Col>
+                </Row>
+                <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
+                    <Col className="col-4">صَلَاةُ العِشَاء‎</Col>
+                    <Col className="col-4">Isha</Col>
+                    <Col className="col-2">{times[9]}</Col>
+                    <Col className="col-2 active-color">{times[10]}</Col>
+                </Row>
+            </Container>
+            <Notifications /> */}
         </div>
         :
             <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 

@@ -1,4 +1,9 @@
 @media (min-width: 576px) {
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+
     .container {
         /* margin: 20px 0px 0px 5px !important; */
         /* margin-left: 5px !important; */
@@ -153,6 +158,11 @@
 }
 
 @media (min-width: 768px) {
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+
     .container {
         /* margin: 20px 0px 0px 5px !important; */
         /* margin-left: 5px !important; */
@@ -307,6 +317,11 @@
 }
 
 @media (min-width: 992px) {
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+
     .container {
         /* margin: 20px 0px 0px 5px !important; */
         /* margin-left: 5px !important; */
@@ -461,6 +476,11 @@
 }
 
 @media (min-width: 1200px) {
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+
     .row0 {
         width: 85%;
     }
@@ -645,6 +665,11 @@
 }
 
 @media (min-width: 1400px) {
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+    
     .row0 {
         width: 100%;
     }
