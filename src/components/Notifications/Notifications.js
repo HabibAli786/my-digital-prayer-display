@@ -47,9 +47,7 @@ function Notifications() {
             }, 3000)
         }
 
-        return () => { 
-            setNotifications(false)
-        }
+       
     }, [animation])
 
 
