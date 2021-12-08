@@ -115,6 +115,10 @@ function PrayerTimes() {
         setInterval(() => {
             setClock(Clock())
         }, 900)
+
+        // return () => { 
+        //     setClock("00:00:00")
+        // }
     }, [clock])
 
     // Update day, month and Jummah if it is Friday

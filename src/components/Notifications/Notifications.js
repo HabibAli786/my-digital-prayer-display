@@ -24,6 +24,7 @@ function Notifications() {
             })
         return () => { 
             source.cancel("Cancelling in cleanup");
+            setNotifications("No Notifications")
         }
     }, [animation])
 
@@ -44,6 +45,10 @@ function Notifications() {
                     setCount(0)
                 }
             }, 3000)
+        }
+
+        return () => { 
+            setNotifications(false)
         }
     }, [animation])
 
