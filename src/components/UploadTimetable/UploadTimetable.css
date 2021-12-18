@@ -88,6 +88,11 @@
         font-size: 30px;
         border-style: solid; 
     }
+
+    .uploadTimetable-hint-button {
+        margin-top: 20px;
+        width: 5%;
+    }
     
     .server_status_success {
         margin-top: 3% !important;
@@ -113,6 +118,11 @@
         margin-top : 4% !important; 
         font-size: 30px;
         border-style: solid; 
+    }
+
+    .uploadTimetable-hint-button {
+        margin-top: 20px;
+        width: 5%;
     }
     
     .server_status_success {
