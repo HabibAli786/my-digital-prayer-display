@@ -109,7 +109,6 @@
         width: 1280px;
         border-style: solid;
         font-size: 40px;
-        color: red;
     }
 }
 
@@ -132,14 +131,19 @@
     }
     
     .uploadTimetable_server_status_success {
-        margin-top: 2.3em;
-        font-size: 50px;
+        margin-top: 0.8em;
+        font-size: 70px;
         color: green;
     }
     
     .uploadTimetbale_server_status_unsuccessful {
         margin-top: 2.3em;
-        font-size: 50px;
-        color: red;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        height: 160px;
+        width: 1920px;
+        border-style: solid;
+        font-size: 40px;
     }
 }
