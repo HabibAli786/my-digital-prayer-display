@@ -476,10 +476,84 @@
 }
 
 @media (min-width: 1200px) {
-    .prayertimes-background {
-        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
-        width: 100%;
+    .prayertimes-div {
+        background-image: url('http://localhost:3000/PrayerTimes-Background.jpg');
+        /* background-repeat: no-repeat; */
+        /* background-size: cover; */
+        /* background-position: center center; */
+        width: 1280px;
+        height: 720px;
     }
+
+    .prayer-circle-row-one-container {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 50% 50%;	
+        /* gap: 20%; */
+        left: 1%;
+        top: 3%;
+        font-size: 7em;
+        border-style: solid;
+        /* background: white; */
+        width: 98%;
+        height: 35%;
+    }
+
+    .prayer-circle-row-one-section {
+        /* overflow: hidden; */
+    }
+
+    .fajr-header {
+        text-align: center;
+        margin : 0; 
+        font-size : 40px; 
+        width : 40%;
+        height: 5px;
+    }
+
+    .isha-header {
+        text-align: center;
+        margin : 0; 
+        font-size : 40px; 
+        width : 40%;
+    }
+
+    .fajr-circle {
+        width: 40%;
+        height: 100%;
+        border-radius: 50%;
+        border-style: solid;
+        background-color: white;
+        float: left;
+        margin-bottom: 0;
+    }
+
+    .isha-circle {
+        width: 40%;
+        height: 100%;
+        border-radius: 50%;
+        border-style: solid;
+        background-color: white;
+        float: right;
+    }
+
+    .start-time-header {
+        font-size: 25px !important;
+        height: 10%;
+        margin: 0;
+    }
+
+    .start-time {
+        margin: 0;
+    }
+
+    /* .prayertimes-background {
+        position: absolute;
+        background-image: url(http://localhost:3000/PrayerTimes-Background.jpg);
+        bottom: 2rem;
+        width: 100%;
+        height: 100%;
+    } */
 
     .row0 {
         width: 85%;
@@ -536,7 +610,7 @@
     .logo {
         position: absolute;
         left: 72%;
-        top: 40px;
+        top: 25px;
         height: 24%;
         width: 30%;    
         max-width: 30%;
@@ -546,7 +620,7 @@
     .weekday {
         position: absolute;
         left: 72%;
-        top: 32%;
+        top: 28%;
         width: 30%;
         font-size: 3em;
     }
@@ -554,11 +628,18 @@
     .dayMonth {
         position: absolute;
         left: 72%;
-        top: 42%;
+        top: 36%;
         width: 30%;
         font-size: 3em;
     }
     
+    .hijri {
+        position: absolute;
+        left: 72%;
+        top: 46%;
+        width: 30%;
+        font-size: 2em;
+    }
     
     .finshed {
         color: grey;
@@ -569,11 +650,12 @@
     }
     
     .clock {
+        font-family: sans-serif;
         position: absolute;
-        left: 72%;
-        top: 54%;
+        left: 25%;
+        top: 5%;
         font-size: 4em;
-        width: 30%;
+        width: 50%;
     }
 
     .clock-hours {
@@ -725,7 +807,7 @@
     .logo {
         position: absolute;
         left: 70%;
-        top: 60px;
+        top: 50px;
         height: 24%;
         width: 30%;    
         max-width: 30%;
@@ -735,7 +817,7 @@
     .weekday {
         position: absolute;
         left: 70%;
-        top: 33.5%;
+        top: 29%;
         width: 30%;
         font-size: 4em;
     }
@@ -743,11 +825,18 @@
     .dayMonth {
         position: absolute;
         left: 70%;
-        top: 41%;
+        top: 36%;
         width: 30%;
         font-size: 4em;
     }
-    
+
+    .hijri {
+        position: absolute;
+        left: 70%;
+        top: 44%;
+        width: 30%;
+        font-size: 3em;
+    }    
     
     .finshed {
         color: grey;

@@ -96,6 +96,7 @@ function PrayerTimes() {
     const [clock, setClock] = useState("00:00:00")
     // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
+    const [hijri, setHijri] = useState(null)
 
     // Prayertimes
     const [times, setTimes] = useState([
@@ -182,8 +183,11 @@ function PrayerTimes() {
             const prayertimes = response.data.slice(1)
             const arr = []
             for(let i=0; i < prayertimes.length; i++) {
-                arr.push(prayertimes[i].startTime)
-                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+                if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
+                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
+                if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth) { 
+                    setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth])
+                }          
             }
             setTimes(arr)
         })
@@ -264,12 +268,13 @@ function PrayerTimes() {
         <>
         {
             !displaySlideshow ?
-        <div className="prayertimes-background">
-            {/* <Link to="/">
+        <div>
+            <Link to="/">
                 <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
             </Link>
             <h1 className="weekday">{date[0]}</h1>
             <h1 className="dayMonth">{date[1]}</h1>
+            <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]}` : ""}</h1>
             <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
             <h1 className="clock-colon-1">:</h1>
             <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
@@ -328,7 +333,7 @@ function PrayerTimes() {
                     <Col className="col-2 active-color">{times[10]}</Col>
                 </Row>
             </Container>
-            <Notifications /> */}
+            <Notifications />
         </div>
         :
             <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
