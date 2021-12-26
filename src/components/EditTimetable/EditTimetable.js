@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react"
-import { Button, Container, Row, Table } from "react-bootstrap";
+import { Button, Container, Row, Table, Col } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";
@@ -71,6 +71,14 @@ function EditTimetable(props) {
                         Header: 'Isha Jamaat',
                         accessor: 'isha_jamaat',
                       },
+                      {
+                        Header: 'Hijri Date',
+                        accessor: 'hijri_date',
+                      },
+                      {
+                        Header: 'Hijri Month',
+                        accessor: 'hijri_month',
+                      },
         ],
         []
     )
@@ -88,9 +96,12 @@ function EditTimetable(props) {
       maghrib_begins: "00:00",
       maghrib_jamaat: "00:00",
       isha_begins: "00:00",
-      isha_jamaat: "00:00"
+      isha_jamaat: "00:00",
+      hijri_date: "00",
+      hijri_month: ""
     }])
     const [loading, setLoading] = useState(true)
+    const [success, setSuccess] = useState(null)
     const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
 
@@ -137,7 +148,13 @@ function EditTimetable(props) {
             url: 'http://localhost:3001/prayertimes'
         })
         .then((res) => {
-            console.log(res.data)
+          const message = res.data
+          if(message === "Success") {
+            setSuccess(true)
+          } else {
+            setSuccess(false)
+          }
+          console.log(res.data)
         })
     }
 
@@ -213,7 +230,10 @@ function EditTimetable(props) {
             <h1 style={{marginTop : "15px", fontSize: "50px"}}>Edit Timetable</h1>
             <Container className="editTimetable_container">
                 <Row>
-                    <Button className="editTimetable_submitbtn" onClick={submitData}>Submit</Button>
+                  <Button className="editTimetable_submitbtn" onClick={submitData}>Submit</Button>
+                  {success &&
+                    <h1 className="editTimetable_success">Succesfully Updated Timetable</h1>
+                  }
                 </Row>
                 <Row>
                 <Table className="edit_table" {...getTableProps()}>
