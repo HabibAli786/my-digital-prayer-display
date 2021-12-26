@@ -11,13 +11,13 @@
         border-style: solid; 
     }
     
-    .server_status_success {
+    .uploadTimetable_server_status_success {
         margin-top: 2.3em;
         font-size: 50px;
         color: green;
     }
     
-    .server_status_unsuccessful {
+    .uploadTimetbale_server_status_unsuccessful {
         margin-top: 2.3em;
         font-size: 50px;
         color: red;
@@ -37,13 +37,13 @@
         border-style: solid; 
     }
     
-    .server_status_success {
+    .uploadTimetable_server_status_success {
         margin-top: 2.3em;
         font-size: 50px;
         color: green;
     }
     
-    .server_status_unsuccessful {
+    .uploadTimetbale_server_status_unsuccessful {
         margin-top: 2.3em;
         font-size: 50px;
         color: red;
@@ -63,13 +63,13 @@
         border-style: solid; 
     }
     
-    .server_status_success {
+    .uploadTimetable_server_status_success {
         margin-top: 2.3em;
         font-size: 50px;
         color: green;
     }
     
-    .server_status_unsuccessful {
+    .uploadTimetbale_server_status_unsuccessful {
         margin-top: 2.3em;
         font-size: 50px;
         color: red;
@@ -94,15 +94,21 @@
         width: 5%;
     }
     
-    .server_status_success {
-        margin-top: 3% !important;
+    .uploadTimetable_server_status_success {
+        margin-top: 2.3em;
         font-size: 50px;
         color: green;
     }
     
-    .server_status_unsuccessful {
-        margin-top: 3% !important;
-        font-size: 50px;
+    .uploadTimetbale_server_status_unsuccessful {
+        margin-top: 5px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        height: 70px;
+        width: 1280px;
+        border-style: solid;
+        font-size: 40px;
         color: red;
     }
 }
@@ -125,13 +131,13 @@
         width: 5%;
     }
     
-    .server_status_success {
+    .uploadTimetable_server_status_success {
         margin-top: 2.3em;
         font-size: 50px;
         color: green;
     }
     
-    .server_status_unsuccessful {
+    .uploadTimetbale_server_status_unsuccessful {
         margin-top: 2.3em;
         font-size: 50px;
         color: red;

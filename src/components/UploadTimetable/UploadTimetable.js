@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row, Modal } from "react-bootstrap";
+import ModalDialog from 'react-bootstrap/ModalDialog'
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -98,10 +99,10 @@ function UploadTimetable(props) {
             </Modal>
 
             { serverStatus === "File has been uploaded successfully" &&
-                <p className="server_status_success">Server Status: {serverStatus}</p>
+                <p className="uploadTimetable_server_status_success">Server Status: {serverStatus}</p>
             }
             { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
-                <p className="server_status_unsuccessful">Server Status: {serverStatus}</p>
+                <p className="uploadTimetbale_server_status_unsuccessful">Server Status: {serverStatus}</p>
             }
             </>
         )
