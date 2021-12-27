@@ -100,6 +100,7 @@ function EditTimetable(props) {
       hijri_date: "00",
       hijri_month: ""
     }])
+    
     const [loading, setLoading] = useState(true)
     const [success, setSuccess] = useState(null)
     const [originalData] = useState(data)
