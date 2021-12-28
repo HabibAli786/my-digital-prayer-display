@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Modal } from "react-bootstrap";
+import ModalDialog from 'react-bootstrap/ModalDialog'
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -17,6 +18,11 @@ function UploadTimetable(props) {
 
     const [file, setFile] = useState(null)
     const [serverStatus, setServerStatus] = useState(null)
+
+    // Modal
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
 
     const uploadFile = (e) => {
@@ -70,11 +76,35 @@ function UploadTimetable(props) {
                     </Col>
                 </Row>
             </Container>
+
+            <Button className="uploadTimetable-hint-button" variant="primary" onClick={handleShow}>
+                Hint
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                    <Modal.Title>Timetable Upload Guide (CSV File)</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>For the timetable to be succesfully uploaded, the rules below must be followed</Modal.Body>
+                <Modal.Body>IMPORTANT: file was be saved with the name prayertimes-2021.csv</Modal.Body>
+                <Modal.Body>Headers should be - d_date, fajr_begins, fajr_jamaat, sunrise, zuhr_begins, 
+                            zuhr_jamaat, asr_begins, asr_jamaat, maghrib_begins, maghrib_jamaat, isha_begins, 
+                            isha_jamaat, hijri_date, hijri_month, hijri_year
+                </Modal.Body>
+                <Modal.Body>d_date should be in DD/MM/YYYY format</Modal.Body>
+                <Modal.Body>Timings for each jamaat should be in 24-hour format</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
             { serverStatus === "File has been uploaded successfully" &&
-                <p className="server_status_success">Server Status: {serverStatus}</p>
+                <p className="uploadTimetable_server_status_success">Server Status: {serverStatus}</p>
             }
             { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
-                <p className="server_status_unsuccessful">Server Status: {serverStatus}</p>
+                <p className="uploadTimetbale_server_status_unsuccessful">Server Status: {serverStatus}</p>
             }
             </>
         )

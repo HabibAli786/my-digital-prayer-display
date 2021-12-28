@@ -72,6 +72,13 @@
         width: 20% !important;
         font-size: 30px !important;
     }
+
+    .editTimetable_success {
+        position: absolute;
+        left: 31%;
+        font-size: 2em;
+        color: green;
+    }
     
     .edit_table {
         font-size: 12px;
