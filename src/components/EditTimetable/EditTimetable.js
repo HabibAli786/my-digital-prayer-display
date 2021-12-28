@@ -79,6 +79,10 @@ function EditTimetable(props) {
                         Header: 'Hijri Month',
                         accessor: 'hijri_month',
                       },
+                      {
+                        Header: 'Hijri Year',
+                        accessor: 'hijri_year',
+                      },
         ],
         []
     )
@@ -98,7 +102,8 @@ function EditTimetable(props) {
       isha_begins: "00:00",
       isha_jamaat: "00:00",
       hijri_date: "00",
-      hijri_month: ""
+      hijri_month: "",
+      hijri_year: "0000"
     }])
     
     const [loading, setLoading] = useState(true)

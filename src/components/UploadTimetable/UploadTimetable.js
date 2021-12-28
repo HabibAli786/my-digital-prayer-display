@@ -86,8 +86,10 @@ function UploadTimetable(props) {
                     <Modal.Title>Timetable Upload Guide (CSV File)</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>For the timetable to be succesfully uploaded, the rules below must be followed</Modal.Body>
+                <Modal.Body>IMPORTANT: file was be saved with the name prayertimes-2021.csv</Modal.Body>
                 <Modal.Body>Headers should be - d_date, fajr_begins, fajr_jamaat, sunrise, zuhr_begins, 
-                            zuhr_jamaat, asr_begins, asr_jamaat, maghrib_begins, maghrib_jamaat, isha_begins, isha_jamaat
+                            zuhr_jamaat, asr_begins, asr_jamaat, maghrib_begins, maghrib_jamaat, isha_begins, 
+                            isha_jamaat, hijri_date, hijri_month, hijri_year
                 </Modal.Body>
                 <Modal.Body>d_date should be in DD/MM/YYYY format</Modal.Body>
                 <Modal.Body>Timings for each jamaat should be in 24-hour format</Modal.Body>
