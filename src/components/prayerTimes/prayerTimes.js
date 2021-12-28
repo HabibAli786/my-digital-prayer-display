@@ -240,29 +240,29 @@ function PrayerTimes() {
     }, [clock])
 
     // Slideshow Animation useEffect
-    // useEffect(() => {
-    //     // How long will the image take to come on the screen
-    //     if(displaySlideshow === false) {
-    //         setTimeout(() => {
-    //             setDisplaySlideshow(true)
-    //         }, 60000)
-    //         // setAnimation(false)
-    //     }
-    //     // How long the image will be on the screen
-    //     if(displaySlideshow === true){
-    //         setTimeout(() => {
-    //             // setSlideshowCount(slideshowCount + 1)
-    //             setDisplaySlideshow(false)
-    //             if(slideshowCount === numOfSlides-1) {
-    //                 setSlideshowCount(0)
-    //             } else {
-    //                 setSlideshowCount(slideshowCount + 1)
-    //             }
-    //             console.log("slideshowcount " + slideshowCount)
-    //             console.log("numofslideshowimages " + numOfSlides)
-    //         }, 15000)
-    //     }
-    // }, [displaySlideshow])
+    useEffect(() => {
+        // How long will the image take to come on the screen
+        if(displaySlideshow === false) {
+            setTimeout(() => {
+                setDisplaySlideshow(true)
+            }, 60000)
+            // setAnimation(false)
+        }
+        // How long the image will be on the screen
+        if(displaySlideshow === true){
+            setTimeout(() => {
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
+                } else {
+                    setSlideshowCount(slideshowCount + 1)
+                }
+                console.log("slideshowcount " + slideshowCount)
+                console.log("numofslideshowimages " + numOfSlides)
+            }, 15000)
+        }
+    }, [displaySlideshow])
 
     return(
         <>
