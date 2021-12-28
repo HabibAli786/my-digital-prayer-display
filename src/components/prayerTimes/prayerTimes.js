@@ -185,8 +185,8 @@ function PrayerTimes() {
             for(let i=0; i < prayertimes.length; i++) {
                 if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
                 if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
-                if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth) { 
-                    setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth])
+                if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
+                    setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
                 }          
             }
             setTimes(arr)
@@ -273,8 +273,8 @@ function PrayerTimes() {
                 <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
             </Link>
             <h1 className="weekday">{date[0]}</h1>
-            <h1 className="dayMonth">{date[1]}</h1>
-            <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]}` : ""}</h1>
+            <h1 className="dayMonth">{`${date[1]} ${new Date().getFullYear()}`}</h1>
+            <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
             <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
             <h1 className="clock-colon-1">:</h1>
             <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
