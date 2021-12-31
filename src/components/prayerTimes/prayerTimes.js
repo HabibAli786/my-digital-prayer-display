@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
+
 import Notifications from '../Notifications/Notifications'
+import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
@@ -266,6 +268,7 @@ function PrayerTimes() {
 
     return(
         <>
+        {/* <JamaatPrayer /> */}
         {
             !displaySlideshow ?
         <div>
