@@ -202,28 +202,28 @@ function PrayerTimes() {
             jamaatEnd.setHours(timesHours, timesMinutes + 5, timesSeconds)
             
 
-            console.log(jamaatStart)
-            console.log(jamaatEnd)
+            // console.log(jamaatStart)
+            // console.log(jamaatEnd)
         }
 
     }, [clock])
 
     // set intial prayertimes
     useEffect(() => {
-        // const nextDate = nextDay()
-        // console.log(nextDate)
         axios.get(`http://localhost:3001/prayertimes/`)
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
-            for(let i=0; i < prayertimes.length; i++) {
-                if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
-                if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
-                if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
-                    setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
-                }          
+            if(prayertimes.length > 1) {
+                for(let i=0; i < prayertimes.length; i++) {
+                    if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
+                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
+                    if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
+                        setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
+                    }          
+                }
+                setTimes(arr)
             }
-            setTimes(arr)
         })
         .catch((error) => {
             console.log(error)
@@ -242,11 +242,13 @@ function PrayerTimes() {
             .then((response) => {
                 const prayertimes = response.data.slice(1)
                 const arr = []
-                for(let i=0; i < prayertimes.length; i++) {
-                    arr.push(prayertimes[i].startTime)
-                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+                if(prayertimes.length > 1) {
+                    for(let i=0; i < prayertimes.length; i++) {
+                        arr.push(prayertimes[i].startTime)
+                        if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+                    }
+                    setTimes(arr)
                 }
-                setTimes(arr)
             })
             .catch((error) => {
                 console.log(error)
