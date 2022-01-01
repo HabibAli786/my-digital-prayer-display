@@ -176,6 +176,38 @@ function PrayerTimes() {
         }                        
     }, [clock])
 
+    useEffect(() => {
+        let clockDate = new Date()
+        let jamaatStart = new Date()
+        let jamaatEnd = new Date()
+
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
+        
+        clockDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+        let j = 0
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 2 || i === 3 || i === 5 || i === 7 || i === 9) {
+                continue
+            }
+
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
+            console.log(parseInt(timesMinutes) + 5)
+            jamaatEnd.setHours(timesHours, timesMinutes + 5, timesSeconds)
+            
+
+            console.log(jamaatStart)
+            console.log(jamaatEnd)
+        }
+
+    }, [clock])
+
     // set intial prayertimes
     useEffect(() => {
         // const nextDate = nextDay()
@@ -268,7 +300,7 @@ function PrayerTimes() {
 
     return(
         <>
-        {/* <JamaatPrayer /> */}
+        {/* <JamaatPrayer prayer={} time={} /> */}
         {
             !displaySlideshow ?
         <div>
