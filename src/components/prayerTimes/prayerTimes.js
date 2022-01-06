@@ -106,6 +106,7 @@ function PrayerTimes() {
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
+    const [jamaatStarted, setJamaatStarted] = useState()
     
     // Slides
     const [slides, setSlides] = useState([])
@@ -187,7 +188,8 @@ function PrayerTimes() {
         
         clockDate.setHours(clockHours, clockMinutes, clockSeconds)
 
-        let j = 0
+        let result = false
+
         for(let i=0; i < 11; i += 1) {
             if(i === 0 || i === 2 || i === 3 || i === 5 || i === 7 || i === 9) {
                 continue
@@ -197,14 +199,25 @@ function PrayerTimes() {
             const timesMinutes = times[i].slice(3, 5)
             const timesSeconds = times[i].slice(6, 8)
 
-            jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
-            console.log(parseInt(timesMinutes) + 5)
-            jamaatEnd.setHours(timesHours, timesMinutes + 5, timesSeconds)
-            
+            const jamaatEndMinutes = parseInt(timesMinutes) + 5
 
+            jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
+            jamaatEnd.setHours(timesHours, jamaatEndMinutes.toString(), timesSeconds)
+            
+            if(clockDate > jamaatStart && clockDate < jamaatEnd) {
+                result = true
+                break
+            } else {
+                result = false
+            }
+            // console.log(clockDate)
+            // console.log(jamaatStart)
+            // console.log(jamaatEnd)
             // console.log(jamaatStart)
             // console.log(jamaatEnd)
         }
+
+        console.log(result)
 
     }, [clock])
 
