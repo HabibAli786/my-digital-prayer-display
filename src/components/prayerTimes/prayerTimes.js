@@ -211,7 +211,6 @@ function PrayerTimes() {
                 result = false
             }
         }
-        console.log(result)
         if(result) {
             setJamaatStarted(true)
         } else {
@@ -293,24 +292,22 @@ function PrayerTimes() {
 
         if(displaySlideshow === false) {
             setTimeout(() => {
-                if(jamaatStarted !== true) { setDisplaySlideshow(true) }
+                setDisplaySlideshow(true)
             }, 60000)
             // setAnimation(false)
         }
         // How long the image will be on the screen
         if(displaySlideshow === true){
             setTimeout(() => {
-                if(jamaatStarted !== true) {
-                    // setSlideshowCount(slideshowCount + 1)
-                    setDisplaySlideshow(false)
-                    if(slideshowCount === numOfSlides-1) {
-                        setSlideshowCount(0)
-                    } else {
-                        setSlideshowCount(slideshowCount + 1)
-                    }
-                    console.log("slideshowcount " + slideshowCount)
-                    console.log("numofslideshowimages " + numOfSlides)
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
+                } else {
+                    setSlideshowCount(slideshowCount + 1)
                 }
+                console.log("slideshowcount " + slideshowCount)
+                console.log("numofslideshowimages " + numOfSlides)
             }, 15000)
         }
         
@@ -321,10 +318,13 @@ function PrayerTimes() {
     return(
         <>
         {/* <JamaatPrayer prayer={} time={} /> */}
-        {!displaySlideshow ?
+        {!jamaatStarted ?
         <div>
-            { jamaatStarted ? 
-                <JamaatPrayer prayer time />
+            {displaySlideshow ? 
+                <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} 
+                    src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} 
+                    alt="slidshow" 
+                />
             :
             <div>
                 <Link to="/">
@@ -396,7 +396,8 @@ function PrayerTimes() {
             }  
         </div> 
         :
-            <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
+            // <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
+            <JamaatPrayer />
         }
         </>
     )
