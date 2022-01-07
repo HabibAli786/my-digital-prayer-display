@@ -210,14 +210,13 @@ function PrayerTimes() {
             } else {
                 result = false
             }
-            // console.log(clockDate)
-            // console.log(jamaatStart)
-            // console.log(jamaatEnd)
-            // console.log(jamaatStart)
-            // console.log(jamaatEnd)
         }
-
         console.log(result)
+        if(result) {
+            setJamaatStarted(true)
+        } else {
+            setJamaatStarted(false)
+        }
 
     }, [clock])
 
@@ -289,102 +288,113 @@ function PrayerTimes() {
     }, [clock])
 
     // Slideshow Animation useEffect
-    // useEffect(() => {
-    //     // How long will the image take to come on the screen
-    //     if(displaySlideshow === false) {
-    //         setTimeout(() => {
-    //             setDisplaySlideshow(true)
-    //         }, 60000)
-    //         // setAnimation(false)
-    //     }
-    //     // How long the image will be on the screen
-    //     if(displaySlideshow === true){
-    //         setTimeout(() => {
-    //             // setSlideshowCount(slideshowCount + 1)
-    //             setDisplaySlideshow(false)
-    //             if(slideshowCount === numOfSlides-1) {
-    //                 setSlideshowCount(0)
-    //             } else {
-    //                 setSlideshowCount(slideshowCount + 1)
-    //             }
-    //             console.log("slideshowcount " + slideshowCount)
-    //             console.log("numofslideshowimages " + numOfSlides)
-    //         }, 15000)
-    //     }
-    // }, [displaySlideshow])
+    useEffect(() => {
+        // How long will the image take to come on the screen
+
+        if(displaySlideshow === false) {
+            setTimeout(() => {
+                if(jamaatStarted !== true) { setDisplaySlideshow(true) }
+            }, 60000)
+            // setAnimation(false)
+        }
+        // How long the image will be on the screen
+        if(displaySlideshow === true){
+            setTimeout(() => {
+                if(jamaatStarted !== true) {
+                    // setSlideshowCount(slideshowCount + 1)
+                    setDisplaySlideshow(false)
+                    if(slideshowCount === numOfSlides-1) {
+                        setSlideshowCount(0)
+                    } else {
+                        setSlideshowCount(slideshowCount + 1)
+                    }
+                    console.log("slideshowcount " + slideshowCount)
+                    console.log("numofslideshowimages " + numOfSlides)
+                }
+            }, 15000)
+        }
+        
+    }, [displaySlideshow])
+
+    // console.log(jamaatStarted)
 
     return(
         <>
         {/* <JamaatPrayer prayer={} time={} /> */}
-        {
-            !displaySlideshow ?
+        {!displaySlideshow ?
         <div>
-            <Link to="/">
-                <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
-            </Link>
-            <h1 className="weekday">{date[0]}</h1>
-            <h1 className="dayMonth">{`${date[1]} ${new Date().getFullYear()}`}</h1>
-            <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
-            <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
-            <h1 className="clock-colon-1">:</h1>
-            <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
-            <h1 className="clock-colon-2">:</h1>
-            <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
-            <Container className="table-container">
-                <Row className="row0">
-                    <Col className="col-4"></Col>
-                    <Col className="col-4"></Col>
-                    <Col className="col-2 start-time">Start</Col>
-                    <Col className="col-2 jamaat active-color">Jamaat</Col>
-                </Row>
-                <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
-                    <Col className="col-4">فَجْر</Col>
-                    <Col className="col-4">Fajr</Col>
-                    <Col className="col-2">{`${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">{`${times[1].slice(0, 2) % 12 || 12}:${times[1].slice(3,5)}`}</Col>
-                </Row>
-                <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
-                    <Col className="col-4">-- --</Col>
-                    <Col className="col-4">Sunrise</Col>
-                    <Col className="col-2">{`${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">-- --</Col>
-                </Row>
-                <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
-                    { isJummah ?
-                        <>
-                            <Col className="col-4">صلاة الجماعة</Col>
-                            <Col className="col-4">Jumu'ah</Col>
-                        </>
-                        :
-                        <>
-                            <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
-                            <Col className="col-4">Dhuhr</Col>
-                        </>
-                    }
-                    <Col className="col-2">{`${times[3].slice(0, 2) % 12 || 12}:${times[3].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">{`${times[4].slice(0, 2) % 12 || 12}:${times[4].slice(3,5)}`}</Col>
-                </Row>
-                <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
-                    <Col className="col-4">صَلَاةُ العَصْر</Col>
-                    <Col className="col-4">Asr</Col>
-                    <Col className="col-2">{`${times[5].slice(0, 2) % 12 || 12}:${times[5].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">{`${times[6].slice(0, 2) % 12 || 12}:${times[6].slice(3,5)}`}</Col>
-                </Row>
-                <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
-                    <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
-                    <Col className="col-4">Maghrib</Col>
-                    <Col className="col-2">{`${times[7].slice(0, 2) % 12 || 12}:${times[7].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">{`${times[8].slice(0, 2) % 12 || 12}:${times[8].slice(3,5)}`}</Col>
-                </Row>
-                <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
-                    <Col className="col-4">صَلَاةُ العِشَاء</Col>
-                    <Col className="col-4">Isha</Col>
-                    <Col className="col-2">{`${times[9].slice(0, 2) % 12 || 12}:${times[9].slice(3,5)}`}</Col>
-                    <Col className="col-2 active-color">{`${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}`}</Col>
-                </Row>
-            </Container>
-            <Notifications />
-        </div>
+            { jamaatStarted ? 
+                <JamaatPrayer prayer time />
+            :
+            <div>
+                <Link to="/">
+                    <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
+                </Link>
+                <h1 className="weekday">{date[0]}</h1>
+                <h1 className="dayMonth">{`${date[1]} ${new Date().getFullYear()}`}</h1>
+                <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
+                <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
+                <h1 className="clock-colon-1">:</h1>
+                <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
+                <h1 className="clock-colon-2">:</h1>
+                <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
+                <Container className="table-container">
+                    <Row className="row0">
+                        <Col className="col-4"></Col>
+                        <Col className="col-4"></Col>
+                        <Col className="col-2 start-time">Start</Col>
+                        <Col className="col-2 jamaat active-color">Jamaat</Col>
+                    </Row>
+                    <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
+                        <Col className="col-4">فَجْر</Col>
+                        <Col className="col-4">Fajr</Col>
+                        <Col className="col-2">{`${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">{`${times[1].slice(0, 2) % 12 || 12}:${times[1].slice(3,5)}`}</Col>
+                    </Row>
+                    <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
+                        <Col className="col-4">-- --</Col>
+                        <Col className="col-4">Sunrise</Col>
+                        <Col className="col-2">{`${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">-- --</Col>
+                    </Row>
+                    <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
+                        { isJummah ?
+                            <>
+                                <Col className="col-4">صلاة الجماعة</Col>
+                                <Col className="col-4">Jumu'ah</Col>
+                            </>
+                            :
+                            <>
+                                <Col className="col-4">صَلَاة ٱلظُّهْر</Col>
+                                <Col className="col-4">Dhuhr</Col>
+                            </>
+                        }
+                        <Col className="col-2">{`${times[3].slice(0, 2) % 12 || 12}:${times[3].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">{`${times[4].slice(0, 2) % 12 || 12}:${times[4].slice(3,5)}`}</Col>
+                    </Row>
+                    <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
+                        <Col className="col-4">صَلَاةُ العَصْر</Col>
+                        <Col className="col-4">Asr</Col>
+                        <Col className="col-2">{`${times[5].slice(0, 2) % 12 || 12}:${times[5].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">{`${times[6].slice(0, 2) % 12 || 12}:${times[6].slice(3,5)}`}</Col>
+                    </Row>
+                    <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
+                        <Col className="col-4">صَلَاةُ اَلْمَغْرِب</Col>
+                        <Col className="col-4">Maghrib</Col>
+                        <Col className="col-2">{`${times[7].slice(0, 2) % 12 || 12}:${times[7].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">{`${times[8].slice(0, 2) % 12 || 12}:${times[8].slice(3,5)}`}</Col>
+                    </Row>
+                    <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
+                        <Col className="col-4">صَلَاةُ العِشَاء</Col>
+                        <Col className="col-4">Isha</Col>
+                        <Col className="col-2">{`${times[9].slice(0, 2) % 12 || 12}:${times[9].slice(3,5)}`}</Col>
+                        <Col className="col-2 active-color">{`${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}`}</Col>
+                    </Row>
+                </Container>
+                <Notifications />
+            </div>
+            }  
+        </div> 
         :
             <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
         }
