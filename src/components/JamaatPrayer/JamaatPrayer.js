@@ -1,17 +1,58 @@
+import { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import './JamaatPrayer.css'
 
 function JamaatPrayer(props) {
+
+    const { prayersStatus, prayerTimes, jummah } = props
+
+    const prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
+
+    const [currentPrayer, setCurrentPrayer] = useState("")
+    const [currentTime, setCurrentTime] = useState("")
+
+    // Finding current prayer
+    useEffect(() => {
+        console.log(prayersStatus)
+        console.log(prayerTimes)
+        
+        if(jummah) {
+            setCurrentPrayer("Jummah")
+        } else {
+            for(let i=0; i < prayersStatus.length;  i++) {
+                if(prayersStatus[i] === false) {
+                    console.log(prayerNames[i-1])
+                    setCurrentPrayer(prayerNames[i-1])
+                    break
+                }
+                setCurrentPrayer(prayerNames[5])
+            }
+        }
+
+        
+    }, [])
+
+    // Setting prayer time
+    useEffect(() => {
+
+        if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
+        if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
+        if(currentPrayer === "Dhuhr") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
+        if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
+        if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
+
+    }, [currentPrayer])
 
     return (
         <>
         <div>
             <Container className="jamaat-prayer-container">
                 <Row>
-                    <Col className="jamaat-prayer-name">صَلَاةُ العَصْر</Col>
+                    <Col className="jamaat-prayer-name">{currentPrayer}</Col>
                 </Row>
                 <Row>
-                    <h1 className="jamaat-prayer-time">1:00</h1>
+                    <h1 className="jamaat-prayer-time">{currentTime}</h1>
                 </Row>
                 <Row>
                     <h1 className="jamaat-prayer-message">Please put your phone on silent to avoid disruption</h1>
