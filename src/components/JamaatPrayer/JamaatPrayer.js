@@ -38,6 +38,7 @@ function JamaatPrayer(props) {
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
         if(currentPrayer === "Dhuhr") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Jummah") { setCurrentPrayer(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
