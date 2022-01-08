@@ -397,7 +397,7 @@ function PrayerTimes() {
         </div> 
         :
             // <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} alt="slidshow" /> 
-            <JamaatPrayer />
+            <JamaatPrayer prayersStatus={prayerFinished} prayerTimes={times} jummah={isJummah} />
         }
         </>
     )
