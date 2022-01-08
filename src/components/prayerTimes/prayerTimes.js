@@ -102,7 +102,7 @@ function PrayerTimes() {
 
     // Prayertimes
     const [times, setTimes] = useState([
-        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "0:00"
+        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
     const [isJummah, setIsJummah] = useState(false)
@@ -255,7 +255,7 @@ function PrayerTimes() {
                 const arr = []
                 if(prayertimes.length > 1) {
                     for(let i=0; i < prayertimes.length; i++) {
-                        arr.push(prayertimes[i].startTime)
+                        if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
                         if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
                     }
                     setTimes(arr)
