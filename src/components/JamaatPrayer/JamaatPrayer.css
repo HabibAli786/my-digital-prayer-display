@@ -47,7 +47,7 @@
 
 @media (min-width: 1200px) {
     .jamaat-prayer-name {
-        font-size: 200px !important;
+        font-size: 150px !important;
     }
 
     .jamaat-prayer-time {
@@ -63,18 +63,18 @@
 
 @media (min-width: 1400px) {
     .jamaat-prayer-name {
-        font-size: 300px !important;
+        font-size: 250px !important;
     }
 
     .jamaat-prayer-time {
         font-size: 200px !important;
-        margin-top: 10% !important;
+        margin-top: 7% !important;
         margin-bottom: 70px;
     }
 
     .jamaat-prayer-message {
-        font-size: 60px;
-        margin-bottom: 20px;
+        font-size: 50px;
+        margin-bottom: 60px;
     }
 
     .jamaat-prayer-phone {
