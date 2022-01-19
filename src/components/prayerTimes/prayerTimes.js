@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Notifications from '../Notifications/Notifications'
 import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
+import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
@@ -338,6 +339,7 @@ function PrayerTimes() {
                 <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
                 <h1 className="clock-colon-2">:</h1>
                 <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
+                <MakroohTime />
                 <Container className="table-container">
                     <Row className="row0">
                         <Col className="col-4"></Col>

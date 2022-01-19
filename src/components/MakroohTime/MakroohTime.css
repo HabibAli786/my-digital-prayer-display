@@ -1,0 +1,33 @@
+@media (min-width: 576px) {
+    .makrooh-time-message {
+        position: absolute;
+    }
+}
+
+@media (min-width: 768px) {
+    .makrooh-time-message {
+        position: absolute;
+    }
+
+}
+
+@media (min-width: 992px) {
+    .makrooh-time-message {
+        position: absolute;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .makrooh-time-message {
+        position: absolute;
+    }
+
+}
+
+@media (min-width: 1400px) {
+    .makrooh-time-message {
+        position: absolute;
+    }
+    
+}
