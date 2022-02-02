@@ -93,10 +93,8 @@ const strToDate = (str) => {
 
 function PrayerTimes() {
 
-    // Global Variables
-    // const numofSlidshowImages = 3
-
     const [clock, setClock] = useState("00:00:00")
+
     // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
     const [hijri, setHijri] = useState(null)
@@ -114,6 +112,9 @@ function PrayerTimes() {
     const [numOfSlides, setNumOfSlides] = useState(null)
     const [slideshowCount, setSlideshowCount] = useState(0)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
+
+    // Makrooh
+    const [makrooh, setMakrooh] = useState(false)
 
     // Update live clock every second
     useEffect(() => {
@@ -177,7 +178,8 @@ function PrayerTimes() {
             j = j+1
         }                        
     }, [clock])
-
+    
+    // Display Jamaat Display
     useEffect(() => {
         let clockDate = new Date()
         let jamaatStart = new Date()
@@ -216,6 +218,49 @@ function PrayerTimes() {
             setJamaatStarted(true)
         } else {
             setJamaatStarted(false)
+        }
+
+    }, [clock])
+
+    // Display Makrooh Time
+    useEffect(() => {
+        let clockDate = new Date()
+        let makroohStart = new Date()
+        let makroohEnd = new Date()
+
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
+        
+        clockDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+        let result = false
+
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 1 || i === 4 || i === 5 || i === 6 || i === 8 || i === 9 || i === 10) {
+                continue
+            }
+
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            const makroohStartMinutes = parseInt(timesMinutes) - 20
+
+            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            makroohEnd.setHours(timesHours, timesMinutes, timesSeconds)
+            
+            if(clockDate >= makroohStart && clockDate < makroohEnd) {
+                result = true
+                break
+            } else {
+                result = false
+            }
+        }
+        if(result) {
+            setMakrooh(true)
+        } else {
+            setMakrooh(false)
         }
 
     }, [clock])
@@ -288,31 +333,31 @@ function PrayerTimes() {
     }, [clock])
 
     // Slideshow Animation useEffect
-    useEffect(() => {
-        // How long will the image take to come on the screen
+    // useEffect(() => {
+    //     // How long will the image take to come on the screen
 
-        if(displaySlideshow === false) {
-            setTimeout(() => {
-                setDisplaySlideshow(true)
-            }, 60000)
-            // setAnimation(false)
-        }
-        // How long the image will be on the screen
-        if(displaySlideshow === true){
-            setTimeout(() => {
-                // setSlideshowCount(slideshowCount + 1)
-                setDisplaySlideshow(false)
-                if(slideshowCount === numOfSlides-1) {
-                    setSlideshowCount(0)
-                } else {
-                    setSlideshowCount(slideshowCount + 1)
-                }
-                console.log("slideshowcount " + slideshowCount)
-                console.log("numofslideshowimages " + numOfSlides)
-            }, 15000)
-        }
+    //     if(displaySlideshow === false) {
+    //         setTimeout(() => {
+    //             setDisplaySlideshow(true)
+    //         }, 60000)
+    //         // setAnimation(false)
+    //     }
+    //     // How long the image will be on the screen
+    //     if(displaySlideshow === true){
+    //         setTimeout(() => {
+    //             // setSlideshowCount(slideshowCount + 1)
+    //             setDisplaySlideshow(false)
+    //             if(slideshowCount === numOfSlides-1) {
+    //                 setSlideshowCount(0)
+    //             } else {
+    //                 setSlideshowCount(slideshowCount + 1)
+    //             }
+    //             console.log("slideshowcount " + slideshowCount)
+    //             console.log("numofslideshowimages " + numOfSlides)
+    //         }, 15000)
+    //     }
         
-    }, [displaySlideshow])
+    // }, [displaySlideshow])
 
     // console.log(jamaatStarted)
 
@@ -339,7 +384,9 @@ function PrayerTimes() {
                 <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
                 <h1 className="clock-colon-2">:</h1>
                 <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
-                <MakroohTime />
+                {makrooh ?
+                    <MakroohTime /> : <img className='prayertimes-qr-code' src="images/qr-code.png" alt="qr-code" /> 
+                }
                 <Container className="table-container">
                     <Row className="row0">
                         <Col className="col-4"></Col>
