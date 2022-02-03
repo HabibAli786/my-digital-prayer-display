@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react"
-import { Button, Container, Row, Table, Col } from "react-bootstrap";
+import { Button, Container, Row, Table } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";

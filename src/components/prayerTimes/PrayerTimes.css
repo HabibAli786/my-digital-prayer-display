@@ -658,39 +658,51 @@
         width: 50%;
     }
 
+    .makrooh-clock {
+        color: red;
+    }
+
     .clock-hours {
         position: absolute;
         left: 77%;
-        top: 54%;
+        top: 50%;
         font-size: 4em;
     }
 
     .clock-colon-1 {
         position: absolute;
         left: 82.3%;
-        top: 53.5%;
+        top: 49.5%;
         font-size: 4em;
     }
 
     .clock-minutes {
         position: absolute;
         left: 84%;
-        top: 54%;
+        top: 50%;
         font-size: 4em;
     }
 
     .clock-colon-2 {
         position: absolute;
         left: 90%;
-        top: 53.5%;
+        top: 49.5%;
         font-size: 4em;
     }
 
     .clock-seconds {
         position: absolute;
         left: 91.5%;
-        top: 54%;
+        top: 50%;
         font-size: 4em;
+    }
+
+    .prayertimes-qr-code {
+        position: absolute;
+        left: 82.5%;
+        top: 61%;
+        width: 110px;
+        height: 140px;
     }
     
     /* Slideshow animation */
@@ -850,39 +862,51 @@
         width: 30%;
     }
 
+    .makrooh-clock {
+        color: red;
+    }
+
     .clock-hours {
         position: absolute;
         left: 75%;
-        top: 54%;
+        top: 50%;
         font-size: 6em;
     }
 
     .clock-colon-1 {
         position: absolute;
         left: 80.3%;
-        top: 53.5%;
+        top: 49.5%;
         font-size: 6em;
     }
 
     .clock-minutes {
         position: absolute;
         left: 82%;
-        top: 54%;
+        top: 50%;
         font-size: 6em;
     }
 
     .clock-colon-2 {
         position: absolute;
         left: 88%;
-        top: 53.5%;
+        top: 49.5%;
         font-size: 6em;
     }
 
     .clock-seconds {
         position: absolute;
         left: 89.5%;
-        top: 54%;
+        top: 50%;
         font-size: 6em;
+    }
+
+    .prayertimes-qr-code {
+        position: absolute;
+        left: 80.3%;
+        top: 61%;
+        width: 170px;
+        height: 200px;
     }
     
     /* Slideshow animation */

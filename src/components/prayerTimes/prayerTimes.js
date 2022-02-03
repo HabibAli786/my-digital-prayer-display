@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Notifications from '../Notifications/Notifications'
 import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
+import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
@@ -92,10 +93,8 @@ const strToDate = (str) => {
 
 function PrayerTimes() {
 
-    // Global Variables
-    // const numofSlidshowImages = 3
-
     const [clock, setClock] = useState("00:00:00")
+
     // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
     const [hijri, setHijri] = useState(null)
@@ -113,6 +112,9 @@ function PrayerTimes() {
     const [numOfSlides, setNumOfSlides] = useState(null)
     const [slideshowCount, setSlideshowCount] = useState(0)
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
+
+    // Makrooh
+    const [makrooh, setMakrooh] = useState(false)
 
     // Update live clock every second
     useEffect(() => {
@@ -176,7 +178,8 @@ function PrayerTimes() {
             j = j+1
         }                        
     }, [clock])
-
+    
+    // Display Jamaat Display
     useEffect(() => {
         let clockDate = new Date()
         let jamaatStart = new Date()
@@ -215,6 +218,49 @@ function PrayerTimes() {
             setJamaatStarted(true)
         } else {
             setJamaatStarted(false)
+        }
+
+    }, [clock])
+
+    // Display Makrooh Time
+    useEffect(() => {
+        let clockDate = new Date()
+        let makroohStart = new Date()
+        let makroohEnd = new Date()
+
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
+        
+        clockDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+        let result = false
+
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 1 || i === 4 || i === 5 || i === 6 || i === 8 || i === 9 || i === 10) {
+                continue
+            }
+
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            const makroohStartMinutes = parseInt(timesMinutes) - 20
+
+            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            makroohEnd.setHours(timesHours, timesMinutes, timesSeconds)
+            
+            if(clockDate >= makroohStart && clockDate < makroohEnd) {
+                result = true
+                break
+            } else {
+                result = false
+            }
+        }
+        if(result) {
+            setMakrooh(true)
+        } else {
+            setMakrooh(false)
         }
 
     }, [clock])
@@ -313,8 +359,6 @@ function PrayerTimes() {
         
     }, [displaySlideshow])
 
-    // console.log(jamaatStarted)
-
     return(
         <>
         {/* <JamaatPrayer prayer={} time={} /> */}
@@ -327,17 +371,29 @@ function PrayerTimes() {
                 />
             :
             <div>
+                {/* Logo */}
                 <Link to="/">
                     <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
                 </Link>
+                
+                {/* Hijri and Normal Date */}
                 <h1 className="weekday">{date[0]}</h1>
                 <h1 className="dayMonth">{`${date[1]} ${new Date().getFullYear()}`}</h1>
                 <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
-                <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
-                <h1 className="clock-colon-1">:</h1>
-                <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
-                <h1 className="clock-colon-2">:</h1>
-                <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
+
+                {/* Clock */}
+                <h1 className={makrooh ? "clock-hours makrooh-clock" : "clock-hours"}>{clock.slice(0, 2)}</h1>
+                <h1 className={makrooh ? "clock-colon-1 makrooh-clock" : "clock-colon-1"}>:</h1>
+                <h1 className={makrooh ? "clock-minutes makrooh-clock" : "clock-minutes"}>{clock.slice(3, 5)}</h1>
+                <h1 className={makrooh ? "clock-colon-2 makrooh-clock" : "clock-colon-2"}>:</h1>
+                <h1 className={makrooh ? "clock-seconds makrooh-clock" : "clock-seconds"}>{clock.slice(6, 8)}</h1>
+
+                {/* Makrooh or QR Code */}
+                {makrooh ?
+                    <MakroohTime /> : <img className='prayertimes-qr-code' src="images/qr-code.png" alt="qr-code" /> 
+                }
+
+                {/* Prayertimes */}
                 <Container className="table-container">
                     <Row className="row0">
                         <Col className="col-4"></Col>
