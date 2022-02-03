@@ -333,33 +333,31 @@ function PrayerTimes() {
     }, [clock])
 
     // Slideshow Animation useEffect
-    // useEffect(() => {
-    //     // How long will the image take to come on the screen
+    useEffect(() => {
+        // How long will the image take to come on the screen
 
-    //     if(displaySlideshow === false) {
-    //         setTimeout(() => {
-    //             setDisplaySlideshow(true)
-    //         }, 60000)
-    //         // setAnimation(false)
-    //     }
-    //     // How long the image will be on the screen
-    //     if(displaySlideshow === true){
-    //         setTimeout(() => {
-    //             // setSlideshowCount(slideshowCount + 1)
-    //             setDisplaySlideshow(false)
-    //             if(slideshowCount === numOfSlides-1) {
-    //                 setSlideshowCount(0)
-    //             } else {
-    //                 setSlideshowCount(slideshowCount + 1)
-    //             }
-    //             console.log("slideshowcount " + slideshowCount)
-    //             console.log("numofslideshowimages " + numOfSlides)
-    //         }, 15000)
-    //     }
+        if(displaySlideshow === false) {
+            setTimeout(() => {
+                setDisplaySlideshow(true)
+            }, 60000)
+            // setAnimation(false)
+        }
+        // How long the image will be on the screen
+        if(displaySlideshow === true){
+            setTimeout(() => {
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
+                } else {
+                    setSlideshowCount(slideshowCount + 1)
+                }
+                console.log("slideshowcount " + slideshowCount)
+                console.log("numofslideshowimages " + numOfSlides)
+            }, 15000)
+        }
         
-    // }, [displaySlideshow])
-
-    // console.log(jamaatStarted)
+    }, [displaySlideshow])
 
     return(
         <>
@@ -373,20 +371,29 @@ function PrayerTimes() {
                 />
             :
             <div>
+                {/* Logo */}
                 <Link to="/">
                     <img className="logo" src='http://localhost:3001/media/logo' alt="logo" />
                 </Link>
+                
+                {/* Hijri and Normal Date */}
                 <h1 className="weekday">{date[0]}</h1>
                 <h1 className="dayMonth">{`${date[1]} ${new Date().getFullYear()}`}</h1>
                 <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
-                <h1 className="clock-hours">{clock.slice(0, 2)}</h1>
-                <h1 className="clock-colon-1">:</h1>
-                <h1 className="clock-minutes">{clock.slice(3, 5)}</h1>
-                <h1 className="clock-colon-2">:</h1>
-                <h1 className="clock-seconds">{clock.slice(6, 8)}</h1>
+
+                {/* Clock */}
+                <h1 className={makrooh ? "clock-hours makrooh-clock" : "clock-hours"}>{clock.slice(0, 2)}</h1>
+                <h1 className={makrooh ? "clock-colon-1 makrooh-clock" : "clock-colon-1"}>:</h1>
+                <h1 className={makrooh ? "clock-minutes makrooh-clock" : "clock-minutes"}>{clock.slice(3, 5)}</h1>
+                <h1 className={makrooh ? "clock-colon-2 makrooh-clock" : "clock-colon-2"}>:</h1>
+                <h1 className={makrooh ? "clock-seconds makrooh-clock" : "clock-seconds"}>{clock.slice(6, 8)}</h1>
+
+                {/* Makrooh or QR Code */}
                 {makrooh ?
                     <MakroohTime /> : <img className='prayertimes-qr-code' src="images/qr-code.png" alt="qr-code" /> 
                 }
+
+                {/* Prayertimes */}
                 <Container className="table-container">
                     <Row className="row0">
                         <Col className="col-4"></Col>

@@ -22,10 +22,11 @@
     .makrooh-time-message {
         position: absolute;
         left: 72%;
-        top: 68%;
+        top: 66%;
         width: 30%;
         color: red;
-        font-size: 24px;
+        font-size: 40px;
+        font-weight: bold;
     }
 
 }
@@ -34,10 +35,11 @@
     .makrooh-time-message {
         position: absolute;
         left: 70%;
-        top: 70%;
+        top: 67%;
         width: 30%;
         color: red;
-        font-size: 40px;
+        font-size: 60px;
+        font-weight: bold;
     }
 
 }

@@ -658,6 +658,10 @@
         width: 50%;
     }
 
+    .makrooh-clock {
+        color: red;
+    }
+
     .clock-hours {
         position: absolute;
         left: 77%;
@@ -856,6 +860,10 @@
         top: 50%;
         font-size: 6em;
         width: 30%;
+    }
+
+    .makrooh-clock {
+        color: red;
     }
 
     .clock-hours {
