@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row, Modal } from "react-bootstrap";
-import ModalDialog from 'react-bootstrap/ModalDialog'
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { AiOutlineCloudUpload } from "react-icons/ai";
