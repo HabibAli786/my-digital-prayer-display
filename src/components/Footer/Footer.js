@@ -4,7 +4,7 @@ function Footer() {
 
     return (
         <div className="footer">
-            <p className="copyright"> Copyright © Habib Ali - {new Date().getFullYear()}</p>
+            <p className="copyright"> Copyright © IQRA Learning Centre - {new Date().getFullYear()}</p>
         </div>
     )
 

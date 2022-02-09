@@ -5,13 +5,13 @@ require('@electron/remote/main').initialize()
 function createWindow() {
     // Create the browser window
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        show: false,
+        frame: false,
         webPreferences: {
             enableRemoteModule: true
         }
     })
-
+    win.maximize()
     win.loadURL('http://localhost:3000')
 }
 

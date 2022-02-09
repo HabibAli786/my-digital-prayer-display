@@ -1,6 +1,14 @@
 {
   "name": "my-digital-prayer-display",
+  "productName" : "PrayerTimes+",
+  "author": "Habib Ali",
   "version": "0.1.0",
+  "build": {
+    "appId": "PrayerTimes+",
+    "win": {
+      "icon": "build/icon.png"
+    }
+  },
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.4",
