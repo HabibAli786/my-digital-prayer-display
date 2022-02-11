@@ -10,7 +10,7 @@ function createWindow() {
     const win = new BrowserWindow({
         show: false,
         frame: false,
-        icon: __dirname + '/public/clockIcon.png',
+        icon: __dirname + '/public/icon.png',
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true
@@ -22,7 +22,7 @@ function createWindow() {
     win.loadURL(
         isDev
             ? 'http://localhost:3000'
-            : `file://${path.join(__dirname, '../build/index.html')}`
+            : `file://${__dirname}/../build/index.html`
     )
 }
 
