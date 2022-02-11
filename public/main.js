@@ -1,18 +1,29 @@
 const { app, BrowserWindow } = require('electron' )
-require('@electron/remote/main').initialize()
 
+const path = require('path')
+const isDev = require('electron-is-dev')
+
+require('@electron/remote/main').initialize()
 
 function createWindow() {
     // Create the browser window
     const win = new BrowserWindow({
         show: false,
         frame: false,
+        icon: __dirname + '/public/clockIcon.png',
         webPreferences: {
+            nodeIntegration: true,
             enableRemoteModule: true
         }
     })
     win.maximize()
-    win.loadURL('http://localhost:3000')
+    // win.loadURL('http://localhost:3000')
+
+    win.loadURL(
+        isDev
+            ? 'http://localhost:3000'
+            : `file://${path.join(__dirname, '../build/index.html')}`
+    )
 }
 
 app.on('ready', createWindow)
