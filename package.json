@@ -1,14 +1,9 @@
 {
   "name": "my-digital-prayer-display",
-  "productName" : "PrayerTimes+",
+  "productName": "PrayerTimes+",
   "author": "Habib Ali",
+  "description": "A simple application to display prayertimes for your local masjid",
   "version": "0.1.0",
-  "build": {
-    "appId": "PrayerTimes+",
-    "win": {
-      "icon": "build/icon.png"
-    }
-  },
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.4",
@@ -19,7 +14,7 @@
     "bootstrap": "^5.0.1",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
-    "electron": "^17.0.0",
+    "electron-is-dev": "^2.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
@@ -43,7 +38,21 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm run-script start\" \"npm run-script electron:start\"",
-    "electron:start": "wait-on tcp:3000 && electron ."
+    "electron:start": "wait-on tcp:3000 && electron .",
+    "electron:build": "npm run-script build && electron-builder -c.extraMetadata.main=build/main.js"
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.prayer.times",
+    "files": [
+      "dist/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assests"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +73,8 @@
     ]
   },
   "devDependencies": {
+    "electron": "^17.0.0",
+    "electron-builder": "^22.14.13",
     "redux-devtools-extension": "^2.13.9"
   }
 }
