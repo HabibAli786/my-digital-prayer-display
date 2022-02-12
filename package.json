@@ -44,6 +44,9 @@
   "build": {
     "extends": null,
     "appId": "com.prayer.times",
+    "win" : {
+      "icon": "build/icon.png"
+    },
     "files": [
       "dist/**/*",
       "build/**/*",
