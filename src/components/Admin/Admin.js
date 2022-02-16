@@ -14,7 +14,6 @@ function Admin(props) {
 
     const dispatch = useDispatch()
     const { auth, set_auth } = props
-    // const [userData, setuserData] = useState(false)
 
     const login = (username, password) => {
         if(username) {
@@ -43,9 +42,6 @@ function Admin(props) {
 
         const username = event.target.username.value
         const password = event.target.password.value
-
-        // setLoginUsername(username)
-        // setLoginPassword(password)
 
         login(username, password)
 
@@ -93,7 +89,7 @@ function Admin(props) {
             </Row>
         </Container>
         { auth === "Successfully Authenticated" &&
-                <Redirect to={{ pathname: "/user" }} />
+                <Redirect to="/user" />
         }
         {
             auth === "Unsuccessfully Authenticated" &&
