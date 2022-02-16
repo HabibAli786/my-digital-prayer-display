@@ -1,6 +1,4 @@
 const { app, BrowserWindow } = require('electron' )
-
-const path = require('path')
 const isDev = require('electron-is-dev')
 
 require('@electron/remote/main').initialize()
@@ -10,10 +8,11 @@ function createWindow() {
     const win = new BrowserWindow({
         show: false,
         frame: false,
-        icon: __dirname + '/public/icon.png',
+        icon: __dirname + '/icon.png',
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            devTools: true
         }
     })
     win.maximize()
@@ -26,7 +25,12 @@ function createWindow() {
     )
 }
 
-app.on('ready', createWindow)
+// app.on('ready', createWindow)
+
+app.on('ready', () => {
+    // Create the new window
+    createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
