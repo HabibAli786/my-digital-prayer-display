@@ -42,7 +42,8 @@ export const authenticate = () => async (dispatch, getState) => {
             auth = "Successfully Authenticated"
             // localStorage.setItem('userInfo', JSON.stringify(data));
             // cookies.set('authToken', data.token);
-            console.log(cookies.getAll())
+            const authCookie = cookies.get('connect.sid')
+            cookies.set('authToken', authCookie)
         } else if(data === "Unsuccessfully Authenticated") {
             auth = "Unsuccessfully Authenticated"
         }
