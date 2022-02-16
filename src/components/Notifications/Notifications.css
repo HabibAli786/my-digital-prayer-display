@@ -1,0 +1,225 @@
+@media (min-width: 576px) {
+    .card-annc {
+      margin-top: 2%;
+      font-size: 4.5em;
+      overflow: hidden;
+  }
+
+  @keyframes slidein {
+      from {
+        transform: translateX(3%);
+        opacity: 0;
+      }
+    
+      to {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+  }
+
+  @keyframes slideout {
+      from {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+    
+      to {
+        transform: translateX(-28%);
+        opacity: 0;
+      }
+  }
+
+  .annc-current {
+      animation-name: slideout;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+  .annc-next {
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .card-annc {
+    margin-top: 2%;
+    font-size: 4.5em;
+    overflow: hidden;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: translateX(3%);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+
+  }
+
+  @keyframes slideout {
+      from {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+    
+      to {
+        transform: translateX(-28%);
+        opacity: 0;
+      }
+  }
+
+  .annc-current {
+      animation-name: slideout;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+  .annc-next {
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .card-annc {
+    margin-top: 2%;
+    font-size: 4.5em;
+    overflow: hidden;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: translateX(3%);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+  }
+
+  @keyframes slideout {
+      from {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+    
+      to {
+        transform: translateX(-28%);
+        opacity: 0;
+      }
+  }
+
+  .annc-current {
+      animation-name: slideout;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+  .annc-next {
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .card-annc {
+    margin-top: 1%;
+    font-size: 3.5em;
+    overflow: hidden;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: translateX(3%);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+  }
+
+  @keyframes slideout {
+      from {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+    
+      to {
+        transform: translateX(-28%);
+        opacity: 0;
+      }
+  }
+
+  .annc-current {
+      animation-name: slideout;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+  .annc-next {
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+}
+
+@media (min-width: 1400px) {
+  .card-annc {
+    margin-top: 2%;
+    font-size: 4.5em;
+    overflow: hidden;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: translateX(3%);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100;
+    }
+  }
+
+  @keyframes slideout {
+      from {
+        transform: translateX(0%);
+        opacity: 100;
+      }
+    
+      to {
+        transform: translateX(-28%);
+        opacity: 0;
+      }
+  }
+
+  .annc-current {
+      animation-name: slideout;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+  .annc-next {
+      animation-name: slidein;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+  }
+
+}

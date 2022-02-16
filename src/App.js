@@ -1,23 +1,49 @@
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router';
+
+import Home from './components/Home';
+import PrayerTimes from './components/PrayerTimes/PrayerTimes';
+import Admin from './components/Admin/Admin';
+import User from './components/User/User';
+import UploadTimetable from './components/UploadTimetable/UploadTimetable';
 import './App.css';
+import EditTimetable from './components/EditTimetable/EditTimetable';
+import UploadLogo from './components/UploadLogo/UploadLogo';
+import EditNotifications from './components/EditNotifications/EditNotifications';
+import EditSlides from './components/EditSlides/EditSlides';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/prayertimes">
+          <PrayerTimes />
+        </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+        <Route path="/user">
+          <Route path="/user" render={(props) => <User {...props} />}/>
+        </Route>
+        <Route path="/uploadTimetable">
+          <UploadTimetable />
+        </Route>
+        <Route path="/editTimetable">
+          <EditTimetable />
+        </Route>
+        <Route path="/uploadLogo">
+          <UploadLogo />
+        </Route>
+        <Route path="/editNotifications">
+          <EditNotifications />
+        </Route>
+        <Route path="/editSlides">
+          <EditSlides />
+        </Route>
+      </Switch>
     </div>
   );
 }
