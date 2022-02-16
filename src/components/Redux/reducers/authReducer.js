@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import { set_auth, set_username } from '../actions/authAction'
 
 const init = {
@@ -24,6 +25,7 @@ const authReducer = (state = init, action) => {
 }
 
 export const authenticate = () => async (dispatch, getState) => {
+    const cookies = new Cookies();
     let auth = null
     let username = null
     console.log("I am running Thunk")
@@ -32,11 +34,15 @@ export const authenticate = () => async (dispatch, getState) => {
         withCredentials: true,
         url: 'http://localhost:3001/admin/user'
     }).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         const data = res.data
+        console.log(data.username)
         if(data.username) {
             username = data.username
             auth = "Successfully Authenticated"
+            // localStorage.setItem('userInfo', JSON.stringify(data));
+            // cookies.set('authToken', data.token);
+            console.log(cookies.getAll())
         } else if(data === "Unsuccessfully Authenticated") {
             auth = "Unsuccessfully Authenticated"
         }
