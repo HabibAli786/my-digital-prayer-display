@@ -315,6 +315,32 @@ function PrayerTimes() {
         }
     }, [clock])
 
+    // Update Hijri Date after Maghrib
+    useEffect(() => {
+        let timeAtChange = strToDate(times[8] + ":00")
+        if(strToDate(clock) > timeAtChange) {
+            const nextDate = nextDay()
+            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+            .then((response) => {
+                const prayertimes = response.data.slice(1)
+                const arr = []
+                if(prayertimes.length > 1) {
+                    for(let i=0; i < prayertimes.length; i++) {
+                        if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
+                            setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
+                        }                     
+                    }
+                    setTimes(arr)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        } else {
+
+        }
+    }, [clock])
+
     // Updating number of slides
     useEffect(() => {
         axios.get(`http://localhost:3001/media/slides`)

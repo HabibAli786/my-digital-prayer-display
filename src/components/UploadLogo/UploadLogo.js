@@ -41,7 +41,7 @@ function UploadLogo(props) {
 
     useEffect(() => {
         console.log("UploadLogo useEffect running")
-        dispatch(authenticate())
+        // dispatch(authenticate())
     }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
