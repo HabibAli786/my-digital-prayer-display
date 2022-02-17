@@ -45,7 +45,7 @@ function UploadTimetable(props) {
 
     useEffect(() => {
         console.log("UploadTimetable useEffect running")
-        dispatch(authenticate())
+        // dispatch(authenticate())
     }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {

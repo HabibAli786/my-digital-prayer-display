@@ -68,7 +68,7 @@ function EditNotifications(props) {
     }
 
     useEffect(() => {
-        dispatch(authenticate())
+        // dispatch(authenticate())
         getNotifications()
     }, [notifications.length])
 

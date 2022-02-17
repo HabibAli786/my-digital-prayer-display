@@ -33,7 +33,7 @@ function User(props) {
     }
 
     useEffect(() => {
-        dispatch(authenticate())
+        // dispatch(authenticate())
     }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {

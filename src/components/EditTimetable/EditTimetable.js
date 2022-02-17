@@ -172,7 +172,7 @@ function EditTimetable(props) {
     }, [data])
 
     useEffect(() => {
-        dispatch(authenticate())
+        // dispatch(authenticate())
         getData()
     }, [])
 
