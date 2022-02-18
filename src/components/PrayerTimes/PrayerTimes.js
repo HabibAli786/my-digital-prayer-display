@@ -330,7 +330,7 @@ function PrayerTimes() {
                             setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
                         }                     
                     }
-                    setTimes(arr)
+                    setHijri(arr)
                 }
             })
             .catch((error) => {
