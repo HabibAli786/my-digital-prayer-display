@@ -428,13 +428,13 @@ function PrayerTimes() {
                         <Col className="col-2 jamaat active-color">Jamaat</Col>
                     </Row>
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
-                        <Col className="col-4 salaah-name">فَجْر</Col>
+                        <Col className="col-4 salaah-name">صلاة الفجر</Col>
                         <Col className="col-4">Fajr</Col>
                         <Col className="col-2">{`${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}`}</Col>
                         <Col className="col-2 active-color">{`${times[1].slice(0, 2) % 12 || 12}:${times[1].slice(3,5)}`}</Col>
                     </Row>
                     <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
-                        <Col className="col-4 salaah-name">-- --</Col>
+                        <Col className="col-4 salaah-name">الشُّروق</Col>
                         <Col className="col-4">Sunrise</Col>
                         <Col className="col-2">{`${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}`}</Col>
                         <Col className="col-2 active-color">-- --</Col>
