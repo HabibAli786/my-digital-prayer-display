@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import PrayerTimes from '../PrayerTimes/PrayerTimes'
 import './JamaatPrayer.css'
 
 function JamaatPrayer(props) {
@@ -15,8 +16,9 @@ function JamaatPrayer(props) {
     useEffect(() => {
         console.log(prayersStatus)
         console.log(prayerTimes)
+        console.log(jummah)
         
-        if(jummah) {
+        if(jummah && prayersStatus[3] === false) {
             setCurrentPrayer("Jummah")
         } else {
             for(let i=0; i < prayersStatus.length;  i++) {
@@ -34,11 +36,10 @@ function JamaatPrayer(props) {
 
     // Setting prayer time
     useEffect(() => {
-
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
         if(currentPrayer === "Dhuhr") { setCurrentTime(prayerTimes[4]) }
-        if(currentPrayer === "Jummah") { setCurrentPrayer(prayerTimes[4]) }
+        if(currentPrayer === "Jummah") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
