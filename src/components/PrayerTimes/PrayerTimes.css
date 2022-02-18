@@ -791,6 +791,11 @@
     .row6 {
         width: 100%;
     }
+
+    .salaah-name {
+        text-align: right;
+        padding-right: 50px !important;
+    }
     .container {
         /* margin: 20px 0px 0px 5px !important; */
         /* margin-left: 5px !important; */
