@@ -326,6 +326,7 @@ function PrayerTimes() {
                 const arr = []
                 if(prayertimes.length > 1) {
                     for(let i=0; i < prayertimes.length; i++) {
+                        console.log(prayertimes[i])
                         if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
                             setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
                         }                     
