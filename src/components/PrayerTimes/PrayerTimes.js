@@ -120,7 +120,7 @@ function PrayerTimes() {
     useEffect(() => {
         setInterval(() => {
             setClock(Clock())
-        }, 900)
+        }, 1000)
 
         // return () => { 
         //     setClock("00:00:00")
@@ -290,10 +290,8 @@ function PrayerTimes() {
         }
     }, [])
 
-    // Update prayertimes after isha
+    // Update prayertimes after every jamaat
     useEffect(() => {
-        const arr = []
-
         for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
             if(prayerFinished[i] === true) {
                 // console.log(i)
@@ -301,7 +299,7 @@ function PrayerTimes() {
                 axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
                 .then((response) => {
                     const prayertimes = response.data.slice(1)
-                    const arr = []
+                    // const arr = []
                     // console.log(i)
                     // console.log(prayertimes)
                     if(prayertimes.length > 1) {
@@ -343,7 +341,7 @@ function PrayerTimes() {
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
                 const prayertimes = response.data.slice(1)
-                const arr = []
+                // const arr = []
                 if(prayertimes.length > 1) {
                     for(let i=0; i < prayertimes.length; i++) {
                         // console.log(prayertimes[i])
@@ -409,7 +407,7 @@ function PrayerTimes() {
         <>
         {/* <JamaatPrayer prayer={} time={} /> */}
         {!jamaatStarted ?
-        <div>
+        <div className="prayertimes-main-div">
             {displaySlideshow ? 
                 <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} 
                     src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} 

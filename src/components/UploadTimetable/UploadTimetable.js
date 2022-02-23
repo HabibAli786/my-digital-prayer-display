@@ -2,17 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row, Modal } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
+// import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
 import Header from '../Header/Header'
 import './UploadTimetable.css'
 import { set_auth, set_username } from "../Redux/actions/authAction";
-import { authenticate } from "../Redux/reducers/authReducer";
+// import { authenticate } from "../Redux/reducers/authReducer";
 
 function UploadTimetable(props) {
     
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { auth } = props
 
     const [file, setFile] = useState(null)

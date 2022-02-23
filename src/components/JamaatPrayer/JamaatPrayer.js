@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import PrayerTimes from '../PrayerTimes/PrayerTimes'
 import './JamaatPrayer.css'
 
 function JamaatPrayer(props) {

@@ -55,7 +55,7 @@ function Notifications(props) {
 
     return (
 
-        <Card className="card-annc mx-5">
+        <Card border="dark" className="card-annc mx-5">
             <Card.Body>
                 <Card.Text className={animation === true ? "annc-current" : "annc-next"}>
                 {notifications[count]}
