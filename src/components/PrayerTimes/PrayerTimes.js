@@ -473,7 +473,7 @@ function PrayerTimes() {
                         <Col className="col-2 active-color">{`${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}`}</Col>
                     </Row>
                 </Container>
-                <Notifications />
+                <Notifications slideshow={displaySlideshow} />
             </div>
             }  
         </div> 
