@@ -1,20 +1,21 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react"
 import { Button, Container, Row, Table } from "react-bootstrap";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
+// import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { useTable } from "react-table";
 
 import Header from "../Header/Header";
 import { set_auth, set_username } from "../Redux/actions/authAction";
-import { authenticate } from "../Redux/reducers/authReducer";
+// import { authenticate } from "../Redux/reducers/authReducer";
 
 import './EditTimetable.css'
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 function EditTimetable(props) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { auth } = props
 
     const columns = useMemo(

@@ -120,7 +120,7 @@ function PrayerTimes() {
     useEffect(() => {
         setInterval(() => {
             setClock(Clock())
-        }, 900)
+        }, 1000)
 
         // return () => { 
         //     setClock("00:00:00")
@@ -290,28 +290,46 @@ function PrayerTimes() {
         }
     }, [])
 
-    // Update prayertimes after isha
+    // Update prayertimes after every jamaat
     useEffect(() => {
-        let timeAtChange = strToDate(times[10] + ":00")
-        if(strToDate(clock) > timeAtChange) {
-            const nextDate = nextDay()
-            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-            .then((response) => {
-                const prayertimes = response.data.slice(1)
-                const arr = []
-                if(prayertimes.length > 1) {
-                    for(let i=0; i < prayertimes.length; i++) {
-                        if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
-                        if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
+        for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
+            if(prayerFinished[i] === true) {
+                // console.log(i)
+                const nextDate = nextDay()
+                axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+                .then((response) => {
+                    const prayertimes = response.data.slice(1)
+                    // const arr = []
+                    // console.log(i)
+                    // console.log(prayertimes)
+                    if(prayertimes.length > 1) {
+                        if(prayertimes[i].startTime) {
+                            // Fajr 
+                            if(i === 0) { times[0] = prayertimes[i].startTime }
+                            // Sunrise
+                            if(i === 1) { times[2] = prayertimes[i].startTime }
+                            // Dhuhr
+                            if(i === 2) { times[3] = prayertimes[i].startTime }
+                            // Asr
+                            if(i === 3) { times[5] = prayertimes[i].startTime }
+                            // Maghrib
+                            if(i === 4) { times[7] = prayertimes[i].startTime }
+                            // Isha
+                            if(i === 5) { times[9] = prayertimes[i].startTime } 
+                        }
+                        if(prayertimes[i].jamaat) { 
+                            if(i === 0) { times[1] = prayertimes[i].jamaat }
+                            if(i === 2) { times[4] = prayertimes[i].jamaat }
+                            if(i === 3) { times[6] = prayertimes[i].jamaat }
+                            if(i === 4) { times[8] = prayertimes[i].jamaat }
+                            if(i === 5) { times[10] = prayertimes[i].startTime }
+                        }
                     }
-                    setTimes(arr)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        } else {
-
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            }
         }
     }, [clock])
 
@@ -323,10 +341,10 @@ function PrayerTimes() {
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
                 const prayertimes = response.data.slice(1)
-                const arr = []
+                // const arr = []
                 if(prayertimes.length > 1) {
                     for(let i=0; i < prayertimes.length; i++) {
-                        console.log(prayertimes[i])
+                        // console.log(prayertimes[i])
                         if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
                             setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
                         }                     
@@ -378,8 +396,8 @@ function PrayerTimes() {
                 } else {
                     setSlideshowCount(slideshowCount + 1)
                 }
-                console.log("slideshowcount " + slideshowCount)
-                console.log("numofslideshowimages " + numOfSlides)
+                // console.log("slideshowcount " + slideshowCount)
+                // console.log("numofslideshowimages " + numOfSlides)
             }, 15000)
         }
         
@@ -389,7 +407,7 @@ function PrayerTimes() {
         <>
         {/* <JamaatPrayer prayer={} time={} /> */}
         {!jamaatStarted ?
-        <div>
+        <div className="prayertimes-main-div">
             {displaySlideshow ? 
                 <img className={displaySlideshow === true ? "slideshow-display slideshow-img" : "slideshow-hide"} 
                     src={`http://localhost:3001/media/slides/${slides[slideshowCount]}`} 
@@ -442,13 +460,13 @@ function PrayerTimes() {
                     <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
                         { isJummah ?
                             <>
-                                <Col className="col-4 salaah-name">صلاة الجماعة</Col>
-                                <Col className="col-4">Jumu'ah</Col>
+                                <Col className="col-4 salaah-name">صَلَاة ٱلْجُمُعَة</Col>
+                                <Col className="col-4">Jumuʿah</Col>
                             </>
                             :
                             <>
                                 <Col className="col-4 salaah-name">صَلَاة ٱلظُّهْر</Col>
-                                <Col className="col-4">Dhuhr</Col>
+                                <Col className="col-4">Ẓuhr</Col>
                             </>
                         }
                         <Col className="col-2">{`${times[3].slice(0, 2) % 12 || 12}:${times[3].slice(3,5)}`}</Col>
@@ -473,7 +491,7 @@ function PrayerTimes() {
                         <Col className="col-2 active-color">{`${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}`}</Col>
                     </Row>
                 </Container>
-                <Notifications />
+                <Notifications slideshow={displaySlideshow} />
             </div>
             }  
         </div> 
