@@ -292,26 +292,46 @@ function PrayerTimes() {
 
     // Update prayertimes after isha
     useEffect(() => {
-        let timeAtChange = strToDate(times[10] + ":00")
-        if(strToDate(clock) > timeAtChange) {
-            const nextDate = nextDay()
-            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-            .then((response) => {
-                const prayertimes = response.data.slice(1)
-                const arr = []
-                if(prayertimes.length > 1) {
-                    for(let i=0; i < prayertimes.length; i++) {
-                        if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
-                        if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }                
-                    }
-                    setTimes(arr)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        } else {
+        const arr = []
 
+        for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
+            if(prayerFinished[i] === true) {
+                // console.log(i)
+                const nextDate = nextDay()
+                axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+                .then((response) => {
+                    const prayertimes = response.data.slice(1)
+                    const arr = []
+                    // console.log(i)
+                    // console.log(prayertimes)
+                    if(prayertimes.length > 1) {
+                        if(prayertimes[i].startTime) {
+                            // Fajr 
+                            if(i === 0) { times[0] = prayertimes[i].startTime }
+                            // Sunrise
+                            if(i === 1) { times[2] = prayertimes[i].startTime }
+                            // Dhuhr
+                            if(i === 2) { times[3] = prayertimes[i].startTime }
+                            // Asr
+                            if(i === 3) { times[5] = prayertimes[i].startTime }
+                            // Maghrib
+                            if(i === 4) { times[7] = prayertimes[i].startTime }
+                            // Isha
+                            if(i === 5) { times[9] = prayertimes[i].startTime } 
+                        }
+                        if(prayertimes[i].jamaat) { 
+                            if(i === 0) { times[1] = prayertimes[i].jamaat }
+                            if(i === 2) { times[4] = prayertimes[i].jamaat }
+                            if(i === 3) { times[6] = prayertimes[i].jamaat }
+                            if(i === 4) { times[8] = prayertimes[i].jamaat }
+                            if(i === 5) { times[10] = prayertimes[i].startTime }
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            }
         }
     }, [clock])
 
