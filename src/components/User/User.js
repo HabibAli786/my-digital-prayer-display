@@ -3,17 +3,18 @@ import Header from '../Header/Header';
 import { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Redirect } from 'react-router';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+// import { connect, useDispatch } from 'react-redux';
 
 import './User.css'
 import Footer from '../Footer/Footer';
 import { set_auth, set_username } from '../Redux/actions/authAction';
 import { Link } from 'react-router-dom';
-import { authenticate } from '../Redux/reducers/authReducer';
+// import { authenticate } from '../Redux/reducers/authReducer';
 
 function User(props) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { auth, set_auth, username, set_username } = props
 
     const Logout = () => {

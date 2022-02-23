@@ -11,8 +11,8 @@ function createWindow() {
         icon: __dirname + '/icon.png',
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true,
-            devTools: true
+            enableRemoteModule: true
+            // devTools: true
         }
     })
     win.maximize()

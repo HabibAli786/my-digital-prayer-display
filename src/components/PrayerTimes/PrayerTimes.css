@@ -650,9 +650,9 @@
         color: grey;
     }
     
-    .active {
+    /* .active {
     
-    }
+    } */
     
     .clock {
         font-family: sans-serif;
@@ -764,6 +764,10 @@
 }
 
 @media (min-width: 1400px) {
+    .prayertimes-main-div {
+        overflow: hidden; /* Hide scrollbars */
+    }
+
     .prayertimes-background {
         content:url(http://localhost:3000/PrayerTimes-Background.jpg);
         width: 100%;

@@ -2,17 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+// import { connect, useDispatch } from "react-redux";
 import { connect, useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 
 import Header from '../Header/Header'
 import { set_auth, set_username } from "../Redux/actions/authAction";
-import { authenticate } from "../Redux/reducers/authReducer";
+// import { authenticate } from "../Redux/reducers/authReducer";
 import './UploadLogo.css'
 
 function UploadLogo(props) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const { auth } = props
 
     const [file, setFile] = useState(null)

@@ -1,6 +1,6 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import { set_auth, set_username } from '../actions/authAction'
+// import axios from 'axios';
+// import Cookies from 'universal-cookie';
+// import { set_auth, set_username } from '../actions/authAction'
 
 const init = {
     auth: false,
