@@ -2,38 +2,27 @@ import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap'
 import axios from 'axios';
 import './Notifications.css'
+import { connect, useDispatch } from 'react-redux';
+import { set_count, set_notifi } from '../Redux/actions/notificationAction';
+import { setNotifi } from '../Redux/reducers/notificationReducer';
 
 
 function Notifications(props) {
 
-    const { slideshow } = props
+    const { slideshow, notifi, count, set_count } = props
 
     const [animation, setAnimation] = useState(false)
-    const [notifications, setNotifications] = useState([
-        "No Notifications"
-    ])
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let source = axios.CancelToken.source();
-        axios.get(`http://localhost:3001/notifications`, {
-            cancelToken: source.token
-        })
-            .then((response) => {
-                setNotifications(response.data.notifications)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        return () => { 
-            source.cancel("Cancelling in cleanup");
-        }
+        dispatch(setNotifi())
     }, [animation])
 
     // Notification Animation useEffect
     useEffect(() => {
         // How long the text will appear
-        if(!slideshow) {
             if(animation === false) {
                 setTimeout(() => {
                     setAnimation(true)
@@ -42,27 +31,41 @@ function Notifications(props) {
             // How long till NEXT text will appear
             if(animation === true){
                 setTimeout(() => {
-                    setCount(count + 1)
-                    setAnimation(false)
-                    if(count === notifications.length-1) {
-                        setCount(0)
+                    if(!slideshow) {
+                        set_count(count + 1)
+                        setAnimation(false)
+                        if(count === notifi.length-1) {
+                            set_count(0)
+                        }
                     }
                 }, 3000)
             }
-        }
+            // console.log(notifi)
+            // console.log(count)
     }, [animation])
-
 
     return (
 
         <Card border="dark" className="card-annc mx-5">
             <Card.Body>
                 <Card.Text className={animation === true ? "annc-current" : "annc-next"}>
-                {notifications[count]}
+                {notifi[count]}
                 </Card.Text>
             </Card.Body>
         </Card>
     )
 }
+const matchStateToProps = state => ({
+    notifi : state.notifi.notifications,
+    count: state.notifi.count
+  })
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        set_notifi : (notifi) => dispatch(set_notifi(notifi)),
+        set_count : (count) => dispatch(set_count(count))
+    }
+}
 
-export default Notifications
+// export default Admin
+export default connect(matchStateToProps, mapDispatchToProps)(Notifications);
