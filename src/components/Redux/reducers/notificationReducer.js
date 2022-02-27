@@ -5,7 +5,7 @@ const init = {
     notifications : ["No notifications"]
 }
 
-const authReducer = (state = init, action) => {
+const notificationReducer = (state = init, action) => {
     switch(action.type) {
         case 'SET_NOTIFICATIONS':
             return {
@@ -17,7 +17,8 @@ const authReducer = (state = init, action) => {
     }
 }
 
-export const authenticate = () => async (dispatch, getState) => {
+export const setNotifications = () => async (dispatch, getState) => {
+    console.log("I am running in thunk")
     let notifications = null
 
     axios.get(`http://localhost:3001/notifications`)
@@ -28,7 +29,8 @@ export const authenticate = () => async (dispatch, getState) => {
             console.log(error)
         })
     console.log("I am running Thunk Notifications")
-    dispatch(set_notifications(notifications))
+    // dispatch(set_notifications(notifications))
+    console.log(notifications)
 }
 
-export default authReducer;
+export default notificationReducer;
