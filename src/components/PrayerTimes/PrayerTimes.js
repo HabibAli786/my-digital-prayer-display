@@ -322,7 +322,7 @@ function PrayerTimes() {
                             if(i === 2) { times[4] = prayertimes[i].jamaat }
                             if(i === 3) { times[6] = prayertimes[i].jamaat }
                             if(i === 4) { times[8] = prayertimes[i].jamaat }
-                            if(i === 5) { times[10] = prayertimes[i].startTime }
+                            if(i === 5) { times[10] = prayertimes[i].jamaat }
                         }
                     }
                 })
