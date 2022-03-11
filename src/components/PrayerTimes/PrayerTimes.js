@@ -329,7 +329,7 @@ function PrayerTimes() {
                 })
             }
         }
-    }, [clock])
+    }, [prayerFinished])
 
     // Update Hijri Date after Maghrib
     useEffect(() => {
@@ -374,8 +374,6 @@ function PrayerTimes() {
     // Slideshow Animation useEffect
     useEffect(() => {
         // How long will the image take to come on the screen
-        console.log(slideshowCount)
-        console.log(displaySlideshow)
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
