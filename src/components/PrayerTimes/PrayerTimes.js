@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 
@@ -129,8 +129,6 @@ function PrayerTimes() {
 
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
-        // console.log(weekDay())
-        // console.log("I am Compare " + compareDate.toLocaleString("default", { weekday: "long" }))
         if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate(times[10]+":00")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
@@ -335,8 +333,7 @@ function PrayerTimes() {
 
     // Update Hijri Date after Maghrib
     useEffect(() => {
-        let timeAtChange = strToDate(times[8] + ":00")
-        if(strToDate(clock) > timeAtChange) {
+        if(prayerFinished[4]) {
             const nextDate = nextDay()
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
@@ -354,10 +351,8 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
-        } else {
-
         }
-    }, [clock])
+    }, [prayerFinished])
 
     // Updating number of slides
     useEffect(() => {
@@ -374,12 +369,13 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
-    }, [clock])
+    }, [])
 
     // Slideshow Animation useEffect
     useEffect(() => {
         // How long will the image take to come on the screen
-
+        console.log(slideshowCount)
+        console.log(displaySlideshow)
         if(displaySlideshow === false) {
             setTimeout(() => {
                 setDisplaySlideshow(true)
