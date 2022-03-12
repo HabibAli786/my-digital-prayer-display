@@ -129,7 +129,7 @@ function PrayerTimes() {
 
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
-        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate(times[10]+":00")) {
+        if(strToDate(clock) > strToDate("00:00:00") && strToDate(clock) < strToDate("00:00:10")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
@@ -167,11 +167,15 @@ function PrayerTimes() {
             timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
 
             if(clockToDate > timesToDate) {
-                newPrayerFinshed[j] = true
-                setprayerFinished(newPrayerFinshed)
+                if(prayerFinished[j] !== true) {
+                    newPrayerFinshed[j] = true
+                    setprayerFinished(newPrayerFinshed)
+                }
             } else {
-                newPrayerFinshed[j] = false
-                setprayerFinished(newPrayerFinshed)
+                if(clockToDate > strToDate("00:00:00") && clockToDate < strToDate("00:00:10")) {
+                    newPrayerFinshed[j] = false
+                    setprayerFinished(newPrayerFinshed)
+                }
             }
             j = j+1
         }                        
@@ -290,50 +294,55 @@ function PrayerTimes() {
 
     // Update prayertimes after every jamaat
     useEffect(() => {
-        for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
-            if(prayerFinished[i] === true) {
-                // console.log(i)
-                const nextDate = nextDay()
-                axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-                .then((response) => {
-                    const prayertimes = response.data.slice(1)
-                    // const arr = []
+        if(jamaatStarted === false) {
+            console.log("I am running")
+            for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
+                if(prayerFinished[i] === true) {
                     // console.log(i)
-                    // console.log(prayertimes)
-                    if(prayertimes.length > 1) {
-                        if(prayertimes[i].startTime) {
-                            // Fajr 
-                            if(i === 0) { times[0] = prayertimes[i].startTime }
-                            // Sunrise
-                            if(i === 1) { times[2] = prayertimes[i].startTime }
-                            // Dhuhr
-                            if(i === 2) { times[3] = prayertimes[i].startTime }
-                            // Asr
-                            if(i === 3) { times[5] = prayertimes[i].startTime }
-                            // Maghrib
-                            if(i === 4) { times[7] = prayertimes[i].startTime }
-                            // Isha
-                            if(i === 5) { times[9] = prayertimes[i].startTime } 
+                    const nextDate = nextDay()
+                    axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+                    .then((response) => {
+                        const prayertimes = response.data.slice(1)
+                        // const arr = []
+                        // console.log(i)
+                        // console.log(prayertimes)
+                        if(prayertimes.length > 1) {
+                            if(prayertimes[i].startTime) {
+                                // Fajr 
+                                if(i === 0) { times[0] = prayertimes[i].startTime }
+                                // Sunrise
+                                if(i === 1) { times[2] = prayertimes[i].startTime }
+                                // Dhuhr
+                                if(i === 2) { times[3] = prayertimes[i].startTime }
+                                // Asr
+                                if(i === 3) { times[5] = prayertimes[i].startTime }
+                                // Maghrib
+                                if(i === 4) { times[7] = prayertimes[i].startTime }
+                                // Isha
+                                if(i === 5) { times[9] = prayertimes[i].startTime } 
+                            }
+                            if(prayertimes[i].jamaat) { 
+                                if(i === 0) { times[1] = prayertimes[i].jamaat }
+                                if(i === 2) { times[4] = prayertimes[i].jamaat }
+                                if(i === 3) { times[6] = prayertimes[i].jamaat }
+                                if(i === 4) { times[8] = prayertimes[i].jamaat }
+                                if(i === 5) { times[10] = prayertimes[i].jamaat }
+                            }
                         }
-                        if(prayertimes[i].jamaat) { 
-                            if(i === 0) { times[1] = prayertimes[i].jamaat }
-                            if(i === 2) { times[4] = prayertimes[i].jamaat }
-                            if(i === 3) { times[6] = prayertimes[i].jamaat }
-                            if(i === 4) { times[8] = prayertimes[i].jamaat }
-                            if(i === 5) { times[10] = prayertimes[i].jamaat }
-                        }
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                }
             }
         }
-    }, [prayerFinished])
+    }, [jamaatStarted])
 
     // Update Hijri Date after Maghrib
     useEffect(() => {
-        if(prayerFinished[4]) {
+        let timeAtChange = strToDate(times[8] + ":00")
+        if(strToDate(clock) > timeAtChange) {
+            console.log("running hijri update")
             const nextDate = nextDay()
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
