@@ -435,9 +435,9 @@ function PrayerTimes() {
                 <h1 className={makrooh ? "clock-colon-2 makrooh-clock" : "clock-colon-2"}>:</h1>
                 <h1 className={makrooh ? "clock-seconds makrooh-clock" : "clock-seconds"}>{clock.slice(6, 8)}</h1>
 
-                {/* Makrooh or QR Code */}
+                {/* Makrooh or Secondary Image */}
                 {makrooh ?
-                    <MakroohTime /> : <img className='prayertimes-qr-code' src="images/qr-code.png" alt="qr-code" /> 
+                    <MakroohTime /> : <img className='prayertimes-qr-code' src="http://localhost:3001/media/secondary-image" alt="qr-code" /> 
                 }
 
                 {/* Prayertimes */}
