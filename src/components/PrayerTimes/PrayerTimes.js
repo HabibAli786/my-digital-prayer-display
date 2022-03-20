@@ -114,6 +114,7 @@ function PrayerTimes() {
     const [displaySlideshow, setDisplaySlideshow] = useState(false)
 
     // Makrooh
+    const [makroohTimes, setMakroohTimes] = useState(["", "", ""])
     const [makrooh, setMakrooh] = useState(false)
 
     // Update live clock every second
@@ -130,6 +131,7 @@ function PrayerTimes() {
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
         if(strToDate(clock) > strToDate("00:00:00") && strToDate(clock) < strToDate("00:00:10")) {
+            console.log("hello")
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
@@ -172,7 +174,7 @@ function PrayerTimes() {
                     setprayerFinished(newPrayerFinshed)
                 }
             } else {
-                if(clockToDate > strToDate("00:00:00") && clockToDate < strToDate("00:00:10")) {
+                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:15")) {
                     newPrayerFinshed[j] = false
                     setprayerFinished(newPrayerFinshed)
                 }
@@ -224,7 +226,12 @@ function PrayerTimes() {
 
     }, [clock])
 
-    // Display Makrooh Time
+    // Set Initial Makrooh times for the day
+    useEffect(() => {
+        setMakroohTimes(state => [times[2], times[3], times[7]])
+    }, [times])
+
+    // Find if time is makrooh
     useEffect(() => {
         let clockDate = new Date()
         let makroohStart = new Date()
@@ -238,21 +245,21 @@ function PrayerTimes() {
 
         let result = false
 
-        for(let i=0; i < 11; i += 1) {
-            if(i === 0 || i === 1 || i === 4 || i === 5 || i === 6 || i === 8 || i === 9 || i === 10) {
-                continue
-            }
+        for(let i=0; i < makroohTimes.length; i++) {
 
-            const timesHours = times[i].slice(0, 2)
-            const timesMinutes = times[i].slice(3, 5)
-            const timesSeconds = times[i].slice(6, 8)
+            const timesHours = makroohTimes[i].slice(0, 2)
+            const timesMinutes = makroohTimes[i].slice(3, 5)
+            const timesSeconds = makroohTimes[i].slice(6, 8)
 
-            const makroohStartMinutes = parseInt(timesMinutes) - 20
-
-            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            // Start time
             makroohEnd.setHours(timesHours, timesMinutes, timesSeconds)
+
+            // 20 minutes before start time
+            const makroohStartMinutes = makroohEnd.getMinutes() - 20
+            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
             
             if(clockDate >= makroohStart && clockDate < makroohEnd) {
+                console.log("true")
                 result = true
                 break
             } else {
@@ -295,7 +302,6 @@ function PrayerTimes() {
     // Update prayertimes after every jamaat
     useEffect(() => {
         if(jamaatStarted === false) {
-            console.log("I am running")
             for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
                 if(prayerFinished[i] === true) {
                     // console.log(i)
