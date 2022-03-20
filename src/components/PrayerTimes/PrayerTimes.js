@@ -9,9 +9,6 @@ import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
 const greyOut = (times, prayerFinished, clock) => {
-    console.log(times)
-    console.log(prayerFinished)
-    console.log(clock)
     let clockToDate = new Date()
     let timesToDate = new Date()
     const newPrayerFinshed = [...prayerFinished]
@@ -125,7 +122,7 @@ const strToDate = (str) => {
         }
         // console.log(str)
     } else {
-        console.log(str + " str not long enough")
+        // console.log(str + " str not long enough")
     }
     // console.log(str)
 }
@@ -195,7 +192,6 @@ function PrayerTimes() {
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
         if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
-            console.log("hello")
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
@@ -291,7 +287,6 @@ function PrayerTimes() {
             makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
             
             if(clockDate >= makroohStart && clockDate < makroohEnd) {
-                console.log("true")
                 result = true
                 break
             } else {
