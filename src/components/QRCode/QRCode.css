@@ -1,4 +1,10 @@
 @media (min-width: 576px) {
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 400px;
+        border-style: solid;
+    }
+
     .uploadQR-inputImage {
         margin-top : 40px;
         font-size: 30px;
@@ -11,6 +17,12 @@
 }
 
 @media (min-width: 768px) { 
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 400px;
+        border-style: solid;
+    }
+
     .uploadQR-inputImage {
         margin-top : 40px;
         font-size: 30px;
@@ -23,6 +35,12 @@
 }
 
 @media (min-width: 992px) { 
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 400px;
+        border-style: solid;
+    }
+    
     .uploadQR-inputImage {
         margin-top : 40px;
         font-size: 30px;
@@ -34,7 +52,13 @@
     }
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 400px;
+        border-style: solid;
+    }
+
     .uploadQR-inputImage {
         margin-top : 40px !important;
         font-size: 30px !important;
@@ -47,6 +71,12 @@
 }
 
 @media (min-width: 1400px) {
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 400px;
+        border-style: solid;
+    }
+
     .uploadQR-inputImage {
         margin-top : 40px !important;
         font-size: 30px !important;

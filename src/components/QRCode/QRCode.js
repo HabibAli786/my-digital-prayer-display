@@ -54,13 +54,9 @@ function QRCode() {
                     <h1>QR Code Status: {checked ? "On" : "Off"}</h1>
                 </Col>
             </Row>
-            <Row>
+            <Row className="uploadQR-row">
                 <Col>
                     <AiOutlineCloudUpload size={200} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
                     <Form onSubmit={uploadFile}>
                         <input 
                             className="uploadQR-inputImage" 
