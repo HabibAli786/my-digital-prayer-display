@@ -130,7 +130,7 @@ function PrayerTimes() {
 
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
-        if(strToDate(clock) > strToDate("00:00:00") && strToDate(clock) < strToDate("00:00:10")) {
+        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
             console.log("hello")
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
@@ -174,9 +174,9 @@ function PrayerTimes() {
                     setprayerFinished(newPrayerFinshed)
                 }
             } else {
-                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:15")) {
-                    newPrayerFinshed[j] = false
-                    setprayerFinished(newPrayerFinshed)
+                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
+                    setprayerFinished([false, false, false, false, false, false])
+                    break
                 }
             }
             j = j+1
@@ -302,6 +302,7 @@ function PrayerTimes() {
     // Update prayertimes after every jamaat
     useEffect(() => {
         if(jamaatStarted === false) {
+            let newTimes = [...times]
             for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
                 if(prayerFinished[i] === true) {
                     // console.log(i)
@@ -315,24 +316,24 @@ function PrayerTimes() {
                         if(prayertimes.length > 1) {
                             if(prayertimes[i].startTime) {
                                 // Fajr 
-                                if(i === 0) { times[0] = prayertimes[i].startTime }
+                                if(i === 0) { newTimes[0] = prayertimes[i].startTime }
                                 // Sunrise
-                                if(i === 1) { times[2] = prayertimes[i].startTime }
+                                if(i === 1) { newTimes[2] = prayertimes[i].startTime }
                                 // Dhuhr
-                                if(i === 2) { times[3] = prayertimes[i].startTime }
+                                if(i === 2) { newTimes[3] = prayertimes[i].startTime }
                                 // Asr
-                                if(i === 3) { times[5] = prayertimes[i].startTime }
+                                if(i === 3) { newTimes[5] = prayertimes[i].startTime }
                                 // Maghrib
-                                if(i === 4) { times[7] = prayertimes[i].startTime }
+                                if(i === 4) { newTimes[7] = prayertimes[i].startTime }
                                 // Isha
-                                if(i === 5) { times[9] = prayertimes[i].startTime } 
+                                if(i === 5) { newTimes[9] = prayertimes[i].startTime } 
                             }
                             if(prayertimes[i].jamaat) { 
-                                if(i === 0) { times[1] = prayertimes[i].jamaat }
-                                if(i === 2) { times[4] = prayertimes[i].jamaat }
-                                if(i === 3) { times[6] = prayertimes[i].jamaat }
-                                if(i === 4) { times[8] = prayertimes[i].jamaat }
-                                if(i === 5) { times[10] = prayertimes[i].jamaat }
+                                if(i === 0) { newTimes[1] = prayertimes[i].jamaat }
+                                if(i === 2) { newTimes[4] = prayertimes[i].jamaat }
+                                if(i === 3) { newTimes[6] = prayertimes[i].jamaat }
+                                if(i === 4) { newTimes[8] = prayertimes[i].jamaat }
+                                if(i === 5) { newTimes[10] = prayertimes[i].jamaat }
                             }
                         }
                     })
@@ -341,6 +342,7 @@ function PrayerTimes() {
                     })
                 }
             }
+            setTimes(newTimes)
         }
     }, [jamaatStarted])
 
@@ -366,6 +368,9 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
+        }
+        if(isJummah === true) {
+            setIsJummah(false)
         }
     }, [prayerFinished])
 
