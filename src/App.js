@@ -10,6 +10,7 @@ import EditTimetable from './components/EditTimetable/EditTimetable';
 import UploadLogo from './components/UploadLogo/UploadLogo';
 import EditNotifications from './components/EditNotifications/EditNotifications';
 import EditSlides from './components/EditSlides/EditSlides';
+import QRCode from './components/QRCode/QRCode';
 
 function App() {
 
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path="/editSlides">
           <EditSlides />
+        </Route>
+        <Route path="/QRCode">
+          <QRCode />
         </Route>
       </Switch>
     </div>
