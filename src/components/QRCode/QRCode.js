@@ -2,17 +2,22 @@ import axios from "axios";
 import { useState } from "react";
 import { Col, Container, Row, Button, Form } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { connect } from "react-redux";
 import Switch from "react-switch";
 import Header from "../Header/Header";
+import { set_qrToggle } from "../Redux/actions/prayertimesAction";
 
 import './QRCode.css'
 
-function QRCode() {
+function QRCode(props) {
+
+    const { qr_toggle, set_qrToggle } = props
 
     const [checked, setChecked] = useState({ checked: false })
 
     const handleChange = (nextChecked) => {
         setChecked(nextChecked)
+        set_qrToggle(true)
     }
 
     const [file, setFile] = useState(null)
@@ -37,6 +42,8 @@ function QRCode() {
         }
         e.target.logo.value = ""
     }
+
+    console.log(qr_toggle)
 
 
     return (
@@ -74,6 +81,14 @@ function QRCode() {
 
 }
 
-   
+const matchStateToProps = state => ({
+    qr_toggle : state.prayertimes.qr_toggle,
+  })
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        set_qrToggle : (qr_toggle) => dispatch(set_qrToggle(qr_toggle)),
+    }
+}   
 
-export default QRCode;
+export default connect(matchStateToProps, mapDispatchToProps)(QRCode);
