@@ -18,17 +18,16 @@ function Notifications(props) {
 
     useEffect(() => {
         dispatch(setNotifi())
-    }, [animation])
+    }, [])
 
     // Notification Animation useEffect
     useEffect(() => {
         // How long the text will appear
-            if(animation === false) {
-                setTimeout(() => {
-                    setAnimation(true)
-                }, 10000)
-            }
-            // How long till NEXT text will appear
+        if(animation === false) {
+            setTimeout(() => {
+                setAnimation(true)
+            }, 6000)
+        } else {
             if(animation === true){
                 setTimeout(() => {
                     if(!slideshow) {
@@ -40,9 +39,11 @@ function Notifications(props) {
                     }
                 }, 3000)
             }
-            // console.log(notifi)
-            // console.log(count)
+        }
     }, [animation])
+
+    console.log(count)
+    console.log(animation)
 
     return (
 

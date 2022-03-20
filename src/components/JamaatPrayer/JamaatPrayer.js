@@ -13,16 +13,16 @@ function JamaatPrayer(props) {
 
     // Finding current prayer
     useEffect(() => {
-        console.log(prayersStatus)
-        console.log(prayerTimes)
-        console.log(jummah)
+        // console.log(prayersStatus)
+        // console.log(prayerTimes)
+        // console.log(jummah)
         
         if(jummah && prayersStatus[3] === false) {
             setCurrentPrayer("Jummah")
         } else {
             for(let i=0; i < prayersStatus.length;  i++) {
                 if(prayersStatus[i] === false) {
-                    console.log(prayerNames[i-1])
+                    // console.log(prayerNames[i-1])
                     setCurrentPrayer(prayerNames[i-1])
                     break
                 }
