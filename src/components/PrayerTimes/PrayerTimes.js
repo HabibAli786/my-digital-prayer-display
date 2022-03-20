@@ -8,6 +8,45 @@ import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
+const greyOut = (times, prayerFinished, clock) => {
+    console.log(times)
+    console.log(prayerFinished)
+    console.log(clock)
+    let clockToDate = new Date()
+    let timesToDate = new Date()
+    const newPrayerFinshed = [...prayerFinished]
+
+    const clockHours = clock.slice(0, 2)
+    const clockMinutes = clock.slice(3, 5)
+    const clockSeconds = clock.slice(6, 8)
+
+    clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+    let j = 0
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
+                continue
+            }
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
+
+            if(clockToDate > timesToDate) {
+                if(prayerFinished[j] !== true) {
+                    newPrayerFinshed[j] = true
+                }
+            } else {
+                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
+                    return prayerFinished = [false, false, false, false, false, false]
+                }
+            }
+            j = j+1
+        }
+    return newPrayerFinshed                        
+}
+
 const Clock = () => {
     const date = new Date()
     let hours = date.getHours()
@@ -128,6 +167,31 @@ function PrayerTimes() {
         // }
     }, [clock])
 
+    // set intial prayertimes
+    useEffect(() => {
+        axios.get(`http://localhost:3001/prayertimes/`)
+        .then((response) => {
+            const prayertimes = response.data.slice(1)
+            const arr = []
+            if(prayertimes.length > 1) {
+                for(let i=0; i < prayertimes.length; i++) {
+                    if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
+                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
+                    if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
+                        setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
+                    }          
+                }
+                setTimes(arr)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        return () => {
+            
+        }
+    }, [])
+
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
         if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
@@ -147,41 +211,9 @@ function PrayerTimes() {
 
     // Grey out prayers that have finshed
     useEffect(() => {
-        let clockToDate = new Date()
-        let timesToDate = new Date()
-        const newPrayerFinshed = [...prayerFinished]
-
-        const clockHours = clock.slice(0, 2)
-        const clockMinutes = clock.slice(3, 5)
-        const clockSeconds = clock.slice(6, 8)
-
-        clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
-
-        let j = 0
-        for(let i=0; i < 11; i += 1) {
-            if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
-                continue
-            }
-            const timesHours = times[i].slice(0, 2)
-            const timesMinutes = times[i].slice(3, 5)
-            const timesSeconds = times[i].slice(6, 8)
-
-            timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
-
-            if(clockToDate > timesToDate) {
-                if(prayerFinished[j] !== true) {
-                    newPrayerFinshed[j] = true
-                    setprayerFinished(newPrayerFinshed)
-                }
-            } else {
-                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
-                    setprayerFinished([false, false, false, false, false, false])
-                    break
-                }
-            }
-            j = j+1
-        }                        
-    }, [clock])
+        let result = greyOut(times, prayerFinished, clock)
+        setprayerFinished(result)
+    }, [jamaatStarted])
     
     // Display Jamaat Display
     useEffect(() => {
@@ -273,31 +305,6 @@ function PrayerTimes() {
         }
 
     }, [clock])
-
-    // set intial prayertimes
-    useEffect(() => {
-        axios.get(`http://localhost:3001/prayertimes/`)
-        .then((response) => {
-            const prayertimes = response.data.slice(1)
-            const arr = []
-            if(prayertimes.length > 1) {
-                for(let i=0; i < prayertimes.length; i++) {
-                    if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
-                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }
-                    if(prayertimes[i].hijriDate && prayertimes[i].hijriMonth && prayertimes[i].hijriYear) { 
-                        setHijri([prayertimes[i].hijriDate, prayertimes[i].hijriMonth, prayertimes[i].hijriYear])
-                    }          
-                }
-                setTimes(arr)
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-        return () => {
-            
-        }
-    }, [])
 
     // Update prayertimes after every jamaat
     useEffect(() => {
