@@ -209,7 +209,7 @@ function PrayerTimes() {
     useEffect(() => {
         let result = greyOut(times, prayerFinished, clock)
         setprayerFinished(result)
-    }, [jamaatStarted])
+    }, [clock])
     
     // Display Jamaat Display
     useEffect(() => {
