@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 
@@ -7,42 +7,6 @@ import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
 import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
-
-const greyOut = (times, prayerFinished, clock) => {
-    let clockToDate = new Date()
-    let timesToDate = new Date()
-    const newPrayerFinshed = [...prayerFinished]
-
-    const clockHours = clock.slice(0, 2)
-    const clockMinutes = clock.slice(3, 5)
-    const clockSeconds = clock.slice(6, 8)
-
-    clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
-
-    let j = 0
-        for(let i=0; i < 11; i += 1) {
-            if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
-                continue
-            }
-            const timesHours = times[i].slice(0, 2)
-            const timesMinutes = times[i].slice(3, 5)
-            const timesSeconds = times[i].slice(6, 8)
-
-            timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
-
-            if(clockToDate > timesToDate) {
-                if(prayerFinished[j] !== true) {
-                    newPrayerFinshed[j] = true
-                }
-            } else {
-                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
-                    return prayerFinished = [false, false, false, false, false, false]
-                }
-            }
-            j = j+1
-        }
-    return newPrayerFinshed                        
-}
 
 const Clock = () => {
     const date = new Date()
@@ -207,8 +171,43 @@ function PrayerTimes() {
 
     // Grey out prayers that have finshed
     useEffect(() => {
-        let result = greyOut(times, prayerFinished, clock)
-        setprayerFinished(result)
+        let clockToDate = new Date()
+        let timesToDate = new Date()
+        let newPrayerFinshed = [...prayerFinished]
+        let update = false
+
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
+
+        clockToDate.setHours(clockHours, clockMinutes, clockSeconds)
+
+        let j = 0
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 3 || i === 5 || i === 7 || i === 9) {
+                continue
+            }
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
+
+            timesToDate.setHours(timesHours, timesMinutes, timesSeconds)
+
+            if(clockToDate > timesToDate) {
+                if(prayerFinished[j] !== true) {
+                    newPrayerFinshed[j] = true
+                    update = true
+                }
+            } else {
+                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
+                    newPrayerFinshed = [false, false, false, false, false, false]
+                }
+            }
+            j = j+1
+        }
+        if(update) {
+            setprayerFinished(newPrayerFinshed)
+        }
     }, [clock])
     
     // Display Jamaat Display
