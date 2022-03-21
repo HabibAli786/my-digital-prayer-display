@@ -8,52 +8,6 @@ import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
-const updatePrayer = (jamaatStarted, times, prayerFinished) => {
-    if(jamaatStarted === false) {
-        let newTimes = [...times]
-        for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
-            if(prayerFinished[i] === true) {
-                // console.log(i)
-                const nextDate = nextDay()
-                axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-                .then((response) => {
-                    const prayertimes = response.data.slice(1)
-                    // const arr = []
-                    // console.log(i)
-                    // console.log(prayertimes)
-                    if(prayertimes.length > 1) {
-                        if(prayertimes[i].startTime) {
-                            // Fajr 
-                            if(i === 0) { newTimes[0] = prayertimes[i].startTime }
-                            // Sunrise
-                            if(i === 1) { newTimes[2] = prayertimes[i].startTime }
-                            // Dhuhr
-                            if(i === 2) { newTimes[3] = prayertimes[i].startTime }
-                            // Asr
-                            if(i === 3) { newTimes[5] = prayertimes[i].startTime }
-                            // Maghrib
-                            if(i === 4) { newTimes[7] = prayertimes[i].startTime }
-                            // Isha
-                            if(i === 5) { newTimes[9] = prayertimes[i].startTime } 
-                        }
-                        if(prayertimes[i].jamaat) { 
-                            if(i === 0) { newTimes[1] = prayertimes[i].jamaat }
-                            if(i === 2) { newTimes[4] = prayertimes[i].jamaat }
-                            if(i === 3) { newTimes[6] = prayertimes[i].jamaat }
-                            if(i === 4) { newTimes[8] = prayertimes[i].jamaat }
-                            if(i === 5) { newTimes[10] = prayertimes[i].jamaat }
-                        }
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-            }
-        }
-        return newTimes
-    }
-}
-
 const Clock = () => {
     const date = new Date()
     let hours = date.getHours()
