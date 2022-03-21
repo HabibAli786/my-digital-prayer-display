@@ -8,6 +8,52 @@ import MakroohTime from '../MakroohTime/MakroohTime'
 import './PrayerTimes.css'
 import { Link } from 'react-router-dom';
 
+const updatePrayer = (jamaatStarted, times, prayerFinished) => {
+    if(jamaatStarted === false) {
+        let newTimes = [...times]
+        for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
+            if(prayerFinished[i] === true) {
+                // console.log(i)
+                const nextDate = nextDay()
+                axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+                .then((response) => {
+                    const prayertimes = response.data.slice(1)
+                    // const arr = []
+                    // console.log(i)
+                    // console.log(prayertimes)
+                    if(prayertimes.length > 1) {
+                        if(prayertimes[i].startTime) {
+                            // Fajr 
+                            if(i === 0) { newTimes[0] = prayertimes[i].startTime }
+                            // Sunrise
+                            if(i === 1) { newTimes[2] = prayertimes[i].startTime }
+                            // Dhuhr
+                            if(i === 2) { newTimes[3] = prayertimes[i].startTime }
+                            // Asr
+                            if(i === 3) { newTimes[5] = prayertimes[i].startTime }
+                            // Maghrib
+                            if(i === 4) { newTimes[7] = prayertimes[i].startTime }
+                            // Isha
+                            if(i === 5) { newTimes[9] = prayertimes[i].startTime } 
+                        }
+                        if(prayertimes[i].jamaat) { 
+                            if(i === 0) { newTimes[1] = prayertimes[i].jamaat }
+                            if(i === 2) { newTimes[4] = prayertimes[i].jamaat }
+                            if(i === 3) { newTimes[6] = prayertimes[i].jamaat }
+                            if(i === 4) { newTimes[8] = prayertimes[i].jamaat }
+                            if(i === 5) { newTimes[10] = prayertimes[i].jamaat }
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            }
+        }
+        return newTimes
+    }
+}
+
 const Clock = () => {
     const date = new Date()
     let hours = date.getHours()
@@ -101,6 +147,9 @@ function PrayerTimes() {
 
     // Prayertimes
     const [times, setTimes] = useState([
+        "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"
+    ])
+    const [nextTimes, setNextTimes] = useState([
         "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"
     ])
     const [prayerFinished, setprayerFinished] = useState([false, false, false, false, false, false])
@@ -199,7 +248,7 @@ function PrayerTimes() {
                     update = true
                 }
             } else {
-                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:06")) {
+                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:04")) {
                     newPrayerFinshed = [false, false, false, false, false, false]
                 }
             }
@@ -223,7 +272,8 @@ function PrayerTimes() {
         clockDate.setHours(clockHours, clockMinutes, clockSeconds)
 
         let result = false
-
+        
+        let j = 0
         for(let i=0; i < 11; i += 1) {
             if(i === 0 || i === 2 || i === 3 || i === 5 || i === 7 || i === 9) {
                 continue
@@ -239,11 +289,14 @@ function PrayerTimes() {
             jamaatEnd.setHours(timesHours, jamaatEndMinutes.toString(), timesSeconds)
             
             if(clockDate > jamaatStart && clockDate < jamaatEnd) {
-                result = true
-                break
+                if(prayerFinished[j] !== true && j !== 1) {
+                    result = true
+                    break
+                }
             } else {
                 result = false
             }
+        j = j+1
         }
         if(result) {
             setJamaatStarted(true)
@@ -300,54 +353,52 @@ function PrayerTimes() {
 
     }, [clock])
 
+    useEffect(() => {
+        const nextDate = nextDay()
+        axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+        .then((response) => {
+            const prayertimes = response.data.slice(1)
+            if(prayertimes) { setNextTimes(prayertimes) }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [date])
+
     // Update prayertimes after every jamaat
     useEffect(() => {
         if(jamaatStarted === false) {
             let newTimes = [...times]
             for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
                 if(prayerFinished[i] === true) {
-                    // console.log(i)
-                    const nextDate = nextDay()
-                    axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-                    .then((response) => {
-                        const prayertimes = response.data.slice(1)
-                        // const arr = []
-                        // console.log(i)
-                        // console.log(prayertimes)
-                        if(prayertimes.length > 1) {
-                            if(prayertimes[i].startTime) {
-                                // Fajr 
-                                if(i === 0) { newTimes[0] = prayertimes[i].startTime }
-                                // Sunrise
-                                if(i === 1) { newTimes[2] = prayertimes[i].startTime }
-                                // Dhuhr
-                                if(i === 2) { newTimes[3] = prayertimes[i].startTime }
-                                // Asr
-                                if(i === 3) { newTimes[5] = prayertimes[i].startTime }
-                                // Maghrib
-                                if(i === 4) { newTimes[7] = prayertimes[i].startTime }
-                                // Isha
-                                if(i === 5) { newTimes[9] = prayertimes[i].startTime } 
-                            }
-                            if(prayertimes[i].jamaat) { 
-                                if(i === 0) { newTimes[1] = prayertimes[i].jamaat }
-                                if(i === 2) { newTimes[4] = prayertimes[i].jamaat }
-                                if(i === 3) { newTimes[6] = prayertimes[i].jamaat }
-                                if(i === 4) { newTimes[8] = prayertimes[i].jamaat }
-                                if(i === 5) { newTimes[10] = prayertimes[i].jamaat }
-                            }
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+                    if(nextTimes[i].startTime) {
+                        // Fajr 
+                        if(i === 0) { newTimes[0] = nextTimes[i].startTime }
+                        // Sunrise
+                        if(i === 1) { newTimes[2] = nextTimes[i].startTime }
+                        // Dhuhr
+                        if(i === 2) { newTimes[3] = nextTimes[i].startTime }
+                        // Asr
+                        if(i === 3) { newTimes[5] = nextTimes[i].startTime }
+                        // Maghrib
+                        if(i === 4) { newTimes[7] = nextTimes[i].startTime }
+                        // Isha
+                        if(i === 5) { newTimes[9] = nextTimes[i].startTime } 
+                    }
+                    if(nextTimes[i].jamaat) { 
+                        if(i === 0) { newTimes[1] = nextTimes[i].jamaat }
+                        if(i === 2) { newTimes[4] = nextTimes[i].jamaat }
+                        if(i === 3) { newTimes[6] = nextTimes[i].jamaat }
+                        if(i === 4) { newTimes[8] = nextTimes[i].jamaat }
+                        if(i === 5) { newTimes[10] = nextTimes[i].jamaat }
+                    }
                 }
             }
             setTimes(newTimes)
         }
-    }, [jamaatStarted])
+    }, [clock])
 
-    // Update Hijri Date after Maghrib
+    // Update Hijri Date after MaghribnextTimes
     useEffect(() => {
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
