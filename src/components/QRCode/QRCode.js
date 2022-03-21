@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row, Button, Form } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { connect } from "react-redux";
@@ -43,7 +43,10 @@ function QRCode(props) {
         e.target.logo.value = ""
     }
 
-    console.log(qr_toggle)
+    useEffect(() => {
+        console.log(qr_toggle)
+        setChecked({...checked, qr_toggle})
+    }, [])
 
 
     return (
