@@ -242,8 +242,9 @@ function PrayerTimes() {
             jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
             jamaatEnd.setHours(timesHours, jamaatEndMinutes.toString(), timesSeconds)
             
+            // console.log(j)
             if(clockDate > jamaatStart && clockDate < jamaatEnd) {
-                if(prayerFinished[j] !== true && j !== 1) {
+                if(prayerFinished[j] !== true) {
                     result = true
                     break
                 }
@@ -251,6 +252,9 @@ function PrayerTimes() {
                 result = false
             }
         j = j+1
+        if(j === 1) {
+            j+=1
+        }
         }
         if(result) {
             setJamaatStarted(true)
@@ -322,6 +326,7 @@ function PrayerTimes() {
     // Update prayertimes after every jamaat
     useEffect(() => {
         if(jamaatStarted === false) {
+            console.log("I am running")
             let newTimes = [...times]
             for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
                 if(prayerFinished[i] === true) {
@@ -350,7 +355,7 @@ function PrayerTimes() {
             }
             setTimes(newTimes)
         }
-    }, [clock])
+    }, [jamaatStarted])
 
     // Update Hijri Date after MaghribnextTimes
     useEffect(() => {
