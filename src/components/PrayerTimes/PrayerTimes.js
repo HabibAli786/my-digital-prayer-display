@@ -209,6 +209,7 @@ function PrayerTimes() {
             j = j+1
         }
         if(update) {
+            console.log("Prayertime has finished")
             setprayerFinished(newPrayerFinshed)
         }
     }, [clock])
@@ -248,17 +249,20 @@ function PrayerTimes() {
                     result = true
                     break
                 }
+                console.log("I should not be running")
             } else {
+                console.log("If statement false")
                 result = false
             }
-        j = j+1
-        if(j === 1) {
-            j+=1
-        }
+            j = j+1
+            if(j === 1) {
+                j+=1
+            }
         }
         if(result) {
             setJamaatStarted(true)
         } else {
+            console.log("I am false")
             setJamaatStarted(false)
         }
 
@@ -325,7 +329,9 @@ function PrayerTimes() {
 
     // Update prayertimes after every jamaat
     useEffect(() => {
+        console.log(jamaatStarted)
         if(jamaatStarted === false) {
+            console.log(jamaatStarted)
             console.log("I am running")
             let newTimes = [...times]
             for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
