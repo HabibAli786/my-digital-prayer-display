@@ -131,6 +131,22 @@ function PrayerTimes() {
         // }
     }, [clock])
 
+    // Update day, month and Jummah if it is Friday
+    useEffect(() => {
+        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
+            const compareDate = new Date()
+            const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
+            if(date[0] !== compareDay) {
+                setDate([weekDay(), dayMonth()])
+            }
+            if(date[0] === "Friday") {
+                setIsJummah(true)
+            } else {
+                setIsJummah(false)
+            }
+        }
+    }, [clock])
+
     // set intial prayertimes
     useEffect(() => {
         axios.get(`http://localhost:3001/prayertimes/`)
@@ -154,23 +170,27 @@ function PrayerTimes() {
         return () => {
             
         }
-    }, [])
+    }, [date])
 
-    // Update day, month and Jummah if it is Friday
+    // Next days Prayertimes
     useEffect(() => {
-        if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
-            const compareDate = new Date()
-            const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
-            if(date[0] !== compareDay) {
-                setDate([weekDay(), dayMonth()])
+        const nextDate = nextDay()
+        axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+        .then((response) => {
+            const prayertimes = response.data.slice(1)
+            const arr = []
+            if(prayertimes.length > 1) {
+                for(let i=0; i < prayertimes.length; i++) {
+                    if(prayertimes[i].startTime) { arr.push(prayertimes[i].startTime) }
+                    if(prayertimes[i].jamaat) { arr.push(prayertimes[i].jamaat) }          
+                }
+                setNextTimes(arr)
             }
-            if(date[0] === "Friday") {
-                setIsJummah(true)
-            } else {
-                setIsJummah(false)
-            }
-        }
-    }, [clock])
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [date])
 
     // Grey out prayers that have finshed
     useEffect(() => {
@@ -209,13 +229,13 @@ function PrayerTimes() {
             j = j+1
         }
         if(update) {
-            console.log("Prayertime has finished")
             setprayerFinished(newPrayerFinshed)
         }
     }, [clock])
     
     // Display Jamaat Display
     useEffect(() => {
+        console.log("Hello")
         let clockDate = new Date()
         let jamaatStart = new Date()
         let jamaatEnd = new Date()
@@ -262,11 +282,10 @@ function PrayerTimes() {
         if(result) {
             setJamaatStarted(true)
         } else {
-            console.log("I am false")
             setJamaatStarted(false)
         }
 
-    }, [clock])
+    }, [prayerFinished])
 
     // Set Initial Makrooh times for the day
     useEffect(() => {
@@ -307,63 +326,16 @@ function PrayerTimes() {
                 result = false
             }
         }
-        if(result) {
+        if(result && makrooh === false) {
             setMakrooh(true)
         } else {
-            setMakrooh(false)
+            if(result === false) {
+                setMakrooh(false)
+            }
         }
-
     }, [clock])
 
-    useEffect(() => {
-        const nextDate = nextDay()
-        axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
-        .then((response) => {
-            const prayertimes = response.data.slice(1)
-            if(prayertimes) { setNextTimes(prayertimes) }
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }, [date])
-
-    // Update prayertimes after every jamaat
-    useEffect(() => {
-        console.log(jamaatStarted)
-        if(jamaatStarted === false) {
-            console.log(jamaatStarted)
-            console.log("I am running")
-            let newTimes = [...times]
-            for(let i=0; i <= prayerFinished.length-1; i+=1 ) {
-                if(prayerFinished[i] === true) {
-                    if(nextTimes[i].startTime) {
-                        // Fajr 
-                        if(i === 0) { newTimes[0] = nextTimes[i].startTime }
-                        // Sunrise
-                        if(i === 1) { newTimes[2] = nextTimes[i].startTime }
-                        // Dhuhr
-                        if(i === 2) { newTimes[3] = nextTimes[i].startTime }
-                        // Asr
-                        if(i === 3) { newTimes[5] = nextTimes[i].startTime }
-                        // Maghrib
-                        if(i === 4) { newTimes[7] = nextTimes[i].startTime }
-                        // Isha
-                        if(i === 5) { newTimes[9] = nextTimes[i].startTime } 
-                    }
-                    if(nextTimes[i].jamaat) { 
-                        if(i === 0) { newTimes[1] = nextTimes[i].jamaat }
-                        if(i === 2) { newTimes[4] = nextTimes[i].jamaat }
-                        if(i === 3) { newTimes[6] = nextTimes[i].jamaat }
-                        if(i === 4) { newTimes[8] = nextTimes[i].jamaat }
-                        if(i === 5) { newTimes[10] = nextTimes[i].jamaat }
-                    }
-                }
-            }
-            setTimes(newTimes)
-        }
-    }, [jamaatStarted])
-
-    // Update Hijri Date after MaghribnextTimes
+    // Update Hijri Date after Maghrib nextTimes
     useEffect(() => {
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
@@ -479,13 +451,22 @@ function PrayerTimes() {
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
                         <Col className="col-4 salaah-name">صلاة الفجر</Col>
                         <Col className="col-4">Fajr</Col>
-                        <Col className="col-2">{`${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}`}</Col>
-                        <Col className="col-2 active-color">{`${times[1].slice(0, 2) % 12 || 12}:${times[1].slice(3,5)}`}</Col>
+                        <Col className="col-2"> 
+                            {!prayerFinished ? `${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}` : 
+                                `${nextTimes[0].slice(0, 2) % 12 || 12}:${nextTimes[0].slice(3,5)}`}
+                        </Col>
+                        <Col className="col-2 active-color">
+                            {!prayerFinished ? `${times[1].slice(0, 2) % 12 || 12}:${times[1].slice(3,5)}` : 
+                                `${nextTimes[1].slice(0, 2) % 12 || 12}:${nextTimes[1].slice(3,5)}`}
+                        </Col>
                     </Row>
                     <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
                         <Col className="col-4 salaah-name">الشُّروق</Col>
                         <Col className="col-4">Sunrise</Col>
-                        <Col className="col-2">{`${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}`}</Col>
+                        <Col className="col-2">
+                            {!prayerFinished ? `${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}` : 
+                                `${nextTimes[2].slice(0, 2) % 12 || 12}:${nextTimes[2].slice(3,5)}`}
+                        </Col>
                         <Col className="col-2 active-color">-- --</Col>
                     </Row>
                     <Row className={prayerFinished[2] === true ? "finshed row3" : "finished row3"}>
@@ -500,26 +481,50 @@ function PrayerTimes() {
                                 <Col className="col-4">Ẓuhr</Col>
                             </>
                         }
-                        <Col className="col-2">{`${times[3].slice(0, 2) % 12 || 12}:${times[3].slice(3,5)}`}</Col>
-                        <Col className="col-2 active-color">{`${times[4].slice(0, 2) % 12 || 12}:${times[4].slice(3,5)}`}</Col>
+                        <Col className="col-2">
+                            {!prayerFinished ? `${times[3].slice(0, 2) % 12 || 12}:${times[3].slice(3,5)}` : 
+                                `${nextTimes[3].slice(0, 2) % 12 || 12}:${nextTimes[3].slice(3,5)}`}
+                        </Col>
+                        <Col className="col-2 active-color">
+                            {!prayerFinished ? `${times[4].slice(0, 2) % 12 || 12}:${times[4].slice(3,5)}` : 
+                                `${nextTimes[4].slice(0, 2) % 12 || 12}:${nextTimes[4].slice(3,5)}`}
+                        </Col>
                     </Row>
                     <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
                         <Col className="col-4 salaah-name">صَلَاةُ العَصْر</Col>
                         <Col className="col-4">Asr</Col>
-                        <Col className="col-2">{`${times[5].slice(0, 2) % 12 || 12}:${times[5].slice(3,5)}`}</Col>
-                        <Col className="col-2 active-color">{`${times[6].slice(0, 2) % 12 || 12}:${times[6].slice(3,5)}`}</Col>
+                        <Col className="col-2">
+                            {!prayerFinished ? `${times[5].slice(0, 2) % 12 || 12}:${times[5].slice(3,5)}` : 
+                                `${nextTimes[5].slice(0, 2) % 12 || 12}:${nextTimes[5].slice(3,5)}`}
+                        </Col>
+                        <Col className="col-2 active-color">
+                            {!prayerFinished ? `${times[6].slice(0, 2) % 12 || 12}:${times[6].slice(3,5)}` : 
+                                `${nextTimes[6].slice(0, 2) % 12 || 12}:${nextTimes[6].slice(3,5)}`}
+                        </Col>
                     </Row>
                     <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
                         <Col className="col-4 salaah-name">صَلَاةُ اَلْمَغْرِب</Col>
                         <Col className="col-4">Maghrib</Col>
-                        <Col className="col-2">{`${times[7].slice(0, 2) % 12 || 12}:${times[7].slice(3,5)}`}</Col>
-                        <Col className="col-2 active-color">{`${times[8].slice(0, 2) % 12 || 12}:${times[8].slice(3,5)}`}</Col>
+                        <Col className="col-2">
+                            {!prayerFinished ? `${times[7].slice(0, 2) % 12 || 12}:${times[7].slice(3,5)}` : 
+                                `${nextTimes[7].slice(0, 2) % 12 || 12}:${nextTimes[7].slice(3,5)}`}
+                        </Col>
+                        <Col className="col-2 active-color">
+                            {!prayerFinished ? `${times[8].slice(0, 2) % 12 || 12}:${times[8].slice(3,5)}` : 
+                                `${nextTimes[8].slice(0, 2) % 12 || 12}:${nextTimes[8].slice(3,5)}`}
+                        </Col>
                     </Row>
                     <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
                         <Col className="col-4 salaah-name">صَلَاةُ العِشَاء</Col>
                         <Col className="col-4">Isha</Col>
-                        <Col className="col-2">{`${times[9].slice(0, 2) % 12 || 12}:${times[9].slice(3,5)}`}</Col>
-                        <Col className="col-2 active-color">{`${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}`}</Col>
+                        <Col className="col-2">
+                            {!prayerFinished ? `${times[9].slice(0, 2) % 12 || 12}:${times[9].slice(3,5)}` : 
+                                `${nextTimes[9].slice(0, 2) % 12 || 12}:${nextTimes[9].slice(3,5)}`}
+                        </Col>
+                        <Col className="col-2 active-color">
+                            {!prayerFinished ? `${times[10].slice(0, 2) % 12 || 12}:${times[10].slice(3,5)}` : 
+                                `${nextTimes[10].slice(0, 2) % 12 || 12}:${nextTimes[10].slice(3,5)}`}
+                        </Col>
                     </Row>
                 </Container>
                 <Notifications slideshow={displaySlideshow} />
