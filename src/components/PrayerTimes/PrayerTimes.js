@@ -138,6 +138,7 @@ function PrayerTimes() {
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
             if(date[0] !== compareDay) {
                 setDate([weekDay(), dayMonth()])
+                setprayerFinished(state => state = [false, false, false, false, false, false])
             }
             if(date[0] === "Friday") {
                 setIsJummah(true)
@@ -220,10 +221,6 @@ function PrayerTimes() {
                 if(prayerFinished[j] !== true) {
                     newPrayerFinshed[j] = true
                     update = true
-                }
-            } else {
-                if(clockToDate > strToDate("00:00:01") && clockToDate < strToDate("00:00:04")) {
-                    newPrayerFinshed = [false, false, false, false, false, false]
                 }
             }
             j = j+1
