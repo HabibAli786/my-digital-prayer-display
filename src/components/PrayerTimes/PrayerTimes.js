@@ -349,9 +349,9 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
-        }
-        if(isJummah === true) {
-            setIsJummah(false)
+            if(isJummah === true) {
+                setIsJummah(false)
+            }
         }
     }, [prayerFinished])
 
