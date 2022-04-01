@@ -122,13 +122,13 @@ function PrayerTimes() {
 
     // Update live clock every second
     useEffect(() => {
-        setInterval(() => {
+        let clockTimeout = setInterval(() => {
             setClock(Clock())
         }, 1000)
 
-        // return () => { 
-        //     setClock("00:00:00")
-        // }
+        return () => { 
+            clearTimeout(clockTimeout)
+        }
     }, [clock])
 
     // Update day, month and Jummah if it is Friday
