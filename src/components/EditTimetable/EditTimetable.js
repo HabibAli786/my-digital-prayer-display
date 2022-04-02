@@ -111,18 +111,7 @@ function EditTimetable(props) {
     const [success, setSuccess] = useState(null)
     const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
-
-    const getData = () => {
-        axios.get('http://localhost:3001/prayertimes/request/all')
-        .then((res) => {
-            console.log(res.data)
-            setData(res.data)
-            setLoading(false)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
+    const [post, setPost] = useState(false)
 
     // We need to keep the table from resetting the pageIndex when we
     // Update data. So we can keep track of that flag with a ref.
@@ -147,7 +136,41 @@ function EditTimetable(props) {
     }
 
     const submitData = () => {
-        console.log(data)
+      setPost(true)
+    }
+
+    // After data chagnes, we turn the flag back off
+    // so that if data actually changes when we're not
+    // editing it, the page is reset
+    useEffect(() => {
+        setSkipPageReset(false)
+    }, [data])
+
+    useEffect(() => {
+        // dispatch(authenticate())
+        let unmounted = false
+        let source = axios.CancelToken.source();
+        axios.get('http://localhost:3001/prayertimes/request/all')
+        .then((res) => {
+            // console.log(res.data)
+            setData(res.data)
+            setLoading(false)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
+        return function () {
+          unmounted = true;
+          source.cancel("Cancelling in cleanup");
+        }
+    }, [])
+
+    useEffect(() => {
+      let unmounted = false
+      let source = axios.CancelToken.source();
+      if(post) {
+        // console.log(data)
         axios({
             method: 'POST',
             data: data,
@@ -161,21 +184,15 @@ function EditTimetable(props) {
           } else {
             setSuccess(false)
           }
-          console.log(res.data)
+          // console.log(res.data)
         })
-    }
-
-    // After data chagnes, we turn the flag back off
-    // so that if data actually changes when we're not
-    // editing it, the page is reset
-    useEffect(() => {
-        setSkipPageReset(false)
-    }, [data])
-
-    useEffect(() => {
-        // dispatch(authenticate())
-        getData()
-    }, [])
+      }
+      
+      return function () {
+        unmounted = true;
+        source.cancel("Cancelling in cleanup");
+      }
+    }, [post, data])
 
     const EditableCell = ({
         value: initialValue,

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap'
-import axios from 'axios';
-import './Notifications.css'
 import { connect, useDispatch } from 'react-redux';
 import { set_count, set_notifi } from '../Redux/actions/notificationAction';
 import { setNotifi } from '../Redux/reducers/notificationReducer';
 
+import './Notifications.css'
 
 function Notifications(props) {
 

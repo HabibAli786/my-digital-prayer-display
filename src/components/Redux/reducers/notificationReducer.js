@@ -25,6 +25,7 @@ const notificationReducer = (state = init, action) => {
 }
 
 export const setNotifi = () => async (dispatch, getState) => {
+    let source = axios.CancelToken.source();
     // console.log("I am running in thunk")
     let notifications = null
 
@@ -41,6 +42,7 @@ export const setNotifi = () => async (dispatch, getState) => {
             console.log(error)
             notifications = ["No Notifications"]
     })
+    source.cancel("Cancelling in cleanup");
 }
 
 export default notificationReducer;
