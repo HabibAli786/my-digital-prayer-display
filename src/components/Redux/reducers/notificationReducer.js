@@ -1,6 +1,3 @@
-import axios from 'axios';
-import { set_notifi } from "../actions/notificationAction"
-
 const init = {
     notifications : true,
     count: 0
