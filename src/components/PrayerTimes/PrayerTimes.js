@@ -140,11 +140,6 @@ function PrayerTimes() {
                 setDate([weekDay(), dayMonth()])
                 setprayerFinished(state => state = [false, false, false, false, false, false])
             }
-            if(date[0] === "Friday") {
-                setIsJummah(true)
-            } else {
-                setIsJummah(false)
-            }
         }
     }, [clock])
 
@@ -331,7 +326,7 @@ function PrayerTimes() {
     useEffect(() => {
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
-            console.log("running hijri update")
+            // console.log("running hijri update")
             const nextDate = nextDay()
             axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
             .then((response) => {
@@ -349,7 +344,9 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
-            if(isJummah === true) {
+            if(date[0] === "Thursday") {
+                setIsJummah(true)
+            } else {
                 setIsJummah(false)
             }
         }
