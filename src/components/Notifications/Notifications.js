@@ -1,8 +1,8 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux';
 import { set_count, set_notifi } from '../Redux/actions/notificationAction';
-import { setNotifi } from '../Redux/reducers/notificationReducer';
 
 import './Notifications.css'
 
@@ -16,7 +16,25 @@ function Notifications(props) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setNotifi())
+        let source = axios.CancelToken.source();
+        // console.log("I am running in thunk")
+        let notifications = null
+
+        axios.get(`http://localhost:3001/notifications`)
+            .then((response) => {
+            // console.log(response.data.notifications)
+            if(response.data.notifications) {
+                notifications = response.data.notifications
+                // console.log(notifications)
+                dispatch(set_notifi(notifications))
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            notifications = ["No Notifications"]
+            set_notifi(notifications)
+        })
+        source.cancel("Cancelling in cleanup");
     }, [])
 
     // Notification Animation useEffect
