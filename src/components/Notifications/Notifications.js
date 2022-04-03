@@ -68,7 +68,7 @@ function Notifications(props) {
         }
     }, [animation])
 
-    console.log(notifi[count])
+    console.log(notifi)
 
     return (
         <Card border="dark" className="card-annc mx-5">
