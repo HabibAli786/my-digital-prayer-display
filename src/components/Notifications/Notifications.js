@@ -42,16 +42,14 @@ function Notifications(props) {
 
     // Notification Animation useEffect
     useEffect(() => {
-        let animationTrue
-        let animationFalse
         // How long the text will appear
         if(animation === false) {
-            animationTrue = setTimeout(() => {
+            setTimeout(() => {
                 setAnimation(true)
             }, 6000)
         } else {
             if(animation === true){
-                animationFalse = setTimeout(() => {
+                setTimeout(() => {
                     if(!slideshow) {
                         set_count(count + 1)
                         setAnimation(false)
@@ -63,8 +61,7 @@ function Notifications(props) {
             }
         }
         return () => { 
-            clearTimeout(animationTrue)
-            clearTimeout(animationFalse)
+            
         }
     }, [animation])
 
