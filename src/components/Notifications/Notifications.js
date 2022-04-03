@@ -24,7 +24,9 @@ function Notifications(props) {
             if(response.data.notifications) {
                 notifications = response.data.notifications
                 // console.log(notifications)
-                set_notifi(notifications)
+                if(notifications) {
+                    set_notifi(notifications)
+                }
             }
         })
         .catch((error) => {
