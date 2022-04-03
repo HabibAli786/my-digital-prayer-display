@@ -8,7 +8,7 @@ import './Notifications.css'
 
 function Notifications(props) {
 
-    const { slideshow, notifi, count, set_count } = props
+    const { slideshow, notifi, count, set_count, set_notifi } = props
 
     const [animation, setAnimation] = useState(false)
     // const [count, setCount] = useState(0)
@@ -40,14 +40,16 @@ function Notifications(props) {
 
     // Notification Animation useEffect
     useEffect(() => {
+        let animationTrue
+        let animationFalse
         // How long the text will appear
         if(animation === false) {
-            setTimeout(() => {
+            animationTrue = setTimeout(() => {
                 setAnimation(true)
             }, 6000)
         } else {
             if(animation === true){
-                setTimeout(() => {
+                animationFalse = setTimeout(() => {
                     if(!slideshow) {
                         set_count(count + 1)
                         setAnimation(false)
@@ -58,10 +60,15 @@ function Notifications(props) {
                 }, 3000)
             }
         }
+        return () => { 
+            clearTimeout(animationTrue)
+            clearTimeout(animationFalse)
+        }
     }, [animation])
 
-    return (
+    console.log(notifi[count])
 
+    return (
         <Card border="dark" className="card-annc mx-5">
             <Card.Body>
                 <Card.Text className={animation === true ? "annc-current" : "annc-next"}>
