@@ -24,7 +24,9 @@ function Notifications(props) {
             if(response.data.notifications) {
                 notifications = response.data.notifications
                 // console.log(notifications)
-                set_notifi(notifications)
+                if(notifications) {
+                    set_notifi(notifications)
+                }
             }
         })
         .catch((error) => {
@@ -53,7 +55,7 @@ function Notifications(props) {
                     if(!slideshow) {
                         set_count(count + 1)
                         setAnimation(false)
-                        if(count === notifi.length-1) {
+                        if(count === notifi.length-1 || count >= notifi.length) {
                             set_count(0)
                         }
                     }
@@ -66,7 +68,7 @@ function Notifications(props) {
         }
     }, [animation])
 
-    console.log(notifi[count])
+    console.log(notifi)
 
     return (
         <Card border="dark" className="card-annc mx-5">

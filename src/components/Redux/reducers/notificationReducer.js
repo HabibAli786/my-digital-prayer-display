@@ -1,5 +1,5 @@
 const init = {
-    notifications : true,
+    notifications : ["No Notifications"],
     count: 0
 }
 
