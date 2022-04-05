@@ -23,7 +23,7 @@ function User(props) {
             withCredentials: true,
             url: 'http://localhost:3001/admin/logout'
         }).then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             if(res.data === "Logged out") {
                 set_auth(false)
                 set_username(null)

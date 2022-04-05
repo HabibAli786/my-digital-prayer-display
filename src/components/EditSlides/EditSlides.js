@@ -20,7 +20,7 @@ function EditSlides(props) {
     const [error, setError] = useState(null)
 
     const getSlides = () => {
-        console.log("getSlides is running")
+        // console.log("getSlides is running")
         axios({
             method: 'GET',
             withCredentials: true,
@@ -28,7 +28,7 @@ function EditSlides(props) {
         }).then((res) => {
             // console.log(res.data)
             const data = res.data.files
-            console.log(data)
+            // console.log(data)
             if(data.length >= 1) {
                 setSlides(data)
             } else {
@@ -47,7 +47,7 @@ function EditSlides(props) {
             url: 'http://localhost:3001/media/slides/admin/delete'
         })
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             getSlides()
         })
     }
@@ -56,14 +56,14 @@ function EditSlides(props) {
         e.preventDefault()
         const data = new FormData()
         data.append('slide', slideToUpload)
-        console.log(data)
+        // console.log(data)
         // console.log(e.target.value)
-        console.log(slideToUpload)
+        // console.log(slideToUpload)
         if(slideToUpload) {
             axios.post('http://localhost:3001/media/slides/admin/add', data, {
                 'content-type': 'multipart/form-data'
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 if(res.data !== "File has been uploaded successfully") {
                     setError(res.data)
                 }
@@ -82,7 +82,7 @@ function EditSlides(props) {
         getSlides()
     }, [slides.length])
 
-    console.log(slides.length)
+    // console.log(slides.length)
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )

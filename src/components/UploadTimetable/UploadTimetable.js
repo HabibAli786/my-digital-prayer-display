@@ -30,12 +30,12 @@ function UploadTimetable(props) {
         const data = new FormData()
         data.append('prayertimes', file)
         // console.log(e.target.value)
-        console.log(file)
+        // console.log(file)
         if(file) {
             axios.post('http://localhost:3001/media/uploadTimetable', data, {
                 'content-type': 'multipart/form-data'
             }).then(res => { // then print response status
-                console.log(res);
+                // console.log(res);
                 setServerStatus(res.data)
             })
         } else {
@@ -45,7 +45,7 @@ function UploadTimetable(props) {
     }
 
     useEffect(() => {
-        console.log("UploadTimetable useEffect running")
+        // console.log("UploadTimetable useEffect running")
         // dispatch(authenticate())
     }, [])
 
