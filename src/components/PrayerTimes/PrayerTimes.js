@@ -122,12 +122,12 @@ function PrayerTimes() {
 
     // Update live clock every second
     useEffect(() => {
-        let clockTimeout = setInterval(() => {
+        let clockInterval = setInterval(() => {
             setClock(Clock())
         }, 1000)
 
         return () => { 
-            clearTimeout(clockTimeout)
+            clearInterval(clockInterval)
         }
     }, [clock])
 
