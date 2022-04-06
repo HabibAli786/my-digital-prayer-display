@@ -25,13 +25,13 @@ function UploadLogo(props) {
         const data = new FormData()
         data.append('logo', file)
         // console.log(e.target.value)
-        console.log(file)
-        console.log(data)
+        // console.log(file)
+        // console.log(data)
         if(file) {
             axios.post('http://localhost:3001/media/logo', data, {
                 'content-type': 'multipart/form-data'
             }).then(res => { // then print response status
-                console.log(res);
+                // console.log(res);
                 setServerStatus(res.data)
             })
         } else {
@@ -41,7 +41,7 @@ function UploadLogo(props) {
     }
 
     useEffect(() => {
-        console.log("UploadLogo useEffect running")
+        // console.log("UploadLogo useEffect running")
         // dispatch(authenticate())
     }, [file, serverStatus])
 

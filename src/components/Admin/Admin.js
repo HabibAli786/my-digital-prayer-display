@@ -27,7 +27,7 @@ function Admin(props) {
                 url: 'http://localhost:3001/admin/login'
             })
             .then((res) => {
-                console.log("I am coming from the server " + res.data)
+                // console.log("I am coming from the server " + res.data)
                 if(res.data === 'Successfully Authenticated') {
                     set_auth(res.data)
                 } else {
@@ -49,7 +49,7 @@ function Admin(props) {
     }
 
     useEffect(() => {
-        console.log("admin useEffect running...")
+        // console.log("admin useEffect running...")
         dispatch(authenticate())
         // login()
     }, [])

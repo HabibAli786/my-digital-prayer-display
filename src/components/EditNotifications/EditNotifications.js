@@ -44,7 +44,7 @@ function EditNotifications(props) {
             url: 'http://localhost:3001/notifications/delete'
         })
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             getNotifications()
         })
     }
@@ -62,7 +62,7 @@ function EditNotifications(props) {
             url: 'http://localhost:3001/notifications/add'
         })
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             getNotifications()
             event.target.reset()
         })
@@ -73,7 +73,7 @@ function EditNotifications(props) {
         getNotifications()
     }, [notifications.length])
 
-    console.log(notifications)
+    // console.log(notifications)
     
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to="/admin" /> )
