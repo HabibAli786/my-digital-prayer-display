@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 
@@ -122,17 +122,20 @@ function PrayerTimes() {
 
     // Update live clock every second
     useEffect(() => {
-        let clockInterval = setInterval(() => {
-            setClock(Clock())
+        let abortController = new AbortController();  
+        const clockInterval = setInterval(() => {
+                setClock(Clock())
         }, 1000)
 
         return () => { 
             clearInterval(clockInterval)
+            abortController.abort();
         }
     }, [clock])
 
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
+        let abortController = new AbortController();
         if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
@@ -141,10 +144,15 @@ function PrayerTimes() {
                 setprayerFinished(state => state = [false, false, false, false, false, false])
             }
         }
-    }, [clock])
+
+        return () => { 
+            abortController.abort();
+        }
+    }, [clock, date])
 
     // set intial prayertimes
     useEffect(() => {
+        let abortController = new AbortController();
         axios.get(`http://localhost:3001/prayertimes/`)
         .then((response) => {
             const prayertimes = response.data.slice(1)
@@ -163,13 +171,15 @@ function PrayerTimes() {
         .catch((error) => {
             console.log(error)
         })
-        return () => {
-            
+
+        return () => { 
+            abortController.abort();
         }
     }, [date])
 
     // Next days Prayertimes
     useEffect(() => {
+        let abortController = new AbortController();
         const nextDate = nextDay()
         axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
         .then((response) => {
@@ -186,10 +196,16 @@ function PrayerTimes() {
         .catch((error) => {
             console.log(error)
         })
+
+        return () => { 
+            abortController.abort();
+        }
     }, [date])
 
     // Grey out prayers that have finshed
     useEffect(() => {
+        let abortController = new AbortController();
+
         let clockToDate = new Date()
         let timesToDate = new Date()
         let newPrayerFinshed = [...prayerFinished]
@@ -223,10 +239,15 @@ function PrayerTimes() {
         if(update) {
             setprayerFinished(newPrayerFinshed)
         }
-    }, [clock])
+
+        return () => { 
+            abortController.abort();
+        }
+    }, [clock, prayerFinished, times])
     
     // Display Jamaat Display
     useEffect(() => {
+        let abortController = new AbortController();
         let clockDate = new Date()
         let jamaatStart = new Date()
         let jamaatEnd = new Date()
@@ -272,15 +293,26 @@ function PrayerTimes() {
             setJamaatStarted(false)
         }
 
+        return () => { 
+            abortController.abort();
+        }
+
     }, [clock, prayerFinished, times])
 
     // Set Initial Makrooh times for the day
     useEffect(() => {
+        let abortController = new AbortController();
         setMakroohTimes(state => [times[2], times[3], times[7]])
+
+        return () => { 
+            abortController.abort();
+        }
     }, [times])
 
     // Find if time is makrooh
     useEffect(() => {
+        let abortController = new AbortController();
+
         let clockDate = new Date()
         let makroohStart = new Date()
         let makroohEnd = new Date()
@@ -320,10 +352,16 @@ function PrayerTimes() {
                 setMakrooh(false)
             }
         }
+
+        return () => { 
+            abortController.abort();
+        }
     }, [clock, makrooh, makroohTimes])
 
     // Update Hijri Date after Maghrib nextTimes
     useEffect(() => {
+        let abortController = new AbortController();
+
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
             // console.log("running hijri update")
@@ -350,10 +388,16 @@ function PrayerTimes() {
                 setIsJummah(false)
             }
         }
+
+        return () => { 
+            abortController.abort();
+        }
     }, [prayerFinished])
 
     // Updating number of slides
     useEffect(() => {
+        let abortController = new AbortController();
+
         axios.get(`http://localhost:3001/media/slides`)
             .then((response) => {
                 const data = response.data
@@ -367,10 +411,16 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
+        
+        return () => { 
+            abortController.abort();
+        }
     }, [])
 
     // Slideshow Animation useEffect
     useEffect(() => {
+        let abortController = new AbortController();
+
         // How long will the image take to come on the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
@@ -393,6 +443,9 @@ function PrayerTimes() {
             }, 15000)
         }
         
+        return () => { 
+            abortController.abort();
+        }
     }, [displaySlideshow])
 
     return(

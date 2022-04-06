@@ -49,9 +49,15 @@ function Admin(props) {
     }
 
     useEffect(() => {
+        let abortController = new AbortController();
+
         // console.log("admin useEffect running...")
         dispatch(authenticate())
         // login()
+
+        return () => { 
+            abortController.abort();
+        }
     }, [])
     
     return (

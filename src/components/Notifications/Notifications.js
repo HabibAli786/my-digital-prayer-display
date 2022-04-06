@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Card } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { set_count, set_notifi } from '../Redux/actions/notificationAction';
@@ -15,6 +15,7 @@ function Notifications(props) {
 
     useEffect(() => {
         let source = axios.CancelToken.source();
+        let abortController = new AbortController();
         // console.log("I am running in thunk")
         let notifications = null
 
@@ -37,6 +38,7 @@ function Notifications(props) {
         
         return () => { 
             source.cancel("Cancelling in cleanup");
+            abortController.abort();
         }
     }, [])
 
@@ -44,20 +46,19 @@ function Notifications(props) {
     useEffect(() => {
         let animationTrue
         let animationFalse
+        let abortController = new AbortController();
         // How long the text will appear
         if(animation === false) {
             animationTrue = setTimeout(() => {
                 setAnimation(true)
             }, 6000)
         } else {
-            if(animation === true){
+            if(animation && !slideshow){
                 animationFalse = setTimeout(() => {
-                    if(!slideshow) {
-                        set_count(count + 1)
-                        setAnimation(false)
-                        if(count === notifi.length-1 || count >= notifi.length) {
-                            set_count(0)
-                        }
+                    set_count(count + 1)
+                    setAnimation(false)
+                    if(count === notifi.length-1 || count >= notifi.length) {
+                        set_count(0)
                     }
                 }, 3000)
             }
@@ -65,6 +66,7 @@ function Notifications(props) {
         return () => { 
             clearTimeout(animationTrue)
             clearTimeout(animationFalse)
+            abortController.abort();
         }
     }, [animation])
 
