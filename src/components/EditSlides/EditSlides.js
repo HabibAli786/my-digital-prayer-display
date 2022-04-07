@@ -21,6 +21,7 @@ function EditSlides(props) {
 
     const getSlides = () => {
         // console.log("getSlides is running")
+        let source = axios.CancelToken.source();
         axios({
             method: 'GET',
             withCredentials: true,
@@ -35,9 +36,11 @@ function EditSlides(props) {
                 setSlides([])
             }
         })
+        source.cancel("Cancelling in cleanup");
     }
 
     const deleteSlide = (slide) => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'POST',
             data: {
@@ -50,9 +53,11 @@ function EditSlides(props) {
             // console.log(res.data)
             getSlides()
         })
+        source.cancel("Cancelling in cleanup");
     }
 
     const uploadSlide = (e) => {
+        let source = axios.CancelToken.source();
         e.preventDefault()
         const data = new FormData()
         data.append('slide', slideToUpload)
@@ -74,16 +79,16 @@ function EditSlides(props) {
             // setServerStatus("Error: No file has been selected")
         }
         e.target.slide.value = ""
+        source.cancel("Cancelling in cleanup");
     } 
 
 
     useEffect(() => {
-        let abortController = new AbortController();
         // dispatch(authenticate())
         getSlides()
 
         return () => {
-            abortController.abort();
+
         }
     }, [slides.length])
 

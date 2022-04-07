@@ -21,6 +21,8 @@ function UploadLogo(props) {
 
 
     const uploadFile = (e) => {
+        let source = axios.CancelToken.source();
+
         e.preventDefault()
         const data = new FormData()
         data.append('logo', file)
@@ -38,6 +40,7 @@ function UploadLogo(props) {
             setServerStatus("Error: No file has been selected")
         }
         e.target.logo.value = ""
+        source.cancel('Cancelling in cleanup')
     }
 
     // useEffect(() => {

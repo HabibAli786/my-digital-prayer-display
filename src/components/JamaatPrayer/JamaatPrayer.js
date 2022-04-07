@@ -13,13 +13,12 @@ function JamaatPrayer(props) {
 
     // Finding current prayer
     useEffect(() => {
-        let abortController = new AbortController();
         // console.log(prayersStatus)
         // console.log(prayerTimes)
         // console.log(jummah)
         
         if(jummah && prayersStatus[3] === false) {
-            setCurrentPrayer("Jummah")
+            setCurrentPrayer("Jumuʿah")
         } else {
             for(let i=0; i < prayersStatus.length;  i++) {
                 if(prayersStatus[i] === false) {
@@ -32,7 +31,7 @@ function JamaatPrayer(props) {
         }
 
         return () => { 
-            abortController.abort();
+
         }
     }, [])
 
@@ -49,7 +48,7 @@ function JamaatPrayer(props) {
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
 
         return () => { 
-            abortController.abort();
+
         }
     }, [currentPrayer])
 

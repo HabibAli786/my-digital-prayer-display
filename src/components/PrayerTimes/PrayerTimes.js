@@ -122,20 +122,14 @@ function PrayerTimes() {
 
     // Update live clock every second
     useEffect(() => {
-        let abortController = new AbortController();  
-        const clockInterval = setInterval(() => {
-                setClock(Clock())
-        }, 1000)
-
+        const clockInterval = setInterval(() => setClock(Clock()), 1000)
         return () => { 
             clearInterval(clockInterval)
-            abortController.abort();
         }
     }, [clock])
 
     // Update day, month and Jummah if it is Friday
     useEffect(() => {
-        let abortController = new AbortController();
         if(strToDate(clock) > strToDate("00:00:01") && strToDate(clock) < strToDate("00:00:03")) {
             const compareDate = new Date()
             const compareDay = compareDate.toLocaleString("default", { weekday: "long" })
@@ -146,13 +140,13 @@ function PrayerTimes() {
         }
 
         return () => { 
-            abortController.abort();
+            
         }
     }, [clock, date])
 
     // set intial prayertimes
     useEffect(() => {
-        let abortController = new AbortController();
+        let source = axios.CancelToken.source();
         axios.get(`http://localhost:3001/prayertimes/`)
         .then((response) => {
             const prayertimes = response.data.slice(1)
@@ -173,13 +167,13 @@ function PrayerTimes() {
         })
 
         return () => { 
-            abortController.abort();
+            source.cancel('Cancelling in cleanup')
         }
     }, [date])
 
     // Next days Prayertimes
     useEffect(() => {
-        let abortController = new AbortController();
+        let source = axios.CancelToken.source();
         const nextDate = nextDay()
         axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
         .then((response) => {
@@ -198,14 +192,12 @@ function PrayerTimes() {
         })
 
         return () => { 
-            abortController.abort();
+            source.cancel('Cancelling in cleanup')
         }
     }, [date])
 
     // Grey out prayers that have finshed
     useEffect(() => {
-        let abortController = new AbortController();
-
         let clockToDate = new Date()
         let timesToDate = new Date()
         let newPrayerFinshed = [...prayerFinished]
@@ -241,13 +233,12 @@ function PrayerTimes() {
         }
 
         return () => { 
-            abortController.abort();
+
         }
     }, [clock, prayerFinished, times])
     
     // Display Jamaat Display
     useEffect(() => {
-        let abortController = new AbortController();
         let clockDate = new Date()
         let jamaatStart = new Date()
         let jamaatEnd = new Date()
@@ -293,26 +284,23 @@ function PrayerTimes() {
             setJamaatStarted(false)
         }
 
-        return () => { 
-            abortController.abort();
+        return () => {
+
         }
 
     }, [clock, prayerFinished, times])
 
     // Set Initial Makrooh times for the day
     useEffect(() => {
-        let abortController = new AbortController();
         setMakroohTimes(state => [times[2], times[3], times[7]])
 
-        return () => { 
-            abortController.abort();
+        return () => {
+
         }
     }, [times])
 
     // Find if time is makrooh
     useEffect(() => {
-        let abortController = new AbortController();
-
         let clockDate = new Date()
         let makroohStart = new Date()
         let makroohEnd = new Date()
@@ -354,13 +342,13 @@ function PrayerTimes() {
         }
 
         return () => { 
-            abortController.abort();
+            
         }
     }, [clock, makrooh, makroohTimes])
 
     // Update Hijri Date after Maghrib nextTimes
     useEffect(() => {
-        let abortController = new AbortController();
+        let source = axios.CancelToken.source();
 
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
@@ -390,14 +378,13 @@ function PrayerTimes() {
         }
 
         return () => { 
-            abortController.abort();
+            source.cancel('Cancelling in cleanup')
         }
     }, [prayerFinished])
 
     // Updating number of slides
     useEffect(() => {
-        let abortController = new AbortController();
-
+        let source = axios.CancelToken.source();
         axios.get(`http://localhost:3001/media/slides`)
             .then((response) => {
                 const data = response.data
@@ -413,14 +400,12 @@ function PrayerTimes() {
             })
         
         return () => { 
-            abortController.abort();
+            source.cancel('Cancelling in cleanup')
         }
     }, [])
 
     // Slideshow Animation useEffect
     useEffect(() => {
-        let abortController = new AbortController();
-
         // How long will the image take to come on the screen
         if(displaySlideshow === false) {
             setTimeout(() => {
@@ -444,7 +429,7 @@ function PrayerTimes() {
         }
         
         return () => { 
-            abortController.abort();
+            
         }
     }, [displaySlideshow])
 

@@ -16,6 +16,7 @@ function Admin(props) {
     const { auth, set_auth } = props
 
     const login = (username, password) => {
+        let source = axios.CancelToken.source();
         if(username) {
             axios({
                 method: 'POST',
@@ -35,6 +36,7 @@ function Admin(props) {
                 }
             })
         }
+        source.cancel("Cancelling in cleanup");
     }
 
     const onSubmit = (event) => {
@@ -49,14 +51,12 @@ function Admin(props) {
     }
 
     useEffect(() => {
-        let abortController = new AbortController();
-
         // console.log("admin useEffect running...")
-        dispatch(authenticate())
+        // dispatch(authenticate())
         // login()
 
         return () => { 
-            abortController.abort();
+            
         }
     }, [])
     

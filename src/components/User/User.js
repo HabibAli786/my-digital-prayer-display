@@ -18,6 +18,7 @@ function User(props) {
     const { auth, set_auth, username, set_username } = props
 
     const Logout = () => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'GET',
             withCredentials: true,
@@ -31,6 +32,7 @@ function User(props) {
                 // set_auth("Authenticated")
             }
         })
+        source.cancel('Cancelling in cleanup')
     }
 
     // useEffect(() => {

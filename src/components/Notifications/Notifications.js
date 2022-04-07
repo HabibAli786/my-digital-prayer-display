@@ -46,7 +46,6 @@ function Notifications(props) {
     useEffect(() => {
         let animationTrue
         let animationFalse
-        let abortController = new AbortController();
         // How long the text will appear
         if(animation === false) {
             animationTrue = setTimeout(() => {
@@ -66,7 +65,6 @@ function Notifications(props) {
         return () => { 
             clearTimeout(animationTrue)
             clearTimeout(animationFalse)
-            abortController.abort();
         }
     }, [animation])
 

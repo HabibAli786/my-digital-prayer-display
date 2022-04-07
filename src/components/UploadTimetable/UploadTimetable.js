@@ -21,11 +21,14 @@ function UploadTimetable(props) {
 
     // Modal
     const [show, setShow] = useState(false);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
     const uploadFile = (e) => {
+        let source = axios.CancelToken.source();
+
         e.preventDefault()
         const data = new FormData()
         data.append('prayertimes', file)
@@ -42,6 +45,7 @@ function UploadTimetable(props) {
             setServerStatus("Error: No file has been selected")
         }
         e.target.prayertimes.value = ""
+        source.cancel('Cancelling in cleanup')
     }
 
     // useEffect(() => {
