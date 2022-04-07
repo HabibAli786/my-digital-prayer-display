@@ -40,10 +40,10 @@ function UploadLogo(props) {
         e.target.logo.value = ""
     }
 
-    useEffect(() => {
-        // console.log("UploadLogo useEffect running")
-        // dispatch(authenticate())
-    }, [file, serverStatus])
+    // useEffect(() => {
+    //     // console.log("UploadLogo useEffect running")
+    //     // dispatch(authenticate())
+    // }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )

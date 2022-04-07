@@ -148,7 +148,7 @@ function EditTimetable(props) {
 
     useEffect(() => {
         // dispatch(authenticate())
-        let unmounted = false
+        let abortController = new AbortController();
         let source = axios.CancelToken.source();
         axios.get('http://localhost:3001/prayertimes/request/all')
         .then((res) => {
@@ -161,13 +161,13 @@ function EditTimetable(props) {
         })
 
         return function () {
-          unmounted = true;
           source.cancel("Cancelling in cleanup");
+          abortController.abort();
         }
     }, [])
 
     useEffect(() => {
-      let unmounted = false
+      let abortController = new AbortController();
       let source = axios.CancelToken.source();
       if(post) {
         // console.log(data)
@@ -189,8 +189,8 @@ function EditTimetable(props) {
       }
       
       return function () {
-        unmounted = true;
         source.cancel("Cancelling in cleanup");
+        abortController.abort();
       }
     }, [post, data])
 

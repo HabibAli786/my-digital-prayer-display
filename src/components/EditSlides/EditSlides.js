@@ -78,8 +78,13 @@ function EditSlides(props) {
 
 
     useEffect(() => {
-        dispatch(authenticate())
+        let abortController = new AbortController();
+        // dispatch(authenticate())
         getSlides()
+
+        return () => {
+            abortController.abort();
+        }
     }, [slides.length])
 
     // console.log(slides.length)

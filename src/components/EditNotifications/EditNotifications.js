@@ -70,7 +70,12 @@ function EditNotifications(props) {
 
     useEffect(() => {
         // dispatch(authenticate())
+        let abortController = new AbortController();
         getNotifications()
+        
+        return () => { 
+            abortController.abort();
+        }
     }, [notifications.length])
 
     // console.log(notifications)

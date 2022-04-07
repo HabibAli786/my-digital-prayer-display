@@ -13,6 +13,7 @@ function JamaatPrayer(props) {
 
     // Finding current prayer
     useEffect(() => {
+        let abortController = new AbortController();
         // console.log(prayersStatus)
         // console.log(prayerTimes)
         // console.log(jummah)
@@ -30,11 +31,15 @@ function JamaatPrayer(props) {
             }
         }
 
-        
+        return () => { 
+            abortController.abort();
+        }
     }, [])
 
     // Setting prayer time
     useEffect(() => {
+        let abortController = new AbortController();
+
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
         if(currentPrayer === "Ẓuhr") { setCurrentTime(prayerTimes[4]) }
@@ -43,6 +48,9 @@ function JamaatPrayer(props) {
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
 
+        return () => { 
+            abortController.abort();
+        }
     }, [currentPrayer])
 
     return (

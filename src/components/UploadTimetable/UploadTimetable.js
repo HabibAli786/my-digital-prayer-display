@@ -44,10 +44,10 @@ function UploadTimetable(props) {
         e.target.prayertimes.value = ""
     }
 
-    useEffect(() => {
-        // console.log("UploadTimetable useEffect running")
-        // dispatch(authenticate())
-    }, [])
+    // useEffect(() => {
+    //     // console.log("UploadTimetable useEffect running")
+    //     // dispatch(authenticate())
+    // }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )
