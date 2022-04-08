@@ -109,7 +109,6 @@ function EditTimetable(props) {
     
     const [loading, setLoading] = useState(true)
     const [success, setSuccess] = useState(null)
-    const [originalData] = useState(data)
     const [skipPageReset, setSkipPageReset] = useState(false)
     const [post, setPost] = useState(false)
 
@@ -144,20 +143,22 @@ function EditTimetable(props) {
     // editing it, the page is reset
     useEffect(() => {
         setSkipPageReset(false)
-    }, [data])
+    }, [])
 
     useEffect(() => {
         // dispatch(authenticate())
         let source = axios.CancelToken.source();
-        axios.get('http://localhost:3001/prayertimes/request/all')
-        .then((res) => {
-            // console.log(res.data)
-            setData(res.data)
-            setLoading(false)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        if(loading) {
+          axios.get('http://localhost:3001/prayertimes/request/all', { cancelToken: source.token })
+          .then((res) => {
+              // console.log(res.data)
+              setData(res.data)
+              setLoading(false)
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+        }
 
         return function () {
           source.cancel("Cancelling in cleanup");
@@ -172,7 +173,8 @@ function EditTimetable(props) {
             method: 'POST',
             data: data,
             withCredentials: true,
-            url: 'http://localhost:3001/prayertimes'
+            url: 'http://localhost:3001/prayertimes',
+            cancelToken: source.token
         })
         .then((res) => {
           const message = res.data

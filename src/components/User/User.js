@@ -22,7 +22,8 @@ function User(props) {
         axios({
             method: 'GET',
             withCredentials: true,
-            url: 'http://localhost:3001/admin/logout'
+            url: 'http://localhost:3001/admin/logout',
+            cancelToken: source.token
         }).then((res) => {
             // console.log(res.data)
             if(res.data === "Logged out") {

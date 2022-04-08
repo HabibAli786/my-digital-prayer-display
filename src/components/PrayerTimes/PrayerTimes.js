@@ -147,7 +147,7 @@ function PrayerTimes() {
     // set intial prayertimes
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get(`http://localhost:3001/prayertimes/`)
+        axios.get(`http://localhost:3001/prayertimes/`, { cancelToken: source.token })
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
@@ -175,7 +175,7 @@ function PrayerTimes() {
     useEffect(() => {
         let source = axios.CancelToken.source();
         const nextDate = nextDay()
-        axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+        axios.get(`http://localhost:3001/prayertimes/${nextDate}`, { cancelToken: source.token })
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
@@ -354,7 +354,7 @@ function PrayerTimes() {
         if(strToDate(clock) > timeAtChange) {
             // console.log("running hijri update")
             const nextDate = nextDay()
-            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+            axios.get(`http://localhost:3001/prayertimes/${nextDate}`, { cancelToken: source.token })
             .then((response) => {
                 const prayertimes = response.data.slice(1)
                 // const arr = []
@@ -385,7 +385,7 @@ function PrayerTimes() {
     // Updating number of slides
     useEffect(() => {
         let source = axios.CancelToken.source();
-        axios.get(`http://localhost:3001/media/slides`)
+        axios.get(`http://localhost:3001/media/slides`, { cancelToken: source.token })
             .then((response) => {
                 const data = response.data
                 setNumOfSlides(data.numOfFiles)

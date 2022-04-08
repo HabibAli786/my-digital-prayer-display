@@ -25,7 +25,8 @@ function Admin(props) {
                     password: password
                 },
                 withCredentials: true,
-                url: 'http://localhost:3001/admin/login'
+                url: 'http://localhost:3001/admin/login',
+                cancelToken: source.token
             })
             .then((res) => {
                 // console.log("I am coming from the server " + res.data)

@@ -44,13 +44,14 @@ function EditNotifications(props) {
                 toDelete : notification
             },
             withCredentials: true,
-            url: 'http://localhost:3001/notifications/delete'
+            url: 'http://localhost:3001/notifications/delete',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)
             getNotifications()
+            source.cancel("Cancelling in cleanup");
         })
-        source.cancel("Cancelling in cleanup");
     }
 
     const addNotification = (event) => {
@@ -64,7 +65,8 @@ function EditNotifications(props) {
                 toAdd : data
             },
             withCredentials: true,
-            url: 'http://localhost:3001/notifications/add'
+            url: 'http://localhost:3001/notifications/add',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)

@@ -15,11 +15,10 @@ function Notifications(props) {
 
     useEffect(() => {
         let source = axios.CancelToken.source();
-        let abortController = new AbortController();
         // console.log("I am running in thunk")
         let notifications = null
 
-        axios.get(`http://localhost:3001/notifications`)
+        axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
             .then((response) => {
             // console.log(response.data.notifications)
             if(response.data.notifications) {
@@ -38,7 +37,6 @@ function Notifications(props) {
         
         return () => { 
             source.cancel("Cancelling in cleanup");
-            abortController.abort();
         }
     }, [])
 

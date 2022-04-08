@@ -36,7 +36,8 @@ function UploadTimetable(props) {
         // console.log(file)
         if(file) {
             axios.post('http://localhost:3001/media/uploadTimetable', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => { // then print response status
                 // console.log(res);
                 setServerStatus(res.data)

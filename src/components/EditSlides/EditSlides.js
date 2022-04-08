@@ -25,7 +25,8 @@ function EditSlides(props) {
         axios({
             method: 'GET',
             withCredentials: true,
-            url: 'http://localhost:3001/media/slides'
+            url: 'http://localhost:3001/media/slides',
+            cancelToken: source.token
         }).then((res) => {
             // console.log(res.data)
             const data = res.data.files
@@ -35,8 +36,8 @@ function EditSlides(props) {
             } else {
                 setSlides([])
             }
+            source.cancel("Cancelling in cleanup");
         })
-        source.cancel("Cancelling in cleanup");
     }
 
     const deleteSlide = (slide) => {
@@ -47,7 +48,8 @@ function EditSlides(props) {
                 slideToDelete : slide
             },
             withCredentials: true,
-            url: 'http://localhost:3001/media/slides/admin/delete'
+            url: 'http://localhost:3001/media/slides/admin/delete',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)
@@ -66,7 +68,8 @@ function EditSlides(props) {
         // console.log(slideToUpload)
         if(slideToUpload) {
             axios.post('http://localhost:3001/media/slides/admin/add', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => {
                 // console.log(res);
                 if(res.data !== "File has been uploaded successfully") {

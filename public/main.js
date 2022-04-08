@@ -1,6 +1,8 @@
 const { app, BrowserWindow } = require('electron' )
 const isDev = require('electron-is-dev')
 
+app.disableHardwareAcceleration()
+
 require('@electron/remote/main').initialize()
 
 function createWindow() {

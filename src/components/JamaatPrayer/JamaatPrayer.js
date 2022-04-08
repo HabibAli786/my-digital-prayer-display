@@ -37,8 +37,6 @@ function JamaatPrayer(props) {
 
     // Setting prayer time
     useEffect(() => {
-        let abortController = new AbortController();
-
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
         if(currentPrayer === "Ẓuhr") { setCurrentTime(prayerTimes[4]) }
