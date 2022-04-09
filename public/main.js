@@ -5,7 +5,7 @@ require('@electron/remote/main').initialize()
 
 app.disableHardwareAcceleration()
 
-crashReporter.start({ submitURL: 'https://your-domain.com/url-to-submit' })
+crashReporter.start({ uploadToServer: false })
 
 function createWindow() {
     // Create the browser window
