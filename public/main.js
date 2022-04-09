@@ -1,5 +1,5 @@
-import { app, BrowserWindow, crashReporter } from 'electron'
-import isDev from 'electron-is-dev'
+const { app, BrowserWindow, crashReporter } = require('electron' )
+const isDev = require('electron-is-dev')
 
 require('@electron/remote/main').initialize()
 
