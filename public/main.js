@@ -1,9 +1,11 @@
-const { app, BrowserWindow } = require('electron' )
-const isDev = require('electron-is-dev')
+import { app, BrowserWindow, crashReporter } from 'electron'
+import isDev from 'electron-is-dev'
+
+require('@electron/remote/main').initialize()
 
 app.disableHardwareAcceleration()
 
-require('@electron/remote/main').initialize()
+crashReporter.start({ submitURL: 'https://your-domain.com/url-to-submit' })
 
 function createWindow() {
     // Create the browser window
@@ -13,8 +15,7 @@ function createWindow() {
         icon: __dirname + '/icon.png',
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
-            // devTools: true
+            devTools: false
         }
     })
     win.maximize()
