@@ -54,8 +54,8 @@ function EditSlides(props) {
         .then((res) => {
             // console.log(res.data)
             getSlides()
+            source.cancel("Cancelling in cleanup");
         })
-        source.cancel("Cancelling in cleanup");
     }
 
     const uploadSlide = (e) => {
@@ -76,13 +76,13 @@ function EditSlides(props) {
                     setError(res.data)
                 }
                 getSlides()
+                source.cancel("Cancelling in cleanup");
                 // setServerStatus(res.data)
             })
         } else {
             // setServerStatus("Error: No file has been selected")
         }
         e.target.slide.value = ""
-        source.cancel("Cancelling in cleanup");
     } 
 
 

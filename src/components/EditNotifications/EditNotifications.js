@@ -32,8 +32,8 @@ function EditNotifications(props) {
             } else {
                 setNotifications([])
             }
+            source.cancel("Cancelling in cleanup");
         })
-        source.cancel("Cancelling in cleanup");
     }
 
     const deleteNotification = (notification) => {
@@ -71,9 +71,9 @@ function EditNotifications(props) {
         .then((res) => {
             // console.log(res.data)
             getNotifications()
+            source.cancel("Cancelling in cleanup");
             event.target.reset()
         })
-        source.cancel("Cancelling in cleanup");
     }
 
     useEffect(() => {
