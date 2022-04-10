@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Header from '../Header/Header';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
