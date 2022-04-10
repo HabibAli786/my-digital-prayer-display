@@ -32,8 +32,8 @@ function User(props) {
             } else {
                 // set_auth("Authenticated")
             }
+            source.cancel('Cancelling in cleanup')
         })
-        source.cancel('Cancelling in cleanup')
     }
 
     // useEffect(() => {
