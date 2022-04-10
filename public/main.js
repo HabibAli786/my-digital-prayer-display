@@ -1,7 +1,7 @@
 const { app, BrowserWindow, crashReporter } = require('electron' )
 const isDev = require('electron-is-dev')
 
-require('@electron/remote/main').initialize()
+// require('@electron/remote/main').initialize()
 
 app.disableHardwareAcceleration()
 
