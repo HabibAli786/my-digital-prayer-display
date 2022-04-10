@@ -35,7 +35,12 @@ function Admin(props) {
                 } else {
                     set_auth(res.data)
                 }
+                console.log(res.data)
                 source.cancel("Cancelling in cleanup");
+            })
+            .catch((err) => {
+                console.log(err)
+                set_auth("Server Offline")
             })
         }
     }
