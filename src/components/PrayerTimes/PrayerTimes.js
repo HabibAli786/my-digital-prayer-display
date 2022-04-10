@@ -322,9 +322,16 @@ function PrayerTimes() {
             // Start time
             makroohEnd.setHours(timesHours, timesMinutes, timesSeconds)
 
-            // 20 minutes before start time
-            const makroohStartMinutes = makroohEnd.getMinutes() - 20
-            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            // 20 minutes before start time or 20 Minutes after
+            let makroohStartMinutes
+            if(i === 0) {
+                const makroohEndMinutes = makroohEnd.getMinutes() + 20
+                makroohEnd.setHours(timesHours, makroohEndMinutes.toString(), timesSeconds)
+                makroohStart.setHours(timesHours, timesMinutes, timesSeconds)
+            } else {
+                makroohStartMinutes = makroohEnd.getMinutes() - 20
+                makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            }
             
             if(clockDate >= makroohStart && clockDate < makroohEnd) {
                 result = true
