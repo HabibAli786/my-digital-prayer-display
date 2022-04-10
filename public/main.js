@@ -13,12 +13,13 @@ function createWindow() {
         show: false,
         frame: false,
         icon: __dirname + '/icon.png',
+        fullscreen: true,
         webPreferences: {
             nodeIntegration: true,
-            devTools: false
+            devTools: false,
+            backgroundThrottling: false
         }
     })
-    win.maximize()
     // win.loadURL('http://localhost:3000')
 
     win.loadURL(
@@ -26,6 +27,7 @@ function createWindow() {
             ? 'http://localhost:3000'
             : `file://${__dirname}/../build/index.html`
     )
+    win.maximize()
 }
 
 // app.on('ready', createWindow)

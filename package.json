@@ -3,7 +3,7 @@
   "productName": "PrayerTimes+",
   "author": "Habib Ali",
   "description": "A simple application to display prayertimes for your local masjid",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.4",
@@ -77,8 +77,9 @@
     ]
   },
   "devDependencies": {
-    "electron": "^17.0.0",
-    "electron-builder": "^22.14.13",
+    "electron": "^18.0.1",
+    "electron-builder": "^23.0.4",
+    "electron-devtools-installer": "^3.2.0",
     "redux-devtools-extension": "^2.13.9"
   }
 }
