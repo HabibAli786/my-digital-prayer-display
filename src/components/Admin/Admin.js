@@ -35,9 +35,9 @@ function Admin(props) {
                 } else {
                     set_auth(res.data)
                 }
+                source.cancel("Cancelling in cleanup");
             })
         }
-        source.cancel("Cancelling in cleanup");
     }
 
     const onSubmit = (event) => {

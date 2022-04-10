@@ -41,12 +41,12 @@ function UploadTimetable(props) {
             }).then(res => { // then print response status
                 // console.log(res);
                 setServerStatus(res.data)
+                source.cancel('Cancelling in cleanup')
             })
         } else {
             setServerStatus("Error: No file has been selected")
         }
         e.target.prayertimes.value = ""
-        source.cancel('Cancelling in cleanup')
     }
 
     // useEffect(() => {
