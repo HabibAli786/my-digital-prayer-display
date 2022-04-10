@@ -384,6 +384,10 @@ function PrayerTimes() {
             }
         }
 
+        if(date[0] === "Friday" && !isJummah) {
+            setIsJummah(true)
+        }
+
         return () => { 
             source.cancel('Cancelling in cleanup')
         }
@@ -483,7 +487,7 @@ function PrayerTimes() {
                         <Col className="col-4"></Col>
                         <Col className="col-4"></Col>
                         <Col className="col-2 start-time">Start</Col>
-                        <Col className="col-2 jamaat active-color">Jamaat</Col>
+                        <Col className="col-2 jamaat active-color">Jama'ah</Col>
                     </Row>
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
                         <Col className="col-4 salaah-name">صلاة الفجر</Col>
