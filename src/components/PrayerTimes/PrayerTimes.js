@@ -407,7 +407,7 @@ function PrayerTimes() {
     // Slideshow Animation useEffect
     useEffect(() => {
         let falseSlideshowTimeout
-        let trueSlideshowTimout
+        let trueSlideshowTimeout
         // How long will the image take to come on the screen
         if(displaySlideshow === false) {
             falseSlideshowTimeout = setTimeout(() => {
@@ -417,7 +417,7 @@ function PrayerTimes() {
         }
         // How long the image will be on the screen
         if(displaySlideshow === true){
-            trueSlideshowTimout = setTimeout(() => {
+            trueSlideshowTimeout = setTimeout(() => {
                 // setSlideshowCount(slideshowCount + 1)
                 setDisplaySlideshow(false)
                 if(slideshowCount === numOfSlides-1) {
@@ -431,8 +431,8 @@ function PrayerTimes() {
         }
         
         return () => { 
-            clearTimeout(falseSlideshowTimeout)
-            clearTimeout(trueSlideshowTimout)
+            if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
+            if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
         }
     }, [displaySlideshow])
 

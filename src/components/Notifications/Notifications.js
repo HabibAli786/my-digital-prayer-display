@@ -17,8 +17,9 @@ function Notifications(props) {
         let source = axios.CancelToken.source();
         // console.log("I am running in thunk")
         let notifications = null
-
-        axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
+        
+        if(notifi.length < 1) {
+            axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
             .then((response) => {
             // console.log(response.data.notifications)
             if(response.data.notifications) {
@@ -28,13 +29,13 @@ function Notifications(props) {
                     set_notifi(notifications)
                 }
             }
-        })
-        .catch((error) => {
-            console.log(error)
-            notifications = ["No Notifications"]
-            set_notifi(notifications)
-        })
-        
+            })
+            .catch((error) => {
+                console.log(error)
+                notifications = ["No Notifications"]
+                set_notifi(notifications)
+            })
+        }
         return () => { 
             source.cancel("Cancelling in cleanup");
         }
