@@ -17,8 +17,8 @@ function Notifications(props) {
         let source = axios.CancelToken.source();
         // console.log("I am running in thunk")
         let notifications = null
-        
-        if(notifi.length < 1) {
+
+        if(notifi.length <= 1) {
             axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
             .then((response) => {
             // console.log(response.data.notifications)
