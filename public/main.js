@@ -14,6 +14,7 @@ function createWindow() {
         frame: false,
         icon: __dirname + '/icon.png',
         fullscreen: true,
+        navigateOnDragDrop: true,
         webPreferences: {
             nodeIntegration: true,
             devTools: false,
