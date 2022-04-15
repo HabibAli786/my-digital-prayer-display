@@ -17,16 +17,14 @@ function JamaatPrayer(props) {
         // console.log(prayerTimes)
         // console.log(jummah)
         
-        if(jummah && prayersStatus[3] === false) {
-            setCurrentPrayer("Jumuʿah")
-        } else {
-            for(let i=0; i < prayersStatus.length;  i++) {
-                if(prayersStatus[i] === false) {
-                    // console.log(prayerNames[i-1])
-                    setCurrentPrayer(prayerNames[i-1])
+        for(let i=0; i < prayersStatus.length;  i++) {
+            if(prayersStatus[i] === false) {
+                if(jummah && prayersStatus[1] && !prayersStatus[3]) {
+                    setCurrentPrayer("Jumuʿah")
                     break
-                }
-                setCurrentPrayer(prayerNames[5])
+                }                
+                setCurrentPrayer(prayerNames[i])
+                break
             }
         }
 
@@ -40,7 +38,7 @@ function JamaatPrayer(props) {
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
         if(currentPrayer === "Ẓuhr") { setCurrentTime(prayerTimes[4]) }
-        if(currentPrayer === "Jummah") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Jumuʿah") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
@@ -52,8 +50,15 @@ function JamaatPrayer(props) {
 
     return (
         <>
-        <div>
-            <Container className="jamaat-prayer-container">
+        <div className="jamaat-prayer-container">
+            {currentPrayer &&
+                <div>
+                    <img src={`jamaat/${currentPrayer.toLowerCase()}.png`} alt={`jamaat-${currentPrayer.toLowerCase()}`} />
+                    <h1 className={`jamaat-prayer-name-${currentPrayer.toLowerCase()}`}>{currentPrayer}</h1>
+                    <h1 className={`jamaat-prayer-time-${currentPrayer.toLowerCase()}`}>{currentTime}</h1>
+                </div>
+            }   
+            {/* <Container className="jamaat-prayer-container">
                 <Row>
                     <Col className="jamaat-prayer-name">{currentPrayer}</Col>
                 </Row>
@@ -68,7 +73,7 @@ function JamaatPrayer(props) {
                         <img className="jamaat-prayer-phone"src="images/no-phone.png" alt="no mobile phone" />
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
         </div>
         </>
     )
