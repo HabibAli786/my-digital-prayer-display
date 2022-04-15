@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
 import './JamaatPrayer.css'
 
 function JamaatPrayer(props) {
