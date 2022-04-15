@@ -23,9 +23,10 @@ function JamaatPrayer(props) {
                     setCurrentPrayer("Jumuʿah")
                     break
                 }                
-                setCurrentPrayer(prayerNames[i])
+                setCurrentPrayer(prayerNames[i-1])
                 break
             }
+            setCurrentPrayer(prayerNames[5])
         }
 
         return () => { 
