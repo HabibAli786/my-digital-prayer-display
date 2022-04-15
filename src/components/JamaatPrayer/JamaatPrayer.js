@@ -54,11 +54,11 @@ function JamaatPrayer(props) {
         <div className="jamaat-prayer-container">
             {currentPrayer &&
                 <div>
-                    <img src={`jamaat/${currentPrayer.toLowerCase()}.png`} alt={`jamaat-${currentPrayer.toLowerCase()}`} />
+                    <img className="jamaat-image" src={`jamaat/${currentPrayer.toLowerCase()}.png`} alt={`jamaat-${currentPrayer.toLowerCase()}`} />
                     <h1 className={`jamaat-prayer-name-${currentPrayer.toLowerCase()}`}>{currentPrayer}</h1>
                     <h1 className={`jamaat-prayer-time-${currentPrayer.toLowerCase()}`}>{currentTime}</h1>
                 </div>
-            }   
+            }
             {/* <Container className="jamaat-prayer-container">
                 <Row>
                     <Col className="jamaat-prayer-name">{currentPrayer}</Col>
