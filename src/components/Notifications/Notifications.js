@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Card } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { set_count, set_notifi } from '../Redux/actions/notificationAction';
@@ -18,8 +18,8 @@ function Notifications(props) {
         // console.log("I am running in thunk")
         let notifications = null
 
-        axios.get(`http://localhost:3001/notifications`)
-            .then((response) => {
+        axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
+        .then((response) => {
             // console.log(response.data.notifications)
             if(response.data.notifications) {
                 notifications = response.data.notifications
@@ -28,13 +28,13 @@ function Notifications(props) {
                     set_notifi(notifications)
                 }
             }
-        })
-        .catch((error) => {
-            console.log(error)
-            notifications = ["No Notifications"]
-            set_notifi(notifications)
-        })
-        
+            })
+            .catch((error) => {
+                console.log(error)
+                notifications = ["No Notifications"]
+                set_notifi(notifications)
+            })
+            
         return () => { 
             source.cancel("Cancelling in cleanup");
         }
@@ -50,14 +50,12 @@ function Notifications(props) {
                 setAnimation(true)
             }, 6000)
         } else {
-            if(animation === true){
+            if(animation && !slideshow){
                 animationFalse = setTimeout(() => {
-                    if(!slideshow) {
-                        set_count(count + 1)
-                        setAnimation(false)
-                        if(count === notifi.length-1 || count >= notifi.length) {
-                            set_count(0)
-                        }
+                    set_count(count + 1)
+                    setAnimation(false)
+                    if(count === notifi.length-1 || count >= notifi.length) {
+                        set_count(0)
                     }
                 }, 3000)
             }

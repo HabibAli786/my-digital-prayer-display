@@ -18,7 +18,7 @@ function JamaatPrayer(props) {
         // console.log(jummah)
         
         if(jummah && prayersStatus[3] === false) {
-            setCurrentPrayer("Jummah")
+            setCurrentPrayer("Jumuʿah")
         } else {
             for(let i=0; i < prayersStatus.length;  i++) {
                 if(prayersStatus[i] === false) {
@@ -30,7 +30,9 @@ function JamaatPrayer(props) {
             }
         }
 
-        
+        return () => { 
+
+        }
     }, [])
 
     // Setting prayer time
@@ -43,6 +45,9 @@ function JamaatPrayer(props) {
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
 
+        return () => { 
+
+        }
     }, [currentPrayer])
 
     return (

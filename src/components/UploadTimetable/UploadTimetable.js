@@ -21,11 +21,14 @@ function UploadTimetable(props) {
 
     // Modal
     const [show, setShow] = useState(false);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
     const uploadFile = (e) => {
+        let source = axios.CancelToken.source();
+
         e.preventDefault()
         const data = new FormData()
         data.append('prayertimes', file)
@@ -33,10 +36,12 @@ function UploadTimetable(props) {
         // console.log(file)
         if(file) {
             axios.post('http://localhost:3001/media/uploadTimetable', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => { // then print response status
                 // console.log(res);
                 setServerStatus(res.data)
+                source.cancel('Cancelling in cleanup')
             })
         } else {
             setServerStatus("Error: No file has been selected")
@@ -44,10 +49,10 @@ function UploadTimetable(props) {
         e.target.prayertimes.value = ""
     }
 
-    useEffect(() => {
-        // console.log("UploadTimetable useEffect running")
-        // dispatch(authenticate())
-    }, [])
+    // useEffect(() => {
+    //     // console.log("UploadTimetable useEffect running")
+    //     // dispatch(authenticate())
+    // }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )

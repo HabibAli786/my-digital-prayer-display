@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
 
@@ -122,10 +122,7 @@ function PrayerTimes() {
 
     // Update live clock every second
     useEffect(() => {
-        let clockInterval = setInterval(() => {
-            setClock(Clock())
-        }, 1000)
-
+        const clockInterval = setInterval(() => setClock(Clock()), 1000)
         return () => { 
             clearInterval(clockInterval)
         }
@@ -141,11 +138,16 @@ function PrayerTimes() {
                 setprayerFinished(state => state = [false, false, false, false, false, false])
             }
         }
-    }, [clock])
+
+        return () => { 
+            
+        }
+    }, [clock, date])
 
     // set intial prayertimes
     useEffect(() => {
-        axios.get(`http://localhost:3001/prayertimes/`)
+        let source = axios.CancelToken.source();
+        axios.get(`http://localhost:3001/prayertimes/`, { cancelToken: source.token })
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
@@ -163,15 +165,17 @@ function PrayerTimes() {
         .catch((error) => {
             console.log(error)
         })
-        return () => {
-            
+
+        return () => { 
+            source.cancel('Cancelling in cleanup')
         }
     }, [date])
 
     // Next days Prayertimes
     useEffect(() => {
+        let source = axios.CancelToken.source();
         const nextDate = nextDay()
-        axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+        axios.get(`http://localhost:3001/prayertimes/${nextDate}`, { cancelToken: source.token })
         .then((response) => {
             const prayertimes = response.data.slice(1)
             const arr = []
@@ -186,6 +190,10 @@ function PrayerTimes() {
         .catch((error) => {
             console.log(error)
         })
+
+        return () => { 
+            source.cancel('Cancelling in cleanup')
+        }
     }, [date])
 
     // Grey out prayers that have finshed
@@ -223,7 +231,11 @@ function PrayerTimes() {
         if(update) {
             setprayerFinished(newPrayerFinshed)
         }
-    }, [clock])
+
+        return () => { 
+
+        }
+    }, [clock, prayerFinished, times])
     
     // Display Jamaat Display
     useEffect(() => {
@@ -272,11 +284,19 @@ function PrayerTimes() {
             setJamaatStarted(false)
         }
 
+        return () => {
+
+        }
+
     }, [clock, prayerFinished, times])
 
     // Set Initial Makrooh times for the day
     useEffect(() => {
         setMakroohTimes(state => [times[2], times[3], times[7]])
+
+        return () => {
+
+        }
     }, [times])
 
     // Find if time is makrooh
@@ -302,9 +322,16 @@ function PrayerTimes() {
             // Start time
             makroohEnd.setHours(timesHours, timesMinutes, timesSeconds)
 
-            // 20 minutes before start time
-            const makroohStartMinutes = makroohEnd.getMinutes() - 20
-            makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            // 20 minutes before start time or 20 Minutes after
+            let makroohStartMinutes
+            if(i === 0) {
+                const makroohEndMinutes = makroohEnd.getMinutes() + 20
+                makroohEnd.setHours(timesHours, makroohEndMinutes.toString(), timesSeconds)
+                makroohStart.setHours(timesHours, timesMinutes, timesSeconds)
+            } else {
+                makroohStartMinutes = makroohEnd.getMinutes() - 20
+                makroohStart.setHours(timesHours, makroohStartMinutes.toString(), timesSeconds)
+            }
             
             if(clockDate >= makroohStart && clockDate < makroohEnd) {
                 result = true
@@ -320,15 +347,21 @@ function PrayerTimes() {
                 setMakrooh(false)
             }
         }
+
+        return () => { 
+            
+        }
     }, [clock, makrooh, makroohTimes])
 
     // Update Hijri Date after Maghrib nextTimes
     useEffect(() => {
+        let source = axios.CancelToken.source();
+
         let timeAtChange = strToDate(times[8] + ":00")
         if(strToDate(clock) > timeAtChange) {
             // console.log("running hijri update")
             const nextDate = nextDay()
-            axios.get(`http://localhost:3001/prayertimes/${nextDate}`)
+            axios.get(`http://localhost:3001/prayertimes/${nextDate}`, { cancelToken: source.token })
             .then((response) => {
                 const prayertimes = response.data.slice(1)
                 // const arr = []
@@ -350,11 +383,20 @@ function PrayerTimes() {
                 setIsJummah(false)
             }
         }
+
+        if(date[0] === "Friday" && !isJummah) {
+            setIsJummah(true)
+        }
+
+        return () => { 
+            source.cancel('Cancelling in cleanup')
+        }
     }, [prayerFinished])
 
     // Updating number of slides
     useEffect(() => {
-        axios.get(`http://localhost:3001/media/slides`)
+        let source = axios.CancelToken.source();
+        axios.get(`http://localhost:3001/media/slides`, { cancelToken: source.token })
             .then((response) => {
                 const data = response.data
                 setNumOfSlides(data.numOfFiles)
@@ -367,20 +409,26 @@ function PrayerTimes() {
             .catch((error) => {
                 console.log(error)
             })
+        
+        return () => { 
+            source.cancel('Cancelling in cleanup')
+        }
     }, [])
 
     // Slideshow Animation useEffect
     useEffect(() => {
+        let falseSlideshowTimeout
+        let trueSlideshowTimeout
         // How long will the image take to come on the screen
         if(displaySlideshow === false) {
-            setTimeout(() => {
+            falseSlideshowTimeout = setTimeout(() => {
                 setDisplaySlideshow(true)
             }, 60000)
             // setAnimation(false)
         }
         // How long the image will be on the screen
         if(displaySlideshow === true){
-            setTimeout(() => {
+            trueSlideshowTimeout = setTimeout(() => {
                 // setSlideshowCount(slideshowCount + 1)
                 setDisplaySlideshow(false)
                 if(slideshowCount === numOfSlides-1) {
@@ -393,6 +441,10 @@ function PrayerTimes() {
             }, 15000)
         }
         
+        return () => { 
+            if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
+            if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
+        }
     }, [displaySlideshow])
 
     return(
@@ -435,7 +487,7 @@ function PrayerTimes() {
                         <Col className="col-4"></Col>
                         <Col className="col-4"></Col>
                         <Col className="col-2 start-time">Start</Col>
-                        <Col className="col-2 jamaat active-color">Jamaat</Col>
+                        <Col className="col-2 jamaat active-color">Jama'ah</Col>
                     </Row>
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
                         <Col className="col-4 salaah-name">صلاة الفجر</Col>

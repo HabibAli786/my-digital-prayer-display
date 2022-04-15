@@ -21,10 +21,12 @@ function EditSlides(props) {
 
     const getSlides = () => {
         // console.log("getSlides is running")
+        let source = axios.CancelToken.source();
         axios({
             method: 'GET',
             withCredentials: true,
-            url: 'http://localhost:3001/media/slides'
+            url: 'http://localhost:3001/media/slides',
+            cancelToken: source.token
         }).then((res) => {
             // console.log(res.data)
             const data = res.data.files
@@ -34,25 +36,30 @@ function EditSlides(props) {
             } else {
                 setSlides([])
             }
+            source.cancel("Cancelling in cleanup");
         })
     }
 
     const deleteSlide = (slide) => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'POST',
             data: {
                 slideToDelete : slide
             },
             withCredentials: true,
-            url: 'http://localhost:3001/media/slides/admin/delete'
+            url: 'http://localhost:3001/media/slides/admin/delete',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)
             getSlides()
+            source.cancel("Cancelling in cleanup");
         })
     }
 
     const uploadSlide = (e) => {
+        let source = axios.CancelToken.source();
         e.preventDefault()
         const data = new FormData()
         data.append('slide', slideToUpload)
@@ -61,13 +68,15 @@ function EditSlides(props) {
         // console.log(slideToUpload)
         if(slideToUpload) {
             axios.post('http://localhost:3001/media/slides/admin/add', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => {
                 // console.log(res);
                 if(res.data !== "File has been uploaded successfully") {
                     setError(res.data)
                 }
                 getSlides()
+                source.cancel("Cancelling in cleanup");
                 // setServerStatus(res.data)
             })
         } else {
@@ -78,8 +87,12 @@ function EditSlides(props) {
 
 
     useEffect(() => {
-        dispatch(authenticate())
+        // dispatch(authenticate())
         getSlides()
+
+        return () => {
+
+        }
     }, [slides.length])
 
     // console.log(slides.length)

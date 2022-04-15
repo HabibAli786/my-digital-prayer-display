@@ -19,6 +19,7 @@ function EditNotifications(props) {
     const [notifications, setNotifications] = useState([])
 
     const getNotifications = () => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'GET',
             withCredentials: true,
@@ -31,25 +32,30 @@ function EditNotifications(props) {
             } else {
                 setNotifications([])
             }
+            source.cancel("Cancelling in cleanup");
         })
     }
 
     const deleteNotification = (notification) => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'POST',
             data: {
                 toDelete : notification
             },
             withCredentials: true,
-            url: 'http://localhost:3001/notifications/delete'
+            url: 'http://localhost:3001/notifications/delete',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)
             getNotifications()
+            source.cancel("Cancelling in cleanup");
         })
     }
 
     const addNotification = (event) => {
+        let source = axios.CancelToken.source();
         // console.log(event)
         event.preventDefault()
         const data = event.target.notification.value
@@ -59,18 +65,25 @@ function EditNotifications(props) {
                 toAdd : data
             },
             withCredentials: true,
-            url: 'http://localhost:3001/notifications/add'
+            url: 'http://localhost:3001/notifications/add',
+            cancelToken: source.token
         })
         .then((res) => {
             // console.log(res.data)
             getNotifications()
+            source.cancel("Cancelling in cleanup");
             event.target.reset()
         })
     }
 
     useEffect(() => {
         // dispatch(authenticate())
+    
         getNotifications()
+        
+        return () => { 
+            
+        }
     }, [notifications.length])
 
     // console.log(notifications)

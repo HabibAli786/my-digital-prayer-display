@@ -1,7 +1,11 @@
-const { app, BrowserWindow } = require('electron' )
+const { app, BrowserWindow, crashReporter } = require('electron' )
 const isDev = require('electron-is-dev')
 
-require('@electron/remote/main').initialize()
+// require('@electron/remote/main').initialize()
+
+app.disableHardwareAcceleration()
+
+crashReporter.start({ uploadToServer: false })
 
 function createWindow() {
     // Create the browser window
@@ -9,13 +13,14 @@ function createWindow() {
         show: false,
         frame: false,
         icon: __dirname + '/icon.png',
+        fullscreen: true,
+        navigateOnDragDrop: true,
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
-            // devTools: true
+            devTools: false,
+            backgroundThrottling: false
         }
     })
-    win.maximize()
     // win.loadURL('http://localhost:3000')
 
     win.loadURL(
@@ -23,6 +28,7 @@ function createWindow() {
             ? 'http://localhost:3000'
             : `file://${__dirname}/../build/index.html`
     )
+    win.maximize()
 }
 
 // app.on('ready', createWindow)

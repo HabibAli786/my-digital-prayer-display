@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Header from '../Header/Header';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
@@ -18,10 +18,12 @@ function User(props) {
     const { auth, set_auth, username, set_username } = props
 
     const Logout = () => {
+        let source = axios.CancelToken.source();
         axios({
             method: 'GET',
             withCredentials: true,
-            url: 'http://localhost:3001/admin/logout'
+            url: 'http://localhost:3001/admin/logout',
+            cancelToken: source.token
         }).then((res) => {
             // console.log(res.data)
             if(res.data === "Logged out") {
@@ -30,12 +32,13 @@ function User(props) {
             } else {
                 // set_auth("Authenticated")
             }
+            source.cancel('Cancelling in cleanup')
         })
     }
 
-    useEffect(() => {
-        // dispatch(authenticate())
-    }, [])
+    // useEffect(() => {
+    //     // dispatch(authenticate())
+    // }, [])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
         return ( <Redirect to={{ pathname: "/admin" }} />)
