@@ -5,7 +5,7 @@ function JamaatPrayer(props) {
 
     const { prayersStatus, prayerTimes, jummah } = props
 
-    const prayerNames = ["Fajr", "Sunrise", "Ẓuhr", "Asr", "Maghrib", "Isha"]
+    const prayerNames = ["Fajr", "Sunrise", "Zuhr", "Asr", "Maghrib", "Isha"]
 
     const [currentPrayer, setCurrentPrayer] = useState("")
     const [currentTime, setCurrentTime] = useState("")
@@ -37,7 +37,7 @@ function JamaatPrayer(props) {
     useEffect(() => {
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
-        if(currentPrayer === "Ẓuhr") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Zuhr") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Jumuʿah") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
