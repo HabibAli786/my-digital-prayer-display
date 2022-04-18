@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 import './JamaatPrayer.css'
 
 function JamaatPrayer(props) {
@@ -16,16 +17,17 @@ function JamaatPrayer(props) {
         // console.log(prayerTimes)
         // console.log(jummah)
         
-        for(let i=0; i < prayersStatus.length;  i++) {
-            if(prayersStatus[i] === false) {
-                if(jummah && prayersStatus[1] && !prayersStatus[3]) {
-                    setCurrentPrayer("Jumuʿah")
+        if(jummah && prayersStatus[3] === false) {
+            setCurrentPrayer("Jumuʿah")
+        } else {
+            for(let i=0; i < prayersStatus.length;  i++) {
+                if(prayersStatus[i] === false) {
+                    // console.log(prayerNames[i-1])
+                    setCurrentPrayer(prayerNames[i-1])
                     break
-                }                
-                setCurrentPrayer(prayerNames[i-1])
-                break
+                }
+                setCurrentPrayer(prayerNames[5])
             }
-            setCurrentPrayer(prayerNames[5])
         }
 
         return () => { 
