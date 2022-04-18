@@ -6,7 +6,7 @@ function JamaatPrayer(props) {
 
     const { prayersStatus, prayerTimes, jummah } = props
 
-    const prayerNames = ["Fajr", "Sunrise", "Ẓuhr", "Asr", "Maghrib", "Isha"]
+    const prayerNames = ["Fajr", "Sunrise", "Zuhr", "Asr", "Maghrib", "Isha"]
 
     const [currentPrayer, setCurrentPrayer] = useState("")
     const [currentTime, setCurrentTime] = useState("")
@@ -39,8 +39,8 @@ function JamaatPrayer(props) {
     useEffect(() => {
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
-        if(currentPrayer === "Ẓuhr") { setCurrentTime(prayerTimes[4]) }
-        if(currentPrayer === "Jummah") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Zuhr") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Jumuʿah") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
         if(currentPrayer === "Isha") { setCurrentTime(prayerTimes[10]) }
@@ -52,8 +52,15 @@ function JamaatPrayer(props) {
 
     return (
         <>
-        <div>
-            <Container className="jamaat-prayer-container">
+        <div className="jamaat-prayer-container">
+            {currentPrayer &&
+                <div>
+                    <img className="jamaat-image" src={`jamaat/${currentPrayer.toLowerCase()}.png`} alt={`jamaat-${currentPrayer.toLowerCase()}`} />
+                    <h1 className={`jamaat-prayer-name-${currentPrayer.toLowerCase()}`}>{currentPrayer}</h1>
+                    <h1 className={`jamaat-prayer-time-${currentPrayer.toLowerCase()}`}>{currentTime}</h1>
+                </div>
+            }
+            {/* <Container className="jamaat-prayer-container">
                 <Row>
                     <Col className="jamaat-prayer-name">{currentPrayer}</Col>
                 </Row>
@@ -68,7 +75,7 @@ function JamaatPrayer(props) {
                         <img className="jamaat-prayer-phone"src="images/no-phone.png" alt="no mobile phone" />
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
         </div>
         </>
     )

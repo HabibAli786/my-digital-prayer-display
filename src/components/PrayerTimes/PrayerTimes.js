@@ -519,7 +519,7 @@ function PrayerTimes() {
                             :
                             <>
                                 <Col className="col-4 salaah-name">صَلَاة ٱلظُّهْر</Col>
-                                <Col className="col-4">Ẓuhr</Col>
+                                <Col className="col-4">Zuhr</Col>
                             </>
                         }
                         <Col className="col-2">
