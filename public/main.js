@@ -1,11 +1,14 @@
-const { app, BrowserWindow, crashReporter } = require('electron' )
-const isDev = require('electron-is-dev')
+const { app, BrowserWindow, crashReporter } = require('electron' );
+const isDev = require('electron-is-dev');
 
-// require('@electron/remote/main').initialize()
+require('@electron/remote/main').initialize();
 
-app.disableHardwareAcceleration()
+app.disableHardwareAcceleration();
 
-crashReporter.start({ uploadToServer: false })
+crashReporter.start({ uploadToServer: false });
+
+// Prevent garbage colelction
+let win;
 
 function createWindow() {
     // Create the browser window
@@ -18,24 +21,25 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             devTools: false,
-            backgroundThrottling: false
+            backgroundThrottling: false,
         }
-    })
-    // win.loadURL('http://localhost:3000')
+    });
+
+    win.maximize();
+    // win.loadURL('http://localhost:3000');
 
     win.loadURL(
         isDev
             ? 'http://localhost:3000'
             : `file://${__dirname}/../build/index.html`
-    )
-    win.maximize()
-}
+    );
 
-// app.on('ready', createWindow)
+    return win;
+}
 
 app.on('ready', () => {
     // Create the new window
-    createWindow();
+    win = createWindow();
 });
 
 // Quit when all windows are closed.
@@ -43,12 +47,14 @@ app.on('window-all-closed', function() {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
-})
+});
 
 app.on('active', function() {
     // On OS X it's common to re-create a window in the app the
     // dock icon is clicked and there are no other windows open.
-    if(BrowserWindow.getAllWindows().length === 0) createWindow()
-})
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+    }
+});

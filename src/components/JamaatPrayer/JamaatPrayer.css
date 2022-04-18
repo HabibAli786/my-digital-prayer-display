@@ -119,7 +119,7 @@
         margin: auto; */
     }
 
-    .jamaat-prayer-name-ẓuhr {
+    .jamaat-prayer-name-zuhr {
         font-size: 130px !important;
         font-weight: bold;
         color: white;
@@ -134,7 +134,7 @@
         margin: auto; */
     }
 
-    .jamaat-prayer-time-ẓuhr {
+    .jamaat-prayer-time-zuhr {
         font-size: 130px !important;
         font-weight: bold;
         color: white;
@@ -328,7 +328,7 @@
         margin: auto; */
     }
 
-    .jamaat-prayer-name-ẓuhr {
+    .jamaat-prayer-name-zuhr {
         font-size: 200px !important;
         font-weight: bold;
         color: white;
@@ -343,7 +343,7 @@
         margin: auto; */
     }
 
-    .jamaat-prayer-time-ẓuhr {
+    .jamaat-prayer-time-zuhr {
         font-size: 200px !important;
         font-weight: bold;
         color: white;
@@ -377,7 +377,6 @@
         font-size: 200px !important;
         font-weight: bold;
         color: white;
-        text-align: center;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -441,10 +440,9 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 76%;
-        right: 0;
-        text-align: left;
-        margin-left: 30px;
+        left: 0;
+        right: 2%;
+        text-align: right;
         /* height: fit-content;
         margin: auto; */
     }
