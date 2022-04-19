@@ -431,6 +431,21 @@
         /* height: fit-content;
         margin: auto; */
     }
+
+    .jamaat-prayer-time-isha {
+        font-size: 200px !important;
+        font-weight: bold;
+        color: white;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 30px;
+        text-align: right;
+        margin-left: 30px;
+        /* height: fit-content;
+        margin: auto; */
+    }
       
     .jamaat-prayer-name {
         font-size: 250px !important;
