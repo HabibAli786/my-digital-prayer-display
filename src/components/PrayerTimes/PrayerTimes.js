@@ -384,6 +384,14 @@ function PrayerTimes() {
             }
         }
 
+        if(date[0] === "Friday" && !prayerFinished[3] && !setIsJummah) {
+            setIsJummah(true)
+        }
+
+        if(date[0] === "Friday" && prayerFinished[3] && setIsJummah) {
+            setIsJummah(false)
+        }
+
         return () => { 
             source.cancel('Cancelling in cleanup')
         }
