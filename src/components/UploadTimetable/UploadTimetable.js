@@ -31,7 +31,7 @@ function UploadTimetable(props) {
 
         e.preventDefault()
         const data = new FormData()
-        data.append('prayertimes', file)
+        data.append('prayertimes-copy', file)
         // console.log(e.target.value)
         // console.log(file)
         if(file) {
