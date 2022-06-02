@@ -21,18 +21,22 @@ function UploadLogo(props) {
 
 
     const uploadFile = (e) => {
+        let source = axios.CancelToken.source();
+
         e.preventDefault()
         const data = new FormData()
         data.append('logo', file)
         // console.log(e.target.value)
-        console.log(file)
-        console.log(data)
+        // console.log(file)
+        // console.log(data)
         if(file) {
             axios.post('http://localhost:3001/media/logo', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => { // then print response status
-                console.log(res);
+                // console.log(res);
                 setServerStatus(res.data)
+                source.cancel('Cancelling in cleanup')
             })
         } else {
             setServerStatus("Error: No file has been selected")
@@ -40,10 +44,10 @@ function UploadLogo(props) {
         e.target.logo.value = ""
     }
 
-    useEffect(() => {
-        console.log("UploadLogo useEffect running")
-        // dispatch(authenticate())
-    }, [file, serverStatus])
+    // useEffect(() => {
+    //     // console.log("UploadLogo useEffect running")
+    //     // dispatch(authenticate())
+    // }, [file, serverStatus])
 
     if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth) {
         return ( <Redirect to="/admin" /> )

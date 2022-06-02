@@ -1,52 +1,72 @@
-import { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap'
 import axios from 'axios';
-import './Notifications.css'
-import { connect, useDispatch } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
+import { Card } from 'react-bootstrap'
+import { connect } from 'react-redux';
 import { set_count, set_notifi } from '../Redux/actions/notificationAction';
-import { setNotifi } from '../Redux/reducers/notificationReducer';
 
+import './Notifications.css'
 
 function Notifications(props) {
 
-    const { slideshow, notifi, count, set_count } = props
+    const { slideshow, notifi, count, set_count, set_notifi } = props
 
     const [animation, setAnimation] = useState(false)
     // const [count, setCount] = useState(0)
 
-    const dispatch = useDispatch()
-
     useEffect(() => {
-        dispatch(setNotifi())
+        let source = axios.CancelToken.source();
+        // console.log("I am running in thunk")
+        let notifications = null
+
+        axios.get(`http://localhost:3001/notifications`, { cancelToken: source.token })
+        .then((response) => {
+            // console.log(response.data.notifications)
+            if(response.data.notifications) {
+                notifications = response.data.notifications
+                // console.log(notifications)
+                if(notifications) {
+                    set_notifi(notifications)
+                }
+            }
+            })
+            .catch((error) => {
+                console.log(error)
+                notifications = ["No Notifications"]
+                set_notifi(notifications)
+            })
+            
+        return () => { 
+            source.cancel("Cancelling in cleanup");
+        }
     }, [])
 
     // Notification Animation useEffect
     useEffect(() => {
+        let animationTrue
+        let animationFalse
         // How long the text will appear
         if(animation === false) {
-            setTimeout(() => {
+            animationTrue = setTimeout(() => {
                 setAnimation(true)
             }, 6000)
         } else {
-            if(animation === true){
-                setTimeout(() => {
-                    if(!slideshow) {
-                        set_count(count + 1)
-                        setAnimation(false)
-                        if(count === notifi.length-1) {
-                            set_count(0)
-                        }
+            if(animation && !slideshow){
+                animationFalse = setTimeout(() => {
+                    set_count(count + 1)
+                    setAnimation(false)
+                    if(count === notifi.length-1 || count >= notifi.length) {
+                        set_count(0)
                     }
                 }, 3000)
             }
         }
+        return () => { 
+            clearTimeout(animationTrue)
+            clearTimeout(animationFalse)
+        }
     }, [animation])
 
-    console.log(count)
-    console.log(animation)
-
     return (
-
         <Card border="dark" className="card-annc mx-5">
             <Card.Body>
                 <Card.Text className={animation === true ? "annc-current" : "annc-next"}>

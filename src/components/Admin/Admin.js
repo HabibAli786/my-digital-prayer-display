@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router';
 import { connect, useDispatch} from 'react-redux';
 
-import { authenticate } from '../Redux/reducers/authReducer'
+// import { authenticate } from '../Redux/reducers/authReducer'
 import { set_auth, set_username } from '../Redux/actions/authAction';
 import Header from '../Header/Header'
 
@@ -16,6 +16,7 @@ function Admin(props) {
     const { auth, set_auth } = props
 
     const login = (username, password) => {
+        let source = axios.CancelToken.source();
         if(username) {
             axios({
                 method: 'POST',
@@ -24,15 +25,22 @@ function Admin(props) {
                     password: password
                 },
                 withCredentials: true,
-                url: 'http://localhost:3001/admin/login'
+                url: 'http://localhost:3001/admin/login',
+                cancelToken: source.token
             })
             .then((res) => {
-                console.log("I am coming from the server " + res.data)
+                // console.log("I am coming from the server " + res.data)
                 if(res.data === 'Successfully Authenticated') {
                     set_auth(res.data)
                 } else {
                     set_auth(res.data)
                 }
+                console.log(res.data)
+                source.cancel("Cancelling in cleanup");
+            })
+            .catch((err) => {
+                console.log(err)
+                set_auth("Server Offline")
             })
         }
     }
@@ -49,9 +57,13 @@ function Admin(props) {
     }
 
     useEffect(() => {
-        console.log("admin useEffect running...")
-        dispatch(authenticate())
+        // console.log("admin useEffect running...")
+        // dispatch(authenticate())
         // login()
+
+        return () => { 
+            
+        }
     }, [])
     
     return (
