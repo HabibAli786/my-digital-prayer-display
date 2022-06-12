@@ -5,7 +5,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { connect } from "react-redux";
 import Switch from "react-switch";
 import Header from "../Header/Header";
-import { set_qrToggle } from "../Redux/actions/prayertimesAction";
+import { set_qrToggle } from "../Redux/actions/qrCodeAction";
 
 import './QRCode.css'
 
@@ -13,11 +13,11 @@ function QRCode(props) {
 
     const { qr_toggle, set_qrToggle } = props
 
-    const [checked, setChecked] = useState({ checked: false })
+    const [checked, setChecked] = useState(false)
 
     const handleChange = (nextChecked) => {
         setChecked(nextChecked)
-        set_qrToggle(true)
+        set_qrToggle(nextChecked)
     }
 
     const [file, setFile] = useState(null)
@@ -45,7 +45,7 @@ function QRCode(props) {
 
     useEffect(() => {
         console.log(qr_toggle)
-        setChecked({...checked, qr_toggle})
+        // setChecked({...checked, qr_toggle})
     }, [])
 
 
@@ -85,7 +85,7 @@ function QRCode(props) {
 }
 
 const matchStateToProps = state => ({
-    qr_toggle : state.prayertimes.qr_toggle,
+    qr_toggle : state.qrCode.qr_toggle,
   })
   
 const mapDispatchToProps = (dispatch) => {

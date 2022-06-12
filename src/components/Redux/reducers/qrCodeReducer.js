@@ -2,7 +2,7 @@ const init = {
     qr_toggle: false
 }
 
-const prayertimesReducer = (state = init, action) => {
+const qrCodeReducer = (state = init, action) => {
     // console.log(action.payload)
     switch(action.type) {
         case 'SET_QR_TOGGLE':
@@ -15,4 +15,4 @@ const prayertimesReducer = (state = init, action) => {
     }
 }
 
-export default prayertimesReducer;
+export default qrCodeReducer;
