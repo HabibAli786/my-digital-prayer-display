@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row, Button, Form } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { connect } from "react-redux";
@@ -25,6 +25,7 @@ function QRCode(props) {
 
     const uploadFile = (e) => {
         e.preventDefault()
+        let source = axios.CancelToken.source();
         const data = new FormData()
         data.append('logo', file)
         // console.log(e.target.value)
@@ -32,22 +33,18 @@ function QRCode(props) {
         console.log(data)
         if(file) {
             axios.post('http://localhost:3001/media/logo', data, {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                cancelToken: source.token
             }).then(res => { // then print response status
-                console.log(res);
+                // console.log(res);
                 setServerStatus(res.data)
+                source.cancel('Cancelling in cleanup')
             })
         } else {
             setServerStatus("Error: No file has been selected")
         }
         e.target.logo.value = ""
     }
-
-    useEffect(() => {
-        console.log(qr_toggle)
-        // setChecked({...checked, qr_toggle})
-    }, [])
-
 
     return (
         <>
