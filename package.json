@@ -3,7 +3,7 @@
   "productName": "PrayerTimes+",
   "author": "Habib Ali",
   "description": "A simple application to display prayertimes for your local masjid",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.4",
