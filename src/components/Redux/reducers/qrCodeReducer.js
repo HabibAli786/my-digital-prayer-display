@@ -1,5 +1,5 @@
 const init = {
-    qr_toggle: false
+    qr_toggle: true
 }
 
 const qrCodeReducer = (state = init, action) => {
