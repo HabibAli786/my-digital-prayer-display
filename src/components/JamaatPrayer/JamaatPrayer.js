@@ -6,7 +6,7 @@ function JamaatPrayer(props) {
 
     const { prayersStatus, prayerTimes, jummah } = props
 
-    const prayerNames = ["Fajr", "Sunrise", "Zuhr", "Asr", "Maghrib", "Isha"]
+    const prayerNames = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]
 
     const [currentPrayer, setCurrentPrayer] = useState("")
     const [currentTime, setCurrentTime] = useState("")
