@@ -5,3 +5,18 @@
 .nav-link {
     font-size: 20px;
 }
+
+@media (min-width: 3840px) {
+    .btn-danger {
+        width: 15%;
+    }
+    
+    .nav-link {
+        font-size: 50px;
+    }
+
+    svg {
+        height: 5em;
+        width: 5em;
+    }
+}
