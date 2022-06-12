@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
+import { connect } from "react-redux";
 
 import Notifications from '../Notifications/Notifications'
 import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
@@ -91,7 +92,9 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
-function PrayerTimes() {
+function PrayerTimes(props) {
+
+    const { qr_toggle } = props
 
     const [clock, setClock] = useState("00:00:00")
 
@@ -384,10 +387,6 @@ function PrayerTimes() {
             }
         }
 
-        console.log(date[0])
-        console.log(prayerFinished[4])
-        console.log(!setIsJummah)
-
         if(date[0] === "Friday" && prayerFinished[4] === false && isJummah === false) {
             setIsJummah(true)
         }
@@ -486,7 +485,12 @@ function PrayerTimes() {
 
                 {/* Makrooh or Secondary Image */}
                 {makrooh ?
-                    <MakroohTime /> : <img className='prayertimes-qr-code' src="http://localhost:3001/media/secondary-image" alt="qr-code" /> 
+                    <MakroohTime /> :
+                    <>
+                        {qr_toggle &&
+                            <img className='prayertimes-qr-code' src="http://localhost:3001/media/secondary-image" alt="qr-code" /> 
+                        }
+                    </>
                 }
 
                 {/* Prayertimes */}
@@ -498,7 +502,7 @@ function PrayerTimes() {
                         <Col className="col-2 jamaat active-color">Jama'ah</Col>
                     </Row>
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
-                        <Col className="col-4 salaah-name">صلاة الفجر</Col>
+                        <Col className="col-4 salaah-name">صَلَاةُ الْفَجْر</Col>
                         <Col className="col-4">Fajr</Col>
                         <Col className="col-2"> 
                             {!prayerFinished[0] ? `${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}` : 
@@ -510,7 +514,7 @@ function PrayerTimes() {
                         </Col>
                     </Row>
                     <Row className={prayerFinished[1] === true ? "finshed row2" : "finished row2"}>
-                        <Col className="col-4 salaah-name">الشُّروق</Col>
+                        <Col className="col-4 salaah-name">اَلشُّرُوْق</Col>
                         <Col className="col-4">Sunrise</Col>
                         <Col className="col-2">
                             {!prayerFinished[1] ? `${times[2].slice(0, 2) % 12 || 12}:${times[2].slice(3,5)}` : 
@@ -526,8 +530,8 @@ function PrayerTimes() {
                             </>
                             :
                             <>
-                                <Col className="col-4 salaah-name">صَلَاة ٱلظُّهْر</Col>
-                                <Col className="col-4">Zuhr</Col>
+                                <Col className="col-4 salaah-name">صَلَاةُ الظُّهْر</Col>
+                                <Col className="col-4">Dhuhr</Col>
                             </>
                         }
                         <Col className="col-2">
@@ -540,7 +544,7 @@ function PrayerTimes() {
                         </Col>
                     </Row>
                     <Row className={prayerFinished[3] === true ? "finshed row4" : "finished row4"}>
-                        <Col className="col-4 salaah-name">صَلَاةُ العَصْر</Col>
+                        <Col className="col-4 salaah-name">صَلَاةُ الْعَصْر</Col>
                         <Col className="col-4">Asr</Col>
                         <Col className="col-2">
                             {!prayerFinished[3] ? `${times[5].slice(0, 2) % 12 || 12}:${times[5].slice(3,5)}` : 
@@ -552,7 +556,7 @@ function PrayerTimes() {
                         </Col>
                     </Row>
                     <Row className={prayerFinished[4] === true ? "finshed row5" : "finished row5"}>
-                        <Col className="col-4 salaah-name">صَلَاةُ اَلْمَغْرِب</Col>
+                        <Col className="col-4 salaah-name">صَلَاةُ الْمَغْرِب</Col>
                         <Col className="col-4">Maghrib</Col>
                         <Col className="col-2">
                             {!prayerFinished[4] ? `${times[7].slice(0, 2) % 12 || 12}:${times[7].slice(3,5)}` : 
@@ -564,7 +568,7 @@ function PrayerTimes() {
                         </Col>
                     </Row>
                     <Row className={prayerFinished[5] === true ? "finshed row6" : "finished row6"}>
-                        <Col className="col-4 salaah-name">صَلَاةُ العِشَاء</Col>
+                        <Col className="col-4 salaah-name">صَلَاةُ الْعِشَاء</Col>
                         <Col className="col-4">Isha</Col>
                         <Col className="col-2">
                             {!prayerFinished[5] ? `${times[9].slice(0, 2) % 12 || 12}:${times[9].slice(3,5)}` : 
@@ -588,4 +592,12 @@ function PrayerTimes() {
     )
 }
 
-export default PrayerTimes;
+const matchStateToProps = state => ({
+    qr_toggle : state.qrCode.qr_toggle,
+})
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(matchStateToProps, mapDispatchToProps)(PrayerTimes);

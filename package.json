@@ -3,7 +3,7 @@
   "productName": "PrayerTimes+",
   "author": "Habib Ali",
   "description": "A simple application to display prayertimes for your local masjid",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.0.4",
@@ -22,6 +22,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
+    "react-switch": "^6.0.0",
     "react-table": "^7.7.0",
     "redux": "^4.1.1",
     "redux-persist": "^6.0.0",
