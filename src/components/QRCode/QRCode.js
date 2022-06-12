@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row, Button, Form } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { connect } from "react-redux";
@@ -46,6 +46,10 @@ function QRCode(props) {
         e.target.logo.value = ""
     }
 
+    useEffect(() => {
+        handleChange(qr_toggle)
+    })
+
     return (
         <>
         <Header />
@@ -83,7 +87,7 @@ function QRCode(props) {
 
 const matchStateToProps = state => ({
     qr_toggle : state.qrCode.qr_toggle,
-  })
+})
   
 const mapDispatchToProps = (dispatch) => {
     return {

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
+import { connect } from "react-redux";
 
 import Notifications from '../Notifications/Notifications'
 import JamaatPrayer from '../JamaatPrayer/JamaatPrayer';
@@ -91,7 +92,9 @@ const strToDate = (str) => {
     // console.log(str)
 }
 
-function PrayerTimes() {
+function PrayerTimes(props) {
+
+    const { qr_toggle } = props
 
     const [clock, setClock] = useState("00:00:00")
 
@@ -384,10 +387,6 @@ function PrayerTimes() {
             }
         }
 
-        console.log(date[0])
-        console.log(prayerFinished[4])
-        console.log(!setIsJummah)
-
         if(date[0] === "Friday" && prayerFinished[4] === false && isJummah === false) {
             setIsJummah(true)
         }
@@ -486,7 +485,12 @@ function PrayerTimes() {
 
                 {/* Makrooh or Secondary Image */}
                 {makrooh ?
-                    <MakroohTime /> : <img className='prayertimes-qr-code' src="http://localhost:3001/media/secondary-image" alt="qr-code" /> 
+                    <MakroohTime /> :
+                    <>
+                        {qr_toggle &&
+                            <img className='prayertimes-qr-code' src="http://localhost:3001/media/secondary-image" alt="qr-code" /> 
+                        }
+                    </>
                 }
 
                 {/* Prayertimes */}
@@ -588,4 +592,12 @@ function PrayerTimes() {
     )
 }
 
-export default PrayerTimes;
+const matchStateToProps = state => ({
+    qr_toggle : state.qrCode.qr_toggle,
+})
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(matchStateToProps, mapDispatchToProps)(PrayerTimes);
