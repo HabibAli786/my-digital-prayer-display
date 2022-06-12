@@ -82,7 +82,9 @@ function User(props) {
                         </Link>
                     </Col>
                     <Col>
-                    
+                        <Link to="/QRCode">
+                            <Button className="button-options" variant="outline-primary" size="lg">QR Code</Button>
+                        </Link>
                     </Col>
                 </Row>
                 <Row className="user-logout-row">

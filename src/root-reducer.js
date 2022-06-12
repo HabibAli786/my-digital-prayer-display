@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import authReducer from './components/Redux/reducers/authReducer';
 import notificationReducer from './components/Redux/reducers/notificationReducer';
+import qrCodeReducer from './components/Redux/reducers/qrCodeReducer';
 
 // const persistConfig = {
 //     key: 'root',
@@ -10,7 +11,8 @@ import notificationReducer from './components/Redux/reducers/notificationReducer
 
 const rootReducers = combineReducers({
     admin : authReducer,
-    notifi: notificationReducer        
+    notifi: notificationReducer,
+    qrCode: qrCodeReducer       
 })
 
 export default rootReducers
