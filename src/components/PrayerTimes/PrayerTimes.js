@@ -241,57 +241,57 @@ function PrayerTimes(props) {
     }, [clock, prayerFinished, times])
     
     // Display Jamaat Display
-    // useEffect(() => {
-    //     let clockDate = new Date()
-    //     let jamaatStart = new Date()
-    //     let jamaatEnd = new Date()
+    useEffect(() => {
+        let clockDate = new Date()
+        let jamaatStart = new Date()
+        let jamaatEnd = new Date()
 
-    //     const clockHours = clock.slice(0, 2)
-    //     const clockMinutes = clock.slice(3, 5)
-    //     const clockSeconds = clock.slice(6, 8)
+        const clockHours = clock.slice(0, 2)
+        const clockMinutes = clock.slice(3, 5)
+        const clockSeconds = clock.slice(6, 8)
         
-    //     clockDate.setHours(clockHours, clockMinutes, clockSeconds)
+        clockDate.setHours(clockHours, clockMinutes, clockSeconds)
 
-    //     let result = false
+        let result = false
         
-    //     let j = 0
-    //     for(let i=0; i < 11; i += 1) {
-    //         if(i === 0 || i === 2 || i === 3 || i === 5 || i === 7 || i === 9) {
-    //             continue
-    //         }
+        let j = 0
+        for(let i=0; i < 11; i += 1) {
+            if(i === 0 || i === 2 || i === 3 || i === 5 || i === 7 || i === 9) {
+                continue
+            }
 
-    //         const timesHours = times[i].slice(0, 2)
-    //         const timesMinutes = times[i].slice(3, 5)
-    //         const timesSeconds = times[i].slice(6, 8)
+            const timesHours = times[i].slice(0, 2)
+            const timesMinutes = times[i].slice(3, 5)
+            const timesSeconds = times[i].slice(6, 8)
 
-    //         const jamaatEndMinutes = parseInt(timesMinutes) + 5
+            const jamaatEndMinutes = parseInt(timesMinutes) + 5
 
-    //         jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
-    //         jamaatEnd.setHours(timesHours, jamaatEndMinutes.toString(), timesSeconds)
+            jamaatStart.setHours(timesHours, timesMinutes, timesSeconds)
+            jamaatEnd.setHours(timesHours, jamaatEndMinutes.toString(), timesSeconds)
             
-    //         // console.log(j)
-    //         if(clockDate > jamaatStart && clockDate < jamaatEnd) {
-    //                 result = true
-    //                 break
-    //         } else {
-    //             result = false
-    //         }
-    //         j = j+1
-    //         if(j === 1) {
-    //             j+=1
-    //         }
-    //     }
-    //     if(result) {
-    //         setJamaatStarted(true)
-    //     } else {
-    //         setJamaatStarted(false)
-    //     }
+            // console.log(j)
+            if(clockDate > jamaatStart && clockDate < jamaatEnd) {
+                    result = true
+                    break
+            } else {
+                result = false
+            }
+            j = j+1
+            if(j === 1) {
+                j+=1
+            }
+        }
+        if(result) {
+            setJamaatStarted(true)
+        } else {
+            setJamaatStarted(false)
+        }
 
-    //     return () => {
+        return () => {
 
-    //     }
+        }
 
-    // }, [clock, prayerFinished, times])
+    }, [clock, prayerFinished, times])
 
     // Set Initial Makrooh times for the day
     useEffect(() => {
@@ -423,36 +423,36 @@ function PrayerTimes(props) {
     }, [])
 
     // Slideshow Animation useEffect
-    // useEffect(() => {
-    //     let falseSlideshowTimeout
-    //     let trueSlideshowTimeout
-    //     // How long will the image take to come on the screen
-    //     if(displaySlideshow === false) {
-    //         falseSlideshowTimeout = setTimeout(() => {
-    //             setDisplaySlideshow(true)
-    //         }, 60000)
-    //         // setAnimation(false)
-    //     }
-    //     // How long the image will be on the screen
-    //     if(displaySlideshow === true){
-    //         trueSlideshowTimeout = setTimeout(() => {
-    //             // setSlideshowCount(slideshowCount + 1)
-    //             setDisplaySlideshow(false)
-    //             if(slideshowCount === numOfSlides-1) {
-    //                 setSlideshowCount(0)
-    //             } else {
-    //                 setSlideshowCount(slideshowCount + 1)
-    //             }
-    //             // console.log("slideshowcount " + slideshowCount)
-    //             // console.log("numofslideshowimages " + numOfSlides)
-    //         }, 15000)
-    //     }
+    useEffect(() => {
+        let falseSlideshowTimeout
+        let trueSlideshowTimeout
+        // How long will the image take to come on the screen
+        if(displaySlideshow === false) {
+            falseSlideshowTimeout = setTimeout(() => {
+                setDisplaySlideshow(true)
+            }, 60000)
+            // setAnimation(false)
+        }
+        // How long the image will be on the screen
+        if(displaySlideshow === true){
+            trueSlideshowTimeout = setTimeout(() => {
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
+                } else {
+                    setSlideshowCount(slideshowCount + 1)
+                }
+                // console.log("slideshowcount " + slideshowCount)
+                // console.log("numofslideshowimages " + numOfSlides)
+            }, 15000)
+        }
         
-    //     return () => { 
-    //         if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
-    //         if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
-    //     }
-    // }, [displaySlideshow])
+        return () => { 
+            if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
+            if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
+        }
+    }, [displaySlideshow])
 
     return(
         <>
