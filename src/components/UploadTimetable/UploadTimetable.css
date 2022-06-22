@@ -147,3 +147,74 @@
         font-size: 40px;
     }
 }
+
+@media (min-width: 3840px) {
+    .uploadTimetable-container {
+        margin-top: 100px;
+        height: 800px;
+        border-style: solid;
+    }
+
+    .title-header {
+        margin-top: 150px;
+        font-size: 170px;
+    }
+
+    .uploadTimetable-icon {
+        height: 300px !important;
+        width: 300px !important;
+    }
+
+    .uploadTimetable-fileInput {
+        margin-top : 4% !important; 
+        font-size: 80px;
+        border-style: solid; 
+    }
+    
+    .uploadTimetable-button {
+        margin-top: 70px;
+        font-size: 70px !important;
+        width: 26%;
+    }
+
+    .uploadTimetable-hint-button {
+        margin-top: 20px;
+        width: 8%;
+        font-size: 70px !important;
+    }
+    
+    .uploadTimetable_server_status_success {
+        margin-top: 1.5em;
+        font-size: 100px;
+        color: green;
+    }
+    
+    .uploadTimetbale_server_status_unsuccessful {
+        margin-top: 2.3em;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        height: 400px;
+        width: 3840px;
+        border-style: solid;
+        font-size: 100px;
+    }
+
+    .modal-dialog {
+        margin-top: 90px !important; 
+        width: 45%;
+        max-width: 45% !important;
+    }
+
+    .modal-title.h4 {
+        font-size: 90px !important;
+    }
+
+    .modal-content {
+        font-size: 80px;
+    }
+
+    .uploadTimetable-close-button {
+        font-size: 60px !important;
+    }
+}

@@ -60,11 +60,12 @@ function UploadTimetable(props) {
         return (
             <>
             <Header />
-            <h1 style={{marginTop : "15px", fontSize: "50px"}}>Upload Timetable</h1>
+            {/* <h1 style={{marginTop : "15px", fontSize: "50px"}}>Upload Timetable</h1> */}
+            <h1 className="title-header">Upload Timetable</h1>
             <Container className="uploadTimetable-container">
                 <Row>
                     <Col>
-                        <AiOutlineCloudUpload size={200} />
+                        <AiOutlineCloudUpload className="uploadTimetable-icon" />
                     </Col>
                 </Row>
                 <Row>
@@ -76,7 +77,8 @@ function UploadTimetable(props) {
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />
                             <br />
-                            <Button type="submit" style={{ marginTop : "15px" }}>Upload Timetable</Button>
+                            {/* <Button type="submit" style={{ marginTop : "15px" }}>Upload Timetable</Button> */}
+                            <Button className="uploadTimetable-button" type="submit">Upload Timetable</Button>
                         </Form>
                     </Col>
                 </Row>
@@ -99,7 +101,7 @@ function UploadTimetable(props) {
                 <Modal.Body>d_date should be in DD/MM/YYYY format</Modal.Body>
                 <Modal.Body>Timings for each jamaat should be in 24-hour format</Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button className="uploadTimetable-close-button" variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
                 </Modal.Footer>
