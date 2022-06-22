@@ -162,3 +162,36 @@
         width: 50%;
     }
 }
+
+@media (min-width: 3840px) {
+    .user-title-row {
+        /* border-style: dotted; */
+        text-align: left;
+    }
+    
+    .user-title {
+        font-size: 13em;
+    }
+    
+    .user-subheading-row {
+        text-align: left;
+    }
+    
+    .user-subheading {
+        font-size: 5em;
+    }
+    
+    .button-options {
+        width: 100%;
+        font-size: 4em !important;
+    }
+    
+    .user-logout-row {
+        margin-top: 500px !important;
+    }
+    
+    .user-logout {
+        font-size: 4.5em !important;
+        width: 50%;
+    }
+}
