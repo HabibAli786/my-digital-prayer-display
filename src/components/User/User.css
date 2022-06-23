@@ -98,6 +98,10 @@
 }
 
 @media (min-width: 1200px) { 
+    .container {
+        width: 100% !important;
+    }
+
     .user-title-row {
         /* border-style: dotted; */
         text-align: left;
@@ -132,7 +136,7 @@
 
 @media (min-width: 1400px) {
     .container {
-        max-width: 90% !important;
+        width: 100% !important;
     }
     
     .user-title-row {
@@ -169,7 +173,7 @@
 
 @media (min-width: 3840px) {
     .container {
-        max-width: 90% !important;
+        width: 100% !important;
     }
 
     .user-title-row {
