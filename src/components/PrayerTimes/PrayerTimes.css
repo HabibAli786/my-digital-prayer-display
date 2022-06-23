@@ -476,6 +476,10 @@
 }
 
 @media (min-width: 1200px) {
+    .container {
+        width: 100% !important;
+    }
+
     .prayertimes-div {
         background-image: url('http://localhost:3000/PrayerTimes-Background.jpg');
         /* background-repeat: no-repeat; */
@@ -547,14 +551,6 @@
         margin: 0;
     }
 
-    /* .prayertimes-background {
-        position: absolute;
-        background-image: url(http://localhost:3000/PrayerTimes-Background.jpg);
-        bottom: 2rem;
-        width: 100%;
-        height: 100%;
-    } */
-
     .row0 {
         width: 85%;
     }
@@ -586,10 +582,6 @@
     .salaah-name {
         text-align: right;
         padding-right: 50px !important;
-    }
-    .container {
-        /* margin: 20px 0px 0px 5px !important; */
-        /* margin-left: 5px !important; */
     }
     
     .table-container {
@@ -766,6 +758,10 @@
 }
 
 @media (min-width: 1400px) {
+    .container {
+        width: 70% !important;
+    }
+
     .prayertimes-main-div {
         overflow: hidden; /* Hide scrollbars */
     }
@@ -806,10 +802,6 @@
     .salaah-name {
         text-align: right;
         padding-right: 50px !important;
-    }
-    .container {
-        /* margin: 20px 0px 0px 5px !important; */
-        /* margin-left: 5px !important; */
     }
     
     .table-container {
@@ -981,7 +973,7 @@
 
 @media (min-width: 3840px) {
     .container {
-        max-width: 2700px !important;
+        width: 70% !important;
     }
 
     .prayertimes-main-div {
