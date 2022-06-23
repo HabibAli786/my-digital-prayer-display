@@ -79,19 +79,37 @@
 @media (min-width: 1200px) {    
     .uploadTimetable-container {
         margin-top: 2%;
-        height: 400px;
+        height: 350px;
+        width: 1000px !important;
         border-style: solid;
+    }
+
+    .title-header {
+        margin-top: 20px;
+        font-size: 50px;
+    }
+
+    .uploadTimetable-icon {
+        height: 130px !important;
+        width: 130px !important;
     }
 
     .uploadTimetable-fileInput {
         margin-top : 1% !important; 
-        font-size: 30px;
+        font-size: 20px;
         border-style: solid; 
+    }
+
+    .uploadTimetable-button {
+        margin-top: 50px;
+        font-size: 20px !important;
+        width: 26%;
     }
 
     .uploadTimetable-hint-button {
         margin-top: 20px;
-        width: 5%;
+        width: 8%;
+        font-size: 20px !important;
     }
     
     .uploadTimetable_server_status_success {
@@ -110,24 +128,60 @@
         border-style: solid;
         font-size: 40px;
     }
+
+    .modal-dialog {
+        margin-top: 30px !important; 
+        width: 45%;
+        max-width: 45% !important;
+    }
+
+    .modal-title.h4 {
+        font-size: 20px !important;
+    }
+
+    .modal-content {
+        font-size: 20px;
+    }
+
+    .uploadTimetable-close-button {
+        font-size: 20px !important;
+    }
 }
 
 @media (min-width: 1400px) { 
     .uploadTimetable-container {
-        margin-top: 100px;
+        margin-top: 50px;
         height: 500px;
+        width: 1700px !important;
         border-style: solid;
     }
 
+    .title-header {
+        margin-top: 40px;
+        font-size: 80px;
+    }
+
+    .uploadTimetable-icon {
+        height: 180px !important;
+        width: 180px !important;
+    }
+
     .uploadTimetable-fileInput {
-        margin-top : 4% !important; 
+        margin-top : 2% !important; 
         font-size: 30px;
         border-style: solid; 
     }
 
+    .uploadTimetable-button {
+        margin-top: 50px;
+        font-size: 30px !important;
+        width: 26%;
+    }
+
     .uploadTimetable-hint-button {
         margin-top: 20px;
-        width: 5%;
+        width: 8%;
+        font-size: 25px !important;
     }
     
     .uploadTimetable_server_status_success {
@@ -146,12 +200,31 @@
         border-style: solid;
         font-size: 40px;
     }
+
+    .modal-dialog {
+        margin-top: 50px !important; 
+        width: 45%;
+        max-width: 45% !important;
+    }
+
+    .modal-title.h4 {
+        font-size: 30px !important;
+    }
+
+    .modal-content {
+        font-size: 30px;
+    }
+
+    .uploadTimetable-close-button {
+        font-size: 30px !important;
+    }
 }
 
 @media (min-width: 3840px) {
     .uploadTimetable-container {
         margin-top: 100px;
-        height: 800px;
+        height: 900px;
+        width: 2700px !important;
         border-style: solid;
     }
 
@@ -202,19 +275,19 @@
 
     .modal-dialog {
         margin-top: 90px !important; 
-        width: 45%;
-        max-width: 45% !important;
+        width: 50%;
+        max-width: 50% !important;
     }
 
     .modal-title.h4 {
-        font-size: 90px !important;
+        font-size: 60px !important;
     }
 
     .modal-content {
-        font-size: 80px;
+        font-size: 60px;
     }
 
     .uploadTimetable-close-button {
-        font-size: 60px !important;
+        font-size: 50px !important;
     }
 }
