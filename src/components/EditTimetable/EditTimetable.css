@@ -70,13 +70,15 @@
     
     .editTimetable_submitbtn {
         width: 20% !important;
-        font-size: 30px !important;
+        font-size: 20px !important;
     }
 
     .editTimetable_success {
-        position: absolute;
-        left: 31%;
-        font-size: 2em;
+        display: inline;
+        text-align: right;
+        margin-left: 600px !important;
+        width: 400px !important;
+        font-size: 25px;
         color: green;
     }
     
@@ -92,13 +94,27 @@
 @media (min-width: 1400px) { 
     .editTimetable_container {
         margin-top: 30px;
-        max-width: 95% !important;
+        max-width: 99% !important;
         /* overflow: hidden; */
+    }
+
+    .editTimetable_title {
+        margin-top: 12px;
+        font-size: 70px;
     }
     
     .editTimetable_submitbtn {
         width: 20% !important;
         font-size: 30px !important;
+    }
+
+    .editTimetable_success {
+        display: inline;
+        text-align: right;
+        margin-left: 600px !important;
+        width: 900px !important;
+        font-size: 40px;
+        color: green;
     }
     
     .edit_table {
@@ -108,4 +124,39 @@
     .edit_input {
         width: 100%;
     }   
+}
+
+@media (min-width: 3840px) {
+    .editTimetable_container {
+        margin-top: 30px;
+        max-width: 99% !important;
+        /* overflow: hidden; */
+    }
+
+    .editTimetable_title {
+        margin-top: 12px;
+        font-size: 150px;
+    }
+    
+    .editTimetable_submitbtn {
+        width: 20% !important;
+        font-size: 70px !important;
+    }
+
+    .editTimetable_success {
+        display: inline;
+        text-align: right;
+        margin-left: 1200px !important;
+        width: 1800px !important;
+        font-size: 90px;
+        color: green;
+    }
+    
+    .edit_table {
+        font-size: 40px;
+    }
+    
+    .edit_input {
+        width: 100%;
+    }
 }

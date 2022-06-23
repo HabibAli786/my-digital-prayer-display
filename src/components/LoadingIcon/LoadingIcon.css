@@ -32,8 +32,16 @@
 
 @media (min-width: 1400px) { 
     .spinner {
-        margin-top: 15%;
-        width: 500px !important;
-        height: 500px !important;
+        margin-top: 10%;
+        width: 700px !important;
+        height: 700px !important;
+    }
+}
+
+@media (min-width: 3840px) {
+    .spinner {
+        margin-top: 11%;
+        width: 1200px !important;
+        height: 1200px !important;
     }
 }
