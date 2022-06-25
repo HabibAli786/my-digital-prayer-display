@@ -60,7 +60,6 @@ function UploadTimetable(props) {
         return (
             <>
             <Header />
-            {/* <h1 style={{marginTop : "15px", fontSize: "50px"}}>Upload Timetable</h1> */}
             <h1 className="title-header">Upload Timetable</h1>
             <Container className="uploadTimetable-container">
                 <Row>

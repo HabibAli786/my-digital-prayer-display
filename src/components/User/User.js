@@ -54,34 +54,34 @@ function User(props) {
                     <p className="mt-2 user-subheading">Please select below what you would like to do today</p>
                 </Row>
                 <Row className="mt-2">
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/uploadTimetable">
                             <Button className="button-options" variant="outline-primary" size="lg">Upload Timetable</Button>
                         </Link>
                     </Col>
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/editTimetable">
                             <Button className="button-options" variant="outline-primary" size="lg">Edit Timetable</Button>
                         </Link>
                     </Col>
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/uploadLogo">
                             <Button className="button-options" variant="outline-primary" size="lg">Upload Logo</Button>
                         </Link>
                     </Col>
                 </Row>
                 <Row className="mt-5">
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/editNotifications">
                             <Button className="button-options" variant="outline-primary" size="lg">Edit Notifications</Button>
                         </Link>
                     </Col>
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/editSlides">
                             <Button className="button-options" variant="outline-primary" size="lg">Edit Slides</Button>
                         </Link>
                     </Col>
-                    <Col>
+                    <Col className="userButtonRow">
                         <Link to="/QRCode">
                             <Button className="button-options" variant="outline-primary" size="lg">QR Code</Button>
                         </Link>

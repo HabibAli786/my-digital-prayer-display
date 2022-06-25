@@ -55,32 +55,32 @@ function UploadLogo(props) {
         return (
             <>
             <Header />
-            <h1 style={{marginTop : "15px", fontSize: "50px"}}>Upload Logo</h1>
+            <h1 className="title-header">Upload Logo</h1>
             <Container className="uploadLogo-container">
                 <Row>
                     <Col>
-                        <AiOutlineCloudUpload size={200} />
+                        <AiOutlineCloudUpload className="uploadTimetable-icon" />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form onSubmit={uploadFile}>
                             <input 
-                                className="uploadLogo-inputImage" 
+                                className="uploadLogo-fileInput" 
                                 name="logo"
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />
                             <br />
-                            <Button type="submit" style={{ marginTop : "15px" }}>Upload Logo</Button>
+                            <Button className="uploadLogo-button" type="submit">Upload Logo</Button>
                         </Form>
                     </Col>
                 </Row>
             </Container>
             { serverStatus === "File has been uploaded successfully" &&
-                <p className="server_status_success">Server Status: {serverStatus}</p>
+                <p className=".uploadLogo_server_status_success">Server Status: {serverStatus}</p>
             }
             { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
-                <p className="server_status_unsuccessful">Server Status: {serverStatus}</p>
+                <p className="uploadLogo_server_status_unsuccessful">Server Status: {serverStatus}</p>
             }
             </>
         )

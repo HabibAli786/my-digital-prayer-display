@@ -271,6 +271,7 @@
         width: 3840px;
         border-style: solid;
         font-size: 100px;
+        color: red;
     }
 
     .modal-dialog {

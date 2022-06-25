@@ -198,6 +198,10 @@
         margin-top: 50px;
         font-size: 7em !important;
     }
+
+    .userButtonRow {
+        margin-right: 30px;
+    }
     
     .user-logout-row {
         margin-top: 300px !important;
