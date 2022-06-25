@@ -127,6 +127,7 @@
         width: 1280px;
         border-style: solid;
         font-size: 40px;
+        color: red;
     }
 
     .modal-dialog {
@@ -199,6 +200,7 @@
         width: 1920px;
         border-style: solid;
         font-size: 40px;
+        color: red;
     }
 
     .modal-dialog {

@@ -81,26 +81,43 @@
 
 @media (min-width: 1200px) { 
     .uploadLogo-container {
-        margin-top: 40px;
-        height: 400px;
+        margin-top: 2%;
+        height: 350px;
+        width: 1000px !important;
         border-style: solid;
     }
 
-    .uploadLogo-inputImage {
-        margin-top : 40px;
-        font-size: 30px;
-        border-style: solid;
+    .title-header {
+        margin-top: 20px;
+        font-size: 50px;
+    }
+
+    .uploadLogo-icon {
+        height: 130px !important;
+        width: 130px !important;
+    }
+
+    .uploadLogo-fileInput {
+        margin-top : 1% !important; 
+        font-size: 20px;
+        border-style: solid; 
+    }
+
+    .uploadLogo-button {
+        margin-top: 50px;
+        font-size: 20px !important;
+        width: 26%;
     }
     
-    .server_status_success {
-        margin-top: 3% !important;
-        font-size: 50px;
+    .uploadLogo_server_status_success {
+        margin-top: 15px;
+        font-size: 40px;
         color: green;
     }
     
-    .server_status_unsuccessful {
-        margin-top: 3% !important;
-        font-size: 50px;
+    .uploadLogo_server_status_unsuccessful {
+        margin-top: 15px;
+        font-size: 40px;
         color: red;
     }
 
@@ -108,26 +125,43 @@
 
 @media (min-width: 1400px) { 
     .uploadLogo-container {
-        margin-top: 100px;
+        margin-top: 50px;
         height: 500px;
+        width: 1700px !important;
         border-style: solid;
     }
 
-    .uploadLogo-inputImage {
-        margin-top : 100px;
+    .title-header {
+        margin-top: 40px;
+        font-size: 80px;
+    }
+
+    .uploadLogo-icon {
+        height: 180px !important;
+        width: 180px !important;
+    }
+
+    .uploadLogo-fileInput {
+        margin-top : 2% !important; 
         font-size: 30px;
-        border-style: solid;
+        border-style: solid; 
+    }
+
+    .uploadLogo-button {
+        margin-top: 50px;
+        font-size: 30px !important;
+        width: 26%;
     }
     
-    .server_status_success {
-        margin-top: 3% !important;
-        font-size: 50px;
+    .uploadLogo_server_status_success {
+        margin-top: 1.5em;
+        font-size: 70px;
         color: green;
     }
     
-    .server_status_unsuccessful {
-        margin-top: 3% !important;
-        font-size: 50px;
+    .uploadLogo_server_status_unsuccessful {
+        margin-top: 1.5em;
+        font-size: 70px;
         color: red;
     }
 
@@ -176,13 +210,7 @@
     }
     
     .uploadLogo_server_status_unsuccessful {
-        margin-top: 2.3em;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        word-wrap: break-word;
-        height: 400px;
-        width: 3840px;
-        border-style: solid;
+        margin-top: 1.5em;
         font-size: 100px;
         color: red;
     }
