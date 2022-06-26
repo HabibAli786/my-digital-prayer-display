@@ -28,16 +28,18 @@ function QRCode(props) {
         e.preventDefault()
         let source = axios.CancelToken.source();
         const data = new FormData()
-        data.append('logo', file)
+        data.append('secondary-image', file)
         // console.log(e.target.value)
         console.log(file)
         console.log(data)
         if(file) {
-            axios.post('http://localhost:3001/media/logo', data, {
+            axios.post('http://localhost:3001/media/secondary-image', data, {
                 'content-type': 'multipart/form-data',
                 cancelToken: source.token
             }).then(res => { // then print response status
                 // console.log(res);
+                console.log(res)
+                console.log(res.data)
                 setServerStatus(res.data)
                 source.cancel('Cancelling in cleanup')
             })
@@ -84,6 +86,12 @@ function QRCode(props) {
                     </Col>
                     </Row>
             </Container>
+            { serverStatus === "File has been uploaded successfully" &&
+                <p className="upload-qr-code-server-status-success">Server Status: {serverStatus}</p>
+            }
+            { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
+                <p className="upload-qr-code-server-status-unsuccessful">Server Status: {serverStatus}</p>
+            }
             </>
         )
     }

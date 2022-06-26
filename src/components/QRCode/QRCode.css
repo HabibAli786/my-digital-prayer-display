@@ -77,13 +77,25 @@
     }
 
     .qr-code-button {
-        margin-top: 90px;
-        font-size: 40px !important;
+        margin-top: 80px;
+        font-size: 20px !important;
         width: 26%;
     }
 
     .qr-code-container {
         margin-top: 20px;
+    }
+
+    .upload-qr-code-server-status-success {
+        margin-top: 80px;
+        font-size: 30px;
+        color: green;
+    }
+    
+    .upload-qr-code-server-status-unsuccessful {
+        margin-top: 80px;
+        font-size: 30px;
+        color: red;
     }
 }
 
@@ -118,6 +130,18 @@
 
     .qr-code-container {
         margin-top: 70px !important;
+    }
+
+    .upload-qr-code-server-status-success {
+        margin-top: 30px;
+        font-size: 50px;
+        color: green;
+    }
+    
+    .upload-qr-code-server-status-unsuccessful {
+        margin-top: 30px;
+        font-size: 50px;
+        color: red;
     }
 }
 
@@ -160,8 +184,19 @@
 
     .qr-code-container {
         margin-top: 70px !important;
-        margin-top: 100px;
         height: 900px;
         width: 2700px !important;
+    }
+
+    .upload-qr-code-server-status-success {
+        margin-top: 200px;
+        font-size: 100px;
+        color: green;
+    }
+    
+    .upload-qr-code-server-status-unsuccessful {
+        margin-top: 200px;
+        font-size: 100px;
+        color: red;
     }
 }
