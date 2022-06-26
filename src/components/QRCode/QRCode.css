@@ -8,7 +8,7 @@
     .uploadQR-inputImage {
         margin-top : 40px;
         font-size: 30px;
-        border-style: solid;
+        /* border-style: solid; */
     }
 
     .qr-code-settings-container {
@@ -26,7 +26,7 @@
     .uploadQR-inputImage {
         margin-top : 40px;
         font-size: 30px;
-        border-style: solid;
+        /* border-style: solid; */
     }
 
     .qr-code-settings-container {
@@ -38,7 +38,7 @@
     .uploadQR-row {
         margin-top: 40px;
         height: 400px;
-        border-style: solid;
+        /* border-style: solid; */
     }
     
     .uploadQR-inputImage {
@@ -53,24 +53,51 @@
 }
 
 @media (min-width: 1200px) {
+    .qr-code-title {
+        margin-top: 15px;
+        font-size: 40px;
+    }
+
+    .qr-code-logo {
+        height: 120px;
+        width: 120px;
+    }
+    
     .uploadQR-row {
         margin-top: 40px;
-        height: 400px;
+        height: 300px;
         border-style: solid;
     }
 
     .uploadQR-inputImage {
         margin-top : 40px !important;
+        margin-bottom: 20px !important;
         font-size: 30px !important;
-        border-style: solid !important;
+        /* border-style: solid !important; */
+    }
+
+    .qr-code-button {
+        margin-top: 90px;
+        font-size: 40px !important;
+        width: 26%;
     }
 
     .qr-code-container {
-        margin-top: 60px;
+        margin-top: 20px;
     }
 }
 
 @media (min-width: 1400px) {
+    .qr-code-title {
+        margin-top: 15px;
+        font-size: 50px;
+    }
+
+    .qr-code-logo {
+        height: 140px;
+        width: 140px;
+    }
+
     .uploadQR-row {
         margin-top: 40px;
         height: 400px;
@@ -80,10 +107,61 @@
     .uploadQR-inputImage {
         margin-top : 40px !important;
         font-size: 30px !important;
-        border-style: solid !important;
+        /* border-style: solid !important; */
+    }
+
+    .qr-code-button {
+        margin-top: 50px;
+        font-size: 30px !important;
+        width: 26%;
     }
 
     .qr-code-container {
         margin-top: 70px !important;
+    }
+}
+
+@media (min-width: 3840px) {
+    .qr-code-title {
+        margin-top: 50px;
+        font-size: 150px;
+    }
+
+    .react-switch-bg {
+        /* height: 50px !important;
+        width: 50px !important; */
+    }
+
+    .qr-code-logo {
+        height: 400px;
+        width: 400px;
+    }
+
+    .qr-code-status-header {
+        font-size: 100px;
+    }
+
+    .uploadQR-row {
+        margin-top: 40px;
+        height: 900px;
+        border-style: solid;
+    }
+
+    .uploadQR-inputImage {
+        margin-top : 40px !important;
+        font-size: 80px !important;
+    }
+
+    .qr-code-button {
+        margin-top: 70px;
+        font-size: 70px !important;
+        width: 26%;
+    }
+
+    .qr-code-container {
+        margin-top: 70px !important;
+        margin-top: 100px;
+        height: 900px;
+        width: 2700px !important;
     }
 }
