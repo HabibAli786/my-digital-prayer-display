@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row, Button, Form } from "react-bootstrap";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { connect } from "react-redux";
+import { Redirect } from 'react-router';
 import Switch from "react-switch";
 import Header from "../Header/Header";
 import { set_qrToggle } from "../Redux/actions/qrCodeAction";
@@ -11,7 +12,7 @@ import './QRCode.css'
 
 function QRCode(props) {
 
-    const { qr_toggle, set_qrToggle } = props
+    const { qr_toggle, set_qrToggle, auth } = props
 
     const [checked, setChecked] = useState(false)
 
@@ -50,43 +51,48 @@ function QRCode(props) {
         handleChange(qr_toggle)
     })
 
-    return (
-        <>
-        <Header />
-        <h1 className="qr-code-title">QR Code Settings</h1>
-        <Container className="qr-code-container">
-            <Row>
-                <Col>
-                    <Switch onChange={handleChange} checked={checked} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <h1 className="qr-code-status-header">QR Code Status: {checked ? "On" : "Off"}</h1>
-                </Col>
-            </Row>
-            <Row className="uploadQR-row">
-                <Col>
-                    <AiOutlineCloudUpload className="qr-code-logo" />
-                    <Form onSubmit={uploadFile}>
-                        <input 
-                            className="uploadQR-inputImage" 
-                            name="logo"
-                            type="file"
-                            onChange={(e) => setFile(e.target.files[0]) } />
-                        <br />
-                        <Button className="qr-code-button" type="submit">Upload QR Code</Button>
-                    </Form>
-                </Col>
+    if(auth === "Unsuccessfully Authenticated" || auth === "Server Offline" || !auth ) {
+        return ( <Redirect to="/admin" /> )
+    } else {
+        return (
+            <>
+            <Header />
+            <h1 className="qr-code-title">QR Code Settings</h1>
+            <Container className="qr-code-container">
+                <Row>
+                    <Col>
+                        <Switch onChange={handleChange} checked={checked} />
+                    </Col>
                 </Row>
-        </Container>
-        </>
-    )
+                <Row>
+                    <Col>
+                        <h1 className="qr-code-status-header">QR Code Status: {checked ? "On" : "Off"}</h1>
+                    </Col>
+                </Row>
+                <Row className="uploadQR-row">
+                    <Col>
+                        <AiOutlineCloudUpload className="qr-code-logo" />
+                        <Form onSubmit={uploadFile}>
+                            <input 
+                                className="uploadQR-inputImage" 
+                                name="logo"
+                                type="file"
+                                onChange={(e) => setFile(e.target.files[0]) } />
+                            <br />
+                            <Button className="qr-code-button" type="submit">Upload QR Code</Button>
+                        </Form>
+                    </Col>
+                    </Row>
+            </Container>
+            </>
+        )
+    }
 
 }
 
 const matchStateToProps = state => ({
     qr_toggle : state.qrCode.qr_toggle,
+    auth : state.admin.auth,
 })
   
 const mapDispatchToProps = (dispatch) => {
