@@ -477,7 +477,8 @@
 
 @media (min-width: 1200px) {
     .container {
-        width: 100% !important;
+        /* width: 100% !important; */
+        /* width: 70% !important; */
     }
 
     .prayertimes-div {
@@ -759,7 +760,7 @@
 
 @media (min-width: 1400px) {
     .container {
-        width: 70% !important;
+        /* width: 70% !important; */
     }
 
     .prayertimes-main-div {
@@ -973,7 +974,7 @@
 
 @media (min-width: 3840px) {
     .container {
-        width: 70% !important;
+        /* width: 100% !important; */
     }
 
     .prayertimes-main-div {
@@ -1036,6 +1037,7 @@
         font-family: Almarai;
         font-size: 5.1em;
         padding-left: 5px;
+        width: 70% !important;
     }
     
     .active-color{

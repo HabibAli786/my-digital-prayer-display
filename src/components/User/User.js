@@ -46,7 +46,7 @@ function User(props) {
         return (
             <>
             <Header />
-            <Container>
+            <Container className="menu-container">
                 <Row className="mt-5 user-title-row">
                     <h1 className="user-title">Welcome Back, {username}</h1>
                 </Row>

@@ -77,7 +77,7 @@ function UploadLogo(props) {
                 </Row>
             </Container>
             { serverStatus === "File has been uploaded successfully" &&
-                <p className=".uploadLogo_server_status_success">Server Status: {serverStatus}</p>
+                <p className="uploadLogo_server_status_success">Server Status: {serverStatus}</p>
             }
             { serverStatus !== null && serverStatus !== "File has been uploaded successfully" &&
                 <p className="uploadLogo_server_status_unsuccessful">Server Status: {serverStatus}</p>
