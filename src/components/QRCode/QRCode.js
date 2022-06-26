@@ -53,7 +53,7 @@ function QRCode(props) {
     return (
         <>
         <Header />
-        <h1 style={{marginTop : "15px", fontSize: "50px"}}>QR Code Settings</h1>
+        <h1 className="qr-code-title">QR Code Settings</h1>
         <Container className="qr-code-container">
             <Row>
                 <Col>
@@ -62,12 +62,12 @@ function QRCode(props) {
             </Row>
             <Row>
                 <Col>
-                    <h1>QR Code Status: {checked ? "On" : "Off"}</h1>
+                    <h1 className="qr-code-status-header">QR Code Status: {checked ? "On" : "Off"}</h1>
                 </Col>
             </Row>
             <Row className="uploadQR-row">
                 <Col>
-                    <AiOutlineCloudUpload size={200} />
+                    <AiOutlineCloudUpload className="qr-code-logo" />
                     <Form onSubmit={uploadFile}>
                         <input 
                             className="uploadQR-inputImage" 
@@ -75,7 +75,7 @@ function QRCode(props) {
                             type="file"
                             onChange={(e) => setFile(e.target.files[0]) } />
                         <br />
-                        <Button type="submit" style={{ marginTop : "15px" }}>Upload QR Code</Button>
+                        <Button className="qr-code-button" type="submit">Upload QR Code</Button>
                     </Form>
                 </Col>
                 </Row>
