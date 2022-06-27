@@ -64,22 +64,6 @@ function JamaatPrayer(props) {
                     <h1 className={`jamaat-prayer-time-${currentPrayer.toLowerCase()}`}>{currentTime}</h1>
                 </div>
             }
-            {/* <Container className="jamaat-prayer-container">
-                <Row>
-                    <Col className="jamaat-prayer-name">{currentPrayer}</Col>
-                </Row>
-                <Row>
-                    <h1 className="jamaat-prayer-time">{currentTime}</h1>
-                </Row>
-                <Row>
-                    <h1 className="jamaat-prayer-message">Please put your phone on silent to avoid disruption</h1>
-                </Row>
-                <Row>
-                    <Col>
-                        <img className="jamaat-prayer-phone"src="images/no-phone.png" alt="no mobile phone" />
-                    </Col>
-                </Row>
-            </Container> */}
         </div>
         </>
     )

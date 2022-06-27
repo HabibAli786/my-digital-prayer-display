@@ -76,7 +76,6 @@ function UploadTimetable(props) {
                                 type="file"
                                 onChange={(e) => setFile(e.target.files[0]) } />
                             <br />
-                            {/* <Button type="submit" style={{ marginTop : "15px" }}>Upload Timetable</Button> */}
                             <Button className="uploadTimetable-button" type="submit">Upload Timetable</Button>
                         </Form>
                     </Col>

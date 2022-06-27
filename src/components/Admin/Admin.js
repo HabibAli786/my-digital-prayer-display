@@ -93,8 +93,7 @@ function Admin(props) {
                     <Form.Group className="mb-5 input-field">
                         <Form.Control className="input-box" required id="password" name="password" type="password" placeholder="Password..." />
                     </Form.Group>
-
-                    {/* <Button style={{fontSize : "40px", borderRadius: "10px", width: "20rem" }} variant="primary" type="submit"> */}
+                    
                     <Button className="submit-box" variant="primary" type="submit">
                         Submit
                     </Button>
