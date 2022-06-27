@@ -23,6 +23,7 @@ function JamaatPrayer(props) {
             for(let i=0; i < prayersStatus.length;  i++) {
                 if(prayersStatus[i] === false) {
                     // console.log(prayerNames[i-1])
+                    console.log(prayerNames[i-1])
                     setCurrentPrayer(prayerNames[i-1])
                     break
                 }
@@ -39,7 +40,7 @@ function JamaatPrayer(props) {
     useEffect(() => {
         if(currentPrayer === "Fajr") { setCurrentTime(prayerTimes[1]) }
         if(currentPrayer === "Sunrise") { setCurrentTime(prayerTimes[2]) }
-        if(currentPrayer === "Zuhr") { setCurrentTime(prayerTimes[4]) }
+        if(currentPrayer === "Dhuhr") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Jumuʿah") { setCurrentTime(prayerTimes[4]) }
         if(currentPrayer === "Asr") { setCurrentTime(prayerTimes[6]) }
         if(currentPrayer === "Maghrib") { setCurrentTime(prayerTimes[8]) }
@@ -49,6 +50,9 @@ function JamaatPrayer(props) {
 
         }
     }, [currentPrayer])
+
+    console.log(currentPrayer)
+    console.log(prayersStatus)
 
     return (
         <>
