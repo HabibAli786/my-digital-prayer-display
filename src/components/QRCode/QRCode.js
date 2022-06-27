@@ -30,16 +30,16 @@ function QRCode(props) {
         const data = new FormData()
         data.append('secondary-image', file)
         // console.log(e.target.value)
-        console.log(file)
-        console.log(data)
+        // console.log(file)
+        // console.log(data)
         if(file) {
             axios.post('http://localhost:3001/media/secondary-image', data, {
                 'content-type': 'multipart/form-data',
                 cancelToken: source.token
             }).then(res => { // then print response status
                 // console.log(res);
-                console.log(res)
-                console.log(res.data)
+                // console.log(res)
+                // console.log(res.data)
                 setServerStatus(res.data)
                 source.cancel('Cancelling in cleanup')
             })

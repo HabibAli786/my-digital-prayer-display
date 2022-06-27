@@ -155,13 +155,13 @@
     
     .uploadLogo_server_status_success {
         margin-top: 1.5em;
-        font-size: 70px;
+        font-size: 50px;
         color: green;
     }
     
     .uploadLogo_server_status_unsuccessful {
         margin-top: 1.5em;
-        font-size: 70px;
+        font-size: 50px;
         color: red;
     }
 
