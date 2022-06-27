@@ -108,19 +108,34 @@
     .login-row {
         font-size: 20%;
     }
+
+    .admin-icon {
+        height: 150px;
+    }
     
     .input-field {
         width: 40%;
         margin: auto;
     }
-    
-    .login-header {
-        font-size: 7rem;
-        margin-bottom: 20px;
+
+    .input-box {
+        font-size: 1.4rem !important;
     }
     
+    .login-header {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+
+    .submit-box {
+        font-size : 20px !important;
+        border-radius: 10px;
+        width: 20%; 
+    }
+
     .login-message {
-        font-size: 3rem;
+        margin-top: 30px;
+        font-size: 2.1rem;
         color: red;
         fill: red;
     }
@@ -140,19 +155,80 @@
     .login-row {
         font-size: 20%;
     }
+
+    .admin-icon {
+        height: 200px;
+    }
     
     .input-field {
         width: 40%;
         margin: auto;
     }
+
+    .input-box {
+        font-size: 2rem !important;
+    }
     
     .login-header {
-        font-size: 7rem;
+        font-size: 5rem;
         margin-bottom: 20px;
+    }
+
+    .submit-box {
+        font-size : 40px !important;
+        border-radius: 10px;
+        width: 20%; 
     }
     
     .login-message {
         font-size: 3rem;
+        color: red;
+        fill: red;
+    }
+}
+
+@media (min-width: 3840px) {
+    .main-container-admin {
+        margin-top: 2%;
+        /* border-style: dotted; */
+    }
+    
+    .login-container {
+        margin-top: 1%;
+        /* border-style: dotted; */
+    }
+    
+    .login-row {
+        font-size: 20%;
+    }
+
+    .admin-icon {
+        height: 400px;
+    }
+    
+    .input-field {
+        width: 40%;
+        font-size: 8rem;
+        margin: auto;
+    }
+
+    .input-box {
+        font-size: 5rem !important;
+    }
+    
+    .login-header {
+        font-size: 11rem;
+        margin-bottom: 20px;
+    }
+
+    .submit-box {
+        font-size : 80px !important;
+        border-radius: 10px;
+        width: 20%; 
+    }
+    
+    .login-message {
+        font-size: 7rem;
         color: red;
         fill: red;
     }

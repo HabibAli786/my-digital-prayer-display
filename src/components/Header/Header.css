@@ -5,3 +5,49 @@
 .nav-link {
     font-size: 20px;
 }
+
+@media (min-width: 1200px) { 
+    .btn-danger {
+        width: 15%;
+    }
+    
+    .nav-link {
+        /* font-size: 30px; */
+    }
+
+    .header-icon {
+        height: 2.2em;
+        width: 2.2em;
+    }
+}
+
+@media (min-width: 1400px) { 
+    .btn-danger {
+        width: 15%;
+    }
+    
+    .nav-link {
+        font-size: 30px;
+    }
+
+    .header-icon {
+        height: 2.2em;
+        width: 2.2em;
+    }
+}
+
+@media (min-width: 3840px) {
+    .btn-danger {
+        width: 15%;
+    }
+    
+    .nav-link {
+        font-size: 70px;
+        margin-right: 30px;
+    }
+
+    .header-icon {
+        height: 5em;
+        width: 5em;
+    }
+}

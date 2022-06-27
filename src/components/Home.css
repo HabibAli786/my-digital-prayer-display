@@ -28,3 +28,32 @@
 .subheading {
     font-size: 0.5em;
 }
+
+@media (min-width: 3840px) {
+    .container {
+        max-width: 3300px !important;
+    } 
+    .main-container{
+        /* background-color: bisque; */
+        position: relative;
+        margin-top: 6%;
+        font-size: 120px;
+    }
+
+    .main-row {
+        width: 100%;
+    }
+    
+    .main-row {
+        /* background-color: aqua; */
+        text-align: left;
+    }
+    
+    .header {
+        font-size: 1.5em;
+    }
+    
+    .subheading {
+        font-size: 0.5em;
+    }
+}

@@ -9,7 +9,7 @@ function Header() {
         <Navbar collapseOnSelect expand="lg" bg="light">
         <Container>
             <Navbar.Brand eventkey="/" as={Link} to="/">
-                <BsClockHistory size="2em"/>
+                <BsClockHistory className="header-icon"/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

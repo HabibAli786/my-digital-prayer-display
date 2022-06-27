@@ -43,3 +43,15 @@
     }
 
 }
+
+@media (min-width: 3840px) {
+    .makrooh-time-message {
+        position: absolute;
+        left: 70%;
+        top: 67%;
+        width: 30%;
+        color: red;
+        font-size: 120px;
+        font-weight: bold;
+    }
+}
