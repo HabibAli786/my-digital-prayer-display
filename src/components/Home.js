@@ -8,27 +8,27 @@ import './Home.css'
 
 function Home() {
 
-    const [screenValid, setScreenValid] = useState(false)
+    const [screenIsValid, setScreenIsValid] = useState(false)
 
     const checkScreenResolution = (height, width) => {
         if(height === 2160 && width === 3840) {
-            setScreenValid(true)
+            setScreenIsValid(true)
         }
 
         if(height === 1080 && width === 1920) {
-            setScreenValid(true)
+            setScreenIsValid(true)
         }
 
         if(height === 720 && width === 1280) {
-            setScreenValid(true)
+            setScreenIsValid(true)
         }
     }
 
     useEffect(() => {
         checkScreenResolution(window.screen.height, window.screen.width)
-    }, [screenValid])
+    }, [screenIsValid])
 
-    if(!screenValid) {
+    if(!screenIsValid) {
         return ( 
             <>
                 <GoStop className="invalid-screen-icon" /> 
