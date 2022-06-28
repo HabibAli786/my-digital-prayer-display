@@ -100,7 +100,7 @@ function PrayerTimes(props) {
 
     // Day and month
     const [date, setDate] = useState([weekDay(), dayMonth()])
-    const [hijri, setHijri] = useState(null)
+    const [hijri, setHijri] = useState("14 Muharam 1443")
 
     // Prayertimes
     const [times, setTimes] = useState([
@@ -503,7 +503,7 @@ function PrayerTimes(props) {
                     </Row>
                     <Row className={prayerFinished[0] === true ? "finshed row1" : "finished row1"}>
                         <Col className="col-4 salaah-name">صَلَاةُ الْفَجْر</Col>
-                        <Col className="col-4">Fajr</Col>
+                        <Col className="col-4 salaah-name-english">Fajr</Col>
                         <Col className="col-2"> 
                             {!prayerFinished[0] ? `${times[0].slice(0, 2) % 12 || 12}:${times[0].slice(3,5)}` : 
                                 `${nextTimes[0].slice(0, 2) % 12 || 12}:${nextTimes[0].slice(3,5)}`}

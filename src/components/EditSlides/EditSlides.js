@@ -80,7 +80,7 @@ function EditSlides(props) {
                 // setServerStatus(res.data)
             })
         } else {
-            // setServerStatus("Error: No file has been selected")
+            setError("Error: No file has been selected")
         }
         e.target.slide.value = ""
     } 

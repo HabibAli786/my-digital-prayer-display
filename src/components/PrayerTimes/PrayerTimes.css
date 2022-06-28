@@ -476,6 +476,11 @@
 }
 
 @media (min-width: 1200px) {
+    .container {
+        /* width: 100% !important; */
+        /* width: 70% !important; */
+    }
+
     .prayertimes-div {
         background-image: url('http://localhost:3000/PrayerTimes-Background.jpg');
         /* background-repeat: no-repeat; */
@@ -547,14 +552,6 @@
         margin: 0;
     }
 
-    /* .prayertimes-background {
-        position: absolute;
-        background-image: url(http://localhost:3000/PrayerTimes-Background.jpg);
-        bottom: 2rem;
-        width: 100%;
-        height: 100%;
-    } */
-
     .row0 {
         width: 85%;
     }
@@ -586,10 +583,6 @@
     .salaah-name {
         text-align: right;
         padding-right: 50px !important;
-    }
-    .container {
-        /* margin: 20px 0px 0px 5px !important; */
-        /* margin-left: 5px !important; */
     }
     
     .table-container {
@@ -708,6 +701,8 @@
         top: 58%;
         width: 150px;
         height: 160px;
+        max-width: 150px;
+        max-height: 160px;
     }
     
     /* Slideshow animation */
@@ -764,6 +759,10 @@
 }
 
 @media (min-width: 1400px) {
+    .container {
+        /* width: 70% !important; */
+    }
+
     .prayertimes-main-div {
         overflow: hidden; /* Hide scrollbars */
     }
@@ -804,10 +803,6 @@
     .salaah-name {
         text-align: right;
         padding-right: 50px !important;
-    }
-    .container {
-        /* margin: 20px 0px 0px 5px !important; */
-        /* margin-left: 5px !important; */
     }
     
     .table-container {
@@ -921,6 +916,8 @@
         top: 60%;
         width: 200px;
         height: 220px;
+        max-width: 200px;
+        max-height: 220px;
     }
     
     /* Slideshow animation */
@@ -973,4 +970,226 @@
     /* .col {
         border-style: dotted;
     } */
+}
+
+@media (min-width: 3840px) {
+    .container {
+        /* width: 100% !important; */
+    }
+
+    .prayertimes-main-div {
+        overflow: hidden; /* Hide scrollbars */
+        position:fixed;
+        top:0;
+        left: 0;
+        width:100%;
+        height:100%;
+        font-size: 2em;
+    }
+
+    .prayertimes-background {
+        content:url(http://localhost:3000/PrayerTimes-Background.jpg);
+        width: 100%;
+    }
+    
+    .row0 {
+        width: 100%;
+        text-align: left;
+    }
+
+    .row1 {
+        width: 100%;
+    }
+
+    .row2 {
+        width: 100%;
+    }
+
+    .row3 {
+        width: 100%;
+    }
+
+    .row4 {
+        width: 100%;
+    }
+
+    .row5 {
+        width: 100%;
+    }
+
+    .row6 {
+        width: 100%;
+    }
+
+    .salaah-name {
+        text-align: right;
+        padding-right: 110px !important;
+    }
+    
+    .container {
+        /* margin: 20px 0px 0px 5px !important; */
+        /* margin-left: 5px !important; */
+    }
+    
+    .table-container {
+        margin: 20px 0px 0px 5px !important;
+        text-align: left;
+        font-family: Almarai;
+        font-size: 5.1em;
+        padding-left: 5px;
+        width: 70% !important;
+    }
+    
+    .active-color{
+        color: #0175f2;
+    }
+    
+    .start-time {
+        font-size: 130px;
+    }
+    
+    .jamaat {
+        font-size: 130px;
+    }
+    
+    .logo {
+        position: absolute;
+        left: 68%;
+        top: 40px;
+        height: 27%;
+        width: 35%;    
+        max-width: 35%;
+        max-height: 27%;
+    }
+    
+    .weekday {
+        position: absolute;
+        left: 70%;
+        top: 28%;
+        width: 30%;
+        font-size: 4.3em;
+    }
+    
+    .dayMonth {
+        position: absolute;
+        left: 70%;
+        top: 36%;
+        width: 30%;
+        font-size: 4.3em;
+    }
+
+    .hijri {
+        position: absolute;
+        left: 70%;
+        top: 45%;
+        width: 30%;
+        font-size: 2.8em;
+    }    
+    
+    .finshed {
+        color: grey;
+    }
+    
+    .clock {
+        position: absolute;
+        left: 71%;
+        top: 50%;
+        font-size: 6em;
+        width: 30%;
+    }
+
+    .makrooh-clock {
+        color: red;
+    }
+
+    .clock-hours {
+        position: absolute;
+        left: 74%;
+        top: 50%;
+        font-size: 6.5em;
+    }
+
+    .clock-colon-1 {
+        position: absolute;
+        left: 80%;
+        top: 49.5%;
+        font-size: 6.5em;
+    }
+
+    .clock-minutes {
+        position: absolute;
+        left: 82%;
+        top: 50%;
+        font-size: 6.5em;
+    }
+
+    .clock-colon-2 {
+        position: absolute;
+        left: 89%;
+        top: 49.5%;
+        font-size: 6.5em;
+    }
+
+    .clock-seconds {
+        position: absolute;
+        left: 91%;
+        top: 50%;
+        font-size: 6.5em;
+    }
+
+    .prayertimes-qr-code {
+        position: absolute;
+        left: 79%;
+        top: 61%;
+        width: 480px;
+        height: 450px;
+        max-width: 480px;
+        max-height: 450px;
+    }
+    
+    /* Slideshow animation */
+    @keyframes display {
+        from {
+          opacity: 0;
+        }
+      
+        to {
+          opacity: 100;
+        }
+    }
+    
+    @keyframes hideDisplay {
+        from {
+          opacity: 100;
+        }
+      
+        to {
+          opacity: 0;
+        }
+    }
+    
+    .slideshow-display {
+        animation-name: display;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+
+        width: 100%;
+    }
+    
+    .slideshow-hide {
+        animation-name: hideDisplay;
+        animation-duration: 20s;
+        animation-fill-mode: forwards;
+    }
+    
+    .slideshow-image {
+        /* Full height */
+      height: 100%; 
+    
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
 }

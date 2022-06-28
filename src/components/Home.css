@@ -28,3 +28,75 @@
 .subheading {
     font-size: 0.5em;
 }
+
+@media (min-width: 1200px) { 
+    .invalid-screen-icon {
+        height: 300px;
+        width: 300px;
+    }
+
+    .invalid-screen-title {
+        font-size: 90px;
+    }
+
+    .invalid-screen-info {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .invalid-screen-icon {
+        height: 500px;
+        width: 500px;
+    }
+
+    .invalid-screen-title {
+        font-size: 130px;
+    }
+
+    .invalid-screen-info {
+        font-size: 45px;
+    }
+}
+
+@media (min-width: 3840px) {
+    .invalid-screen-icon {
+        height: 1000px;
+        width: 1080px;
+    }
+
+    .invalid-screen-title {
+        font-size: 300px;
+    }
+
+    .invalid-screen-info {
+        font-size: 100px;
+    }
+
+    .container {
+        max-width: 3300px !important;
+    } 
+    .main-container{
+        /* background-color: bisque; */
+        position: relative;
+        margin-top: 6%;
+        font-size: 120px;
+    }
+
+    .main-row {
+        width: 100%;
+    }
+    
+    .main-row {
+        /* background-color: aqua; */
+        text-align: left;
+    }
+    
+    .header {
+        font-size: 1.5em;
+    }
+    
+    .subheading {
+        font-size: 0.5em;
+    }
+}
