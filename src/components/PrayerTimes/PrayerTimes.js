@@ -423,36 +423,36 @@ function PrayerTimes(props) {
     }, [])
 
     // Slideshow Animation useEffect
-    useEffect(() => {
-        let falseSlideshowTimeout
-        let trueSlideshowTimeout
-        // How long will the image take to come on the screen
-        if(displaySlideshow === false) {
-            falseSlideshowTimeout = setTimeout(() => {
-                setDisplaySlideshow(true)
-            }, 60000)
-            // setAnimation(false)
-        }
-        // How long the image will be on the screen
-        if(displaySlideshow === true){
-            trueSlideshowTimeout = setTimeout(() => {
-                // setSlideshowCount(slideshowCount + 1)
-                setDisplaySlideshow(false)
-                if(slideshowCount === numOfSlides-1) {
-                    setSlideshowCount(0)
-                } else {
-                    setSlideshowCount(slideshowCount + 1)
-                }
-                // console.log("slideshowcount " + slideshowCount)
-                // console.log("numofslideshowimages " + numOfSlides)
-            }, 15000)
-        }
+    // useEffect(() => {
+    //     let falseSlideshowTimeout
+    //     let trueSlideshowTimeout
+    //     // How long will the image take to come on the screen
+    //     if(displaySlideshow === false) {
+    //         falseSlideshowTimeout = setTimeout(() => {
+    //             setDisplaySlideshow(true)
+    //         }, 60000)
+    //         // setAnimation(false)
+    //     }
+    //     // How long the image will be on the screen
+    //     if(displaySlideshow === true){
+    //         trueSlideshowTimeout = setTimeout(() => {
+    //             // setSlideshowCount(slideshowCount + 1)
+    //             setDisplaySlideshow(false)
+    //             if(slideshowCount === numOfSlides-1) {
+    //                 setSlideshowCount(0)
+    //             } else {
+    //                 setSlideshowCount(slideshowCount + 1)
+    //             }
+    //             // console.log("slideshowcount " + slideshowCount)
+    //             // console.log("numofslideshowimages " + numOfSlides)
+    //         }, 15000)
+    //     }
         
-        return () => { 
-            if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
-            if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
-        }
-    }, [displaySlideshow])
+    //     return () => { 
+    //         if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
+    //         if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
+    //     }
+    // }, [displaySlideshow])
 
     return(
         <>
@@ -477,11 +477,14 @@ function PrayerTimes(props) {
                 <h1 className="hijri">{hijri !== null ? `${hijri[0]}  ${hijri[1]} ${hijri[2]}` : ""}</h1>
 
                 {/* Clock */}
-                <h1 className={makrooh ? "clock-hours makrooh-clock" : "clock-hours"}>{clock.slice(0, 2)}</h1>
-                <h1 className={makrooh ? "clock-colon-1 makrooh-clock" : "clock-colon-1"}>:</h1>
-                <h1 className={makrooh ? "clock-minutes makrooh-clock" : "clock-minutes"}>{clock.slice(3, 5)}</h1>
-                <h1 className={makrooh ? "clock-colon-2 makrooh-clock" : "clock-colon-2"}>:</h1>
-                <h1 className={makrooh ? "clock-seconds makrooh-clock" : "clock-seconds"}>{clock.slice(6, 8)}</h1>
+                <div className="clock-container">
+                    <h1 className={makrooh ? "clock-item makrooh-clock" : "clock-item"}>{clock.slice(0, 2)}</h1>
+                    <h1 className={makrooh ? "clock-item makrooh-clock" : "clock-item"}>:</h1>
+                    <h1 className={makrooh ? "clock-item makrooh-clock" : "clock-item"}>{clock.slice(3, 5)}</h1>
+                    <h1 className={makrooh ? "clock-item makrooh-clock" : "clock-item"}>:</h1>
+                    <h1 className={makrooh ? "clock-item makrooh-clock" : "clock-item"}>{clock.slice(6, 8)}</h1>
+                </div>
+                
 
                 {/* Makrooh or Secondary Image */}
                 {makrooh ?
