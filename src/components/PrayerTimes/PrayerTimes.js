@@ -423,36 +423,36 @@ function PrayerTimes(props) {
     }, [])
 
     // Slideshow Animation useEffect
-    // useEffect(() => {
-    //     let falseSlideshowTimeout
-    //     let trueSlideshowTimeout
-    //     // How long will the image take to come on the screen
-    //     if(displaySlideshow === false) {
-    //         falseSlideshowTimeout = setTimeout(() => {
-    //             setDisplaySlideshow(true)
-    //         }, 60000)
-    //         // setAnimation(false)
-    //     }
-    //     // How long the image will be on the screen
-    //     if(displaySlideshow === true){
-    //         trueSlideshowTimeout = setTimeout(() => {
-    //             // setSlideshowCount(slideshowCount + 1)
-    //             setDisplaySlideshow(false)
-    //             if(slideshowCount === numOfSlides-1) {
-    //                 setSlideshowCount(0)
-    //             } else {
-    //                 setSlideshowCount(slideshowCount + 1)
-    //             }
-    //             // console.log("slideshowcount " + slideshowCount)
-    //             // console.log("numofslideshowimages " + numOfSlides)
-    //         }, 15000)
-    //     }
+    useEffect(() => {
+        let falseSlideshowTimeout
+        let trueSlideshowTimeout
+        // How long will the image take to come on the screen
+        if(displaySlideshow === false) {
+            falseSlideshowTimeout = setTimeout(() => {
+                setDisplaySlideshow(true)
+            }, 20000)
+            // setAnimation(false)
+        }
+        // How long the image will be on the screen
+        if(displaySlideshow === true){
+            trueSlideshowTimeout = setTimeout(() => {
+                // setSlideshowCount(slideshowCount + 1)
+                setDisplaySlideshow(false)
+                if(slideshowCount === numOfSlides-1) {
+                    setSlideshowCount(0)
+                } else {
+                    setSlideshowCount(slideshowCount + 1)
+                }
+                // console.log("slideshowcount " + slideshowCount)
+                // console.log("numofslideshowimages " + numOfSlides)
+            }, 10000)
+        }
         
-    //     return () => { 
-    //         if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
-    //         if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
-    //     }
-    // }, [displaySlideshow])
+        return () => { 
+            if(falseSlideshowTimeout) { clearTimeout(falseSlideshowTimeout) }
+            if(trueSlideshowTimeout) { clearTimeout(trueSlideshowTimeout) }
+        }
+    }, [displaySlideshow])
 
     return(
         <>
